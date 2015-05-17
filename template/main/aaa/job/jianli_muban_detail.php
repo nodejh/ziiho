@@ -1,47 +1,9 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
 <?php include _g('template')->name('@', 'header', true); ?>
-<link rel="stylesheet" type="text/css"
-	href="<?php prt(_g('template')->dir('job')); ?>/css/style.css" />
-<?php include _g('template')->name('job', 'nav3', true); ?>
-
-<!-- //muban-where -->
-<div class="muban-where clearfix" id="muban-where">
-	<div class="box-area clearfix">
-    	<!-- //swd -->
-    	<div class="swd clearfix">
-        	<div class="sbb"></div>
-            <div class="stt clearfix">
-        		<div class="icon clearfix"></div>
-            	<input type="text" name="wd" class="ww" />
-            	<button type="button" class="bb">找模板</button>
-            </div>
-        </div>
-        <!-- swd// -->
-        
-        <!-- //sdd -->
-        <div class="sdd clearfix">
-        	<div class="aaa clearfix">求职意向</div>
-            <div class="bbb clearfix"><a href="#" class="on">不限</a><a href="#">保险</a><a href="#">材料</a><a href="#">电气</a></div>
-        </div>
-        <!-- sdd// -->
-        
-        <!-- //sdd -->
-        <div class="sdd clearfix">
-        	<div class="aaa clearfix">模板风格</div>
-            <div class="bbb clearfix"><a href="#" class="on">不限</a><a href="#">黑白</a><a href="#">彩色</a></div>
-        </div>
-        <!-- sdd// -->
-        
-        <!-- //sdd -->
-        <div class="sdd clearfix">
-        	<div class="aaa clearfix">简历语言</div>
-            <div class="bbb clearfix"><a href="#" class="on">不限</a><a href="#">中文</a><a href="#">英文</a></div>
-        </div>
-        <!-- sdd// -->
-        
-    </div>
-</div>
-<!-- muban-where// -->
+<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('common')); ?>/font-awesome-4.3.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/jianli.css" />
+<?php include _g('template')->name('job', 'nav-muban-where', true); ?>
 
 
 <!-- //muban-area -->

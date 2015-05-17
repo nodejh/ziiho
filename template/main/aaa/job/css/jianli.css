@@ -1,0 +1,62 @@
+/*.jianli-where {*/
+    /*width: 1200px;*/
+    /*margin: auto;*/
+    /*background: #f2f2f2;*/
+/*}*/
+/*.jianli-where-title {*/
+    /*height: 44px;*/
+    /*float: left;*/
+    /*width: 50%;*/
+/*}*/
+/*.jianli-where-title a {*/
+    /*color: #CF3030;*/
+    /*padding: 0 10px;*/
+    /*line-height: 44px;*/
+    /*font-size: 22px;*/
+/*}*/
+/*.jianli-where-search {*/
+    /*float: right;*/
+    /*width: 50%;*/
+/*}*/
+/*.jianli-where-search-ipt {*/
+    /*display: inline-block;*/
+/*}*/
+
+.jianli-where {
+    width: 1200px;
+    height: 44px;
+    background: #f2f2f2;
+    margin: auto;
+}
+.jianli-where-title {
+    position: relative;
+    width: 50%;
+}
+.jianli-where-title a {
+    color: #cf3030;
+    float: left;
+    font-size: 22px;
+    line-height: 44px;
+    margin: 0 10px;
+}
+.jianli-where-search {
+    position: relative;
+    float: right;
+    padding: 7px 0;
+}
+.jianli-where-search-ipt {
+    line-height: 30px;
+    width: 350px;
+    padding: 0 10px;
+}
+.jianli-where-search-icon {
+    margin-right: 30px;
+    color: #8E8E8E;
+    border: 1px solid #8E8E8E;
+    border-left:none;
+    padding: 8px;
+    margin-left: -5px;
+    top: -1px;
+    position: relative;
+    background: #fff;
+}
