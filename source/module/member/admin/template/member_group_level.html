@@ -1,0 +1,105 @@
+<!--{eval $isshowmenuitem=false;/}-->
+<!--{modtemplate admin/template/adm_header}-->
+
+<script type="text/javascript"
+	src="{field:_G.web.sourcepath/}module/member/admin/template/js/member_adm.js"></script>
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<!--导航开始-->
+	<div class="c_w100 c_pt5px c_pb5px">
+		{eval $index=0;/} {loop $groupTypeList $val} {eval $index++;/}
+		<p class="c_l fw cont_item" id="grouptype_nav_{field:val.field/}">
+			<a href="javascript:;"
+				onclick="setSelectClass('#grouptype_nav_{field:val.field/}', 'cont_item', 'cont_items', {'setDataId':'#item-html', 'data':textareaval('item-html-{field:val.field/}')}); return false;">{field:val.title/}</a><input
+				type="checkbox" name="grouptype_arr" value="{field:val.field/}"
+				checked="checked" class="c_w0px c_h0px" />
+		</p>
+		{/loop}
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+	<!--导航结束-->
+
+	<!--组列表开始-->
+	<div class="c_w100" id="item-html"></div>
+	<div class="clr"></div>
+	<!--组列表结束-->
+
+	<!--html 开始-->
+	{loop $groupTypeList $val}
+	<!--{modtemplate 'member/admin/template/member_group_level_'.$val['field']}-->
+	{/loop}
+	<!--html 结束-->
+
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+$(document).ready(function(){
+	setSelectClass('#grouptype_nav_{field:default_GroupType/}', 'cont_item', 'cont_items', {'setDataId':'#item-html', 'data':textareaval('item-html-{field:default_GroupType/}')});
+});
+
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=["#addbt","#dobt"];
+var _V = {
+		'baseAddUrl':"{url 'index','mod/member/ac/admin/op/membergroup/ao/level_baseadd'/}",
+		'baseEditUrl':"{url 'index','mod/member/ac/admin/op/membergroup/ao/level_baseedit'/}",
+		'delUrl':"{url 'index','mod/member/ac/admin/op/membergroup/ao/level_del'/}"
+};
+/*会员组添加*/
+function member_adm_member_group_add(set_grouptype){
+	var title=inputval("_title");
+	var credit=inputval("_credit");
+	var datas={'grouptype':set_grouptype,'title':title,'credit':credit};
+	ajaxAction({'actionUrl':_V.baseAddUrl,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+/*会员组列表操作*/
+function member_adm_member_group_listdo(set_grouptype, set_coreGroupid, isCoreType){
+	var groupid_arr=checkedval("groupid_arr");
+	var groupid_len=groupid_arr.length;
+	var title_arr=[],credit_arr=[];
+	var datas={};
+	
+	if(!isVal(getboxfirst("ck_dosign"))){
+		if(isCoreType==1){
+			if(isVal(set_coreGroupid)){
+				var coreGroupidVal = $.trim(set_coreGroupid);
+				coreGroupidVal = coreGroupidVal.substr(1);
+				coreGroupidVal = coreGroupidVal.split(',');
+				if(groupid_len<1){
+					groupid_arr = coreGroupidVal;
+				}else{
+					for(var a = 0; a<coreGroupidVal.length; a++){
+						groupid_arr.push(coreGroupidVal[a]);
+					}
+					a = null;
+				}
+			}
+		}
+		groupid_len = groupid_arr.length;
+		if(groupid_len<1){
+			mydialog({'data':'{lang global:select_is_null/}'});
+			return false;
+		}
+		/*编辑操作*/
+		for(var i=0;i<groupid_len;i++){
+			title_arr.push(inputval("title_"+groupid_arr[i]));
+			credit_arr.push(inputval("credit_"+groupid_arr[i]));	
+		}
+		datas={'grouptype':set_grouptype,'groupid':groupid_arr,'title':title_arr,'credit':credit_arr};
+		ajaxAction({'actionUrl':_V.baseEditUrl,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});		
+	}else{
+		if(groupid_len<1){
+			mydialog({'data':'{lang global:select_is_null/}'});
+			return false;
+		}
+		/*删除操作*/
+		datas=arr_merge({'grouptype':set_grouptype,'groupid':groupid_arr},callback_param);
+		mydialog({'data':'{lang global:del_info_prompt/}','showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':_V.delUrl,'actionData':datas,'urlTarget':_CJG.MF}});
+	}
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

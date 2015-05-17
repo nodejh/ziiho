@@ -1,0 +1,181 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<div class="cont_z">
+	<ul>
+		<li>
+			<div class="cont_li_p1">
+				<strong>排序:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="listorder"
+						value="{print array_key_val('listorder',$moduleSub,0)/}" />
+				</div>
+				<div class="cont_li_p2_2">模块顺序</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>模块名称:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="title"
+						value="{print array_key_val('title',$moduleSub)/}" />
+				</div>
+				<div class="cont_li_p2_2">模块名称</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>模块目录</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="module"
+						value="{print array_key_val('module',$moduleSub)/}" />
+				</div>
+				<div class="cont_li_p2_2">模块目录名称</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>版本号:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="version"
+						value="{print array_key_val('version',$moduleSub)/}" />
+				</div>
+				<div class="cont_li_p2_2">模块的版本号</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>模块说明:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<textarea class="cont_z_txts" name="description">{print array_key_val('description',$moduleSub)/}</textarea>
+				</div>
+				<div class="cont_li_p2_2">模块说明</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>是否为核心:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+						class="c_l {if $index!=1}c_ml10px{/if}"><input type="radio"
+						name="iscore" value="{field:val.val/}"
+						{if $val['val']==array_key_val(
+						'iscore',$moduleSub,yesno_val('check'))} checked="checked"
+						{/if} onclick="module_adm_status_disabled('{field:val.val/}','status','{print yesno_val('check')/}')" />&nbsp;{field:val.title/}</span>
+					{/loop}
+				</div>
+				<div class="cont_li_p2_2">如果选择“是”，则为不可更该状态、卸载</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li id="status_item">
+			<div class="cont_li_p1">
+				<strong>模块状态:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+						class="c_l status_item {if $index!=1}c_ml10px{/if}"><input
+						type="radio" name="status" value="{field:val.val/}"
+						{if $val['val']==array_key_val(
+						'status',$moduleSub,yesno_val('check'))} checked="checked" {/if} />&nbsp;<font>{field:val.title3/}</font></span>
+					<!--{/loop}-->
+				</div>
+				<div class="cont_li_p2_2">选择该模块状态</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+	</ul>
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="c_l c_ml5px"><input type="button" class="cont_dod"
+			id="dobt" value="提交"
+			onclick="adm_module_edit('{field:saveurl/}','{print array_key_val('moduleid',$moduleSub)/}')" /></span>
+		<span class="c_l c_ml10px"><input type="button"
+			class="cont_dod" id="gobt" value="返回"
+			onclick="redirectUrl({'url':'{field:callbackurl/}'})" /></span>
+		<div class="clr"></div>
+	</div>
+
+	<div class="clr"></div>
+</div>
+
+<script language="javascript">
+$(document).ready(function(){
+module_adm_status_disabled("{print array_key_val('iscore',$moduleSub,yesno_val('check'))/}",'status',"{print yesno_val('check')/}");
+});
+/*更改是否显示状态*/
+function module_adm_status_disabled(val,f,defaultval){
+	var o=$('input[name="'+f+'"]');
+	var to=$("#status_item font");
+	if(defaultval!=val){
+		o.attr("disabled","disabled");
+		to.attr("class","color1");
+	}else{
+		o.attr("disabled","");
+		to.attr("class","");
+	}
+}
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':'{field:callbackurl/}','isajax':1}};
+var button_ids=["#dobt","#gobt"];
+/*编辑操作*/
+function adm_module_edit(do_url,moduleid){
+	var listorder=inputval("listorder");
+	var title=inputval("title");
+	var module=inputval("module");
+	var version=inputval("version");
+	var description=textareaval("description");
+	var iscore=getboxfirst("iscore");
+	var status=getboxfirst("status");
+	
+	var datas={'moduleid':moduleid,'listorder':listorder,'title':title,'module':module,'version':version,'description':description,'iscore':iscore,'status':status};
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

@@ -1,0 +1,43 @@
+<?php
+if (! defined ( 'IN_PATH' )) {
+	exit ( 'no direct access allowed' );
+}
+
+$module = _M ();
+
+$sess_uid = get_user ( 'uid' );
+/* 页码 */
+$page = get_page ();
+/* 显示数 */
+$page_size = 10;
+/* 分页导航 */
+$page_nums = 5;
+/* 排序方式 */
+$orderby = order_val ( 2 );
+/* 当前 */
+$s = loader ( 'class:class_member_notice', 'member', true, true );
+/* 更改成已读 */
+$s->notice_isview ( $sess_uid );
+
+/* 查询 */
+$db = $s->db;
+$db->from ( $s->table_member_notice );
+$db->where ( 'inboxuid', $sess_uid );
+/* 获取总数 */
+$total_num = $db->count_num ();
+/* 计算分页 */
+$pg = pagephow ( $total_num, $page_size, $page_nums, $page );
+$db->order_by ( 'noticeid', $orderby );
+$db->limit ( $pg ['first_count'], $pg ['page_size'] );
+$result = $db->select ();
+if ($result == $db->cw) {
+	return $result;
+}
+$lists = $db->get_list ();
+
+/* 分页参数 */
+$pg ['name'] = 'index';
+$pg ['param'] = 'mod/member/ac/notice/op/index';
+
+include subtemplate ( $module . '/notice' );
+?>

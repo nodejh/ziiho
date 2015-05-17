@@ -1,0 +1,296 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--内容开始-->
+<div class="cont_z">
+	<ul>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>允许新用户注册:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop common_value_get('allow_register_type')
+					$val} {eval $index++;/}
+					<p {if $index>
+						1}class="c_mt5px"{/if}><input type="radio" name="register_type"
+							id="{field:val.field/}" value="{field:val.field/}" {if
+							config_val('register_type',$sets)==$val[
+							'field']}checked="checked"
+							{/if} onclick="adm_showCurrentItem({'val':'{field:val.field/}'})" />&nbsp;{field:val.title/}
+					</p>
+					{/loop}
+				</div>
+				<div class="cont_li_p2_2">设置是否允许游客注册成为站点会员，您可以根据站点需求选择注册方式</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li fielditem="invitecode" class="c_none">
+			<div class="cont_li_p1">
+				<strong>邀请码注册提示信息:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<textarea class="cont_z_txts" name="invitecode_msg">{print config_val('invitecode_msg',$sets)/}</textarea>
+				</div>
+				<div class="cont_li_p2_2">当开放邀请码注册时，需要显示的提示信息</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li fielditem="close" class="c_none">
+			<div class="cont_li_p1">
+				<strong>关闭注册提示信息:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<textarea class="cont_z_txts" name="close_msg">{print config_val('close_msg',$sets)/}</textarea>
+				</div>
+				<div class="cont_li_p2_2">当关闭注册时，需要显示的提示信息</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>验证码:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+						class="c_l {if $index>1}c_ml10px{/if}"><input type="radio"
+						name="ischeckcode" value="{field:val.val/}" {if
+						config_val('ischeckcode',$sets)==$val[ 'val']}checked="checked" {/if} />&nbsp;{field:val.title3/}</span>
+					{/loop}
+				</div>
+				<div class="cont_li_p2_2">开启后，会员注册时将会显示输入验证码</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>通过邮箱发送注册链接:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+						class="c_l {if $index>1}c_ml10px{/if}"><input type="radio"
+						name="toemailregister" value="{field:val.val/}" {if
+						config_val('toemailregister',$sets)==$val[
+						'val']}checked="checked" {/if} />&nbsp;{field:val.title/}</span> {/loop}
+				</div>
+				<div class="cont_li_p2_2">选择“是”系统会发送一条注册的地址到用户的邮箱，从该地址链接过来的允许注册。（该功能需要在“邮箱配置”中完成设置，并确保邮件能正常发送成功下才有效）</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>新用户注册验证方式:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<p>
+						<input type="radio" name="status"
+							value="{print member_value_get('status','normal','field');/}" {if
+							config_val('status',$sets)==member_value_get(
+							'status','normal','field')}checked="checked" {/if} />&nbsp;{print
+						member_value_get('status','normal','title');/}
+					</p>
+					<p class="c_mt5px">
+						<input type="radio" name="status"
+							value="{print member_value_get('status','check','field');/}" {if
+							config_val('status',$sets)==member_value_get(
+							'status','check','field')}checked="checked" {/if} />&nbsp;{print
+						member_value_get('status','check','title');/}
+					</p>
+					<p class="c_mt5px">
+						<input type="radio" name="status"
+							value="{print member_value_get('status','email','field');/}" {if
+							config_val('status',$sets)==member_value_get(
+							'status','email','field')}checked="checked" {/if} />&nbsp;{print
+						member_value_get('status','email','title');/}
+					</p>
+				</div>
+				<div class="cont_li_p2_2">选择"正常"用户可直接注册成功；选择"E-mail 验证"将向用户注册
+					E-mail
+					发送一封验证邮件以确认邮箱的有效性（开启"通过邮件发送注册链接"该设置自动通过验证）；选择"人工审核"将由管理员人工逐个确定是否允许新用户注册</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>发送新用户注册欢迎信息:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<p>
+						<input type="checkbox" name="send_system_msg"
+							value="{print yesno_val('check')/}" {if
+							config_val('send_system_msg',$sets)==yesno_val(
+							'check')}checked="checked" {/if} />&nbsp;发送欢迎信息
+					</p>
+					<p class="cont_li_p2_3">
+						<input type="checkbox" name="send_email_msg"
+							value="{print yesno_val('check')/}" {if
+							config_val('send_email_msg',$sets)==yesno_val(
+							'check')}checked="checked" {/if} />&nbsp;发送E-mail信息
+					</p>
+				</div>
+				<div class="cont_li_p2_2">可选择是否自动向新注册用户发送一条欢迎信息</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>欢迎信息标题:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="msg_title"
+						value="{print config_val('msg_title',$sets)/}" />
+				</div>
+				<div class="cont_li_p2_2">系统发送的欢迎信息的标题，不支持HTML，不超过100个字符串。</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>欢迎信息内容:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<textarea class="cont_z_txts" name="msg_content">{print config_val('msg_content',$sets)/}</textarea>
+				</div>
+				<div class="cont_li_p2_2">
+					系统发送的欢迎信息的内容。标题内容均支持变量替换，可以使用如下变量:<br /> {username} : 用户名<br />
+					{time} : 发送时间<br /> {site_name} : 站点名称（显示在浏览器窗口标题等位置的名称）<br />
+					{web_name} : 网站名称（显示在页面底部的联系方式处的名称）<br /> {adminemail} : 管理员 E-mail<br />
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>显示网站服务条款:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+						class="c_l {if $index>1}c_ml10px{/if}"><input type="radio"
+						name="show_serve_item" value="{field:val.val/}" {if
+						config_val('show_serve_item',$sets)==$val[
+						'val']}checked="checked" {/if} />&nbsp;{field:val.title/}</span> {/loop}
+				</div>
+				<div class="cont_li_p2_2">新用户注册时需要显示的网站服务条款。</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>服务条款内容:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<textarea class="cont_z_txts" name="serve_item_content">{print config_val('serve_item_content',$sets)/}</textarea>
+				</div>
+				<div class="cont_li_p2_2">新用户注册时需要显示的网站服务条款的详细内容</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+	</ul>
+
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="cont_dobt"><input type="button" class="cont_dod"
+			id="dobt" value="提交" onclick="common_adm_register_set()" /></span>
+	</div>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','isajax':1}};
+var button_ids="#dobt";
+
+/*状态*/
+var _setStatus={
+	<!--{eval $index=0;/}-->
+	<!--{loop common_value_get('allow_register_type') $val}-->
+	<!--{eval $index++;/}-->
+	<!--{if $index>1}-->,<!--{/if}-->"{field:val.field/}":"{field:val.field/}"
+	<!--{/loop}-->
+};
+$(document).ready(function(){
+	var _defaultStatus="{print config_val('register_type',$sets)/}";
+	if(!isVal(_defaultStatus)){
+		_defaultStatus=_setStatus.close;
+	}
+	adm_showCurrentItem({'val':_defaultStatus});
+	setchecked(_defaultStatus,"id",true);
+});
+function common_adm_register_set(do_url){
+	var register_type=getboxfirst("register_type");
+	var ischeckcode=getboxfirst("ischeckcode");
+	var invitecode_msg=textareaval("invitecode_msg");
+	var close_msg=textareaval("close_msg");
+	var toemailregister=getboxfirst("toemailregister");
+	var status=getboxfirst("status");
+	var send_system_msg=getboxfirst("send_system_msg");
+	var send_email_msg=getboxfirst("send_email_msg");
+	var msg_title=inputval("msg_title");
+	var msg_content=textareaval("msg_content");
+	var show_serve_item=getboxfirst("show_serve_item");
+	var serve_item_content=textareaval("serve_item_content");	
+	
+	var datas={'register_type':register_type,'ischeckcode':ischeckcode,'invitecode_msg':invitecode_msg,'close_msg':close_msg,'toemailregister':toemailregister,'status':status,'send_system_msg':send_system_msg,'send_email_msg':send_email_msg,'msg_title':msg_title,'msg_content':msg_content,'show_serve_item':show_serve_item,'serve_item_content':serve_item_content};
+	
+	var do_url="{url 'index','mod/common/ac/admin/op/set/ao/registerset_setdo'/}";
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

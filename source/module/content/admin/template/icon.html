@@ -1,0 +1,131 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+
+<!--提示信息开始-->
+<div class="c_w100 c_mt5px adm_bb_dashed c_pb10px">
+	<p class="c_mt5px c_ml5px color2 fw">提示:</p>
+	<p class="c_mt5px c_ml5px color1">1、通过此图标来指定文章标题附属的图标</p>
+	<p class="c_mt5px c_ml5px color1">2、图标“标识名”可指定html标签的class名称（引用图标地址则可显示图标）</p>
+	<p class="c_mt5px c_ml5px color1">3、图标文件位于{print
+		show_uf($iconpathdir)/}目录下</p>
+	<div class="clr"></div>
+</div>
+<div class="clr"></div>
+<!--提示信息结束-->
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_iconid"
+				onclick="checkedall(this.name,'iconid_arr')" /></td>
+			<td width="6%">ID编号</td>
+			<td width="8%">排序编号</td>
+			<td width="20%">名称</td>
+			<td width="20%">标识名</td>
+			<td width="22%">图标</td>
+			<td width="20%">操作时间</td>
+		</tr>
+
+		{if array_key_val('total_num',$pg)>=1} {dbres $result $val}
+		<tr id="iconid_{field:val.iconid/}" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="checkbox" name="iconid_arr"
+				value="{field:val.iconid/}" /></td>
+			<td width="6%" class="color1">{field:val.iconid/}</td>
+			<td width="8%"><input type="text" class="cont_zt7"
+				name="listorder_{field:val.iconid/}" value="{field:val.listorder/}" /></td>
+			<td width="20%"><input type="text" class="cont_zt6"
+				name="title_{field:val.iconid/}" value="{field:val.title/}" /></td>
+			<td width="20%"><input type="text" class="cont_zt6"
+				name="iconident_{field:val.iconid/}" value="{field:val.iconident/}" /></td>
+			<td width="22%" class="c_overh"><span class="c_l"
+				id="icon_{field:val.iconid/}">{if
+					str_len($val['filename'])>=1}<img
+					src="{print show_uf($val['filename'])/}" />{/if}
+			</span> <span class="c_ml5px anc"><a href="javascript:;"
+					onclick="article_adm_icon_upload('{url 'index','mod/article/ac/admin/op/icon/ao/icon_upload/iconid/'.$val['iconid']/}');">{if
+						str_len($val['filename'])>=1}编辑{else}上传文件{/if}</a></span></td>
+			<td width="20%" class="color1">{datestyle $val['ctime'],'Y-m-d
+				H:i'/}</td>
+		</tr>
+		{/dbres} {/if}
+		<tr id="menu_list_p" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="10%" colspan="2" style="text-align: right;"><span
+				class="cont_c2">添加:</span></td>
+			<td width="8%"><input type="text" class="cont_zt7"
+				name="listorder" value="" /></td>
+			<td width="20%"><input type="text" class="cont_zt6" name="title" /></td>
+			<td width="20%"><input type="text" class="cont_zt6"
+				name="iconident" /></td>
+			<td width="22%" class="c_overh"><span class="c_l" id="icon_0">{if
+					$isadded==1}<img src="{print show_uf($iconsrc)/}" />{/if}
+			</span><span class="c_ml5px anc"><a href="javascript:;"
+					onclick="article_adm_icon_upload('{url 'index','mod/article/ac/admin/op/icon/ao/icon_upload'/}');">{if
+						$isadded==1}重新上传{else}上传文件{/if}</a></span></td>
+			<td width="20%" colspan="2"><input type="button"
+				class="cont_dod" id="addbt" value="添加"
+				onclick="article_adm_icon_add()" /></td>
+		</tr>
+		<tr class="cont_dbg">
+			<td colspan="7"><span class="c_l"> <input type="checkbox"
+					name="ck_dosign" value="1" />&nbsp;<span class="cont_c2">删?</span>&nbsp;&nbsp;<input
+					type="button" class="cont_dod" id="dobt" value="提交"
+					onclick="article_adm_icon_listdo()" /></span> <span class="c_r">{modtemplate
+					admin/template/page}</span></td>
+		</tr>
+	</table>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=['#addbt','#dobt'];
+var urls={
+	'baseadd':"{url 'index','mod/article/ac/admin/op/icon/ao/icon_baseadd'/}",
+	'baseedit':"{url 'index','mod/article/ac/admin/op/icon/ao/icon_baseedit'/}",
+	'del':"{url 'index','mod/article/ac/admin/op/icon/ao/icon_del'/}",
+	'upload':"{url 'index','mod/article/ac/admin/op/icon/ao/icon_upload'/}"
+};
+function article_adm_icon_add(){
+	var listorder=inputval("listorder");
+	var title=inputval("title");
+	var iconident=inputval("iconident");
+	var datas={'listorder':listorder,'title':title,'iconident':iconident};
+	ajaxAction({'actionUrl':urls.baseadd,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+
+function article_adm_icon_listdo(){
+	var iconid_arr=checkedval("iconid_arr");
+	var iconid_len=iconid_arr.length;
+	var listorder_arr=[],title_arr=[],iconident_arr=[];
+	if(iconid_len<1){
+		mydialog({'data':'{lang global:select_is_null/}'});
+		return false;
+	}
+	var datas={};
+	if(!isVal(getboxfirst("ck_dosign"))){
+		/*编辑操作*/
+		for(var i=0;i<iconid_len;i++){
+			listorder_arr.push(inputval("listorder_"+iconid_arr[i]));
+			title_arr.push(inputval("title_"+iconid_arr[i]));
+			iconident_arr.push(inputval("iconident_"+iconid_arr[i]));
+		}
+		datas={'iconid':iconid_arr,'listorder':listorder_arr,'title':title_arr,'iconident':iconident_arr};
+		ajaxAction({'actionUrl':urls.baseedit,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+	}else{
+		/*删除操作*/
+		datas=arr_merge({'iconid':iconid_arr},callback_param);
+		mydialog({'data':'{lang global:del_info_prompt/}','showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':urls.del,'actionData':datas,'urlTarget':_CJG.MF}});
+	}
+}
+function article_adm_icon_upload(){
+	dialog({'title':"上传图标",'type':"iframe",'url':urls.upload,'width':480,'height':80,'showbg':false,'showOkButton':false,'showCancelButton':false});
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

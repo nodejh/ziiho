@@ -1,0 +1,19 @@
+
+<li>
+	<div class="adm_dv">
+		<p>
+			<span class="color7">常用html标签:</span>
+		</p>
+		<!--{eval $htmltag_arr=common_htmltag();}-->
+		<!--{loop $htmltag_arr $val}-->
+		<p>
+			<span><a href="javascript:;"
+				onclick="insertchar('#content',('{$val['val']}'))">
+					<!--{$val['title']}-->
+			</a></span>
+		</p>
+		<!--{/loop}-->
+	</div>
+	<div class="clr"></div>
+</li>
+<div class="clr"></div>

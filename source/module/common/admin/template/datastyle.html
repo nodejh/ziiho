@@ -1,0 +1,92 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<div class="cont_z">
+
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_dsid"
+				onclick="checkedall(this.name,'dsid_arr')" /></td>
+			<td width="6%">ID编号</td>
+			<td width="8%">排序</td>
+			<td width="15%">模板名称</td>
+			<td width="15%">{lang common:module}</td>
+			<td width="12%">创建时间</td>
+			<td width="40%">操作</td>
+		</tr>
+		<!--{if $pg['total_num']>=1}-->
+		<!--{dbres $lists $val}-->
+		<tr id="menu_list_{$val['dsid']}" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="checkbox" name="dsid_arr"
+				value="{$val['dsid']}" /></td>
+			<td width="6%">{$val['dsid']}</td>
+			<td width="8%"><input type="text" class="cont_zt7"
+				name="ds_listorder_{$val['dsid']}" value="{$val['listorder']}" /></td>
+			<td width="15%">{$val['title']}</td>
+			<td width="15%">{echo get_module($val['module'],'title')}</td>
+			<td width="10%" class="color1">
+				<!--{datestyle $val['ctime'],'Y-m-d H:i'}-->
+			</td>
+			<td width="40%" class="anc">
+				<!--{eval $editurl=common_inc_module_datacall($val['module'],'datastyle_set_url','edit','val',$pg['url_id'])}-->
+				<span class="c_l"><a href="javascript:;"
+					onclick="gourl('{modelurl $editurl,array('dsid'=>$val['dsid'])}')">编辑</a></span>
+			</td>
+		</tr>
+		<!--{/dbres}-->
+		<!--{else}-->
+		<tr id="clist_0" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td colspan="7"><font class="color6">{lang
+					common:nonedata}</font></td>
+		</tr>
+		<!--{/if}-->
+
+		<tr class="cont_dbg">
+			<td colspan="7">
+				<div class="c_l">
+					<input type="checkbox" name="ck_dosign" value="1" />&nbsp;<span
+						class="cont_c2">删?</span>&nbsp;&nbsp;<input type="button"
+						class="cont_dod" id="dobt" value="提交"
+						onclick="common_datastyle_listdo('{modelurl 948}','{modelurl 949}')" />
+				</div>
+				<div class="c_r">
+					<!--{modtemplate admin/template/page}-->
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<div class="clr"></div>
+</div>
+
+<script language="javascript">
+var callback_param={'callback_param':{'msg_call':'myalert','msg_call_b':'alertgo','msg_href':"{modelurl $callback_url}"}};
+var button_ids="#dobt";
+/*简单编辑,删除*/
+function common_datastyle_listdo(do_url_edit,do_url_del){
+	var dsid_arr=cboxvals("dsid_arr");
+	var dsid_arr_len=dsid_arr.length;
+	var listorder_arr=[];
+	if(dsid_arr_len<1){
+		myalert({'msg_str':'请选择一个ID编号'});
+		return false;
+	}
+	var datas='';
+	if(cboxvals("ck_dosign").length<1){
+		for(var i=0;i<dsid_arr_len;i++){
+			listorder_arr.push(inputvals("ds_listorder_"+dsid_arr[i]));
+		}
+		datas={'dsid':dsid_arr,'listorder':listorder_arr};
+		publishdo(do_url_edit,arr_merge(datas,callback_param),'',"",button_ids);
+	}else{
+		/*删除操作*/
+		var alert_str='{lang admin:msgdel}';
+		datas={'alert_str':alert_str,'alert_callfunc':'alert_callback_func','buttons':button_ids,'url':do_url_del,'dsid':dsid_arr};
+		datas=arr_merge(datas,callback_param);
+		msgalert(datas);
+	}
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

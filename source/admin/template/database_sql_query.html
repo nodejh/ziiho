@@ -1,0 +1,98 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--提示信息开始-->
+<div class="c_w100 c_mt5px adm_bb_dashed c_pb10px">
+	<p class="c_mt5px c_ml5px color2">
+		<strong>提示:</strong>
+	</p>
+	<p class="c_mt5px c_ml5px color1">1、请谨慎对此操作</p>
+	<p class="c_mt5px c_ml5px color1">2、若有多条SQL语句，请使用“(Enter)回车键”换行</p>
+	<div class="clr"></div>
+</div>
+<div class="clr"></div>
+<!--提示信息结束-->
+
+<!--内容开始-->
+<div class="cont_z">
+	<ul>
+
+		<li class="cont_zbg"><p class="cont_tlabel">
+				<strong>SQL命令运行工具:</strong>
+			</p></li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="c_l c_ml5px" style="width: 98%;">
+				<textarea name="_sql_content" class="tabs"
+					style="width: 98%; height: 200px;"></textarea>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+	</ul>
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="c_l cont_dobt"><input type="button"
+			class="cont_dod" id="dobt" value="开始执行SQL命令"
+			onclick="adm_database_sql_query()" /></span> <span
+			class="c_l c_ml10px c_mt5px color1 c_none" id="showstatus"></span>
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+
+	<!--运行结果开始-->
+	<ul id="sql_query_result" class="c_none">
+		<li class="cont_zbg"><p class="cont_tlabel">
+				<strong>SQL命令运行结果:</strong><span class="color1 ared">[&nbsp;<a
+					href="javascript:;" onclick="setHtmlDisplay('#sql_query_result_a')">显示</a>&nbsp;|&nbsp;<a
+					href="javascript:;"
+					onclick="setHtmlDisplay('#sql_query_result_a','none')">隐藏</a>&nbsp;]
+				</span>
+			</p></li>
+		<div class="clr"></div>
+
+		<li id="sql_query_result_a">
+			<div class="c_l c_ml5px" style="width: 98%;">
+				<textarea readonly="readonly" name="sql_query_result_b" class="tabs"
+					style="width: 98%; height: 200px;"></textarea>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+	</ul>
+	<!--运行结果结束-->
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=['#dobt'];
+var _V={
+	'sqlqueryUrl':"{url 'index','mod/admin/ac/tool/op/database/ao/sqlquery_do'/}",
+	'submitStatusId':'#showstatus',
+	'submitStatusMsg':'<img src="'+_CJG.sourcepath+'module/admin/template/image/loading5.gif"/>&nbsp;正在提交...',
+	'sqlQueryResult':['#sql_query_result','#sql_query_result_a','sql_query_result_b'],
+};
+function adm_database_sql_query(){
+	var sql_content=textareaval("_sql_content");
+	var datas={'sql_content':sql_content};
+	textareaval(_V.sqlQueryResult[2],'name','');
+	setHtmlDisplay(_V.submitStatusId);
+	setHtmlData(_V.submitStatusId,_V.submitStatusMsg);
+	var callbackVal={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'adm_database_sql_query_callback','isajax':1}};
+	ajaxAction({'actionUrl':_V.sqlqueryUrl,'actionData':arr_merge(datas,callbackVal),'offButton':button_ids,'showStatusId':_V.submitStatusId,'TimeOut':86400,'urlTarget':_CJG.MF});
+}
+function adm_database_sql_query_callback(sData,ob){
+	if(!isObject(sData)) sData = {};
+	setHtmlDisplay(_V.sqlQueryResult[0]);
+	setHtmlDisplay(_V.sqlQueryResult[1]);_V.sqlQueryResult[2]
+	textareaval(_V.sqlQueryResult[2],'name',sData.data);
+}
+</script>
+
+{modtemplate admin/template/adm_footer}

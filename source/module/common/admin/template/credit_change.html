@@ -1,0 +1,130 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--内容开始-->
+<div class="cont_z">
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_ids"
+				onclick="checkedall(this.name,'changeid_arr')" /></td>
+			<td width="6%">ID编号</td>
+			<td width="25%">积分兑出</td>
+			<td width="6%">兑换</td>
+			<td width="25%">积分兑入</td>
+			<td width="34%">启用</td>
+		</tr>
+		{eval $creditFiledArr=common_creditfield();/} {if $total_num>=1}
+		{dbres $resultlist $val}
+
+		<tr id="clist_{field:val.changeid/}" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="checkbox" name="changeid_arr"
+				value="{field:val.changeid/}" /></td>
+			<td width="6%" class="color1">{field:val.changeid/}</td>
+			<td width="25%">{field:val.outcost/}&nbsp;({print
+				array_key_val('unit',$creditFiledArr[$val['outcredit']])/})&nbsp;{print
+				array_key_val('title',$creditFiledArr[$val['outcredit']])/}</td>
+			<td width="6%">兑换</td>
+			<td width="25%">{field:val.incost/}&nbsp;({print
+				array_key_val('unit',$creditFiledArr[$val['incredit']])/})&nbsp;{print
+				array_key_val('title',$creditFiledArr[$val['incredit']])/}</td>
+			<td width="34%"><input type="checkbox"
+				name="disabled_{field:val.changeid/}"
+				value="{print yesno_val('normal')/}"
+				{if $val['disabled']==yesno_val( 'normal')} checked="checked" {/if} /></td>
+		</tr>
+		{/dbres} {/if}
+		<tr id="clist_0" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="10%" colspan="2" style="text-align: right;"><span
+				class="cont_c2">添加:</span></td>
+			<td width="25%"><span class="c_l"><input type="text"
+					class="cont_zt7" name="outcost_val" value="" /></span> <span
+				class="c_l c_ml5px"> <select name="outcredit_val"
+					class="cont_sh">
+						<option value="">==请选择==</option> {loop $creditFiledArr $val}
+						<option value="{field:val.field/}">({field:val.unit/})&nbsp;{field:val.title/}</option>
+						{/loop}
+				</select>
+			</span></td>
+			<td width="6%">兑换</td>
+			<td width="25%"><span class="c_l"><input type="text"
+					class="cont_zt7" name="incost_val" value="" /></span> <span
+				class="c_l c_ml5px"> <select name="incredit_val"
+					class="cont_sh">
+						<option value="">==请选择==</option> {loop $creditFiledArr $val}
+						<option value="{field:val.field/}">({field:val.unit/})&nbsp;{field:val.title/}</option>
+						{/loop}
+				</select>
+			</span></td>
+			<td width="34%"><input type="checkbox" name="disabled_val"
+				value="{print yesno_val('normal')/}" />&nbsp;&nbsp;&nbsp;&nbsp;<input
+				type="button" class="cont_dod" id="addbt" value="添加"
+				onclick="common_adm_credit_change_baseadd()" /></td>
+		</tr>
+		<tr class="cont_dbg">
+			<td colspan="6">
+				<div class="c_l">
+					<input type="checkbox" name="ck_dosign" value="1" />&nbsp;<span
+						class="cont_c2">删?</span>&nbsp;&nbsp;<input type="button"
+						class="cont_dod" id="dobt" value="提交"
+						onclick="common_adm_credit_change_listdo('{url 'index','mod/common/ac/admin/op/credit/ao/change_baseedit'/}','{url 'index','mod/common/ac/admin/op/credit/ao/change_del'/}')" />
+				</div>
+				<div class="c_r">{modtemplate admin/template/page}</div>
+			</td>
+		</tr>
+	</table>
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':'{field:callback_url/}','isajax':1}};
+var button_ids=['#addbt','#dobt'];
+/*添加*/
+function common_adm_credit_change_baseadd(){
+	var outcost=inputval('outcost_val');
+	var outcredit=selectval('outcredit_val');
+	var incost=inputval('incost_val');
+	var incredit=selectval('incredit_val');
+	var disabled=getboxfirst('disabled_val','name',"{print yesno_val('check')/}");
+	if(outcredit.length<1){
+		mydialog({'data':'{lang common:credit_change_outcredit_null/}'});
+		return false;
+	}
+	if(incredit.length<1){
+		mydialog({'data':'{lang common:credit_change_incredit_null/}'});
+		return false;
+	}
+	if(outcredit==incredit){
+		mydialog({'data':'{lang common:credit_change_outcredit_incredit_equal/}'});
+		return false;
+	}
+	var datas={'outcost':outcost,'outcredit':outcredit,'incost':incost,'incredit':incredit,'disabled':disabled};
+	var do_url="{url 'index','mod/common/ac/admin/op/credit/ao/change_baseadd'/}";
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+/*删除*/
+function common_adm_credit_change_listdo(editurl,delurl){
+	var changeid_arr=checkedval("changeid_arr");
+	var changeid_len=changeid_arr.length;
+	var disabled_arr=[];
+	if(changeid_len<1){
+		mydialog({'data':'{lang global:select_is_null/}'});
+		return false;
+	}
+	var datas={};
+	if(!isVal(getboxfirst("ck_dosign"))){
+		/*编辑操作*/
+		for(var i=0;i<changeid_len;i++){
+			disabled_arr.push(getboxfirst("disabled_"+changeid_arr[i],'name',"{print yesno_val('check')/}"));
+		}
+		datas={'changeid':changeid_arr,'disabled':disabled_arr};
+		ajaxAction({'actionUrl':editurl,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+	}else{
+		datas=arr_merge({'changeid':changeid_arr},callback_param);
+		mydialog({'data':'{lang global:del_info_prompt/}','showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':delurl,'actionData':datas,'urlTarget':_CJG.MF}});
+	}
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

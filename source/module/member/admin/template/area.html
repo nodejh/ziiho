@@ -1,0 +1,117 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--内容开始-->
+<div class="cont_z">
+
+	{if check_is_array($area_nav_arr)==1}
+	<!--分类导航开始-->
+	<div class="c_w100 c_pt5px c_pb10px">
+		<span class="c_l c_ml5px">分类位置:</span> <span class="c_l c_ml5px"><a
+			href="javascript:;"
+			onclick="redirectUrl({'url':'{url 'index','mod/member/ac/admin/op/area/ao/area'/}'})">返回顶级</a></span>
+		{eval $index_len=0;/} {loop $area_nav_arr $key $val} {eval
+		$index_len++;/} {if $area_nav_len!=$index_len} <span
+			class="c_l c_ml5px">&raquo;&nbsp;<a href="javascript:;"
+			onclick="redirectUrl({'url':'{url 'index','mod/member/ac/admin/op/area/ao/area/aid/'.$key/}'})">{field:val/}</a></span>
+		{else} <span class="c_l c_ml5px">&raquo;&nbsp;{field:val/}</span>
+		{/if} {/loop}
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+	<!--分类导航结束-->
+	{/if}
+
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_aid"
+				onclick="checkedall(this.name,'aid_arr')" /></td>
+			<td width="6%">ID编号</td>
+			<td width="8%">排序</td>
+			<td width="59%">名称</td>
+			<td width="21%">操作</td>
+		</tr>
+
+		{if $total_num>=1} {dbres $lists $val}
+		<tr id="menu_list_{field:val.aid/}" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="checkbox" name="aid_arr"
+				value="{field:val.aid/}" /></td>
+			<td width="6%" class="color1">{field:val.aid/}</td>
+			<td width="8%"><input type="text" class="cont_zt7"
+				name="listorder_{field:val.aid/}" value="{field:val.listorder/}" /></td>
+			<td width="59%"><span class="c_l"><input type="text"
+					class="cont_zt1" name="title_{field:val.aid/}"
+					value="{field:val.title/}" /></span> <span
+				class="c_l c_ml2px c_mt5px add"><a href="javascript:;"
+					title="添加下级分类"
+					onclick="redirectUrl({'url':'{url 'index','mod/member/ac/admin/op/area/ao/area_addset/aid/'.$val['aid']/}'})">+</a></span>
+			</td>
+			<td width="21%" class="anc"><a href="javascript:;"
+				onclick="redirectUrl({'url':'{url 'index','mod/member/ac/admin/op/area/ao/area/aid/'.$val['aid']/}'})">查看下级</a>&nbsp;<font
+				class="cont_c1">|</font>&nbsp;<a href="javascript:;"
+				onclick="redirectUrl({'url':'{url 'index','mod/member/ac/admin/op/area/ao/area_editset/aid/'.$val['aid']/}'})">编辑</a></td>
+		</tr>
+		{/dbres} {/if}
+
+		<tr id="menu_list_p" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="10%" colspan="2" style="text-align: right;"><span
+				class="cont_c2">添加:</span></td>
+			<td width="8%"><input type="text" class="cont_zt7"
+				name="listorder" /></td>
+			<td width="59%"><input type="text" class="cont_zt1" name="title" /></td>
+			<td width="21%"><input type="button" class="cont_dod" id="addbt"
+				value="添加" onclick="member_adm_area_baseadd()" /></td>
+		</tr>
+		<tr class="cont_dbg">
+			<td colspan="5"><span class="c_l"><input type="checkbox"
+					name="ck_dosign" value="1" />&nbsp;<span class="cont_c2">删?</span>&nbsp;&nbsp;<input
+					type="button" class="cont_dod" id="dobt" value="提交"
+					onclick="member_adm_area_listdo('{url 'index','mod/member/ac/admin/op/area/ao/area_baseedit'/}','{url 'index','mod/member/ac/admin/op/area/ao/area_del'/}')" /></span>
+				<span class="c_r">{modtemplate admin/template/page}</span></td>
+		</tr>
+	</table>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=["#addbt","#dobt"];
+/*地区简单添加*/
+function member_adm_area_baseadd(){
+	var aid='{field:aid/}';
+	var listorder=inputval('listorder');
+	var title=inputval('title');
+	var datas={'aid':aid,'listorder':listorder,'title':title};
+	ajaxAction({'actionUrl':"{url 'index','mod/member/ac/admin/op/area/ao/area_baseadd'/}",'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+/*地区列表操作*/
+function member_adm_area_listdo(editurl,delurl){
+	var aid_arr=checkedval("aid_arr");
+	var aid_len=aid_arr.length;
+	var listorder_arr=[],title_arr=[];
+	var datas='';
+	if(aid_len<1){
+		mydialog({'data':'{lang global:select_is_null/}'});
+		return false;
+	}
+	if(!isVal(getboxfirst("ck_dosign"))){
+		/*编辑操作*/
+		for(var i=0;i<aid_len;i++){
+			listorder_arr.push(inputval("listorder_"+aid_arr[i]));
+			title_arr.push(inputval("title_"+aid_arr[i]));
+		}
+		datas={'aid':aid_arr,'listorder':listorder_arr,'title':title_arr};
+		ajaxAction({'actionUrl':editurl,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});		
+	}else{
+		/*删除操作*/
+		var msg='如果删除该地区分类，则会员已选择的该地区分类，将不可用<br/>您确定要执行删除操作么？';
+		datas=arr_merge({'aid':aid_arr},callback_param);
+		mydialog({'data':msg,'showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':delurl,'actionData':datas,'urlTarget':_CJG.MF}});
+	}
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

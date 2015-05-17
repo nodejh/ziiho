@@ -1,0 +1,121 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--提示开始-->
+<div class="c_w100 c_mt5px adm_bb_dashed c_pb10px">
+	<p class="c_mt5px c_ml5px color2 fw">提示:</p>
+	<p class="c_mt5px c_ml5px color1">1、模板文件存放于:&nbsp;{field:_G.web.template_main/}</p>
+	<div class="clr"></div>
+</div>
+<div class="clr"></div>
+<!--提示结束-->
+
+<div class="cont_z">
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_templateid"
+				onclick="checkedall(this.name,'templateid_arr')" /></td>
+			<td width="6%">ID编号</td>
+			<td width="8%">排序</td>
+			<td width="15%">模板名称</td>
+			<td width="15%">所在目录</td>
+			<td width="20%">版权信息</td>
+			<td width="8%">可用</td>
+			<td width="24%">操作</td>
+		</tr>
+		{dbres $lists $val}
+		<tr id="menu_list_{field:val.templateid/}"
+			onmouseover="currentbg(this)" onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="checkbox" name="templateid_arr"
+				value="{field:val.templateid/}" /></td>
+			<td width="6%" class="color1">{field:val.templateid/}</td>
+			<td width="8%"><input type="text" class="cont_zt7"
+				name="listorder_{field:val.templateid/}"
+				value="{field:val.listorder/}" /></td>
+			<td width="15%"><input type="text" class="cont_zt1"
+				name="title_{field:val.templateid/}" value="{field:val.title/}" /></td>
+			<td width="15%"><input type="text" class="cont_zt1"
+				name="path_{field:val.templateid/}" value="{field:val.path/}" /></td>
+			<td width="20%"><input type="text" class="cont_zt6"
+				name="description_{field:val.templateid/}"
+				value="{field:val.description/}" /></td>
+			<td width="8%"><input type="checkbox"
+				name="disabled_{field:val.templateid/}"
+				value="{print yesno_val('normal')/}"
+				{if $val['disabled']==yesno_val( 'normal')}checked="checked" {/if} /></td>
+			<td width="24%" class="anc"><a href="javascript:;">文件管理</a></td>
+		</tr>
+		{/dbres}
+		<tr id="menu_list_p" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="10%" colspan="2" style="text-align: right;"><span
+				class="cont_c2">{lang global:add/}:</span></td>
+			<td width="8%"><input type="text" class="cont_zt7"
+				name="listorder" /></td>
+			<td width="15%"><input type="text" class="cont_zt1" name="title" /></td>
+			<td width="15%"><input type="text" class="cont_zt1" name="path" /></td>
+			<td width="20%"><input type="text" class="cont_zt6"
+				name="description" /></td>
+			<td width="34%" colspan="2"><input type="checkbox"
+				name="disabled" value="{print yesno_val('normal')/}" />&nbsp;&nbsp;&nbsp;<input
+				type="button" class="cont_dod" id="pbt" value="{lang global:add/}"
+				onclick="templateadd('{url 'index','mod/common/ac/admin/op/template/ao/template_baseadd'/}')" /></td>
+		</tr>
+		<tr class="cont_dbg">
+			<td colspan="8">
+				<div class="c_l">
+					<input type="checkbox" name="ck_dosign" value="delete" />&nbsp;<span
+						class="cont_c2">删?</span>&nbsp;&nbsp;<input type="button"
+						class="cont_dod" id="dobt" value="{lang global:submit/}"
+						onclick="templatedo('{url 'index','mod/common/ac/admin/op/template/ao/template_baseedit'/}','{url 'index','mod/common/ac/admin/op/template/ao/template_del'/}')" />
+				</div>
+				<div class="c_r">{modtemplate admin/template/page}</div>
+			</td>
+		</tr>
+	</table>
+
+	<div class="clr"></div>
+</div>
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=["#pbt","#dobt"];
+/*添加*/
+function templateadd(do_url){
+	var listorder=inputval('listorder');
+	var title=inputval('title');
+	var path=inputval('path');
+	var description=inputval('description');
+	var disabled=getboxfirst('disabled','name',"{print yesno_val('check')/}");
+	
+	var datas={'listorder':listorder,'title':title,'path':path,'description':description,'disabled':disabled};
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+/*网站模板编辑删除*/
+function templatedo(editurl,delurl){
+	var templateid_arr=checkedval("templateid_arr");
+	var templateid_arr_len=templateid_arr.length;
+	var listorder_arr=[],title_arr=[],path_arr=[],description_arr=[],disabled_arr=[];
+	if(templateid_arr_len<1){
+		mydialog({'data':'{lang global:select_is_null/}'});
+		return false;
+	}
+	var datas={};
+	if(!isVal(getboxfirst("ck_dosign"))){
+		for(var i=0;i<templateid_arr_len;i++){
+			listorder_arr.push(inputval("listorder_"+templateid_arr[i]));
+			title_arr.push(inputval("title_"+templateid_arr[i]));
+			path_arr.push(inputval("path_"+templateid_arr[i]));
+			description_arr.push(inputval("description_"+templateid_arr[i]));
+			disabled_arr.push(getboxfirst("disabled_"+templateid_arr[i],'name',"{print yesno_val('check')/}"));
+		}
+		datas={'templateid':templateid_arr,'listorder':listorder_arr,'title':title_arr,'path':path_arr,'description':description_arr,'disabled':disabled_arr};
+		ajaxAction({'actionUrl':editurl,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+	}else{
+		/*删除操作*/
+		datas=arr_merge({'templateid':templateid_arr},callback_param);
+		mydialog({'data':'{lang global:del_info_prompt/}','showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':delurl,'actionData':datas,'urlTarget':_CJG.MF}});
+	}
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

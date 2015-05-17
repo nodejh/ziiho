@@ -1,0 +1,24 @@
+<tr id="menu_list_{field:arr.menu_id/}" onmouseover="currentbg(this)"
+	onmouseout="currentbg(this,1)">
+	<td width="4%"><input type="checkbox" name="menu_id_arr"
+		value="{field:arr.menu_id/}" /></td>
+	<td width="6%" class="color1">{field:arr.menu_id/}</td>
+	<td width="8%"><input type="text" class="cont_zt7"
+		name="listorder_arr_{field:arr.menu_id/}"
+		value="{field:arr.listorder/}" /></td>
+	<td width="36%"><span class="c_l">{if
+			$arr['indent']>=1}{for
+			$x=0;$x<$arr['indent'];$x++}&nbsp;&nbsp;&nbsp;&nbsp;{/for}<span
+			class="color1">┝&nbsp;</span>{/if}<input type="text"
+			class="cont_zt1 {if $arr['indent']<1}fw{/if}"
+			name="title_arr_{field:arr.menu_id/}" value="{field:arr.title/}" />
+	</span> <span class="c_l c_ml2px c_mt5px add"><a href="javascript:;"
+			title="添加子菜单"
+			onclick="redirectUrl({'url':'{url 'index','mod/admin/ac/menu/op/menu_add/new_menu_id/'.$arr['menu_id']/}'})">+</a></span>
+	</td>
+	<td width="36%"><input type="text" class="cont_zt9"
+		name="menu_url_arr_{field:arr.menu_id/}" value="{field:arr.menu_url/}" /></td>
+	<td width="10%" class="cont_c1 cont_z_link"><a
+		href="{url 'index','mod/admin/ac/menu/op/menu_edit/edit_menu_id/'.$arr['menu_id']/}">编辑</a>
+	</td>
+</tr>

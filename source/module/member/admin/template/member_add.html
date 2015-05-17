@@ -1,0 +1,139 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--内容开始-->
+<div class="cont_z">
+	<ul>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>用户名:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="username" value="" />
+				</div>
+				<div class="cont_li_p2_2">
+					<p class="cont_c1">{field:username_lang/}</p>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>E-mail(邮箱):</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="email" value="" />
+				</div>
+				<div class="cont_li_p2_2">
+					<p class="cont_c1">{field:email_lang/}</p>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>密码:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="password" value="" />
+				</div>
+				<div class="cont_li_p2_2">
+					<p class="cont_c1">{field:password_lang/}</p>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>确认密码:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="password2" value="" />
+				</div>
+				<div class="cont_li_p2_2">
+					<p class="cont_c1">&nbsp;</p>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>{print member_grouptype('system','title')/}:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $groupTypeArr=array(member_grouptype('system',NULL))/} <select
+						name="admin_groupid" class="width200px cont_sh">
+						<option value="0">==请选择==</option> {loop $groupTypeArr $Gval}
+						{eval $groups=member_group_getlist($Gval['field'])/} {dbres
+						array_key_val(1,$groups) $val}
+						<option value="{field:val.groupid/}">{field:val.title/}</option>
+						{/dbres} {/loop}
+					</select>
+				</div>
+				<div class="cont_li_p2_2">
+					<p class="cont_c1">&nbsp;</p>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+	</ul>
+
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="cont_dobt"><input type="button" class="cont_dod"
+			id="dobt" value="提交"
+			onclick="member_adm_member_add('{url 'index','mod/member/ac/admin/op/operation/ao/add_save'/}')" /></span>
+	</div>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script type="text/javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'member_adm_member_add_back','isajax':1}};
+var button_ids="#dobt";
+function member_adm_member_add(do_url){
+	var username=inputval("username");
+	var email=inputval("email");
+	var password=inputval("password");
+	var password2=inputval("password2");
+	var admin_groupid=selectval('admin_groupid');
+	
+	var datas={'username':username,'email':email,'password':password,'password2':password2,'admin_groupid':admin_groupid};
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+function member_adm_member_add_back(data,ob){
+	inputval('username','name','');
+	inputval('nickname','name','');
+	inputval('email','name','');
+	ajaxActionDialog({'data':data.data});
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

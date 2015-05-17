@@ -1,0 +1,100 @@
+{eval $isshowmenuitem=true/} {modtemplate admin/template/adm_header}
+
+<div class="cont_z">
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_tagid"
+				onclick="checkedall(this.name,'tagid_arr')" /></td>
+			<td width="6%">ID编号</td>
+			<td width="8%">排序</td>
+			<td width="53%">标签名称</td>
+			<td width="8%">可用</td>
+			<td width="21%">操作时间</td>
+		</tr>
+
+		{dbres $lists $val}
+		<tr id="st_{$val['tagid']}" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="checkbox" name="tagid_arr"
+				value="{field:val.tagid/}" /></td>
+			<td width="6%" class="color1">{field:val.tagid/}</td>
+			<td width="8%"><input type="text" class="cont_zt7"
+				name="listorder_{field:val.tagid/}" value="{field:val.listorder/}" /></td>
+			<td width="53%"><input type="text" class="cont_zt6"
+				name="title_{field:val.tagid/}" value="{field:val.title/}" /></td>
+			<td width="8%"><input type="checkbox"
+				name="disabled_{field:val.tagid/}"
+				value="{print yesno_val('normal')/}"
+				{if $val['disabled']!=yesno_val( 'check')}checked="checked" {/if} /></td>
+			<td width="21%" class="color1">{datestyle $val['ctime'],'Y-m-d
+				H:i'/}</td>
+		</tr>
+		{/dbres}
+
+		<tr id="menu_list_p" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="10%" colspan="2" style="text-align: right;"><span
+				class="cont_c2">添加:</span></td>
+			<td width="8%"><input type="text" class="cont_zt7"
+				name="listorder" /></td>
+			<td width="53%"><input type="text" class="cont_zt6" name="title" /></td>
+			<td width="29%" colspan="2"><input type="checkbox"
+				name="disabled" value="{print yesno_val('normal')/}" />&nbsp;&nbsp;&nbsp;<input
+				type="button" class="cont_dod" id="addbt" value="添加"
+				onclick="member_adm_tag_add('{url 'index','mod/member/ac/admin/op/tag/ao/tag_baseadd'/}','{field:page/}')" /></td>
+		</tr>
+		<tr class="cont_dbg">
+			<td width="50%" colspan="3"><input type="checkbox"
+				name="ck_dosign" value="{print yesno_val('check')/}" />&nbsp;<span
+				class="cont_c2">删?</span>&nbsp;&nbsp;<input type="button"
+				class="cont_dod" id="dobt" value="提交"
+				onclick="member_adm_tag_listdo('{url 'index','mod/member/ac/admin/op/tag/ao/tag_baseedit'/}','{url 'index','mod/member/ac/admin/op/tag/ao/tag_del'/}')" />
+			</td>
+			<td width="50%" colspan="3">{modtemplate admin/template/page}</td>
+		</tr>
+	</table>
+
+	<div class="clr"></div>
+</div>
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':'{field:callbackurl/}','isajax':1}};
+var button_ids=["#addbt","#dobt"];
+/*添加*/
+function member_adm_tag_add(do_url,page){
+	var listorder=inputval('listorder');
+	var title=inputval('title');
+	var disabled=getboxfirst('disabled','name',"{print yesno_val('check')/}");
+	var datas={'listorder':listorder,'title':title,'disabled':disabled};
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+/*编辑&&删除*/
+function member_adm_tag_listdo(editurl,delurl){
+	var tagid_arr=checkedval("tagid_arr");
+	var tagid_len=tagid_arr.length;
+	var listorder_arr=[],title_arr=[],disabled_arr=[];
+	if(tagid_len<1){
+		mydialog({'data':'{lang global:select_is_null/}'});
+		return false;
+	}
+	var datas={};
+	if(!isVal(getboxfirst("ck_dosign"))){
+		/*编辑操作*/
+		for(var i=0;i<tagid_len;i++){
+			listorder_arr.push(inputval("listorder_"+tagid_arr[i]));
+			title_arr.push(inputval("title_"+tagid_arr[i]));
+			disabled_arr.push(getboxfirst("disabled_"+tagid_arr[i],'name',"{print yesno_val('check')/}"));
+		}
+		datas={'tagid':tagid_arr,'listorder':listorder_arr,'title':title_arr,'disabled':disabled_arr};
+		ajaxAction({'actionUrl':editurl,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+	}else{
+		/*删除操作*/
+		var msgstr="如果删除该标签，则会员已选择的该标签，也将会同时删除。<br/>您确定要删除吗？";
+		datas=arr_merge({'tagid':tagid_arr},callback_param);
+		mydialog({'data':msgstr,'showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':delurl,'actionData':datas,'urlTarget':_CJG.MF}});
+	}
+	return false;
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

@@ -1,0 +1,4 @@
+{eval $subject=article_query('aid',$val['sid'])/}
+<a
+	href="{url 'index','mod/article/ac/content/op/detail/id/'.$val['sid']/}"
+	target="_blank">{field:subject.title/}</a>

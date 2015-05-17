@@ -1,0 +1,51 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<div class="cont_z">
+	<ul>
+		<li>
+			<div class="c_ml5px">
+				<strong>{lang common:module}:</strong>
+			</div>
+			<div class="clr"></div>
+
+			<div class="contbm">
+				<div class="contbm_a">
+					<select name="datacall_module" class="width260px cont_sh">
+						<option value="0">=={lang common:xuanze}{lang
+							common:module}==</option>
+						<!--{eval $dcmodule=get_module()}-->
+						<!--{loop $dcmodule $val}-->
+						<!--{if $val['level']>1}-->
+						<option value="{$val['module']}">&nbsp;
+							<!--{$val['title']}--></option>
+						<!--{/if}-->
+						<!--{/loop}-->
+					</select>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+	</ul>
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="cont_dobt"><input type="button" class="cont_dod"
+			id="dobt" value="{lang common:ok}"
+			onclick="datacall_addcheck('{modelurl 945}')" /></span>
+	</div>
+
+	<div class="clr"></div>
+</div>
+
+<script language="javascript">
+var callback_param={'callback_param':{'msg_call':'myalert','msg_call_b':'redirecturl'}};
+function datacall_addcheck(do_url){
+	var module=selectvals("datacall_module");
+	var datas={'module':module};
+	publishdo(do_url,arr_merge(datas,callback_param),"","","#dobt");
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

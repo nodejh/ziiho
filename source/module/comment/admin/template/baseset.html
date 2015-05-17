@@ -1,0 +1,123 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<div class="c_w100">
+		<ul>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>评论功能:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+							class="c_l {if $index!=1}c_ml10px{/if}"><input
+							type="radio" name="html_fn_allow" value="{field:val.field/}" {if
+							config_val('fn_allow',$sets,yesno_val('check','field'))==$val[
+							'field']} checked="checked" {/if} />&nbsp;{field:val.title3/}</span>
+						{/loop}
+					</div>
+					<div class="cont_li_p2_2">选择“{print
+						yesno_val('normal','title3')/}”后，会员可进行评论操作，选择“{print
+						yesno_val('check','title3')/}”，则关闭评论功能</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>评论状态:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+
+						{eval $statusArr=comment_value_get('status')/} {loop $statusArr
+						$val}
+						<p class="cont_li_p2_3">
+							<input type="radio" name="html_status" value="{field:val.field/}"
+								{if $val['field']==config_val(
+								'status',$sets,comment_value_get('status','check','field'))}checked="checked" {/if} />&nbsp;{field:val.title/}
+						</p>
+						{/loop}
+						<div class="clr"></div>
+					</div>
+					<div class="cont_li_p2_2">
+						<p class="color1">设置添加评论成功后的状态</p>
+						{loop $statusArr $val}
+						<p class="color1">{field:val.description/}</p>
+						{/loop}
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>评论内容字数:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_zt7" name="html_content_minlen"
+							value="{print config_val('content_minlen',$sets,1)/}" />&nbsp;~&nbsp;<input
+							type="text" class="cont_zt7" name="html_content_maxlen"
+							value="{print config_val('content_maxlen',$sets,500)/}" />
+					</div>
+					<div class="cont_li_p2_2">
+						设置评论的字数长度限制，最小长度为大于或等于1的整数。<span class="color7">如果最大长度为0，则不受限</span>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+		</ul>
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+
+	<!--button start-->
+	<div class="cont_doc">
+		<span class="c_l c_ml5px"><input type="button" class="cont_dod"
+			id="dobt" value="提交" onclick="comment_adm_baseset()" /></span>
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+	<!--button end-->
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','isajax':1}};
+var button_ids=['#dobt'];
+var urls={
+	'basesetUrl':"{url 'index','mod/comment/ac/admin/op/set/ao/baseset_do'/}"
+};
+function comment_adm_baseset(){
+	var fn_allow=getboxfirst("html_fn_allow");
+	var status=getboxfirst("html_status");
+	var content_minlen=inputval("html_content_minlen");
+	var content_maxlen=inputval("html_content_maxlen");
+	
+	var datas={
+		'fn_allow':fn_allow,
+		'status':status,
+		'content_minlen':content_minlen,
+		'content_maxlen':content_maxlen
+	};
+	ajaxAction({'actionUrl':urls.basesetUrl,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

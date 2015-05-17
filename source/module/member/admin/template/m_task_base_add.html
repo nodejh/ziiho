@@ -1,0 +1,176 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<div class="main_cont">
+
+	<!--导航开始-->
+	<!--{modtemplate admin/template/menu_nav}-->
+	<!--导航结束-->
+
+	<!--内容列表开始-->
+	<div class="cont_z">
+		<ul>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>排序:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_z_txt" name="tb_listorder" value="" />
+					</div>
+					<div class="cont_li_p2_2">排序编号，作为任务名称列表显示排列顺序</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>任务名称:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_z_txt" name="tb_name" value="" />
+					</div>
+					<div class="cont_li_p2_2">任务名称</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>任务描述:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<textarea class="cont_z_txts" name="tb_content"></textarea>
+					</div>
+					<div class="cont_li_p2_2">任务描述内容信息，支持HTML标签代码</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>是否可用:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="radio" name="tb_disabled" value="1" /> 是&nbsp;&nbsp;<input
+							type="radio" name="tb_disabled" value="0" /> 否
+					</div>
+					<div class="cont_li_p2_2">选择“是”该任务为可用，选择“否”则设为不可用。</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>任务类型:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<select name="tb_type">
+							<!--{loop $task_base_type $val}-->
+							<option value="{$val['v_val']}">{$val['v_name']}</option>
+							<!--{/loop}-->
+						</select>
+					</div>
+					<div class="cont_li_p2_2">选择任务的类型</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>管理组:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<select name="tb_system_group" multiple="multiple" size="8"
+							class="cont_zt8" style="width: 180px;">
+							<!--{dbres $system_group $val}-->
+							<option value="{$val['group_id']}">{$val['group_name']}</option>
+							<!--{/dbres}-->
+						</select>
+					</div>
+					<div class="cont_li_p2_2">按住键盘ctrl键可多选，选择管理组允许完成的该任务</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>会员组:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<select name="tb_member_group" multiple="multiple" size="8"
+							class="cont_zt8" style="width: 180px;">
+							<!--{dbres $member_group $val}-->
+							<option value="{$val['group_id']}">{$val['group_name']}</option>
+							<!--{/dbres}-->
+						</select>
+					</div>
+					<div class="cont_li_p2_2">按住键盘ctrl键可多选，选择会员组允许完成的该任务</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>积分数:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_z_txt" name="tb_point" value="" />
+					</div>
+					<div class="cont_li_p2_2">完成该任务后，所需得到的积分数</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+		</ul>
+
+		<div class="clr"></div>
+
+		<div class="cont_doc">
+			<span class="c_l cont_dobt"><input type="button"
+				class="cont_dod" id="dobt" value="提交"
+				onclick="task_base_add('{modelurl 188}')" /></span> <span
+				class="c_l c_ml5px cont_dobt"><input type="button"
+				class="cont_dod" value="返回" onclick="gourl('{modelurl 185}')" /></span>
+			<div class="clr"></div>
+		</div>
+
+		<div class="clr"></div>
+	</div>
+	<!--内容列表结束-->
+
+	<div class="clr"></div>
+</div>
+
+<!--{modtemplate admin/template/adm_footer}-->

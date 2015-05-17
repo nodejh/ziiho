@@ -1,0 +1,26 @@
+{if array_key_val('total_num',$ppg)>=1} {dbres $plists $val} {if
+check_is_key('picid',$val)==1} {eval $id=$val['picid']/} {else} {eval
+$id=$val['attachid']/} {/if}
+<li>
+	<p>
+		<a href="javascript:;"
+			onclick="article_adm_picture_upload_insert('{field:val.file_name/}','{print show_uf($val['file_name'])/}')"><img
+			src="{print show_uf($val['file_name'])/}" width="110" height="110" /></a>
+	</p>
+	<div class="clr"></div>
+	<p class="c_w100 c_mt2px textc">
+		<a href="javascript:;"
+			onClick="article_adm_picture_upload_del('{field:id/}')">删除</a>&nbsp;&nbsp;{if
+		$val['iscover']!=1}<span class="a_upload_cover"><a
+			href="javascript:;"
+			onClick="article_adm_picture_upload_cover('{field:id/}','set')">设为封面</a></span>{else}<span
+			class="a_upload_coverc"><a href="javascript:;"
+			onClick="article_adm_picture_upload_cover('{field:id/}','cancel')">取消封面</a></span>{/if}
+	</p>
+	<div class="clr"></div>
+	<p class="c_w100 c_mt2px">
+		<input type="text" class="a_texts a_upload_pic_text" value="" />
+	</p>
+	<div class="clr"></div>
+</li>
+{/dbres} {/if}

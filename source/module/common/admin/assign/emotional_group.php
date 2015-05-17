@@ -1,0 +1,39 @@
+<?php
+if (! defined ( 'IN_PATH' )) {
+	exit ( 'no direct access allowed' );
+}
+
+$module = _M ();
+
+/* 组类 */
+$eg = loader ( 'class:class_common_emotional_group', $module, true, true );
+$db = $eg->db;
+
+/* 获取页码 */
+$page = get_page ();
+/* 显示个数 */
+$page_size = 20;
+/* 分页导航 */
+$page_nums = 7;
+/* 排序 */
+$orderby = order_val ();
+
+/* 查询 */
+$db->from ( $eg->table_common_emotional_group );
+/* 获取总数 */
+$total_num = $db->count_num ();
+/* 计算分页 */
+$pg = pagephow ( $total_num, $page_size, $page_nums, $page );
+$db->limit ( $pg ['first_count'], $pg ['page_size'] );
+$db->order_by ( 'listorder', $orderby );
+$db->select ();
+$result = $db->get_list ();
+
+/* 当前url */
+$pg ['name'] = 'index';
+$pg ['param'] = 'mod/common/ac/admin/op/emotional/ao/group/bo/group';
+/* 回调url */
+$callback_url = set_current_url ();
+
+include modtemplate ( $module . '/admin/template/emotional_group' );
+?>

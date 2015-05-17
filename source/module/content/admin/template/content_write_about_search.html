@@ -1,0 +1,35 @@
+{if array_key_val('total_num',$pg)>=1} {dbres $result $val}
+<li id="dx_{field:val.aid/}" onmouseover="currentbg(this)"
+	onmouseout="currentbg(this,1)"><span class="c_l c_fab"><a
+		href="{url 'index','mod/article/ac/content/op/detail/id/'.$val['aid']/}"
+		target="_blank" title="{field:val.title/}"
+		id="dxtitle_{field:val.aid/}">{sublen $val['title'],0,18,'...'/}</a></span> <span
+	class="c_r"><a href="javascript:;"
+		onClick="article_adm_about_addhtml({field:val.aid/})">添加</a></span>
+	<div class="clr"></div></li>
+<div class="clr"></div>
+{/dbres} {else}
+<li style="border: none;">{lang global:nodata/}</li>
+{/if}
+
+<!--分页开始-->
+<div class="c_none" id="fyhtml">
+	<span class="color1"><font class="color6">{field:pg.page/}</font>/{field:pg.last_page/}</span>
+	<span class="color1"> {if $pg['page']==$pg['pre_page']} 上一页
+		{else} <a href="javascript:;"
+		onclick="article_adm_about_search('{field:pg.pre_page/}');">上一页</a>
+		{/if}
+	</span> <span class="color1"> {if $pg['page']==$pg['last_page']} 下一页
+		{else} <a href="javascript:;"
+		onclick="article_adm_about_search('{field:pg.next_page/}');">下一页</a>
+		{/if}
+	</span>
+</div>
+<!--分页结束-->
+
+<script language="javascript">
+$(document).ready(function(){
+	$("#dx_num").html("{field:pg.total_num/}");
+	$("#fy").html($("#fyhtml").html());
+});
+</script>

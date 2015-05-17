@@ -1,0 +1,171 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--提示信息开始-->
+<div class="c_w100 c_mt5px adm_bb_dashed c_pb10px">
+	<p class="c_mt5px c_ml5px color2">
+		<strong>提示:</strong>
+	</p>
+	<p class="c_mt5px c_ml5px color1">1、数据表备份前，请先关闭站点后再继续</p>
+	<p class="c_mt5px c_ml5px color1">2、数据表备份文件目录:{field:_G.web.datapath/}backup下</p>
+	<p class="c_mt5px c_ml5px color1">3、通过登录FTP下载此备份文件，可通过“数据库还原”功能或其他数据库管理工具，进行数据库恢复</p>
+	<div class="clr"></div>
+</div>
+<div class="clr"></div>
+<!--提示信息结束-->
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%">选择</td>
+			<td width="46%">表名</td>
+			<td width="4%">选择</td>
+			<td width="46%">表名</td>
+		</tr>
+
+		{eval $index=0;/} {dbres $dbTableResult $val} {eval
+		$valStr=$_G['db']->_db_table($val[0],false,true)/} {eval $index++;/}
+		{if $index%2>=1}
+		<tr id="tb_{field:index/}" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="checkbox" name="_table_arr"
+				value="{field:valStr/}" /></td>
+			<td width="46%">{field:val.0/}</td> {/if} {if $index%2<1}
+			<td width="4%"><input type="checkbox" name="_table_arr"
+				value="{field:valStr/}" /></td>
+			<td width="46%">{field:val.0/}</td> {/if} {if $index%2==0}
+		</tr>
+		{/if} {/dbres} {if $index%2>=1}
+		<td width="4%">&nbsp;</td>
+		<td width="46%">&nbsp;</td>
+		</tr>
+		{/if}
+
+		<tr>
+			<td colspan="4"><span class="c_l"><a href="javascript:;"
+					onclick="checkedall('','_table_arr')">全选</a></span> <span
+				class="c_l c_ml10px">数据表<font class="c_p2px color6">{field:index/}</font>张,&nbsp;大小<font
+					class="c_p2px color6">{print format_file_size($dbSize)/}</font></span></td>
+		</tr>
+	</table>
+	<div class="clr"></div>
+
+	<ul>
+
+		<li class="cont_dbg">
+			<p class="c_ml5px color1">
+				<strong>数据库备份选项</strong>
+			</p>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>当前数据库版本:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">{field:mysqlVersion/}</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>分卷大小(KB):</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input class="cont_zt1" name="_splitsize" value="2048" />
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>备份表结构信息:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+						class="c_l {if $index!=1}c_ml10px{/if}"><input type="radio"
+						name="_isstruct" value="{field:val.val/}"
+						{if $val['val']==yesno_val( 'normal')} checked="checked" {/if} />&nbsp;{field:val.title/}</span>
+					{/loop}
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>生成表解除信息:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+						class="c_l {if $index!=1}c_ml10px{/if}"><input type="radio"
+						name="_isuntableinfo" value="{field:val.val/}"
+						{if $val['val']==yesno_val( 'check')} checked="checked" {/if} />&nbsp;{field:val.title/}</span>
+					{/loop}
+					<div class="clr"></div>
+				</div>
+				<div class="cont_li_p2_2">
+					<span class="color6">注意:&nbsp;此功能将生成解除表信息，仅作为参考或适合于开发者同步对表的解除信息</span>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+	</ul>
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="c_l cont_dobt"><input type="button"
+			class="cont_dod" id="dobt" value="提交" onclick="adm_database_backup()" /></span>
+		<span class="c_l c_ml10px c_mt5px color1 c_none" id="showstatus"></span>
+		<div class="clr"></div>
+	</div>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=['#addbt','#dobt'];
+var _V={
+	'backupUrl':"{url 'index','mod/admin/ac/tool/op/database/ao/backup_do'/}",
+	'submitStatusId':'#showstatus',
+	'submitStatusMsg':'<img src="'+_CJG.sourcepath+'module/admin/template/image/loading5.gif"/>&nbsp;正在数据库备份中，请稍后...'
+};
+function adm_database_backup(do_url){
+	var tables=checkedval("_table_arr");
+	var splitsize=inputval("_splitsize");
+	var isstruct=getboxfirst("_isstruct");
+	var isuntableinfo=getboxfirst("_isuntableinfo");
+	if(tables.length<1){
+		mydialog({'data':'{lang admin:database_backup_table_null/}'});
+		return false;
+	}
+	var datas={'tables':tables,'splitsize':splitsize,'isstruct':isstruct,'isuntableinfo':isuntableinfo};
+	setHtmlDisplay(_V.submitStatusId);
+	setHtmlData(_V.submitStatusId,_V.submitStatusMsg);
+	ajaxAction({'actionUrl':_V.backupUrl,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'showStatusId':_V.submitStatusId,'TimeOut':86400,'urlTarget':_CJG.MF});
+}
+</script>
+
+{modtemplate admin/template/adm_footer}

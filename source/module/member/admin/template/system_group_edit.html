@@ -1,0 +1,85 @@
+<!--{eval $isshowmenuitem=false;/}-->
+<!--{modtemplate admin/template/adm_header}-->
+
+<script type="text/javascript"
+	src="{field:_G.web.sourcepath/}module/member/admin/template/js/member_adm.js"></script>
+<script language="javascript">
+var currentGroup={
+	"callback_param":{'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}},
+	"groupid":"{field:group.groupid/}",
+	"settingdo":"systemgroup_allowdo",
+	"submitUrl":"{url 'index','mod/member/ac/admin/op/mg/ao/sys_editsetdo'/}"
+};
+</script>
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<!--导航开始-->
+	<div class="c_w100 c_pt5px c_pb5px">
+		<p class="c_l c_ml5px fs14px fw color11">编辑{print
+			get_param('admin_menu_title')/}&nbsp;-&nbsp;{field:group.title/}</p>
+		<p class="c_l c_ml10px">&nbsp;</p>
+		{eval $moduleList=get_module_support('access');/} {eval $index=0;/}
+		{loop $moduleList $val} {eval $index++;/}
+		<p class="c_l fw cont_item" id="nav_module_{field:val.module/}">
+			<a href="javascript:;"
+				onclick="member_adm_groupsetting_item('{field:val.module/}');">{field:val.name/}</a><input
+				type="checkbox" name="module_arr" value="{field:val.module/}"
+				checked="checked" class="c_w0px c_h0px" />
+		</p>
+		{/loop}
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+	<!--导航结束-->
+
+	<!--组设置开始-->
+	<div class="c_w100">
+		<ul>
+			<li>
+				<div class="cont_li_p1">
+					<strong>组名称:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_z_txt" name="title"
+							value="{field:group.title/}" />
+					</div>
+					<div class="cont_li_p2_2">组名称</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+		</ul>
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+	<!--组设置结束-->
+
+	{loop $moduleList $moduleInfo} {eval
+	$groupSetting=groupset_query($group['groupid'],$moduleInfo['module'],true);/}
+	<div class="c_w100 c_none" id="set_module_{field:moduleInfo.module/}">
+		<div class="cont_z_c cont_zbg">
+			<p class="cont_tlabel fw"
+				id="set_module_b_{field:moduleInfo.module/}"></p>
+		</div>
+		{modtemplate
+		$moduleInfo['module'].'/admin/template/systemgroup_allow'}
+	</div>
+	<div class="clr"></div>
+	{/loop}
+
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+$(document).ready(function(){
+	member_adm_groupsetting_item();
+});
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

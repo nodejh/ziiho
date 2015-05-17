@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+
+.answers-area { width:1200px; margin:auto; line-height:35px; position:relative; }
+	
+	.answers-area .txm { position:fixed;  top:35px; right:0px; line-height:35px; padding:0px 5px; background:#3C6; }
+		.answers-area .txm span { color:#fff; }
+		.answers-area .txm .ut { margin:0px 3px; padding:0px 3px; background:#FF6; color:#F00; }
+
+	.answers-area .pos-box { width:100%; line-height:35px; }	
+		.answers-area .pos-box em { float:left; }
+		.answers-area .pos-box em.f1 { margin-right:5px; } 
+		.answers-area .pos-box em.f2 { color:#999; margin:0px 5px; } 
+		.answers-area .pos-box em.f3 { margin:0px 5px; }
+		.answers-area .pos-box a { float:left; color:#930; }
+		.answers-area .pos-box a:hover { color:#F00; text-decoration:underline; }
+		
+		
+	.answers-area .des-box { line-height:24px; padding:15px; border-bottom:3px solid #ccc; background:#F2F2F2; }
+		.answers-area .des-box .ln { font-weight:bold; }
+			.answers-area .des-box .tx { text-indent:28px; }
+		
+		
+	.answers-area .item-box { width:100%; margin-top:10px; }
+		.answers-area .item-box ul.is li { padding:15px; border-bottom:1px solid #eee; }
+		.answers-area .item-box ul.is li:hover { background:#F9F9F9; }
+			.answers-area .item-box ul.is li .tit { width:100%; line-height:24px; letter-spacing:1px; }
+				.answers-area .item-box ul.is li .tit .hh { float:left; width:30px; font-weight:bold; color:#00C; }
+				.answers-area .item-box ul.is li .tit .tt { float:left; }
+			.answers-area .item-box ul.is li .opts { margin-left:30px; margin-top:8px; line-height:28px; }
+				.answers-area .item-box ul.is li .opts p { float:left; padding:2px 8px; }
+				.answers-area .item-box ul.is li .opts p.h:hover { background:#E0E0E0; border-radius:3px; }
+				.answers-area .item-box ul.is li .opts input.single-text { width:320px; height:28px; line-height:26px; text-indent:3px; outline:none; }
+				.answers-area .item-box ul.is li .opts textarea.multi-text{ width:320px; height:100px; line-height:18px; text-indent:3px; outline:none; overflow-x:hidden; overflow-y:auto; }
+				
+				
+		.answers-area .btn-box { width:100%; margin-top:20px; padding-bottom:30px; text-align:center; }
+			.answers-area .btn-box .ok { line-height:28px; padding:5px 30px; border-radius:3px; cursor:pointer; font-size:16px; color:#fff; letter-spacing:1px; font-weight:bold; background:#093; }
+			
+					
+			
+		
+

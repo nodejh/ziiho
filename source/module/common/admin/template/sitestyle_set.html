@@ -1,0 +1,68 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<div class="cont_z">
+	<ul>
+		<li>
+			<div class="cont_li_p1">
+				<strong>站点默认模板:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<select name="templateid" class="width200px cont_sh">
+						{dbres array_key_val(1,$template_result) $val}
+						<option value="{field:val.templateid/}" {if
+							config_val('templateid',$sitestyle)==$val[
+							'templateid']} selected="selected"{/if}>&nbsp;{field:val.title/}&nbsp;</option>
+						{/dbres}
+					</select>
+				</div>
+				<div class="cont_li_p2_2 alc">站点默认的界面风格，选择后将以此风格显示</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>站点默认首页:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<select name="navid" class="width200px cont_sh">
+						<option value="0">==请选择==</option> {field:nav_options/}
+					</select>
+				</div>
+				<div class="cont_li_p2_2 alc">站点默认首页，选择后将会作为站点的默认首页</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+	</ul>
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="cont_dobt"><input type="button" class="cont_dod"
+			id="dobt" value="{lang global:submit/}"
+			onclick="common_adm_sitestyle_set('{url 'index','mod/common/ac/admin/op/set/ao/sitestyle_save'/}')" /></span>
+	</div>
+
+	<div class="clr"></div>
+</div>
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','isajax':1}};
+/*站点风格设置*/
+function common_adm_sitestyle_set(do_url){
+	var templateid=selectval('templateid');
+	var navid=selectval('navid');
+	
+	var datas={'templateid':templateid,'navid':navid};
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':"#dobt"});
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

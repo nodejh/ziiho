@@ -1,0 +1,106 @@
+<!--{eval $isshowmenuitem=false;/}-->
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<!--导航开始-->
+	<div class="c_w100 c_pt5px c_pb5px">
+		{eval $index=0;/} {loop $moduleList $val} {eval $index++;/}
+		<p
+			class="c_l fw {if $cm!=$val['module']}cont_item{else}cont_items{/if}"
+			id="nav_module_{field:val.module/}">
+			<a href="javascript:;"
+				onclick="redirectUrl({'url':'{url 'index','mod/common/ac/admin/op/category/ao/category/cm/'.$val['module']/}'});">{field:val.name/}</a>
+		</p>
+		{/loop}
+		<div class="clr"></div>
+		<div class="c_w100 c_pt5px c_pb2px adm_bb_solid"></div>
+	</div>
+	<div class="clr"></div>
+	<!--导航结束-->
+
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_catid"
+				onclick="checkedall(this.name,'catid_arr')" /></td>
+			<td width="6%">ID编号</td>
+			<td width="8%">排序</td>
+			<td width="40%">分类名称</td>
+			<td width="24%">说明</td>
+			<td width="8%">可用</td>
+			<td width="10%">操作</td>
+		</tr>
+
+		{field:categoryList/}
+
+		<tr id="menu_list_p" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="10%" colspan="2" style="text-align: right;"><span
+				class="cont_c2">添加:</span></td>
+			<td width="8%"><input type="text" class="cont_zt7"
+				name="listorder" /></td>
+			<td width="40%"><input type="text" class="cont_zt1" name="title" /></td>
+			<td width="24%"><input type="text" class="cont_zt3"
+				name="description" /></td>
+			<td width="18%" colspan="2"><input type="checkbox"
+				name="disabled" value="{print yesno_val('normal')/}" />&nbsp;&nbsp;&nbsp;<input
+				type="button" class="cont_dod" id="addbt" value="添加"
+				onclick="common_adm_category_baseadd('{field:cm/}')" /></td>
+		</tr>
+		<tr class="cont_dbg">
+			<td colspan="7"><input type="checkbox" name="ck_dosign"
+				value="1" />&nbsp;<span class="cont_c2">删?</span>&nbsp;&nbsp;<input
+				type="button" class="cont_dod" id="dobt" value="提交"
+				onclick="common_adm_category_listdo('{url 'index','mod/common/ac/admin/op/category/ao/category_baseedit'/}','{url 'index','mod/common/ac/admin/op/category/ao/category_del'/}')" />
+			</td>
+		</tr>
+	</table>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=['#addbt','#dobt'];
+/*分类基本添加*/
+function common_adm_category_baseadd(cm){
+	var listorder=inputval("listorder");
+	var title=inputval("title");
+	var description=inputval("description");
+	var disabled=getboxfirst("disabled");
+
+	var datas={'cm':cm,'listorder':listorder,'title':title,'description':description,'disabled':disabled};
+	var do_url="{url 'index','mod/common/ac/admin/op/category/ao/category_baseadd'/}";
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+/*分类列表操作*/
+function common_adm_category_listdo(editurl,delurl){
+	var catid_arr=checkedval("catid_arr");
+	var catid_len=catid_arr.length;
+	var listorder_arr=[],title_arr=[],description_arr=[],disabled_arr=[];
+	if(catid_len<1){
+		mydialog({'data':'{lang global:select_is_null/}'});
+		return false;
+	}
+	var datas={};
+	if(!isVal(getboxfirst("ck_dosign"))){
+		/*编辑操作*/
+		for(var i=0;i<catid_len;i++){
+			listorder_arr.push(inputval("listorder_"+catid_arr[i]));
+			title_arr.push(inputval("title_"+catid_arr[i]));
+			description_arr.push(inputval("description_"+catid_arr[i]));
+			disabled_arr.push(getboxfirst("disabled_"+catid_arr[i]));
+		}
+		datas={'catid':catid_arr,'listorder':listorder_arr,'title':title_arr,'description':description_arr,'disabled':disabled_arr};
+		ajaxAction({'actionUrl':editurl,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});	
+	}else{
+		/*删除操作*/
+		datas=arr_merge({'catid':catid_arr},callback_param);
+		mydialog({'data':'{lang global:del_info_prompt/}','showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':delurl,'actionData':datas,'urlTarget':_CJG.MF}});
+	}
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

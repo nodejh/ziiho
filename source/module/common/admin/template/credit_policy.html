@@ -1,0 +1,98 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--内容开始-->
+<div class="cont_z anc">
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_ids"
+				onclick="checkedall(this.name,'ruleid_arr')" /></td>
+			<td width="6%">策略项</td>
+			<td width="6%">周期</td>
+			<td width="6%">周期次数</td> {if $creditFileLen>=1} {eval
+			$tdwidth=70/$creditFileLen/} {/if} {eval $tdindex=0;/} {loop
+			$creditFiledArr $val} {eval $tdindex++;/}
+			<td width="{print $tdwidth/}%">{field:val.title/}</td> {/loop}
+			<td width="{if $tdindex<1}80{else}8{/if}%">操作</td>
+		</tr>
+
+		{if $total_num>=1} {dbres $resultlist $val}
+		<tr id="clist_{field:val.ruleid/}" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="checkbox" name="ruleid_arr"
+				value="{field:val.ruleid/}" /></td>
+			<td width="6%">{field:val.title/}</td>
+			<td width="6%">{print
+				common_value_get('credit_cycletype',$val['cycletype'],'title')/}</td>
+			<td width="6%">{field:val.rewardnum/}</td> {eval $tdindex=0;/} {loop
+			$creditFiledArr $cf} {eval $tdindex++;/}
+			<td width="{print $tdwidth/}%"><input type="text"
+				class="cont_zt4" name="{field:cf.field/}_{field:val.ruleid/}"
+				value="{print array_key_val($cf['field'],$val,0)/}" /></td> {/loop}
+			<td width="{if $tdindex<1}80{else}8{/if}%"><a
+				href="javascript:;"
+				onclick="redirectUrl({'url':'{url 'index','mod/common/ac/admin/op/credit/ao/policy_edit/ruleid/'.$val['ruleid']/}'})">编辑</a></td>
+		</tr>
+		{/dbres} {else}
+		<tr id="clist_0" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="100%" colspan="{print 5+$tdindex/}" class="color6">{lang
+				admin:notdata/}</td>
+		</tr>
+		{/if}
+		<tr class="cont_dbg">
+			<td width="100%" colspan="{print 5+$tdindex/}">
+				<div class="c_l">
+					<input type="checkbox" name="ck_dosign" value="1" />&nbsp;<span
+						class="cont_c2">删?</span>&nbsp;&nbsp;<input type="button"
+						class="cont_dod" id="dobt" value="提交"
+						onclick="common_adm_credit_change_listdo('{url 'index','mod/common/ac/admin/op/credit/ao/policy_baseedit'/}','{url 'index','mod/common/ac/admin/op/credit/ao/policy_del'/}')" />&nbsp;&nbsp;<input
+						type="button" class="cont_dod" id="addbt" value="添加"
+						onclick="redirectUrl({'url':'{url 'index','mod/common/ac/admin/op/credit/ao/policy_add'/}'})" />
+				</div>
+				<div class="c_r">{modtemplate admin/template/page}</div>
+			</td>
+		</tr>
+	</table>
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':'{field:callback_url/}','isajax':1}};
+var button_ids=['#addbt','#dobt'];
+var JS_creditFieldArr=Array();
+<!--{loop $creditFiledArr $val}-->
+JS_creditFieldArr.push("{field:val.field/}");
+<!--{/loop}-->
+/*删除*/
+function common_adm_credit_change_listdo(editurl,delurl){
+	var ruleid_arr=checkedval("ruleid_arr");
+	var ruleid_len=ruleid_arr.length;
+	if(ruleid_len<1){
+		mydialog({'data':'{lang global:select_is_null/}'});
+		return false;
+	}
+	var datas={};
+	if(!isVal(getboxfirst("ck_dosign"))){
+		/*编辑操作*/
+		if(JS_creditFieldArr.length<1){
+			mydialog({'data':'{lang global:submit_is_null/}'});
+			return false;
+		}
+		var _creditArr=Array();
+		for(var i=0;i<ruleid_len;i++){
+			_creditArr[i]=Array();
+			for(var j=0; j<JS_creditFieldArr.length; j++){
+				_creditArr[i].push({'field':JS_creditFieldArr[j],'val':inputval(JS_creditFieldArr[j]+"_"+ruleid_arr[i])});
+			}
+		}
+		datas={'ruleid':ruleid_arr,'credit':_creditArr};
+		ajaxAction({'actionUrl':editurl,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+	}else{
+		datas=arr_merge({'ruleid':ruleid_arr},callback_param);
+		mydialog({'data':'{lang global:del_info_prompt/}','showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':delurl,'actionData':datas,'urlTarget':_CJG.MF}});
+	}
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

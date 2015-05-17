@@ -1,0 +1,89 @@
+{eval $isshowmenuitem=true/} {modtemplate admin/template/adm_header}
+
+<div class="cont_z">
+
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_cgroupid"
+				onclick="checkedall(this.name,'cgroupid_arr')" /></td>
+			<td width="6%">ID编号</td>
+			<td width="8%">排序编号</td>
+			<td width="62%">组名称</td>
+			<td width="20%">操作时间</td>
+		</tr>
+
+		{if array_key_val('total_num',$pg)>=1} {dbres $result $val}
+		<tr id="cgroupid_{field:val.cgroupid/}" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="checkbox" name="cgroupid_arr"
+				value="{field:val.cgroupid/}" /></td>
+			<td width="6%" class="color1">{field:val.cgroupid/}</td>
+			<td width="8%"><input type="text" class="cont_zt7"
+				name="listorder_{field:val.cgroupid/}"
+				value="{field:val.listorder/}" /></td>
+			<td width="62%"><input type="text" class="cont_zt6"
+				name="title_{field:val.cgroupid/}" value="{field:val.title/}" /></td>
+			<td width="20%" class="color1">{datestyle $val['ctime'],'Y-m-d
+				H:i'/}</td>
+		</tr>
+		{/dbres} {/if}
+		<tr id="menu_list_p" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="10%" colspan="2" style="text-align: right;"><span
+				class="cont_c2">添加:</span></td>
+			<td width="8%"><input type="text" class="cont_zt7"
+				name="listorder" value="" /></td>
+			<td width="62%"><input type="text" class="cont_zt6" name="title" /></td>
+			<td width="20%" colspan="2"><input type="button"
+				class="cont_dod" id="pbt" value="添加"
+				onclick="common_adm_wordgroup_add('{url 'index','mod/common/ac/admin/op/badword/ao/group/bo/group_baseadd'/}')" /></td>
+		</tr>
+		<tr class="cont_dbg">
+			<td colspan="5"><span class="c_l"> <input type="checkbox"
+					name="ck_dosign" value="1" />&nbsp;<span class="cont_c2">删?</span>&nbsp;&nbsp;<input
+					type="button" class="cont_dod" id="dobt" value="提交"
+					onclick="common_adm_wordgroup_listdo('{url 'index','mod/common/ac/admin/op/badword/ao/group/bo/group_baseedit'/}','{url 'index','mod/common/ac/admin/op/badword/ao/group/bo/group_del'/}')" /></span>
+				<span class="c_r">{modtemplate admin/template/page}</span></td>
+		</tr>
+	</table>
+
+	<div class="clr"></div>
+</div>
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=['#pbt','#dobt'];
+/*添加*/
+function common_adm_wordgroup_add(do_url){
+	var listorder=inputval("listorder");
+	var title=inputval("title");
+	var datas={'listorder':listorder,'title':title};
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+/*列表操作*/
+function common_adm_wordgroup_listdo(editurl,delurl){
+	var cgroupid_arr=checkedval("cgroupid_arr");
+	var cgroupid_len=cgroupid_arr.length;
+	var listorder_arr=[],title_arr=[];
+	if(cgroupid_len<1){
+		mydialog({'data':'{lang global:select_is_null/}'});
+		return false;
+	}
+	var datas='';
+	if(!isVal(getboxfirst("ck_dosign"))){
+		/*编辑操作*/
+		for(var i=0;i<cgroupid_len;i++){
+			listorder_arr.push(inputval("listorder_"+cgroupid_arr[i]));
+			title_arr.push(inputval("title_"+cgroupid_arr[i]));	
+		}
+		datas={'cgroupid':cgroupid_arr,'listorder':listorder_arr,'title':title_arr};
+		ajaxAction({'actionUrl':editurl,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+	}else{
+		/*删除操作*/
+		datas=arr_merge({'cgroupid':cgroupid_arr},callback_param);
+		mydialog({'data':'{lang global:del_info_prompt/}','showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':delurl,'actionData':datas,'urlTarget':_CJG.MF}});
+	}
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

@@ -1,0 +1,126 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--提示信息开始-->
+<div class="c_w100 c_mt5px adm_bb_dashed c_pb10px">
+	<p class="c_mt5px c_ml5px color2">
+		<strong>提示:</strong>
+	</p>
+	<p class="c_mt5px c_ml5px color1">1、数据表还原前，请先关闭站点后再继续</p>
+	<p class="c_mt5px c_ml5px color1">2、还原数据后将会覆盖原来的数据，请先确认将要被覆盖的数据是否已备份</p>
+	<div class="clr"></div>
+</div>
+<div class="clr"></div>
+<!--提示信息结束-->
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_arr"
+				onclick="checkedall(this.name,'_restorefile_arr')" /></td>
+			<td width="36%">备份文件名称</td>
+			<td width="10%">类型</td>
+			<td width="50%">备份时间</td>
+		</tr>
+
+		{eval $rowIndex=0;/} {eval
+		$fileArr=get_file_list($_G['app']['path_data'].'backup');/} {loop
+		$fileArr $val} {eval $rowIndex++;/}
+		<tr id="list_{field:rowIndex/}" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="checkbox" name="_restorefile_arr"
+				value="{field:val.name/}" /></td>
+			<td width="36%">{field:val.name/}</td>
+			<td width="10%">{field:val.filetype/}</td>
+			<td width="50%" class="color1">{datestyle $val['ctime'],'Y-m-d
+				H:i'/}</td>
+		</tr>
+		{/loop} {if $rowIndex<1}
+		<tr id="list_0" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="100%" colspan="4" class="color6">暂无数据备份信息</td>
+		</tr>
+		{/if}
+		<tr class="cont_dbg">
+			<td colspan="4"><span class="c_l"><input type="button"
+					class="cont_dod" id="delbt" value="删除备份文件"
+					onclick="adm_database_restore_backupdel()" /></span></td>
+		</tr>
+	</table>
+
+	<div class="clr"></div>
+	<ul>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>数据还原选项:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="c_l c_ml5px">
+					<p class="c_mt5px">
+						<input type="checkbox" name="_restore_table_struct"
+							value="{print yesno_val('check')/}" />&nbsp;还原表结构信息
+					</p>
+					<p class="c_mt5px">
+						<input type="checkbox" name="_isdelbackup"
+							value="{print yesno_val('check')/}" />&nbsp;还原后删除备份文件
+					</p>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+	</ul>
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="c_l cont_dobt"><input type="button"
+			class="cont_dod" id="dobt" value="开始还原数据"
+			onclick="adm_database_restore()" /></span> <span
+			class="c_l c_ml10px c_mt5px color1 c_none" id="showstatus"></span>
+		<div class="clr"></div>
+	</div>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=['#delbt','#dobt'];
+var _V={
+	'restoreUrl':"{url 'index','mod/admin/ac/tool/op/database/ao/restore_do'/}",
+	'backupdelUrl':"{url 'index','mod/admin/ac/tool/op/database/ao/restore_backupdel'/}",
+	'submitStatusId':'#showstatus',
+	'submitStatusMsg':'<img src="'+_CJG.sourcepath+'module/admin/template/image/loading5.gif"/>&nbsp;正在还原数据，请稍后...'
+};
+function adm_database_restore(){
+	var restorefile_arr=checkedval("_restorefile_arr");
+	var restore_table_struct=getboxfirst("_restore_table_struct");
+	var isdelbackup=getboxfirst("_isdelbackup");
+	if(restorefile_arr.length<1){
+		mydialog({'data':'{lang admin:database_restore_file_null/}'});
+		return false;
+	}
+	var datas={'restorefile':restorefile_arr,'restore_table_struct':restore_table_struct,'isdelbackup':isdelbackup};
+	setHtmlDisplay(_V.submitStatusId);
+	setHtmlData(_V.submitStatusId,_V.submitStatusMsg);
+	ajaxAction({'actionUrl':_V.restoreUrl,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'showStatusId':_V.submitStatusId,'TimeOut':86400,'urlTarget':_CJG.MF});
+}
+function adm_database_restore_backupdel(){
+	var restorefile_arr=checkedval("_restorefile_arr");
+	if(restorefile_arr.length<1){
+		mydialog({'data':'{lang admin:database_restore_backup_del_null/}'});
+		return false;
+	}
+	var datas=arr_merge({'restorefile':restorefile_arr},callback_param);
+	mydialog({'data':'{lang global:del_info_prompt/}','showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':_V.backupdelUrl,'actionData':datas,'urlTarget':_CJG.MF}});
+}
+</script>
+
+{modtemplate admin/template/adm_footer}

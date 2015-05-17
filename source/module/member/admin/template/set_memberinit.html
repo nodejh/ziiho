@@ -1,0 +1,97 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<ul>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>{print member_grouptype('member','title')/}:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval
+					$groupTypeArr=array(member_grouptype('member',NULL),member_grouptype('default',NULL))/}
+					<select name="member_groupid" class="width200px cont_sh">
+						{loop $groupTypeArr $Gval} {eval
+						$groups=member_group_getlist($Gval['field'])/}
+						<optgroup label="{field:Gval.title/}">
+							{dbres array_key_val(1,$groups) $val}
+							<option value="{field:val.groupid/}"
+								{if $val['groupid']==config_val(
+								'groupid',$memberinitSet)}selected="selected"{/if}>{field:val.title/}</option>
+							{/dbres}
+						</optgroup> {/loop}
+					</select>
+				</div>
+				<div class="cont_li_p2_2">
+					<p class="cont_c1">设定会员注册成功后所拥有的会员组</p>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		{eval $creditfieldArr=common_creditfield(NULL)/} {eval
+		$creditfieldLen=array_number($creditfieldArr)/} {loop $creditfieldArr
+		$val}
+		<li>
+			<div class="cont_li_p1">
+				<strong>{field:val.title/}:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="{field:val.field/}"
+						value="{print array_key_val($val['field'],$creditNum,0)/}" />
+				</div>
+				<div class="cont_li_p2_2">&nbsp;</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+		{/loop}
+
+	</ul>
+
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="cont_dobt"><input type="button" class="cont_dod"
+			id="dobt" value="提交" onclick="member_adm_memberinitSet()" /></span>
+	</div>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param = {'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','isajax':1}};
+var button_ids = "#dobt";
+
+/*积分字段*/
+var _creditFieldArr = Array()
+<!--{loop $creditfieldArr $val}-->
+_creditFieldArr.push("{field:val.field/}");
+<!--{/loop}-->
+
+function member_adm_memberinitSet(){
+	var member_groupid = selectval("member_groupid");
+	
+	/*保存积分字段的变量*/
+	var _creditArr=Array();
+	/*获取积分字段值*/
+	for(var i=0; i<_creditFieldArr.length; i++){
+		_creditArr.push(Array(_creditFieldArr[i], inputval(_creditFieldArr[i])));
+	}
+	var datas = {'member_groupid':member_groupid,'credit':_creditArr};
+	
+	ajaxAction({'actionUrl':"{url 'index','mod/member/ac/admin/op/set/ao/memberinit_do'/}",'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

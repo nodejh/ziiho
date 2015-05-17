@@ -1,0 +1,5 @@
+打开 data目录
+  1. 将"old.config.php"文件名称，更改为 " config.php "
+  2. 打开config.php文件配置您的运行环境
+
+当前目录下的 data.sql数据库文件 导入您的数据库

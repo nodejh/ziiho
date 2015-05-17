@@ -1,0 +1,70 @@
+{eval $isshowmenuitem=true/} {modtemplate admin/template/adm_header}
+
+<div class="cont_z">
+
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_navid"
+				onclick="checkedall(this.name,'navid_arr')" /></td>
+			<td width="6%">ID编号</td>
+			<td width="8%">排序</td>
+			<td width="36%">导航名称</td>
+			<td width="26%">URL链接</td>
+			<td width="6%">可用</td>
+			<td width="14%">操作</td>
+		</tr>
+		{field:lists/}
+		<tr class="cont_dbg">
+			<td colspan="7"><input type="checkbox" name="ck_dosign"
+				value="1" />&nbsp;<span class="cont_c2">删?</span>&nbsp;&nbsp;<input
+				type="button" class="cont_dod" id="dobt" value="提交"
+				onclick="common_adm_nav_listdo('{url 'index','mod/common/ac/admin/op/nav/ao/main_listedit'/}','{url 'index','mod/common/ac/admin/op/nav/ao/main_del'/}')" />&nbsp;&nbsp;<input
+				type="button" class="cont_dod" id="addbt"
+				onclick="redirectUrl({'url':'{url 'index','mod/common/ac/admin/op/nav/ao/main_addset'/}'})"
+				value="添加" /></td>
+		</tr>
+	</table>
+
+	<div class="clr"></div>
+</div>
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=["#addbt","#dobt"];
+
+function common_adm_nav_add(do_url,navid){
+	var listorder=inputval("listorder");
+	var title=inputval("title");
+	var navurl=inputval("navurl");
+	var disabled=getboxfirst("disabled","name","{print yesno_val('check')/}");
+	
+	var datas={'navid':navid,'listorder':listorder,'title':title,'navurl':navurl,'disabled':disabled};
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+
+function common_adm_nav_listdo(editurl,delurl){
+	var navid_arr=checkedval("navid_arr");
+	var navid_arr_len=navid_arr.length;
+	var listorder_arr=[],title_arr=[],navurl_arr=[],disabled_arr=[];
+	if(navid_arr_len<1){
+		mydialog({'data':'{lang global:select_is_null/}'});
+		return false;
+	}
+	var datas={};
+	if(!isVal(getboxfirst("ck_dosign"))){
+		for(var i=0;i<navid_arr_len;i++){
+			listorder_arr.push(inputval("listorder_"+navid_arr[i]));
+			title_arr.push(inputval("title_"+navid_arr[i]));
+			navurl_arr.push(inputval("navurl_"+navid_arr[i]));
+			disabled_arr.push(getboxfirst("disabled_"+navid_arr[i],"name","{print yesno_val('check')/}"));
+		}
+		datas={'navid':navid_arr,'listorder':listorder_arr,'title':title_arr,'navurl':navurl_arr,'disabled':disabled_arr};
+		ajaxAction({'actionUrl':editurl,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+	}else{
+		datas=arr_merge({'navid':navid_arr},callback_param);
+		mydialog({'data':'{lang global:del_info_prompt/}','showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':delurl,'actionData':datas,'urlTarget':_CJG.MF}});
+	}
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

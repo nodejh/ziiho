@@ -1,0 +1,24 @@
+<div class="cont_zpage">
+	<span class="cont_c1">共<strong class="cont_c2">{field:pg.total_num/}</strong>条/每页<strong
+		class="cont_c2">{field:pg.page_size/}</strong>条/共<strong
+		class="cont_c2">{field:pg.last_page/}</strong>页
+	</span>&nbsp;&nbsp; {if $pg['page']==$pg['pre_page']} <span class="cont_c1">上一页</span>
+	{else} {if $pg['pre_page']!=1} <a
+		href="{url $pg['name'],urladdto($pg['param'],'page/'.$pg['pre_page'])/}">上一页</a>
+	{else} <a href="{url $pg['name'],$pg['param']/}">上一页</a> {/if} {/if}
+
+	{loop $pg['page_nav'] $pv} {if $pv==page_omit()} <span
+		class="cont_c1 pading3px">...</span> {else} {if $pv!=$pg['page']} {if
+	$pv!=1} <a href="{url $pg['name'],urladdto($pg['param'],'page/'.$pv)/}">{$pv/}</a>
+	{else} <a href="{url $pg['name'],$pg['param']/}">{$pv/}</a> {/if}
+
+	{else} <span class="cont_c2 pading3px">{$pv/}</span> {/if} {/if}
+	{/loop} {if check_is_array($pg['page_nav'])!=1} <span
+		class="cont_c2 pading3px">{field:pg.page/}</span> {/if} {if
+	$pg['page']==$pg['last_page']} <span class="cont_c1 pading3px">下一页</span>
+	{else} <a
+		href="{url $pg['name'],urladdto($pg['param'],'page/'.$pg['next_page'])/}">下一页</a>
+	{/if} <input type="hidden" name="input_page" value="{field:pg.page/}" />
+	<div class="clr"></div>
+</div>
+<div class="clr"></div>

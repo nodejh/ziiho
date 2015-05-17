@@ -1,0 +1,105 @@
+@charset "utf-8";
+/* Copyright 2010-2014, Jolly,Cloud,Bonejay */
+
+/* index - logdata */
+.index-data {
+	width: 100%;
+	position: relative;
+}
+
+.index-data .wrap {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+}
+
+.index-data .wrap .box {
+	max-width: 1920px;
+	max-height: 930px;
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	margin-top: 66px;
+	position: relative;
+}
+
+.index-data .wrap .box .bd {
+	margin: auto;
+}
+
+.index-data .wrap .box .bd-small {
+	width: 1197px;
+}
+
+.index-data .wrap .box .bd-max {
+	width: 1407px;
+}
+
+.index-data .wrap .box .bd .icol {
+	float: left;
+}
+
+.index-data .wrap .box .bd .icol-small {
+	width: 57px;
+}
+
+.index-data .wrap .box .bd .icol-max {
+	width: 67px;
+}
+
+.index-data .wrap .box .bd .icol .is {
+	padding: 1px;
+}
+
+.index-data .wrap .box .bd .icol .is-small {
+	width: 55px;
+	height: 55px;
+}
+
+.index-data .wrap .box .bd .icol .is-max {
+	width: 65px;
+	height: 65px;
+}
+
+/*.index-data .wrap .box .bd .icol-0 { margin-top:220px; }
+					
+					.index-data .wrap .box .bd .icol-1 { margin-top:236px; }
+					
+					.index-data .wrap .box .bd .icol-2 { margin-top:185px; }
+					
+					.index-data .wrap .box .bd .icol-3 { margin-top:169px; }
+					
+					.index-data .wrap .box .bd .icol-4 { margin-top:114px; }
+						
+					.index-data .wrap .box .bd .icol-5 { margin-top:127px; }
+					
+					.index-data .wrap .box .bd .icol-6 { margin-top:95px; }
+					
+					.index-data .wrap .box .bd .icol-7 { margin-top:84px; }
+					
+					.index-data .wrap .box .bd .icol-8 { margin-top:114px; }
+					
+					.index-data .wrap .box .bd .icol-9 { margin-top:346px; }
+					
+					.index-data .wrap .box .bd .icol-10 { margin-top:95px; }
+					
+					.index-data .wrap .box .bd .icol-11 { margin-top:139px; }
+					
+					.index-data .wrap .box .bd .icol-12 { margin-top:231px; }
+					
+					.index-data .wrap .box .bd .icol-13 { margin-top:202px; }
+					
+					.index-data .wrap .box .bd .icol-14 { margin-top:169px; }
+					
+					.index-data .wrap .box .bd .icol-15 { margin-top:198px; }
+					
+					.index-data .wrap .box .bd .icol-16 { margin-top:165px; }
+					
+					.index-data .wrap .box .bd .icol-17 { margin-top:128px; }
+					
+					.index-data .wrap .box .bd .icol-18 { margin-top:160px; }
+					
+					.index-data .wrap .box .bd .icol-19 { margin-top:200px; }
+					
+					.index-data .wrap .box .bd .icol-20 { margin-top:220px; }*/

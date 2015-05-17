@@ -1,0 +1,58 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<div class="cont_z">
+	<ul>
+		<li>
+			<div class="cont_li_p1">
+				<strong>提示:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<p class="c_mt5px c_ml5px color1">1、更新全站缓存，全站所有已缓存的数据将更新</p>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+	</ul>
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="c_l c_ml5px"><input type="button" class="cont_dod"
+			id="dobt" value="更新全站缓存" onclick="adm_cache_update_all('all')" /></span> <span
+			class="c_l c_ml10px c_mt5px color1" id="load-msg"></span>
+	</div>
+
+	<div class="clr"></div>
+</div>
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'adm_cache_update_msg','url':'{field:callback_url/}','isajax':1}};
+var button_ids=["#dobt","#gobt"];
+var _V = {
+		'updateUrl':{
+			'all':"{url 'index','mod/admin/ac/tool/op/cache/ao/u_alldo'/}"
+		},
+		'loadTime':86400,
+		'loadMsgId':"#load-msg",
+		'loadMsg':'<img src="'+_CJG.sourcepath+'module/admin/template/image/loading5.gif"/>&nbsp;正在更新全站缓存...'
+	};
+function adm_cache_update_all(updateType){
+	setHtmlDisplay(_V.loadMsgId);
+	setHtmlData(_V.loadMsgId,_V.loadMsg);
+	var datas={};
+	ajaxAction({'actionUrl':_V.updateUrl[updateType],'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'showStatusId':_V.loadMsgId,'TimeOut':_V.loadTime,'urlTarget':_CJG.MF});
+}
+var msgTimeId = null;
+function adm_cache_update_msg(serverData, param){
+	clearTimeout(msgTimeId);
+	setHtmlDisplay(_V.loadMsgId);
+	setHtmlData(_V.loadMsgId,serverData.data);
+	msgTimeId = setTimeout(function(){
+		setHtmlData(_V.loadMsgId, '');
+		setHtmlDisplay(_V.loadMsgId, 'none');
+	},3000);
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

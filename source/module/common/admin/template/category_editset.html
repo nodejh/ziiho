@@ -1,0 +1,232 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--内容开始-->
+<div class="cont_z">
+	<ul>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>排序编号:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="listorder"
+						value="{print array_key_val('listorder',$category)/}" />
+				</div>
+				<div class="cont_li_p2_2">排序编号，显示顺序</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>分类名称:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="title"
+						value="{print array_key_val('title',$category)/}" />
+				</div>
+				<div class="cont_li_p2_2">要显示的分类名称</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>模板名称:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="template"
+						value="{print array_key_val('template',$category)/}" />
+				</div>
+				<div class="cont_li_p2_2">指定当前分类要显示的模板，留空则为默认，目录为{field:template_path/}</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>移动到分类下:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<select name="catids" class="cont_sh">
+						<option value="0" class="color7">==作为顶级分类==</option>
+						{field:category_option/}
+					</select>
+				</div>
+				<div class="cont_li_p2_2">&nbsp;</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>可用:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+						class="c_l {if $index>1}c_ml10px{/if}"><input type="radio"
+						name="disabled" value="{field:val.val/}" {if
+						array_key_val('disabled',$category,yesno_val('check'))==$val[
+						'val']}checked="checked" {/if} />&nbsp;{field:val.title/}</span> {/loop}
+				</div>
+				<div class="cont_li_p2_2">是否可用</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>在网站导航显示:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+						class="c_l {if $index>1}c_ml10px{/if}"><input type="radio"
+						name="innav" value="{field:val.val/}" {if
+						array_key_val('innav',$category,yesno_val('check'))==$val[
+						'val']}checked="checked" {/if} />&nbsp;{field:val.title/}</span> {/loop}
+				</div>
+				<div class="cont_li_p2_2">设为在网站导航显示</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>说明:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<textarea class="cont_z_txts" name="description">{print array_key_val('description',$category)/}</textarea>
+				</div>
+				<div class="cont_li_p2_2">主要用于叙述分类的介绍，不支持html代码</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li class="cont_zbg"><p class="cont_tlabel">
+				<strong>SEO设置</strong>
+			</p></li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>title&nbsp;标题:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="seo_title"
+						value="{print array_key_val('seo_title',$category)/}" />
+				</div>
+				<div class="cont_li_p2_2">设置当前分类的title&nbsp;标题，将会作为当前分类要显示在网站的标题，不支持html代码</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>keywords&nbsp;关键字:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<textarea class="cont_z_txts" name="seo_keywords">{print array_key_val('seo_keywords',$category)/}</textarea>
+				</div>
+				<div class="cont_li_p2_2">
+					<p class="cont_c1">设置当前分类的keywords&nbsp;关键字，将会作为当前分类的关键字，不支持html代码</p>
+					<p class="cont_c1">可用变量如下:</p>
+					<p class="cont_c1">{title}:分类名称</p>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>description&nbsp;内容:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<textarea class="cont_z_txts" name="seo_description">{print array_key_val('seo_description',$category)/}</textarea>
+				</div>
+				<div class="cont_li_p2_2 alc">
+					<p class="cont_c1">设置当前分类的description&nbsp;内容，将会作为当前分类的介绍内容，不支持html代码</p>
+					<p class="cont_c1">可用变量如下:</p>
+					<p class="cont_c1">{title}:分类名称</p>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+	</ul>
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="c_l c_ml5px"><input type="button" class="cont_dod"
+			id="dobt" value="提交"
+			onclick="common_adm_category_editset('{field:submitUrl/}','{print array_key_val('catid',$category)/}','{print array_key_val('module',$category)/}')" /></span>
+		<span class="c_l c_ml10px"><input type="button"
+			class="cont_dod" id="gobt" value="返回"
+			onclick="redirectUrl({'url':'{field:callback_url/}'})" /></span>
+		<div class="clr"></div>
+	</div>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=['#dobt','#gobt'];
+function common_adm_category_editset(do_url,catid,cm){
+	var catids=selectval("catids");
+	var listorder=inputval("listorder");
+	var title=inputval("title");
+	var description=textareaval("description");
+	var disabled=getboxfirst("disabled");
+	var innav=getboxfirst("innav");
+	var seo_title=inputval("seo_title");
+	var seo_keywords=textareaval("seo_keywords");
+	var seo_description=textareaval("seo_description");
+	var template=inputval("template");
+	
+	var datas={'catid':catid,'catids':catids,'cm':cm,'listorder':listorder,'title':title,'description':description,'disabled':disabled,'innav':innav,'seo_title':seo_title,'seo_keywords':seo_keywords,'seo_description':seo_description,'template':template};
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->
