@@ -34,9 +34,9 @@ switch (_get ( 'op' )) {
 		$CUSER->db->limit($pageData['start'], $pageData['size']);
 		$CUSER->db->select($CUSER->t_field);
 		$compayResult = $CUSER->db->get_list();
-		
+
 		$pageData['uri'] = 'job/ac/companys/spid/' . $spid . '/page/';
-		
+
 		include _g ( 'template' )->name ( 'job', 'company-list', true );
 		break;
 }

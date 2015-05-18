@@ -19,7 +19,7 @@ $_G ['dns'] ['user'] = 'root';
 /* 密码 */
 $_G ['dns'] ['password'] = 'root';
 /* 数据库名 */
-$_G ['dns'] ['database'] = 'zhihu';
+$_G ['dns'] ['database'] = 'ziiho';
 /* 0=及时链接,1=持久链接 */
 $_G ['dns'] ['conn'] = '0';
 /* 表前缀 */

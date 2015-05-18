@@ -39,7 +39,7 @@ switch (_get ( 'op' )) {
 		break;
 	default :
 		$parentResult = $JMODEL->readSort();
-		
+
 		$spid = null;
 		if(!_g('validate')->hasget('spid')){
 			$spid = my_array_value('sortid', $parentResult[0]);
