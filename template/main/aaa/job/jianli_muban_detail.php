@@ -22,7 +22,7 @@
         
         <!-- //vd -->
         <div class="vd clearfix">
-            <div class="bb1"><button type="button">使用此模板</button></div>
+            <div class="bb1"><a href="<?php prt(_g('uri')->su('job/ac/jianligonglue/op/muban_use')); ?>"><button type="button">使用此模板</button></a></div>
             
             <div class="ctxt clearfix"><em>100</em>人使用</div>
             

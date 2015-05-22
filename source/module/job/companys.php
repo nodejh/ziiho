@@ -10,6 +10,10 @@ $JTYPE = _g('module')->trigger('job', 'jtype');
 $CJOB = _g('module')->trigger('job', 'job');
 $CJSKILL = _g('module')->trigger('job', 'skill');
 
+//$a = $CJSKILL->db->count();
+//var_dump($JMODEL);
+//die('s');
+
 switch (_get ( 'op' )) {
 	default :
 		$__spid = null;
@@ -23,7 +27,7 @@ switch (_get ( 'op' )) {
 			$__spid = ($spid != 'a' ? $spid : null);
 		}
 		$parentResult = $JMODEL->readSort();
-		
+
 		/* 获取职位 */
 		$CUSER->db->join($CUSER->t_user_cuser, 'a.cuid', $CUSER->t_user_cuser_profile, 'b.cuid', 'LEFT JOIN');
 		if(!empty($__spid)){
