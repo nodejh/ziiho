@@ -3,12 +3,15 @@ if (! defined ( 'IN_GESHAI' )) {
 	exit ( 'no direct access allowed' );
 }
 
-//$job_muban_intenttion = '求职意向';
-//$job_muban_type = '模板类型';
-//$job_muban_language = '简历语言';
+$MUBAN = _g('module')->trigger('muban', 'muban');
+$MINTENTION = _g('module')->trigger('muban', 'intention');
+$MTYPE = _g('module')->trigger('muban', 'type');
+$MLANGUAGE = _g('module')->trigger('muban', 'language');
 
-//$JMUBAN = _g('module')->trigger('muban', 'muban'); //cs_muban_muban
-
+$intention =  $MINTENTION->finds(); //求职意向
+$type = $MTYPE->find(); //模板风格
+$language = $MLANGUAGE->find(); //简历语言
+var_dump($intention);
 
 switch (_get ( 'op' )) {
 	case 'muban':

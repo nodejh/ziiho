@@ -10,8 +10,14 @@ $JTYPE = _g('module')->trigger('job', 'jtype');
 $CJOB = _g('module')->trigger('job', 'job');
 $CJSKILL = _g('module')->trigger('job', 'skill');
 
-//$a = $CJSKILL->db->count();
-//var_dump($JMODEL);
+//$MUBAN = _g('module')->trigger('muban', 'muban');
+
+//$a = $CJSKILL->db->select();
+//var_dump($CJSKILL);
+//$MUBAN->db->_from = 'cs_muban_muban';
+//$a = $MUBAN->find();
+//var_dump($a);
+//var_dump($MUBAN);
 //die('s');
 
 switch (_get ( 'op' )) {
@@ -27,7 +33,8 @@ switch (_get ( 'op' )) {
 			$__spid = ($spid != 'a' ? $spid : null);
 		}
 		$parentResult = $JMODEL->readSort();
-
+//        var_dump($parentResult);
+//        die();
 		/* 获取职位 */
 		$CUSER->db->join($CUSER->t_user_cuser, 'a.cuid', $CUSER->t_user_cuser_profile, 'b.cuid', 'LEFT JOIN');
 		if(!empty($__spid)){
@@ -37,6 +44,7 @@ switch (_get ( 'op' )) {
 		$CUSER->db->order_by('a.regtime', 'DESC');
 		$CUSER->db->limit($pageData['start'], $pageData['size']);
 		$CUSER->db->select($CUSER->t_field);
+
 		$compayResult = $CUSER->db->get_list();
 
 		$pageData['uri'] = 'job/ac/companys/spid/' . $spid . '/page/';

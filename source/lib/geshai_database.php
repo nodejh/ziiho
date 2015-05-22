@@ -28,13 +28,12 @@ class geshai_database extends geshai_mysql {
 	
 	
 	function select($fields = null) {
-		$sql = $this->get_sql ();
+        $sql = $this->get_sql ();
 		if (empty ( $this->_set_sql )) {
 			$str = ('SELECT ' . $this->sql_field ( $fields ) . ' FROM ' . $this->_from . ' ' . $sql);
 		} else {
 			$str = $this->_set_sql;
 		}
-
 		$this->execute ( $str );
 		$this->clear_sql ();
 		return $this->status;

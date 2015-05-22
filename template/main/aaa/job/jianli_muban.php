@@ -10,7 +10,7 @@
 <!-- //muban-area -->
 <div class="muban-area clearfix">
 	<!-- //sels -->
-	<div class="sels clearfix"><a href="#" class="on"><?php echo $job_muban_intenttion;  ?>最新</a><a href="#" class="def">人气</a><a href="#" class="def">相关</a></div>
+	<div class="sels clearfix"><a href="#" class="on"><?php echo var_dump($intention);  ?>最新</a><a href="#" class="def">人气</a><a href="#" class="def">相关</a></div>
     <!-- sels// -->
     
     <!-- //lists -->

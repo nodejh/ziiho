@@ -24,6 +24,7 @@ class geshai_base {
 			$this->_global ['db'] = _g ( 'loader' )->lib ( 'database', $this->_global ['dns'], true );
 		}
 		$this->db = &$this->_global ['db'];
+
 	}
 }
 ?>
