@@ -21,6 +21,27 @@ class class_muban_muban extends geshai_model {
         return $this->db->get_one();
     }
 
+    //返回资源
+    function finds($k, $v, $symbol, $order = null) {
+        $this->db->from($this->t_muban_muban);
+        $this->db->where($k, $v, $symbol);
+        if(!empty($order)){
+            $this->db->order_by ( $order );
+        }
+        $this->db->select();
+        return $this->db->get_list();
+    }
+
+    //返回一个结果集
+    function find_array($k, $v, $symbol) {
+        $resource = $this->finds($k, $v, $symbol);
+        $result = array();
+        while($row = $this->db->fetch_row($resource)) {
+            array_push($result, $row);
+        }
+        return $result;
+    }
+
 }
 
 ?>

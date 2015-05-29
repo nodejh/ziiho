@@ -9,13 +9,14 @@
     <!-- //muban-area -->
     <div class="muban-area clearfix">
         <!-- //pos -->
-        <div class="pos clearfix"><a href="#" class="home-icon">首页</a><em>></em><a href="#">简历中心</a><em>></em><a href="#">农艺师（销售推广）英文简历模板（应届生初级岗位）</a></div>
+<!--        <div class="pos clearfix"><a href="#" class="home-icon">首页</a><em>></em><a href="#">简历中心</a><em>></em><a href="#">农艺师（销售推广）英文简历模板（应届生初级岗位）</a></div>-->
+        <div class="pos clearfix">农艺师（销售推广）英文简历模板（应届生初级岗位）<?php echo $muban['mbname'];?></div>
         <!-- pos// -->
 
         <!-- //cc-box -->
         <div class="cc-box clearfix">
             <!-- //view -->
-            <div class="view clearfix">
+            <div class="view clearfix" id="html">
                 <div class="use">
                     <div class="use-title">
                         <div class="use-title-left">
@@ -108,9 +109,9 @@
 
             <!-- //vd -->
             <div class="vd clearfix">
-                <div class="bb1"><a href="<?php prt(_g('uri')->su('job/ac/jianligonglue/op/muban_use')); ?>"><button type="button">保存简历</button></a></div>
+                <div class="bb1"><button type="button" id="save" url="<?php prt(_g('uri')->su('job/ac/jianligonglue/op/muban_save/')); ?>" uid="1">保存简历</button></div>
 
-                <div class="ctxt clearfix"><em>100</em>人使用</div>
+                <div class="ctxt clearfix"><em><?php echo $muban['mbcount']; ?></em>人使用</div>
 
                 <div class="fx clearfix">
                     <div class="fx-nn">分享到：</div>
@@ -141,7 +142,26 @@
             var _cs = {"w": _GESHAI.clientsize("clientWidth"), "h": _GESHAI.clientsize("clientHeight")};
             var _ss = {"w": Math.min(_ms.w, _cs.w), "h": Math.min(_ms.h, _cs.h)};
 
+            $('#save').click(function () {
+                var url = $('#save').attr('url');
+                var uid = $('#save').attr('uid');
+                var html = $('#html').html();
+                var data = {'uid':uid, 'html':html};
+                //http://lziiho.com/job.php?ac=jianligonglue&op=muban_save&uid=1
+                //console.log(url);
+                $.post(url, data, function (result) {
+                    var res = $.parseJSON(result);
+                    if (res.code == 0){
+                        alert(res.msg);
+                        //跳转到个人中心
+                    } else {
+                        alert(res.msg);
+                    }
+                });
+            });
+
         });
+
     </script>
 
 <?php include _g('template')->name('@', 'footer', true); ?>

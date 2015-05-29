@@ -200,10 +200,11 @@ class geshai_mysql {
 		}
 		$this->sql = $sql;
 		$result = mysql_query ( $this->sql, $this->db_conn );
+//        var_dump($result);
+//        die();
 		if (! $result) {
 			$this->status = $this->dns ['error'];
-			
-			
+
 			if ($this->show_error) {
 				$this->show_error ( '错误SQL语句：', $this->sql );
 			}

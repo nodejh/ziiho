@@ -21,7 +21,9 @@
 /*.jianli-where-search-ipt {*/
     /*display: inline-block;*/
 /*}*/
-
+.current {
+    color: #CB0000;
+}
 .jianli-where {
     width: 1200px;
     height: 44px;
@@ -117,3 +119,35 @@
     margin-left: 20%;
     width: 60%;
 }
+
+/*jianli-middle*/
+.jianli-where-middle {
+    width: 1200px;
+    margin: auto;
+}
+.jianli-middle {
+    width: 100%;
+    line-height: 25px;
+    position: relative;
+}
+.jianli-middle-border {
+    border:1px solid #E2E2E2;
+    margin: 30px 0;
+    padding: 15px;
+    line-height: 18px;
+}
+.jianli-middle-left {
+    font-weight: 900;
+    width: 80px;
+    float: left;
+}
+.jianli-middle-right {
+    width: 1000px;
+    padding-left: 80px;
+}
+.jianli-left-right-clear {
+    padding-left: 0;
+}
+/*.jianli-middle {*/
+    /*height: auto;*/
+/*}*/

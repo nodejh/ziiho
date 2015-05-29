@@ -34,7 +34,11 @@ class geshai_database extends geshai_mysql {
 		} else {
 			$str = $this->_set_sql;
 		}
+
+        //var_dump($str);
 		$this->execute ( $str );
+//        var_dump($this->fetch_row());
+//        die();
 		$this->clear_sql ();
 		return $this->status;
 	}

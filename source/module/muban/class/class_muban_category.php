@@ -14,9 +14,9 @@ class class_muban_category extends geshai_model {
     }
 
     //查询一条记录
-    function find($k, $v = null) {
+    function find($k, $v, $symbol) {
         $this->db->from($this->t_muban_category);
-        $this->db->where($k, $v);
+        $this->db->where($k, $v, $symbol);
         $this->db->select();
         return $this->db->get_one();
     }

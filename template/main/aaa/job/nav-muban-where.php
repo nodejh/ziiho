@@ -3,7 +3,7 @@
     <!-- //banner-top -->
     <div class="jianli-where">
         <div class="jianli-where-title">
-            <a href="#">简历中心</a>
+            <a href="<?php prt(_g('uri')->su('job/ac/jianligonglue/op/muban'));?>">简历中心</a>
         </div>
         <div class="jianli-where-search">
             <input type="text" class="jianli-where-search-ipt" placeholder="请输入您要查询的公司/实习/学习方案等">

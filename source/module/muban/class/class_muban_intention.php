@@ -21,12 +21,22 @@ class class_muban_intention extends geshai_model {
         return $this->db->get_one();
     }
 
-    //查询多条记录
-    function finds($k, $v) {
+    //返回资源
+    function finds($k, $v, $symbol) {
         $this->db->from($this->t_muban_intention);
-        $this->db->where($k, $v);
+        $this->db->where($k, $v, $symbol);
         $this->db->select();
         return $this->db->get_list();
+    }
+
+    //返回一个结果集
+    function find_array($k, $v, $symbol) {
+        $resource = $this->finds($k, $v, $symbol);
+        $result = array();
+        while($row = $this->db->fetch_row($resource)) {
+            array_push($result, $row);
+        }
+        return $result;
     }
 
 }

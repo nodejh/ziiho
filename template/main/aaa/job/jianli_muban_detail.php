@@ -4,27 +4,32 @@
     <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('common')); ?>/font-awesome-4.3.0/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/jianli.css" />
 <?php include _g('template')->name('job', 'nav-muban-where', true); ?>
-
+<?php include _g('template')->name('job', 'nav-muban-middle', true); ?>
 
 <!-- //muban-area -->
 <div class="muban-area clearfix">
 	<!-- //pos -->
-	<div class="pos clearfix"><a href="#" class="home-icon">首页</a><em>></em><a href="#">简历中心</a><em>></em><a href="#">农艺师（销售推广）英文简历模板（应届生初级岗位）</a></div>
+<!--	<div class="pos clearfix"><a href="#" class="home-icon">首页</a><em>></em><a href="#">简历中心</a><em>></em><a href="#">农艺师（销售推广）英文简历模板（应届生初级岗位）</a></div>-->
     <!-- pos// -->
-    
+
     <!-- //cc-box -->
     <div class="cc-box clearfix">
         <!-- //view -->
-        <div class="view clearfix">
-            <img src="<?php prt(_g('template')->dir('job')); ?>/image/f/g/2.png" />
-        </div>
+        <?php
+        if (!empty($muban)) {
+        ?>
+            <div class="view clearfix">
+                <img src="<?php prt(_g('template')->dir('job'));echo $muban['mbimg']; ?>" />
+            </div>
+
+
         <!-- view// -->
         
         <!-- //vd -->
         <div class="vd clearfix">
-            <div class="bb1"><a href="<?php prt(_g('uri')->su('job/ac/jianligonglue/op/muban_use')); ?>"><button type="button">使用此模板</button></a></div>
+            <div class="bb1"><a href="<?php prt(_g('uri')->su('job/ac/jianligonglue/op/muban_use/mbid/' . $muban['mbid'])); ?>"><button type="button">使用此模板</button></a></div>
             
-            <div class="ctxt clearfix"><em>100</em>人使用</div>
+            <div class="ctxt clearfix"><em><?php echo $v['mbcount'];?></em>人使用</div>
             
             <div class="fx clearfix">
             	<div class="fx-nn">分享到：</div>
@@ -37,7 +42,15 @@
             </div>
         </div>
         <!-- vd// -->
-        
+        <?php
+        }else {
+            ?>
+            <div class="view clearfix">
+                尚无模板信息！
+            </div>
+        <?php
+        }
+        ?>
     </div>
     <!-- cc-box// -->
     
