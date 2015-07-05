@@ -147,6 +147,9 @@
                         <a href="<?php prt(_g('uri')->su('user')); ?>"><i class="fa fa-dashboard fa-fw"></i> 个人中心</a>
                     </li>
                     <li>
+                        <a href="<?php prt(_g('uri')->su('user/profile')); ?>"><i class="fa fa-gear fa-fw"></i> 个人设置</a>
+                    </li>
+                    <li>
                         <a href="<?php prt(_g('uri')->su('user/t/myauth')); ?>"><i class="fa fa-certificate fa-fw"></i> 我的认证书</a>
                     </li>
                     <li>

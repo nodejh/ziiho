@@ -69,3 +69,5 @@ common/bt
     |--- navbar.php ```<nav>...</nav>```
 
 
+
+主题配置 ./data/common/option.php
