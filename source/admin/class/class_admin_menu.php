@@ -4,8 +4,7 @@ if (! defined ( 'IN_GESHAI' )) {
 }
 class class_admin_menu extends geshai_model {
 	public $t_admin_menu = 'admin_menu';
-	public $t_admin_menuof = 'admin_menuof';
-	public $of_relete_field = 'a.menuid,a.parentid,a.module,a.listorder,a.title,a.urlfile,a.keys,a.vals,a.url,a.target';
+	
 	function __construct() {
 		parent::__construct ();
 	}
@@ -18,27 +17,41 @@ class class_admin_menu extends geshai_model {
 		if (_g ( 'cp' )->admin->isAdmin) {
 			$result = $this->finds ( $menuid );
 		} else {
-			$result = $this->of_finds ( $menuid, _g ( 'cp' )->admin->uid );
+			$result = $this->my_finds ( $menuid );
 		}
 		return $result;
 	}
-	/* 是否存在下级 */
+	/* 单个 */
 	function my_find($parentid) {
 		if (_g ( 'cp' )->admin->isAdmin) {
 			$result = $this->find ( 'parentid', $parentid );
 		} else {
-			$this->db->join ( $this->t_admin_menuof, 'a.menuid', $this->t_admin_menu, 'b.menuid' );
-			$this->db->where ( 'a.parentid', $parentid );
-			$this->db->where ( 'b.menuid', $parentid );
-			$this->db->where ( 'b.uid', _g ( 'cp' )->admin->uid );
-			$result = $this->db->select ( $this->of_relete_field );
+			$this->db->from ( $this->t_admin_menu );
+			$this->db->where_in ( 'menuid', _g('cp')->admin->getData('group>mgr>menuid') );
+			$this->db->where ( 'parentid', $parentid );
+			$result = $this->db->select ();
 		}
 		if (! $this->db->is_success ( $result )) {
 			return null;
 		}
 		return $this->db->get_one ();
 	}
-	/* 列出遍历菜单 */
+	/* 多个*/
+	function my_finds($menuid) {
+		if (! _g ( 'validate' )->num ( $menuid )) {
+			return null;
+		}
+		$this->db->from ( $this->t_admin_menu );
+		$this->db->where_in ( 'menuid', _g('cp')->admin->getData('group>mgr>menuid') );
+		$this->db->where ( 'parentid', $menuid );
+		$this->db->order_by ( 'listorder' );
+		$this->db->select ();
+		if (! $this->db->is_success ()) {
+			return null;
+		}
+		return $this->db->get_list ();
+	}
+	/* 载入 */
 	function my_include_find($parentid, $index = 0) {
 		if (_g ( 'cp' )->admin->isAdmin) {
 			$this->db->from ( $this->t_admin_menu );
@@ -47,13 +60,12 @@ class class_admin_menu extends geshai_model {
 			$count = $this->db->count ();
 			$this->db->select ();
 		} else {
-			$this->db->join ( $this->t_admin_menuof, 'a.menuid', $this->t_admin_menu, 'b.menuid' );
-			$this->db->where ( 'a.parentid', $parentid );
-			$this->db->where ( 'b.menuid', $parentid );
-			$this->db->where ( 'b.uid', _g ( 'cp' )->admin->uid );
-			$this->db->order_by ( 'a.listorder' );
+			$this->db->from ( $this->t_admin_menu );
+			$this->db->where_in ( 'menuid', _g('cp')->admin->getData('group>mgr>menuid') );
+			$this->db->where ( 'parentid', $parentid );
+			$this->db->order_by ( 'listorder' );
 			$count = $this->db->count ();
-			$this->db->select ( $this->of_relete_field );
+			$this->db->select ();
 		}
 		if (! $this->db->is_success () || $count < 1) {
 			return null;
@@ -70,13 +82,12 @@ class class_admin_menu extends geshai_model {
 			$count = $this->db->count ();
 			$this->db->select ();
 		} else {
-			$this->db->join ( $this->t_admin_menuof, 'a.menuid', $this->t_admin_menu, 'b.menuid' );
-			$this->db->where ( 'a.menuid', $parentid );
-			$this->db->where ( 'b.menuid', $parentid );
-			$this->db->where ( 'b.uid', _g ( 'cp' )->admin->uid );
-			$this->db->order_by ( 'a.listorder' );
+			$this->db->from ( $this->t_admin_menu );
+			$this->db->where ( 'menuid', $parentid );
+			$this->db->where_in ( 'menuid', _g('cp')->admin->getData('group>mgr>menuid') );
+			$this->db->order_by ( 'listorder' );
 			$count = $this->db->count ();
-			$this->db->select ( $this->of_relete_field );
+			$this->db->select ();
 		}
 		if (! $this->db->is_success () || $count < 1) {
 			return $data;
@@ -88,7 +99,25 @@ class class_admin_menu extends geshai_model {
 		}
 		return $data;
 	}
-	/* 列表 */
+	
+	/* --------- */
+	function selectHtml($mgrData, $parentid = 0, $index = 0) {
+		if (! _g ( 'validate' )->num ( $parentid )) {
+			return null;
+		}
+		$dataResult = $this->finds ( $parentid );
+	
+		include (_g ( 'cp' )->get_template ( ':', 'menu_select_list' ));
+	}
+	
+	/* 单个 */
+	function find($k, $v = null) {
+		$this->db->from ( $this->t_admin_menu );
+		$this->db->where ( $k, $v );
+		$this->db->select ();
+		return $this->db->get_one ();
+	}
+	/* 多个 */
 	function finds($menuid) {
 		if (! _g ( 'validate' )->num ( $menuid )) {
 			return null;
@@ -101,27 +130,6 @@ class class_admin_menu extends geshai_model {
 			return null;
 		}
 		return $this->db->get_list ();
-	}
-	/* 条件查询 */
-	function find($k, $v = null) {
-		$this->db->from ( $this->t_admin_menu );
-		$this->db->where ( $k, $v );
-		$this->db->select ();
-		return $this->db->get_one ();
-	}
-	/* 检查设置参数是否存在 */
-	function menu_getval_query($_key, $_val = NULL, $menu_id = NULL) {
-		$this->db->from ( $this->table_admin_menu );
-		if (! empty ( $menu_id )) {
-			$this->db->where_more ( 'menu_id', $menu_id, '!=' );
-		}
-		$this->db->where ( $_key, $_val );
-		$result = $this->db->select ();
-		if ($result == $this->db->cw) {
-			return $result;
-		}
-		$result = $this->db->get_one ();
-		return $result;
 	}
 	/* 获取 - 子级 */
 	function childs($parentid, $isOnlyIds = false, &$data = array(), $isFindCur = true, $index = 0) {
@@ -334,38 +342,6 @@ class class_admin_menu extends geshai_model {
 			}
 		}
 		smsg ( lang ( '100061' ), null, 1 );
-	}
-	/**
-	 * 管理菜单
-	 */
-	function of_find($k, $v = null) {
-		$this->db->from ( $this->t_admin_menuof );
-		$this->db->where ( $k, $v );
-		$this->db->select ();
-		return $this->db->get_one ();
-	}
-	/* 获取用户关联的 */
-	function of_finds($menuid, $uid) {
-		if (! _g ( 'validate' )->pnum ( $uid )) {
-			return null;
-		}
-		if (! _g ( 'validate' )->num ( $menuid )) {
-			return null;
-		}
-		$this->db->join ( $this->t_admin_menuof, 'a.menuid', $this->t_admin_menu, 'b.menuid', 'LEFT JOIN' );
-		$this->db->where ( 'b.uid', $uid );
-		$this->db->order_by ( 'a.listorder' );
-		$this->db->select ( $this->of_relete_field );
-		if (! $this->db->is_success ()) {
-			return null;
-		}
-		return $this->db->get_list ();
-	}
-	/* 增加用户关联的 */
-	function of_add($key, $v = null) {
-		$this->db->from ( $this->t_admin_menuof );
-		$this->db->set ( $k, $v );
-		return $this->db->insert ();
 	}
 }
 ?>

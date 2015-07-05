@@ -13,6 +13,7 @@ class class_job_examsubject_answer extends geshai_model {
 	function find($k, $v = null) {
 		$this->db->from ( $this->t_job_examsubject_answer );
 		$this->db->where ( $k, $v );
+		$this->db->order_by('ctime', 'DESC');
 		$this->db->select ();
 		return $this->db->get_one ();
 	}
@@ -49,10 +50,35 @@ class class_job_examsubject_answer extends geshai_model {
 	
 	function insertValue($data){
 		$this->db->from($this->t_job_examsubject_answer);
-		$this->db->where($where);
 		$this->db->set($data);
 		$this->db->insert();
 		return $this->db->is_success();
+	}
+	
+	/* show my answer */
+	function myAnswer($esid, $cuid, $jobid, $uid, $option, $model, $isStr = false){
+		$where = array(
+				'esid'=>$esid,
+				'cuid'=>$cuid,
+				'jobid'=>$jobid,
+				'uid'=>$uid
+		);
+		$answerData = $this->find($where);
+		if(my_is_array($answerData)){
+			$answer = _g('value')->ra(str2array($answerData['esoptionid']));
+			$option = _g('value')->ra(str2array($option));
+			
+			$value = array();
+			$i = 0;
+			foreach($option as $k=>$v){
+				if(my_in_array($k, $answer)){
+					$value[] = $model->qsOptionOrder($i);
+				}
+				$i++;
+			}
+		}
+		
+		return ($isStr != true ? $value : my_join(',', $value));
 	}
 }
 ?>

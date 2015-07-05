@@ -87,7 +87,7 @@ class geshai_value {
 			}
 		}
 		
-		$arr = _g ( 'module' )->dv ( '@', 100002 );
+		$arr = $this->sbs();
 		if (! my_array_key_exist ( $k, $arr )) {
 			return _g ( 'module' )->dv ( '@', '100002>' . ($k2 !== true ? 'false' : 'true') . '>v' );
 		}
@@ -148,6 +148,49 @@ class geshai_value {
 		}
 		$d = preg_split($pattern, $str);
 		return $d;
+	}
+	function arr2nl($v){
+		$d = null;
+		if(is_array($v)){
+			$isLoop = false;
+			foreach ($v as $str){
+				if($isLoop){
+					$d .= "\n";
+				}
+				$d .= $str;
+				$isLoop = true;
+			}
+		}
+		return $d;
+	}
+	function serverinfo() {
+		$S = array ();
+		$S ['servdomain'] = array (
+				'name' => '服务器域名',
+				'value' => $_SERVER ['SERVER_NAME']
+		);
+		$S ['opsys'] = array (
+				'name' => '服务器操作系统',
+				'value' => @getenv ( 'OS' )
+		);
+		;
+		$S ['sysserver'] = array (
+				'name' => '服务器解译引擎',
+				'value' => $_SERVER ['SERVER_SOFTWARE']
+		);
+		$S ['phpversion'] = array (
+				'name' => 'PHP版本',
+				'value' => phpversion ()
+		);
+		$S ['mysqlversion'] = array (
+				'name' => 'MySql版本',
+				'value' => _g ( 'db' )->server ( 1 )
+		);
+		$S ['fileupload'] = array (
+				'name' => '上传文件',
+				'value' => (@ini_get ( 'file_uploads' ) ? ini_get ( 'upload_max_filesize' ) : 'unknown')
+		);
+		return $S;
 	}
 }
 ?>

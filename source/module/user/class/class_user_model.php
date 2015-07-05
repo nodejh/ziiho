@@ -41,14 +41,6 @@ class class_user_model extends geshai_model {
 		return my_array_value($k, $user);
 	}
 	
-	function cUserCenterNav(){
-		include _g('template')->name('user', 'c_center_nav', true);
-	}
-	
-	function userCenterNav(){
-		include _g('template')->name('user', 'center_nav', true);
-	}
-	
 	function result($r){
 		return $this->db->fetch_array($r);
 	}

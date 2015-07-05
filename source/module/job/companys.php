@@ -3,22 +3,12 @@ if (! defined ( 'IN_GESHAI' )) {
 	exit ( 'no direct access allowed' );
 }
 
-$CUSER = _g('module')->trigger('user', 'cuser');
+$CUSER = _g('module')->trigger('cuser');
 $CUMODEL = _g('module')->trigger('user', 'model');
 $JMODEL = _g('module')->trigger('job', 'model');
 $JTYPE = _g('module')->trigger('job', 'jtype');
 $CJOB = _g('module')->trigger('job', 'job');
 $CJSKILL = _g('module')->trigger('job', 'skill');
-
-//$MUBAN = _g('module')->trigger('muban', 'muban');
-
-//$a = $CJSKILL->db->select();
-//var_dump($CJSKILL);
-//$MUBAN->db->_from = 'cs_muban_muban';
-//$a = $MUBAN->find();
-//var_dump($a);
-//var_dump($MUBAN);
-//die('s');
 
 switch (_get ( 'op' )) {
 	default :
@@ -33,10 +23,9 @@ switch (_get ( 'op' )) {
 			$__spid = ($spid != 'a' ? $spid : null);
 		}
 		$parentResult = $JMODEL->readSort();
-//        var_dump($parentResult);
-//        die();
+		
 		/* 获取职位 */
-		$CUSER->db->join($CUSER->t_user_cuser, 'a.cuid', $CUSER->t_user_cuser_profile, 'b.cuid', 'LEFT JOIN');
+		$CUSER->db->join($CUSER->t_cuser, 'a.cuid', $CUSER->t_cuser_profile, 'b.cuid', 'LEFT JOIN');
 		if(!empty($__spid)){
 			$CUSER->db->where_regexp('b.csortid', ',' . $__spid . ',');
 		}
@@ -44,11 +33,10 @@ switch (_get ( 'op' )) {
 		$CUSER->db->order_by('a.regtime', 'DESC');
 		$CUSER->db->limit($pageData['start'], $pageData['size']);
 		$CUSER->db->select($CUSER->t_field);
-
 		$compayResult = $CUSER->db->get_list();
-
+		
 		$pageData['uri'] = 'job/ac/companys/spid/' . $spid . '/page/';
-
+		
 		include _g ( 'template' )->name ( 'job', 'company-list', true );
 		break;
 }

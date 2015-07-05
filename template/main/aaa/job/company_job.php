@@ -19,7 +19,11 @@
     <div class="nns clearfix">
     	<a href="<?php prt(_g('uri')->su('job/ac/company/op/jobstep/id/' . _get('id') . '/jobid/' . $jobid)); ?>">学习方案</a>
         <a href="<?php prt(_g('uri')->su('job/ac/material')); ?>">学习资料</a>
-        <a href="<?php prt(_g('uri')->su('job/ac/company/op/jobrz/id/' . _get('id') . '/jobid/' . $jobid)); ?>">提递简历</a>
+        <?php if($MYAUTH->is($jobid)){ ?>
+        	<a href="javascript:;" onclick="_GESHAI.dialog({ clickBgClose: true, title: '温馨提醒', data: '该功能正在研发中...' });">提递简历</a>
+        <?php }else{ ?>
+        	<a href="<?php prt(_g('uri')->su('job/ac/company/op/jobrz/id/' . _get('id') . '/jobid/' . $jobid)); ?>">我要认证</a>
+        <?php } ?>
     </div>
 </div>
 <!-- job-company-job// -->

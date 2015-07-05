@@ -4,7 +4,7 @@
 <div class="clearfix adm-header">
 
 	<div class="clearfix z logo">
-		<p class="t">logo</p>
+		<img src="<?php prt(_g('module')->path(':', 'template/image/logo.png')); ?>" />
 	</div>
 
 	<!-- //菜单 -->
@@ -23,26 +23,24 @@
 	<!-- 工具 -->
 	<div class="clearfix y ops">
 		<div class="clearfix ops-a">
-			<div class="y as as-a">
-				<a href="<?php prt(sdir()); ?>" target="_blank"
-					class="icon-site-home">网站首页</a>
+        	<div class="as as-fc">
+				<p class="as-fc-bb">上午好,<span style="background:url(<?php prt(_g('cp')->admin->ranksrc()); ?>) no-repeat;" class="margin106 rank"><?php prt(_g('cp')->admin->getData('user>username')); ?>[<?php prt(_g('cp')->admin->getData('group>gname')); ?>]</span></p>
 			</div>
-			<div class="y as as-a">
-				<a href="javascript:;" class="icon-manager-home"
-					onclick="_GESHAI.redirect({'target': 'mcenter', 'url': '<?php prt(_g('cp')->uri('ac/mcenter')); ?>'});">管理中心</a>
+			<div class="as as-a">
+				<a href="javascript:;" class="icon-manager-home" onclick="_GESHAI.redirect({'target': 'mcenter', 'url': '<?php prt(_g('cp')->uri('ac/mcenter')); ?>'});">管理中心</a>
 			</div>
-			<div class="y as as-fc">
-				<p class="as-fc-bb">上午好,Jolly</p>
+            <div class="as as-a">
+				<a href="<?php prt(sdir()); ?>/" target="_blank" class="icon-site-home">网站首页</a>
 			</div>
 		</div>
 		<div class="clear"></div>
 
 		<div class="clearfix ops-b">
-			<div class="y bs bs-a">
-				<a href="javascript:;" class="icon-logout">退出</a>
-			</div>
-			<div class="y bs bs-a">
+			<div class="bs bs-a">
 				<a href="javascript:;" class="icon-lock-screen">锁屏</a>
+			</div>
+            <div class="bs bs-a">
+				<a href="javascript:;" class="icon-logout">退出</a>
 			</div>
 		</div>
 	</div>

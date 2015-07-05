@@ -56,10 +56,11 @@ class class_user extends geshai_model {
 		$data['flag'] = 'register';
 		my_session('suser', my_stripslashes($data));
 		
+		/*
 		if(!$this->email_send($data)){
 			smsg(_g('mail')->message());
 			return null;
-		}
+		}*/
 		
 		/* 跳转值验证提示页 */
 		$redirectUrl = _g('uri')->su('user/ac/register/op/email_auth');
@@ -179,6 +180,17 @@ class class_user extends geshai_model {
 			return null;
 		}
 		smsg(lang('100061'), null, 1);
+	}
+	function update($data, $k, $v = null){
+		$this->db->from($this->t_user);
+		$this->db->where($k, $v);
+		$this->db->set($data);
+		$this->db->update();
+		return $this->db->is_success();
+	}
+	function updateOnline($k, $v = null){
+		$data = array( 'online' => _g('cfg>time')  );
+		return $this->update($data, $k, $v);
 	}
 }
 ?>

@@ -56,6 +56,8 @@
 <!-- //javascript -->
 <script language="javascript">
 _GESHAI.checkbox({
+	"fClass": "icon-checkbox",
+	"tClass": "icon-checkboxed",
 	"checkbox": "span[checkbox-all=qsid]",
 	"checkboxItem": "span[checkbox-item=qsid]",
 	"name": "qsid[]"

@@ -1,143 +1,92 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
 
 <style type="text/css">
-.index-box { width: 100%; padding-top: 5px; padding-bottom: 5px; }
-.index-ul ul li { width: 100%; padding-top: 5px; padding-bottom: 5px; border-bottom: 1px solid #EEE; }
-.index-z { float: left; width: 52%; }
-.index-y { float: right; width: 46%; }
+.center_z { float: left; width: 49%; }
+.center_y { float: right; width: 49%; }
+	.center_ibox { padding:5px; }
+		.center_ibox ul.ibb { border-bottom:2px solid #eee; }
+			.center_ibox ul.ibb li { line-height:24px; padding:2px 5px; }
+			.center_ibox ul.ibb li.tit { border-bottom:1px dashed #eee; }
 </style>
 
-<div class="index-box">
+<!-- //center_z -->
+<div class="clearfix center_z">
 
-	<!--左边开始-->
-	<div class="index-z">
+    <!-- //个人信息 -->
+    <div class="clearfix center_ibox">
+        <ul class="clearfix ibb">
+            <li class="tit fw">我的个人信息</li>
+            <li>Jolly&nbsp;您好，欢迎回来!</li>
+            <li>管理级别:&nbsp;超级管理员</li>
+            <li>上次登录时间:&nbsp;2015-2-12 14:20:44</li>
+            <li>上次登录IP:&nbsp;192.168.0.90</li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <!-- 个人信息// -->
+    
+    <!-- //在线会员 -->
+    <div class="clearfix center_ibox">
+        <ul class="clearfix ibb">
+            <li class="tit fw">在线会员<em class="tc-d padding101">230</em>人</li>
+            <li><em class="padding101">Jolly</em>，<em class="padding101">coco</em>，<em class="padding101">匆匆那年</em>...</li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <!-- 在线会员// -->
+    
+    <!-- //新注册会员 -->
+    <div class="clearfix center_ibox">
+        <ul class="clearfix ibb">
+            <li class="tit fw">最近登录会员</li>
+            <li><em class="padding101">abc</em>，<em class="padding101">环游世界</em>，<em class="padding101">明明</em>...</li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <!-- 新注册会员// -->
 
-		<!--个人信息开始-->
-		<div class="index-ul">
-			<ul>
-				<li class="c_bg2"><p class="c_ml5px fw">我的个人信息</p></li>
-				<li>
-					<p class="c_ml5px c_mt5px">
-						您好,&nbsp;<strong>{field:member.username/}</strong>&nbsp;欢迎您回来!
-					</p>
-					<p class="c_ml5px c_mt5px">管理级别:&nbsp;超级管理员</p>
-					<p class="c_ml5px c_mt10px">上次登录时间:&nbsp;{datestyle
-						$member['before_time'],'Y-m-d H:i:s'/}</p>
-					<p class="c_ml5px c_mt5px">上次登录IP:&nbsp;{field:member.before_ip/}</p>
-					<div class="clr"></div>
-				</li>
-				<div class="clr"></div>
-			</ul>
-			<div class="clr"></div>
-		</div>
-		<div class="clr"></div>
-		<!--个人信息结束-->
+    <!-- //系统信息 -->
+    <div class="clearfix center_ibox">
+        <ul class="clearfix ibb">
+            <li class="tit fw">系统信息</li>
+            <?php foreach(_g('value')->ra(_g('value')->serverinfo()) as $v){ ?>
+            <li><?php prt($v['name']); ?>：<?php prt($v['value']); ?></li>
+            <?php } ?>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <!-- 系统信息// -->
 
-		<!--系统信息开始-->
-		<div class="index-ul c_mt10px">
-			<ul>
-				<li class="c_bg2"><p class="c_ml5px fw">系统信息</p></li>
-				<li>
-					<p class="c_ml5px c_mt5px">
-						{field:_G.cj.name/}程序版本:&nbsp;{field:_G.cj.name/}&nbsp;v{field:_G.cj.version/}&nbsp;release
-						&nbsp;{field:_G.cj.release/}&nbsp;&nbsp;[<a
-							href="{field:_G.cj.download/}" target="_blank">查看最新版本</a>]
-					</p>
-					<p class="c_ml5px c_mt5px c_h0px">&nbsp;</p> {loop get_serverinfo()
-					$SInfo}
-					<p class="c_ml5px c_mt5px">{field:SInfo.name/}:&nbsp;{field:SInfo.value/}</p>
-					{/loop}
-					<div class="clr"></div>
-				</li>
-				<div class="clr"></div>
-			</ul>
-			<div class="clr"></div>
-		</div>
-		<div class="clr"></div>
-		<!--系统信息结束-->
+    <!-- //开发团队信息 -->
+    <!--<div class="clearfix center_ibox">
+        <ul class="clearfix ibb">
+            <li class="tit fw"><?php prt(_g('value')->geshai('name'));?>开发团队</li>
+            <?php foreach(_g('value')->ra(_g('value')->geshai('product_info')) as $v){ ?>
+            <li class="ta_100"><?php prt($v['name']); ?>:&nbsp;<?php prt($v['value']); ?></li>
+            <?php } ?>
+        </ul>
+    </div>
+    <div class="clear"></div>-->
+    <!-- 开发团队信息// -->
 
-		<!--开发团队信息开始-->
-		<div class="index-ul c_mt10px">
-			<ul>
-				<li class="c_bg2"><p class="c_ml5px fw">{field:_G.cj.name/}开发团队</p></li>
-				<li>{loop array_key_val('product_info',array_key_val('cj',$_G))
-					$PInfo}
-					<p class="c_ml5px c_mt5px">{field:PInfo.name/}:&nbsp;{field:PInfo.value/}</p>
-					{/loop}
-					<div class="clr"></div>
-				</li>
-				<div class="clr"></div>
-			</ul>
-			<div class="clr"></div>
-		</div>
-		<div class="clr"></div>
-		<!--开发团队信息结束-->
-
-		<!--相关链接开始-->
-		<div class="index-ul c_mt10px">
-			<ul>
-				<li class="c_bg2"><p class="c_ml5px fw">相关链接</p></li>
-				<li>{eval $index=0;/} {loop
-					array_key_val('product_relate',array_key_val('cj',$_G)) $PR} {eval
-					$index++;/} <span
-					class="c_l c_mt5px c_mr10px {if $index<2}c_ml5px{/if}"><a
-						href="{field:PR.value/}" target="_blank">{field:PR.name/}</a></span>
-					{/loop}
-					<div class="clr"></div>
-				</li>
-				<div class="clr"></div>
-			</ul>
-			<div class="clr"></div>
-		</div>
-		<div class="clr"></div>
-		<!--相关链接结束-->
-
-	</div>
-	<!--左边结束-->
-
-	<!--右边开始-->
-	<div class="index-y">
-
-		<!--授权信息开始-->
-		<div class="index-ul">
-			<ul>
-				<li class="c_bg2"><p class="c_ml5px fw">授权信息</p></li>
-				<li>
-					<p class="c_ml5px c_mt5px">
-						{field:_G.cj.name/}程序版本:&nbsp;{field:_G.cj.name/}&nbsp;v{field:_G.cj.version/}&nbsp;release
-						&nbsp;{field:_G.cj.release/}&nbsp;&nbsp;[<a
-							href="{field:_G.cj.buy/}" target="_blank">技术支持与服务</a>]
-					</p>
-					<p class="c_ml5px c_mt5px c_h0px">&nbsp;</p>
-					<p class="c_mt5px c_ml5px">
-						授权类型:&nbsp;<span id="authorize-type"></span>
-					</p>
-					<p class="c_mt5px c_ml5px">
-						授权码:&nbsp;<span id="authorize-code"></span>
-					</p>
-					<div class="clr"></div>
-				</li>
-				<div class="clr"></div>
-			</ul>
-			<div class="clr"></div>
-		</div>
-		<div class="clr"></div>
-		<!--授权信息结束-->
-
-		<!--官方动态开始-->
-		<div class="index-ul c_mt10px">
-			<ul>
-				<li class="c_bg2"><p class="c_ml5px fw">官方最新动态</p></li>
-				<li class="ared" id="product-active-info"></li>
-				<div class="clr"></div>
-			</ul>
-			<div class="clr"></div>
-		</div>
-		<div class="clr"></div>
-		<!--官方动态结束-->
-
-	</div>
-	<!--右边结束-->
-
-	<div class="clr"></div>
 </div>
+<!-- center_z// -->
+
+<!-- //center_y -->
+<div class="clearfix center_y">
+
+    <!-- //统计信息 -->
+    <div class="clearfix center_ibox">
+        <ul class="clearfix ibb">
+            <li class="tit fw">统计信息</li>
+            <li class="ta_100">会员：<em class="tc-d padding101">350</em>个记录<li>
+            <li class="ta_100">企业：<em class="tc-d padding101">50</em>个记录<li>
+            <li>招聘：<em class="tc-d padding101">150</em>个记录</li>
+            <li>学习资料：<em class="tc-d padding101">1500</em>个记录</li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <!-- 统计信息// -->
+
+</div>
+<!-- center_y// -->

@@ -70,6 +70,8 @@
 <!-- //javascript -->
 <script language="javascript">
 _GESHAI.checkbox({
+	"fClass": "icon-checkbox",
+	"tClass": "icon-checkboxed",
 	"checkbox": "span[checkbox-all=materialid]",
 	"checkboxItem": "span[checkbox-item=materialid]",
 	"name": "materialid[]"

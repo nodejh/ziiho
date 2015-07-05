@@ -3,7 +3,7 @@ if (! defined ( 'IN_GESHAI' )) {
 	exit ( 'no direct access allowed' );
 }
 
-$CUSER = _g('module')->trigger('user', 'cuser');
+$CUSER = _g('module')->trigger('cuser');
 $CUMODEL = _g('module')->trigger('user', 'model');
 $JMODEL = _g('module')->trigger('job', 'model');
 $JSORT = _g('module')->trigger('job', 'sort');
@@ -37,7 +37,7 @@ switch (_get ( 'op' )) {
 		
 		
 		/* 所有职位招聘 */
-		$CUSER->db->join($CUSER->t_user_cuser, 'a.cuid', $CUSER->t_user_cuser_profile, 'b.cuid', 'LEFT JOIN');
+		$CUSER->db->join($CUSER->t_cuser, 'a.cuid', $CUSER->t_cuser_profile, 'b.cuid', 'LEFT JOIN');
 		if($q_isSortid && !empty($__q_sortids)){
 			foreach ($__q_sortids as $__sortid){
 				$CUSER->db->where_like('b.csortid', ',' . $__sortid . ',', 'OR');

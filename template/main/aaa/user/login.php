@@ -36,7 +36,7 @@
             <div class="t2"><input type="password" class="inp" name="password" /></div>
         </div>
         <div class="f3 clearfix">
-        	<div class="z t1"><button type="button" class="btn" name="disabled-buttons" onclick="userLogin(this, '<?php prt(_g('uri')->su('user/ac/login/op/ordinary')); ?>', '<?php prt(_g('uri')->su('user/ac/login/op/company')); ?>');">登&nbsp;陆</button></div>
+        	<div class="z t1"><button type="submit" class="btn" name="disabled-buttons" onclick="userLogin(this, '<?php prt(_g('uri')->su('user/ac/login/op/ordinary')); ?>', '<?php prt(_g('uri')->su('user/ac/login/op/company')); ?>');">登&nbsp;陆</button></div>
             <div class="z t2"><a href="<?php prt(_g('uri')->su('user/ac/register')); ?>">注册</a><em>|</em><a href="<?php prt(_g('uri')->su('user/ac/forget')); ?>">忘记密码</a></div>
         </div>
         </form>

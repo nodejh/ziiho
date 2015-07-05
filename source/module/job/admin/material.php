@@ -9,6 +9,8 @@ $JMaterial = _g ( 'module' )->trigger ( 'job', 'material' );
 
 $gobackUrl = _g('uri')->referer();
 
+$writeUrlStr = 'mod/job/ac/material/op/write';
+
 switch (_get ( 'op' )) {
 	case 'write' :
 		$materialSub = array ();
@@ -96,7 +98,7 @@ switch (_get ( 'op' )) {
 		$JMaterial->db->select();
 		$dataResult = $JMaterial->db->get_list();
 		
-		$writeUrlStr = 'mod/job/ac/material/op/write';
+		$pageData['uri'] = 'mod/job/ac/material/page/';
 		_g ( 'cp' )->set_template ( 'job', 'material' );
 		break;
 }

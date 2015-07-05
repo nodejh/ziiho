@@ -17,7 +17,19 @@ a { -webkit-transition:all 0.4s ease; transition:all 0.4s ease; text-decoration:
 
 .com-w { width:1200px; margin:auto; }
 
+.icon-11 { padding-left:18px; background:url(../image/11.png) no-repeat left center; }
+.icon-12 { padding-left:18px; background:url(../image/12.png) no-repeat left center; }
+
+.icon-13 { padding-left:18px; background:url(../image/13.png) no-repeat left center; }
+.icon-14 { padding-left:18px; background:url(../image/14.png) no-repeat left center; }
+
+.color100 { color:#390; }
+.color101 { color:#F00; }
+.color102 { color:#939393; }
+.color103 { color:#090; }
+
 /* com-header */
+.com-header-wrap { border-bottom:1px solid #eee; }
 .com-header { height:62px; }
 	.com-header .hd1 { float:left; width:400px; }
 	.com-header .hd2 { float:left; width:400px; }
@@ -25,7 +37,14 @@ a { -webkit-transition:all 0.4s ease; transition:all 0.4s ease; text-decoration:
 		.com-header .hd2 a.ml { float:left; }
 		.com-header .hd2 a.mr { float:right; }
 	.com-header .hd3 { float:right; }
-		.com-header .hd3 a { display:block; line-height:62px; font-family: "arial","SimSun"; font-size:20px; }
+		.com-header .hd3 .uinfo_101 { position:relative; width:160px; line-height:62px; background:#fff; }
+			.com-header .hd3 .uinfo_101 a.un { margin-right:10px; text-align:right; display:block; overflow:hidden; }
+				.com-header .hd3 .uinfo_101 a.un em { padding-right:20px; background:url(../image/17.png) no-repeat right center; }
+				.com-header .hd3 .uinfo_101.on a.un em { background:url(../image/18.png) no-repeat right center; }
+			.com-header .hd3 .uinfo_101 .ui_box { position:absolute; z-index:2; right:0px; top:62px; width:160px; background:#fff; border:1px solid #eee; border-top:none; display:none; }
+				.com-header .hd3 .uinfo_101 .ui_box a { display:block; outline:none; height:26px; line-height:26px; padding:5px; text-align:center; }
+				.com-header .hd3 .uinfo_101 .ui_box a:hover { text-decoration:underline; color:#F00; background:#CCC; }
+		.com-header .hd3 a.co { display:block; line-height:62px; font-family: "arial","SimSun"; font-size:20px; }
 		.com-header .hd3 a.dl { float:left; padding-left:32px; background:url(../image/com-header-dl.png) no-repeat left 12px; }
 		.com-header .hd3 a.zc { float:left; margin-left:20px; padding-left:32px; background:url(../image/com-header-zc.png) no-repeat left 12px; }
 		
@@ -59,19 +78,19 @@ a { -webkit-transition:all 0.4s ease; transition:all 0.4s ease; text-decoration:
 /* job-company-data */
 .job-company-data { }
 	.job-company-data ul.dbox { float:left; }
-	.job-company-data ul.dbox li { float:left; margin-top:25px; width:215px; height:140px; overflow:hidden; position:relative; }
-	.job-company-data ul.dbox li.mrpx { margin-right:30px; }
-		.job-company-data ul.dbox li a.pic { position:absolute; left:0px; top:0px; width:215px; height:140px; overflow:hidden; display:block; }
+	.job-company-data ul.dbox li { float:left; margin-top:25px; width:285px; height:180px; padding-bottom:12px; background:url(../image/bg_100.png) no-repeat right bottom; overflow:hidden; position:relative; }
+	.job-company-data ul.dbox li.mrpx { margin-right:20px; }
+		.job-company-data ul.dbox li a.pic { position:absolute; left:0px; top:0px; width:279px; height:175px; padding:2px; border:1px solid #ccc; overflow:hidden; display:block; }
 			.job-company-data ul.dbox li a.pic img { width:100%; height:100%; }
-		.job-company-data ul.dbox li .info { position:absolute; left:0px; /*top:0px;*/ bottom:0px; width:215px; height:140px; background:#fafafa; background:url(../../job/image/black-50.png) repeat; overflow:hidden; display:none; }
-			.job-company-data ul.dbox li .info .di { width:205px; height:130px; padding:5px;/* border:1px solid #edeef0;*/ }
+		.job-company-data ul.dbox li .info { position:absolute; left:0px; /*top:0px;*/ bottom:11px; width:279px; height:175px; padding:2px; border:1px solid #ccc; /*background:#fafafa;*/ background:url(../image/white_shadow_1.png) repeat;  overflow:hidden; display:none; }
+			.job-company-data ul.dbox li .info .di { width:275px; height:170px; padding:5px;/* border:1px solid #edeef0;*/ }
 				.job-company-data ul.dbox li .info .di .tt { height:28px; line-height:28px; overflow:hidden; }
-					.job-company-data ul.dbox li .info .di .tt a { color:#4a4a4a; color:#fff; font-weight:bold; }
+					.job-company-data ul.dbox li .info .di .tt a { color:#4a4a4a; /*color:#fff;*/ font-weight:bold; }
 					.job-company-data ul.dbox li .info .di .tt a:hover { text-decoration:underline; }
-						.job-company-data ul.dbox li .info .di .tt a img.s-logo { margin-right:4px; padding:1px; border:1px solid #ccc; }
+						.job-company-data ul.dbox li .info .di .tt a img.s-logo { margin-right:4px; padding:1px; border:1px solid #13abab; }
 				.job-company-data ul.dbox li .info .di .dd { height:108px; padding:0px 8px; font-size:12px; overflow-x:hidden; overflow-y:auto; }
-					.job-company-data ul.dbox li .info .di .dd a { float:left; display:block; line-height:18px; padding:0px 2px; margin:8px 8px 0px 0px; color:#fff; border-bottom:1px solid #ccc; }
-					.job-company-data ul.dbox li .info .di .dd a:hover { text-decoration:none; }
+					.job-company-data ul.dbox li .info .di .dd a { float:left; display:block; line-height:18px; padding:2px 4px; margin:8px 8px 0px 0px; color:#fff; /*border-bottom:1px solid #4a4a4a;*/ background:#0d9f9f; }
+					.job-company-data ul.dbox li .info .di .dd a:hover { text-decoration:underline; background:#0b6c6c; }
 		
 		
 /* job-company-view */
@@ -362,15 +381,15 @@ a { -webkit-transition:all 0.4s ease; transition:all 0.4s ease; text-decoration:
 	.material-list .dlist { margin-top:10px; }
 		.material-list .dlist ul li { padding:25px 0px; border-bottom:1px solid #edeef0; }
 			.material-list .dlist ul li.empty { line-height:24px; padding:0px 0px 10px 0px; color:#999; }
-			.material-list .dlist ul li .pic { float:left; width:140px; height:180px; padding:2px; border:1px solid #eee; border-bottom-width:2px; border-right-width:3px; overflow:hidden; }
+			.material-list .dlist ul li .pic { float:left; width:270px; height:180px; overflow:hidden; }
 				.material-list .dlist ul li .pic img { width:100%; height:100%; }
-			.material-list .dlist ul li .ddd { padding-left:160px; }
-				.material-list .dlist ul li .ddd .aaa { height:50px; }
+			.material-list .dlist ul li .ddd { padding-left:300px; }
+				.material-list .dlist ul li .ddd .aaa { height:30px; }
 					.material-list .dlist ul li .ddd .aaa .t1 { line-height:24px; font-size:18px; font-weight:bold; font-family: "SimSun"; }
 						.material-list .dlist ul li .ddd .aaa .t1 a { color:#4a4a4a; }
 						.material-list .dlist ul li .ddd .aaa .t1 a:hover { color:#cb0000; text-decoration:underline; }
 					.material-list .dlist ul li .ddd .aaa .t2 { line-height:20px; color:#777777; }
-				.material-list .dlist ul li .ddd .bbb { height:70px; line-height:20px; margin-top:15px; color:#4a4a4a; overflow:hidden; }
+				.material-list .dlist ul li .ddd .bbb { height:100px; line-height:20px; margin-top:5px; color:#4a4a4a; overflow:hidden; }
 					.material-list .dlist ul li .ddd .bbb .t1 { font-weight:bold; }
 					.material-list .dlist ul li .ddd .bbb .t2 { margin-top:2px; }
 				.material-list .dlist ul li .ddd .gogo { margin-top:5px; }

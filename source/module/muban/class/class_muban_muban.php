@@ -42,6 +42,15 @@ class class_muban_muban extends geshai_model {
         return $result;
     }
 
+    //更新数据
+    function update($set_k, $set_v, $where_k, $where_v) {
+        $this->db->from($this->t_muban_muban);
+        $this->db->set($set_k, $set_v);
+        $this->db->where($where_k, $where_v);
+        $result = $this->db->update();
+        return $result;
+    }
+
 }
 
 ?>

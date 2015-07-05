@@ -2,9 +2,11 @@
 
 <?php 
 	$navDataArr = array(
-		'profile'=> array('uri'=>'user/t/profile', 'name'=>'个人资料'),
-		'avatar'=> array('uri'=>'user/t/avatar', 'name'=>'上传头像'),
-		'password'=> array('uri'=>'user/t/password', 'name'=>'密码修改')
+		'profile'=> array('uri'=>'user/ac/profile', 'name'=>'个人资料'),
+		'avatar'=> array('uri'=>'user/ac/avatar', 'name'=>'上传头像'),
+		'password'=> array('uri'=>'user/ac/password', 'name'=>'密码修改'),
+		'answer'=> array('uri'=>'user/ac/answer', 'name'=>'我的答卷'),
+		'myauth'=> array('uri'=>'user/ac/myauth', 'name'=>'我的认证书')
 	);
  ?>
 	<div class="ul-item">

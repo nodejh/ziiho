@@ -43,6 +43,26 @@ class geshai_module {
 		return $v;
 	}
 	
+	function path($module = null, $file = null, $local = false){
+		$root = sdir ( ($local ? ':' : null) . 'source' );
+		$module = $this->flag ( $module );
+		if(empty( $module )){
+			return $root;
+		}
+		
+		$path = $root;
+		if (_g ( 'module' )->isadmin ( $module )) {
+			$path .= ('/' . $module);
+		} else {
+			$path .= ('/module/' . $module);
+		}
+		
+		if(!_g('validate')->em( $file )){
+			$path .= ('/' . $file);
+		}
+		
+		return $path;
+	}
 	
 	function filename($module, $name = null, $extension = 'php') {
 		$module = $this->flag ( $module );
@@ -77,7 +97,7 @@ class geshai_module {
 		}
 		return $c;
 	}
-	
+
 	
 	function c($module, $name = null, $param = null, $is_instance = false) {
 		if (empty ( $module )) {

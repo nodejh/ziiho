@@ -11,13 +11,5 @@ class class_user_setting extends geshai_model {
 		$this->__construct ();
 	}
 	
-	function email($data){
-		$settings = array();
-		foreach ( $data as $k => $v ){
-			my_array_push($settings, array('user', 'emailSetting', $k, $v));
-		}
-		
-		return _g ( 'module' )->trigger ( '@', 'setting', null, 'save', $settings );
-	}
 }
 ?>

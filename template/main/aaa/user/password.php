@@ -2,14 +2,12 @@
 <?php include _g('template')->name('@', 'header', true); ?>
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
-    
-<?php include _g('template')->name('user', 'nav', true); ?>
 
 <!-- //cuser_center -->
 <div class="cuser_center clearfix" id="cuser_center">
     <!-- //cuser_z -->
     <div class="cuser_z clearfix">
-        <?php $UModel->userCenterNav(); ?>
+        <?php include _g('template')->name('user', 'center_nav', true); ?>
     </div>
     <!-- cuser_z// -->
 
@@ -44,7 +42,7 @@
                     
                     <li class="clearfix">
                     	<div class="nn">&nbsp;</div>
-                    	<button type="button" class="btn-ok" name="disabled-buttons" onclick="updatePassword(this, '<?php prt(_g('uri')->su('user/t/password/op/do')); ?>');">修改密码</button>
+                    	<button type="button" class="btn-ok" name="disabled-buttons" onclick="updatePassword(this, '<?php prt(_g('uri')->su('user/ac/password/op/do')); ?>');">修改密码</button>
                     </li>
                 </ul>
                 </form>

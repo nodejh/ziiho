@@ -39,8 +39,8 @@
         	<?php if($pageData['total'] >= 1){ ?>
         	<?php while($rs = _g('db')->result($JJOBResult)){ ?>
         	<li class="clearfix">
-            	<div class="a1"><a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $rs['cuid'] . '/jobid/' . $rs['jobid'])); ?>" target="_blank"><?php prt($rs['jname']); ?></a></div>
-                <div class="a2"><a href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $rs['cuid'])); ?>" target="_blank"><?php prt($rs['cname']); ?></a></div>
+            	<div class="a1"><a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $rs['cuid'] . '/jobid/' . $rs['jobid'])); ?>" ><?php prt($rs['jname']); ?></a></div>
+                <div class="a2"><a href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $rs['cuid'])); ?>" ><?php prt($rs['cname']); ?></a></div>
                 <div class="a3"><?php prt($JMODEL->areaPos($rs['area'], $rs['area_detail'])); ?></div>
                 <div class="a4"><?php prt(person_time($rs['ctime'])); ?></div>
             </li>

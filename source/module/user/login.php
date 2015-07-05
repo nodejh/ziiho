@@ -4,11 +4,11 @@ if (! defined ( 'IN_GESHAI' )) {
 }
 
 $USER = _g('module')->trigger('user');
-$CUSER = _g('module')->trigger('user', 'cuser');
+$CUSER = _g('module')->trigger('cuser');
 $UModel = _g('module')->trigger('user', 'model');
 
 if(my_is_array($UModel->suser())){
-	smsg(lang('user:100012'));
+	header('location:' . _g('uri')->su('user'));
 	return null;
 }
 
@@ -32,11 +32,11 @@ switch (_get ( 'op' )) {
 		$password = _post('password');
 		
 		if(!_g('validate')->en_e($username, 3, 30) || !_g('validate')->vm(strlen($username), 3, 30)){
-			smsg ( lang ( 'user:cuser>100013') );
+			smsg ( lang ( 'cuser:100013') );
 			return null;
 		}
 		if(!_g('validate')->vm(strlen($password), 6, 30)){
-			smsg ( lang ( 'user:cuser>100014') );
+			smsg ( lang ( 'cuser:100014') );
 			return null;
 		}
 		$CUSER->login($username, $password);

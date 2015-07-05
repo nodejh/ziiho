@@ -9,13 +9,18 @@ class geshai_file {
 		$this->__construct ();
 	}
 	
-	
 	function nname($v) {
 		$ext = my_end ( my_explode ( '.', $v ) );
 		$nameStr = _g ( 'value' )->randchar ( 16 ) . '-' . _g ( 'cfg>time' );
 		return ($nameStr . '.' . $ext);
 	}
 	
+	function isfile($v){
+		if(strlen($v) < 1){
+			return false;
+		}
+		return is_file($v);
+	}
 	
 	function read($dir, $fname, $def = null) {
 		if (strlen ( $dir ) < 1 || strlen ( $fname ) < 1) {
@@ -73,25 +78,30 @@ class geshai_file {
 		}
 		return unlink ( $fname );
 	}
-	
+	function uploadfile($v = null){
+		if(_g('validate')->em($v)){
+			return null;
+		}
+		$path = sdir(':uploadfile');
+		$path = ($path . '/' . $v);
+		return $path;
+	}
+	/* dir */
 	function clean_dir($str) {
-		if (strlen ( $str ) < 1) {
-			return _g ( 'value' )->randchar ( 10 );
-		}
-		$str = str_replace ( '\\', '/', $str );
+		$str = str_replace ('\\', '/', $str);
 		if ($str == '/') {
-			return _g ( 'value' )->randchar ( 10 );
+			return $str;
 		}
-		for($i = 0; $i < 2; $i ++) {
-			$str = str_replace ( '//', _g ( 'value' )->randchar ( 10 ), $str );
-		}
-		if (substr ( $str, 0, 1 ) == '/') {
-			$str = substr ( $str, 1 );
-		}
-		if (substr ( $str, - 1, 1 ) == '/') {
-			$str = substr ( $str, 0, - 1 );
+		if (substr ($str, -1, 1) == '/') {
+			$str = substr ($str, 0, -1);
 		}
 		return $str;
+	}
+	function isdir($v){
+		if(strlen($v) < 1){
+			return false;
+		}
+		return is_dir($v);
 	}
 	function create_dir($root, $dir) {
 		if (strlen ( $root ) < 1 || strlen ( $dir ) < 1) {
@@ -119,6 +129,7 @@ class geshai_file {
 		return true;
 	}
 	function delete_dir($root, $dir) {
+		
 	}
 }
 ?>

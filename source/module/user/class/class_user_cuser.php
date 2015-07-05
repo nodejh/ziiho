@@ -6,7 +6,7 @@ class class_user_cuser extends geshai_model {
 	public $t_user_cuser = 'user_cuser';
 	public $t_user_cuser_profile = 'user_cuser_profile';
 	
-	public $t_field = 'a.cuid,a.username,a.password,a.email,a.regtime,a.regip,a.lasttime,a.lastip,a.curtime,a.curip,a.status,a.online,a.cname,a.area,a.area_detail,a.contacts,a.telephone,a.mobilephone,a.cemail,b.csortid,b.cnatureid,b.csize,b.cdescription,b.authenticate,b.licence,b.recruitment,b.rtelephone,b.rmobilephone,b.remail,b.logo';
+	public $t_field = 'a.cuid,a.username,a.password,a.email,a.regtime,a.regip,a.lasttime,a.lastip,a.curtime,a.curip,a.status,a.online,a.cname,a.area,a.area_detail,a.contacts,a.telephone,a.mobilephone,a.cemail,b.csortid,b.cnatureid,b.csize,b.cdescription,b.authlicence,b.licence,b.logo';
 	
 	function __construct() {
 		parent::__construct ();
@@ -164,27 +164,30 @@ class class_user_cuser extends geshai_model {
 			smsg(lang('200013'));
 			return null;
 		}
-		/* 资料 */
-		$profileRs = $this->profile_find('cuid', $cuid);
-		if(!$this->db->is_success($profileRs)){
-			smsg(lang('200013'));
-			return null;
-		}
-		$this->db->from($this->t_user_cuser_profile);
-		if(my_is_array($profileRs)){
-			my_unset($data2, 'cuid');
-			$this->db->where('cuid', $cuid);
-			$this->db->set($data2);
-			$this->db->update();
-		}else{
-			$this->db->set($data2);
-			$this->db->insert();
-		}
-		if(!$this->db->is_success()){
+		if(!$this->profileUpdate($cuid, $data2)){
 			smsg(lang('200013'));
 			return null;
 		}
 		smsg(lang('100061'), null, 1);
+	}
+	
+	/* profile update */
+	function profileUpdate($cuid, $data){
+		$profileRs = $this->profile_find('cuid', $cuid);
+		if(!$this->db->is_success($profileRs)){
+			return false;
+		}
+		$this->db->from($this->t_user_cuser_profile);
+		if(my_is_array($profileRs)){
+			my_unset($data, 'cuid');
+			$this->db->where('cuid', $cuid);
+			$this->db->set($data);
+			$this->db->update();
+		}else{
+			$this->db->set($data);
+			$this->db->insert();
+		}
+		return $this->db->is_success();
 	}
 	
 	/* login */

@@ -33,7 +33,9 @@ class class_job_examsubject extends geshai_model {
 		$this->db->where ( $k, $v );
 		$c = $this->db->count ();
 		$this->db->select ();
-		return ($this->db->is_success($c) ? $c : 0);
+		
+		$s = $this->db->is_success($c);
+		return array($s, ($s ? $c : 0));
 	}
 	
 	/* update - value */

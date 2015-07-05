@@ -137,3 +137,34 @@ function cUserExamSubjectWrite(_this, _url, _goUrl){
 		}
 	});
 };
+
+function cUserJexamDelete(_this, _url){
+	var _thisForm = document.getElementById("form-jexams-post");
+		_thisForm.esid.value = _this.getAttribute("data-id");
+		window.top._GESHAI.dialog({
+				"title": "删除操作",
+				"data": "<p>若删除选项，将不可恢复。<p>如果删除请点击“确定”，则点击“取消”按钮</p>",
+				"isCloseBtn": false,
+				"isCancelBtn": true,
+				"okBtnFunc" : function(){
+					return _GESHAI.fsubmit(_thisForm, _url, {
+						"start": function(){
+							_GESHAI.disbtn("", true);
+							window.top._GESHAI.dialog({isHeader: false, isFooter: false, data: "Loading..."});
+						},
+						"success": function(d){
+							_thisForm.id.value = "";
+							_GESHAI.disbtn("", false);
+							
+							d.isCloseBtn = false;
+							d.clickBgClose = true;
+							d.title = "删除操作";
+							window.top._GESHAI.dialog(d);
+							if(d.status == 1){
+								_GESHAI.redirect(d);
+							}
+						}
+					});
+				}
+		});
+};

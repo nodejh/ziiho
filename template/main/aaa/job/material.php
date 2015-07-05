@@ -39,18 +39,18 @@
         	<?php while($rs = _g('db')->result($dataResult)){ ?>
         	<li class="clearfix">
             	<div class="pic clearfix">
-                	<a href="<?php prt(_g('uri')->su('job/ac/material/op/view/id/' . $rs['materialid'])); ?>" target="_blank"><img src="<?php prt($JMODEL->src($rs['src'])); ?>" /></a>
+                	<a href="<?php prt(_g('uri')->su('job/ac/material/op/view/id/' . $rs['materialid'])); ?>"><img src="<?php prt($JMODEL->src($rs['src'])); ?>" /></a>
                 </div>
                 <div class="ddd clearfix">
                 	<div class="aaa clearfix">
-                    	<p class="t1"><a href="<?php prt(_g('uri')->su('job/ac/material/op/view/id/' . $rs['materialid'])); ?>" target="_blank"><?php prt($rs['title']); ?></a></p>
-                        <p class="t2">作者：<?php prt($rs['author']); ?></p>
+                    	<p class="t1"><a href="<?php prt(_g('uri')->su('job/ac/material/op/view/id/' . $rs['materialid'])); ?>"><?php prt($rs['title']); ?></a></p>
+                        <!--<p class="t2">作者：<?php prt($rs['author']); ?></p>-->
                     </div>
                     <div class="bbb clearfix">
-                    	<p class="t1">内容简介</p>
+                    	<!--<p class="t1">内容简介</p>-->
                         <p class="t2"><?php prt(my_substr($rs['description'], 0, 120)); ?></p>
                     </div>
-                    <div class="gogo clearfix"><a href="<?php prt(_g('uri')->su('job/ac/material/op/view/id/' . $rs['materialid'])); ?>" target="_blank">查看资料</a></div>
+                    <div class="gogo clearfix"><a href="<?php prt(_g('uri')->su('job/ac/material/op/view/id/' . $rs['materialid'])); ?>">查看资料</a></div>
                 </div>
             </li>
             <?php } ?>

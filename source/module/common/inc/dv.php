@@ -5,12 +5,12 @@ if (! defined ( 'IN_GESHAI' )) {
 return array(
  	/* 100000 */
  	'100001'=>array(
-			'self' => array ('v' => '_self','name' => '默认' ),
-			'blank' => array ('v' => '_blank','name' => '新窗口' ) 
+			1 => array ('v' => '_self','name' => '默认' ),
+			2 => array ('v' => '_blank','name' => '新窗口' ) 
 	),
 	'100002'=>array(
-			'true' => array ('v' => 1, 'name' => '是' ),
-			'false' => array ('v' => -1, 'name' => '否' )
+			'true' => array ('v' => 1, 'name' => '是', 'auth' => '已认证', 'startuse' => '已启用', 'status' => '开启' ),
+			'false' => array ('v' => -1, 'name' => '否', 'auth' => '未认证', 'startuse' => '已停用', 'status' => '关闭' )
 	),
 	/* 200000 */
 	'200000'=>array('*.gif', '*.png', '*.jpg'),

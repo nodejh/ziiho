@@ -5,7 +5,7 @@
     <ul class="ubox">
         <li class="clearfix is">
 			<?php $area->include_cpos(my_array_value('parentid', $areaSub)); ?>
-			<?php if(my_array_key_exist('areaid', $areaSub)){ ?><span class="pos-sp">-</span><span class="tc-a t-fw"><?php prt(my_array_value('aname', $areaSub)); ?></span><?php } ?>
+			<?php if(my_array_key_exist('areaid', $areaSub)){ ?><span class="pos-sp">-</span><span class="tc-a fw"><?php prt(my_array_value('aname', $areaSub)); ?></span><?php } ?>
 		</li>
 	</ul>
 </div>

@@ -11,6 +11,7 @@
 <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.cjslip-v1.0.3.min.js"></script>
 <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/geshai.common.min.js"></script>
+<script type="text/javascript" src="<?php prt(sdir('source')); ?>/admin/template/js/a.js"></script>
 
 <script type="text/javascript">
 _GESHAI.setting("path", "<?php prt(sdir()); ?>");

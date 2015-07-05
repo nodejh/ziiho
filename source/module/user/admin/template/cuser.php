@@ -6,35 +6,33 @@
 	<button type="button" name="disabled-buttons" id="btn_delete" class="dis-n">删除</button>
     <table class="tbox">
         <tr class="bg-a trow-bline trow-fw">
-            <td width="15%">企业名称</td>
+            <td width="25%">企业名称</td>
             <td width="20%">行业类型</td>
             <td width="10%">认证状态</td>
-            <td width="55%">操作</td>
+            <td width="45%">操作</td>
         </tr>
         
         <?php if(my_array_value('total', $pageData) >= 1){ ?>
         <?php while($rs = $CUser->db->fetch_array($dataResult)){ ?>
         <tr class="trow-bline bg-hover-a">
-             <td width="15%"><?php prt($rs['cname']); ?></td>
+             <td width="25%"><?php prt($rs['cname']); ?></td>
             <td width="20%">
             	<?php $CSortData = $CSort->get_finds(my_explode(',', $rs['csortid'])); ?>
                 <?php if($CSortData[0] > 0){ ?>
-                	<?php while($CSortRs = $CSort->db->fetch_array($CSortData[1])){ ?>
-            		<p><?php prt($CSortRs['sname']); ?></p>
-                    <?php } ?>
+            		<?php prt(my_array_value('sname', $CSort->db->fetch_array($CSortData[1]))); ?>&nbsp;...
                 <?php }else{ ?>
                 -
                 <?php } ?>
             </td>
             <td width="10%">
-            	<?php if(_g('validate')->sb2eq($rs['authenticate'])){ ?>
+            	<?php if($rs['authlicence'] == _g('value')->sb(true)){ ?>
             	<span class="icon-status-normal">已认证</span>
                 <?php }else{ ?>
                 <span class="icon-status-error">未认证</span>
                 <?php } ?>
 			</td>
-            <td width="55%">
-            <a class="fa-cd icon-page-go" href="<?php prt(_g('cp')->uri('mod/user/ac/cuser/op/detail/cuid/' . $rs['cuid'])); ?>">查看资料</a>
+            <td width="45%">
+            <a class="fa-cd icon-page-go" href="<?php prt(_g('cp')->uri('mod/user/ac/cuser/op/detail/cuid/' . $rs['cuid'])); ?>">查看</a>
             <a class="fa-cd icon-delete" data-id="<?php prt($rs['cuid']); ?>" onclick="fsdo(this, 'delete')">删除</a></td>
         </tr>
         <?php } ?>

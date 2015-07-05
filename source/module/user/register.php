@@ -6,10 +6,11 @@ if (! defined ( 'IN_GESHAI' )) {
 $USER = _g('module')->trigger('user');
 $UModel = _g('module')->trigger('user', 'model');
 
-$CUser = _g('module')->trigger('user', 'cuser');
+$CUser = _g('module')->trigger('cuser');
 
 if(my_is_array($UModel->suser())){
-	smsg(lang('user:100012'));
+	/* smsg(lang('user:100012')); */
+	header('location:' . _g('uri')->su('user'));
 	return null;
 }
 
@@ -138,7 +139,7 @@ switch (_get ( 'op' )) {
 		break;
 	case 'email_success' :
 		if(!_g('validate')->v2eq($CUser->sess_cuser('flag'), 'register', true)){
-			smsg(lang('user:cuser>300002'), _g('uri')->su('user/ac/login'));
+			smsg(lang('cuser:300002'), _g('uri')->su('user/ac/login'));
 			return null;
 		}
 		include _g ( 'template' )->name ( 'user', 'register_email3', true );
@@ -163,53 +164,53 @@ switch (_get ( 'op' )) {
 		
 		/* 用户名 */
 		if(!_g('validate')->en_e($username, 3, 30) || !_g('validate')->vm(strlen($username), 3, 30)){
-			smsg ( lang ( 'user:cuser>100000', array(3, 30)) );
+			smsg ( lang ( 'cuser:100000', array(3, 30)) );
 			return null;
 		}
 		/* 邮箱 */
 		if(!_g('validate')->email($email, 1)){
-			smsg ( lang ( 'user:cuser>100001') );
+			smsg ( lang ( 'cuser:100001') );
 			return null;
 		}
 		/* 密码检查 */
 		if(!_g('validate')->vm(strlen($password), 6, 30)){
-			smsg ( lang ( 'user:cuser>100002', array(6, 30)) );
+			smsg ( lang ( 'cuser:100002', array(6, 30)) );
 			return null;
 		}
 		if(strlen($password2) < 1){
-			smsg ( lang ( 'user:cuser>100003') );
+			smsg ( lang ( 'cuser:100003') );
 			return null;
 		}
 		if(!_g('validate')->v2eq(my_md5($password, 2), my_md5($password2, 2), true)){
-			smsg ( lang ( 'user:cuser>100004') );
+			smsg ( lang ( 'cuser:100004') );
 			return null;
 		}
 		
 		/* 公司名称 */
 		if(!_g('validate')->vm(strlen($cname), 1, 30)){
-			smsg ( lang ( 'user:cuser>100005', array(1, 30)) );
+			smsg ( lang ( 'cuser:100005', array(1, 30)) );
 			return null;
 		}
 		
 		/* 公司地址 */
 		if(my_count(my_explode(',', $area)) < 2){
-			smsg ( lang ( 'user:cuser>100006') );
+			smsg ( lang ( 'cuser:100006') );
 			return null;
 		}
 		
 		/* 联系人 */
 		if(!_g('validate')->vm(strlen($contacts), 1, 20)){
-			smsg ( lang ( 'user:cuser>100007', array(1, 20)) );
+			smsg ( lang ( 'cuser:100007', array(1, 20)) );
 			return null;
 		}
 		/* 手机号 */
 		if(!_g('validate')->pnum($mobilephone) || !_g('validate')->vm(strlen($mobilephone), 8, 11)){
-			smsg ( lang ( 'user:cuser>100008') );
+			smsg ( lang ( 'cuser:100008') );
 			return null;
 		}
 		/* 公司邮箱 */
 		if(!_g('validate')->email($cemail, 1)){
-			smsg ( lang ( 'user:cuser>100009') );
+			smsg ( lang ( 'cuser:100009') );
 			return null;
 		}
 		
@@ -245,7 +246,7 @@ switch (_get ( 'op' )) {
 		
 	case 'company2' :
 		if(!_g('validate')->v2eq($CUser->sess_cuser('flag'), 'register', true)){
-			smsg(lang('user:cuser>300002'), _g('uri')->su('user/ac/login'));
+			smsg(lang('cuser:300002'), _g('uri')->su('user/ac/login'));
 			return null;
 		}
 		include _g ( 'template' )->name ( 'user', 'register_company2', true );
@@ -262,22 +263,22 @@ switch (_get ( 'op' )) {
 		
 		/* cuid是否合法 */
 		if(!_g('validate')->pnum($cuid)){
-			smsg(lang('user:cuser>300000'));
+			smsg(lang('cuser:300000'));
 			return null;
 		}
 		if(!my_is_array($CUser->find('cuid', $cuid))){
-			smsg(lang('user:cuser>300001'));
+			smsg(lang('cuser:300001'));
 			return null;
 		}
 		
 		/* 行业类别 */
 		if(!my_is_array($csortid)){
-			smsg ( lang ( 'user:cuser>100011') );
+			smsg ( lang ( 'cuser:100011') );
 			return null;
 		}
 		/* 公司性质 */
 		if(!_g('validate')->pnum($cnatureid)){
-			smsg ( lang ( 'user:cuser>100012') );
+			smsg ( lang ( 'cuser:100012') );
 			return null;
 		}
 		
@@ -295,10 +296,7 @@ switch (_get ( 'op' )) {
 				'csortid'=>$__csortid,
 				'cnatureid'=>$cnatureid,
 				'csize'=>$csize,
-				'cdescription'=>$cdescription,
-				'recruitment'=>$recruitment,
-				'rtelephone'=>my_addslashes(array2str($rtelephone)),
-				'rmobilephone'=>$rmobilephone
+				'cdescription'=>$cdescription
 		);
 		$CUser->register($datas, 2);
 		break;
@@ -308,7 +306,7 @@ switch (_get ( 'op' )) {
 		break;
 	case 'company3' :
 		if(!_g('validate')->v2eq($CUser->sess_cuser('flag'), 'register', true)){
-			smsg(lang('user:cuser>300002'), _g('uri')->su('user/ac/login'));
+			smsg(lang('cuser:300002'), _g('uri')->su('user/ac/login'));
 			return null;
 		}
 		include _g ( 'template' )->name ( 'user', 'register_company3', true );

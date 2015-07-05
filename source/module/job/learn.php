@@ -3,7 +3,7 @@ if (! defined ( 'IN_GESHAI' )) {
 	exit ( 'no direct access allowed' );
 }
 
-$CUSER = _g('module')->trigger('user', 'cuser');
+$CUSER = _g('module')->trigger('cuser');
 $CUMODEL = _g('module')->trigger('user', 'model');
 $JMODEL = _g('module')->trigger('job', 'model');
 $JJOB = _g('module')->trigger('job', 'job');
@@ -39,7 +39,7 @@ switch (_get ( 'op' )) {
 		break;
 	default :
 		$parentResult = $JMODEL->readSort();
-
+		
 		$spid = null;
 		if(!_g('validate')->hasget('spid')){
 			$spid = my_array_value('sortid', $parentResult[0]);

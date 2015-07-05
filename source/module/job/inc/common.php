@@ -21,7 +21,7 @@ $acts = array (
 );
 $ac = strtolower ( _get ( 'ac' ) );
 
-$_GET ['ac'] = (in_array ( $ac, $acts ) ? $ac : 'index');
+$_GET ['ac'] = (in_array ( $ac, $acts ) ? $ac : 'home');
 
 include _g ( 'module' )->filename ( 'job', $_GET ['ac'] );
 ?>

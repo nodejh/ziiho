@@ -2,14 +2,12 @@
 <?php include _g('template')->name('@', 'header', true); ?>
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
-    
-<?php include _g('template')->name('user', 'nav', true); ?>
 
 <!-- //cuser_center -->
 <div class="cuser_center clearfix" id="cuser_center">
     <!-- //cuser_z -->
     <div class="cuser_z clearfix">
-        <?php $UModel->userCenterNav(); ?>
+        <?php include _g('template')->name('user', 'center_nav', true); ?>
     </div>
     <!-- cuser_z// -->
 
@@ -39,9 +37,8 @@
                         <div class="nn">性别:</div>
                         <div class="ii">
                         	<select class="sel" name="gender">
-                            	<option value="-1">==请选择==</option>
                                 <?php foreach(_g('value')->ra(_g('module')->dv('user', 100000)) as $v): ?>
-                                <option value="<?php prt($v['v']); ?>" <?php if($v['v'] == my_array_value('gender', $userData)){ ?>selected="selected"<?php } ?> ><?php prt($v['name']); ?></option>
+                                <option value="<?php prt($v['v']); ?>" <?php if($v['v'] == my_array_value('gender', $userData, -1)){ ?>selected="selected"<?php } ?> ><?php prt($v['name']); ?></option>
                                 <?php endforeach; ?>
                             </select>
 						</div>
@@ -50,7 +47,7 @@
                     <li class="bline clearfix">
                         <div class="nn">生日:</div>
                         <div class="ii">
-                            <input type="text" name="birthday" class="ii-inp" value="<?php prt(date("Y-m-d", my_array_value('birthday',$userData)));?>" readonly="readonly" onclick="WdatePicker({isShowClear:false,readOnly:true,'dateFmt':'yyyy-MM-dd',isShowToday:false,qsEnabled:false,isShowOK:false,minDate:'1960-01-01',maxDate:'<?php prt(date("Y-m-d", _g('cfg>time'))); ?>'})"/>
+                            <input type="text" name="birthday" class="ii-calendar" value="<?php prt(date("Y-m-d", my_array_value('birthday',$userData)));?>" readonly="readonly" onclick="WdatePicker({isShowClear:false,readOnly:true,'dateFmt':'yyyy-MM-dd',isShowToday:false,qsEnabled:false,isShowOK:false,minDate:'1960-01-01',maxDate:'<?php prt(date("Y-m-d", _g('cfg>time'))); ?>'})"/>
                         </div>
                     </li>
                     
@@ -66,13 +63,13 @@
                     </li>
                     
                     <li class="bline clearfix">
-                        <div class="nn">现居地:</div>
-                        <div class="ii"><div class="clearfix" id="area-data-1"></div><input type="hidden" name="residence" /></div>
+                        <div class="nn">故乡:</div>
+                        <div class="ii"><div class="clearfix" id="area-data-2"></div><input type="hidden" name="hometown" /></div>
                     </li>
                     
                     <li class="bline clearfix">
-                        <div class="nn">故乡:</div>
-                        <div class="ii"><div class="clearfix" id="area-data-2"></div><input type="hidden" name="hometown" /></div>
+                        <div class="nn">现居地:</div>
+                        <div class="ii"><div class="clearfix" id="area-data-1"></div><input type="hidden" name="residence" /></div>
                     </li>
                     
                     <li class="clearfix">
@@ -82,7 +79,7 @@
                     
                     <li class="clearfix">
                     	<div class="nn">&nbsp;</div>
-                    	<button type="button" class="btn-ok" name="disabled-buttons" onclick="cUserProfileUpdate(this, '<?php prt(_g('uri')->su('user/t/profile/op/do')); ?>');">保存</button>
+                    	<button type="button" class="btn-ok" name="disabled-buttons" onclick="cUserProfileUpdate(this, '<?php prt(_g('uri')->su('user/ac/profile/op/do')); ?>');">保存</button>
                     </li>
                 </ul>
                 </form>

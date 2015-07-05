@@ -38,7 +38,9 @@ switch (_get ( 'op' )) {
 			'ctime'=>_g('cfg>time'),
 			'sortid'=>$sortid
 		);
-		if($JQuestion->writeSave ( $data, null )){
+		if(!$JQuestion->writeSave ( $data, null )){
+			smsg ( lang ( '200013' ) );
+		}else{
 			smsg ( lang ( '100061' ), null, 1 );
 		}
 		break;
@@ -63,6 +65,7 @@ switch (_get ( 'op' )) {
 			}
 			$data['qname'] = $qname[$id];
 			if(!$JQuestion->writeSave ( $data, $id )){
+				smsg ( lang ( '200013' ) );
 				return null;
 			}
 		}
@@ -79,9 +82,11 @@ switch (_get ( 'op' )) {
 		}
 		foreach ($_questionid as $id){
 			if(!$JQuestion->delete ( $id )){
-				break;
+				smsg ( lang ( '200013' ) );
+				return null;
 			}
 		}
+		smsg ( lang ( '100061' ), null, 1 );
 		break;
 	case 'qsubject':
 		include _g ( 'cp' )->ac ( 'job', 'qsubject' );

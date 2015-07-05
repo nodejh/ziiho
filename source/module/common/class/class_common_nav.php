@@ -1,205 +1,210 @@
 <?php
-if (! defined ( 'IN_PATH' )) {
+if (! defined ( 'IN_GESHAI' )) {
 	exit ( 'no direct access allowed' );
 }
-class class_common_nav extends class_model {
-	public $table_common_nav = 'common_nav';
-	
-	/* 析构函数 */
+class class_common_nav extends geshai_model {
+	public $t_common_nav = 'common_nav';
 	function __construct() {
 		parent::__construct ();
 	}
 	function class_common_nav() {
 		$this->__construct ();
 	}
+	function find($k, $v = null) {
+		$this->db->from ( $this->t_common_nav );
+		$this->db->where ( $k, $v );
+		$this->db->select ();
+		return $this->db->get_one ();
+	}
+	function finds($k, $v = null) {
+		$this->db->from ( $this->t_common_nav );
+		$this->db->where ( $k, $v );
+		$this->db->order_by ( 'listorder' );
+		$this->db->select ();
+		return $this->db->get_list ();
+	}
+	function child($navid, $isOnlyIds = false, $isFindCur = true, &$data = array(), $index = 0) {
+		if (! _g ( 'validate' )->pnum ( $navid )) {
+			return $data;
+		}
+		$this->db->from ( $this->t_common_nav );
+		$this->db->where ( ($isFindCur === true ? 'navid' : 'parentid'), $navid );
+		$this->db->order_by ( 'listorder' );
+		$count = $this->db->count ();
+		$this->db->select ();
+		if (! $this->db->is_success () || $count < 1) {
+			return $data;
+		}
+		
+		/* 当前 */
+		if ($isFindCur === true) {
+			$v = $this->db->get_one ();
+			$v ['index'] = $index;
+			
+			my_array_push ( $data, ($isOnlyIds === true ? $v ['navid'] : $v) );
+			
+			$this->child ( $v ['navid'], $isOnlyIds, false, $data, ($index + 1) );
+		} else {
+			/* 获取子级 */
+			$result = $this->db->get_list ();
+			while ( $v = $this->db->fetch_array ( $result ) ) {
+				$v ['index'] = $index;
+				
+				my_array_push ( $data, ($isOnlyIds === true ? $v ['navid'] : $v) );
+				
+				$this->child ( $v ['navid'], $isOnlyIds, false, $data, ($index + 1) );
+				$index = 1;
+			}
+		}
+		return $data;
+	}
 	
-	/* 导航查询 */
-	function nav_query($_key = NULL, $_val = NULL) {
-		$this->db->from ( $this->table_common_nav );
-		$this->db->where ( $_key, $_val );
-		$result = $this->db->select ();
-		if ($result == $this->db->cw) {
-			return $result;
+	/* 管理 - 操作 */
+	function include_list($parentid = 0, $index = 0) {
+		if (! _g ( 'validate' )->num ( $parentid )) {
+			return null;
+		}
+		$dataResult = $this->finds ( 'parentid', $parentid );
+		$writeUrlStr = 'mod/common/ac/nav/op/write';
+		
+		include (_g ( 'cp' )->get_template ( 'common', 'nav_list' ));
+	}
+	
+	/* 编辑页面 - option */
+	function option($navSub, $parentid, $index = 0) {
+		$this->db->from ( $this->t_common_nav );
+		$this->db->where ( 'parentid', $parentid );
+		$this->db->order_by ( 'listorder' );
+		$count = $this->db->count ();
+		$this->db->select ();
+		if (! $this->db->is_success () || $count < 1) {
+			return null;
+		}
+		$result = $this->db->get_list ();
+		include _g ( 'cp' )->get_template ( 'common', 'nav_option' );
+	}
+	
+	/* 页面位置 - position */
+	function cpos($parentid, &$data = array()) {
+		$this->db->from ( $this->t_common_nav );
+		$this->db->where ( 'navid', $parentid );
+		$this->db->order_by ( 'listorder' );
+		$count = $this->db->count ();
+		$this->db->select ();
+		if (! $this->db->is_success () || $count < 1) {
+			return $data;
 		}
 		$result = $this->db->get_one ();
-		return $result;
+		if (is_array ( $result )) {
+			$data = my_array_unshift ( $data, $result );
+			$this->cpos ( $result ['parentid'], $data );
+		}
+		return $data;
 	}
-	/* 导航列表 */
-	function nav_list($_key = NULL, $_val = NULL) {
-		$this->db->from ( $this->table_common_nav );
-		$this->db->where ( $_key, $_val );
-		$this->db->order_by ( 'listorder' );
-		$result = $this->db->select ();
-		if ($result == $this->db->cw) {
-			return $result;
+	/* 页面位置 - 显示 */
+	function include_cpos($parentid) {
+		$data = array ();
+		if (_g ( 'validate' )->pnum ( $parentid )) {
+			$data = $this->cpos ( $parentid );
+			$data = (! is_array ( $data ) ? array () : $data);
 		}
-		$result = $this->db->get_list ();
-		return $result;
-	}
-	/* id下的子id */
-	function nav_child_id($navtype, $navid) {
-		if (check_nums ( $navid ) < 1) {
-			return $navid;
-		}
-		/* 检查是否存在 */
-		$result = $this->nav_query ( 'navid', $navid );
-		if ($result == $this->db->cw) {
-			return $result;
-		}
-		if (check_is_array ( $result ) < 1) {
-			return $navid;
-		}
-		unset ( $result );
+		$urlb = _g ( 'cp' )->uri ( 'mod/common/ac/nav/parentid/' );
 		
-		$this->db->from ( $this->table_common_nav );
-		$this->db->where ( 'navtype', $navtype );
-		$this->db->order_by ( 'listorder' );
-		$result = $this->db->select ();
-		if ($result == $this->db->cw) {
-			return $result;
-		}
-		$result = $this->db->get_list ();
-		$ids = NULL;
-		while ( $val = $this->db->fetch_array ( $result ) ) {
-			$ids [$val ['navids']] [] = $val ['navid'];
-		}
-		$ids = get_child_id ( $navid, $ids );
-		return $ids;
+		include _g ( 'cp' )->get_template ( 'common', 'nav_pos' );
 	}
-	/* 获取导航位置 */
-	function lead_nav($navtype = NULL, $navid) {
-		if (check_nums ( $navid ) < 1) {
-			return NULL;
-		}
-		/* 是否存在 */
-		$qrs = $this->nav_query ( 'navid', $navid );
-		if (check_is_array ( $qrs ) < 1) {
-			return NULL;
-		}
-		unset ( $qrs );
-		/* 列表查询 */
-		$this->db->from ( $this->table_common_nav );
-		$this->db->where ( 'navtype', $navtype );
-		$this->db->order_by ( 'listorder' );
-		$result = $this->db->select ();
-		if ($result == $this->db->cw) {
-			return $result;
-		}
-		$result = $this->db->get_list ();
-		while ( $val = $this->db->fetch_array ( $result ) ) {
-			$navids [$val ['navid']] = $val ['navids'];
-			$_navid [$val ['navid']] = $val ['navid'];
-			$_title [$val ['navid']] = $val ['title'];
-		}
-		/* 当前菜单 */
-		$navid_arr [] = $_navid [$navid];
-		$title_arr [$_navid [$navid]] = $_title [$navid];
-		/* 上级菜单 */
-		while ( (check_nums ( $navids [$navid] ) == 1) ) {
-			if ($navids [$navid] == $navid) {
-				break;
+	
+	/* 编辑 */
+	function update($navid, $listorder, $nname, $status) {
+		foreach ( $navid as $id ) {
+			if (! _g ( 'validate' )->pnum ( $id )) {
+				smsg ( lang ( '110014' ) );
+				return null;
 			}
-			$navid = $navids [$navid];
-			$navid_arr [] = $_navid [$navid];
-			$title_arr [$_navid [$navid]] = $_title [$navid];
-		}
-		$title_arr = array_reverse ( $title_arr, true );
-		$navid_arr = array_reverse ( $navid_arr );
-		/* 上一级的id */
-		$arr_len = array_number ( $navid_arr );
-		$pre_navid = 0;
-		if ($arr_len > 1) {
-			$pre_navid = $navid_arr [($arr_len - 2)];
-		}
-		/* 当前菜单名称 */
-		$_title = $title_arr [end ( $navid_arr )];
-		/* 当前菜单id */
-		$_navid = $pre_navid;
-		
-		$m_arr = array (
-				'title_arr' => $title_arr,
-				'navid_arr' => $navid_arr,
-				'title' => $_title,
-				'navid' => $_navid,
-				'pre_navid' => $pre_navid,
-				'len' => $arr_len 
-		);
-		return $m_arr;
-	}
-	/* 导航获取 */
-	function nav_show($template, $navtype = NULL, $old_navid = NULL, $is_move = false) {
-		if (check_num ( $old_navid ) < 1) {
-			$old_navid = 0;
-		}
-		$_normal = yesno_val ( 'normal' );
-		$this->db->from ( $this->table_common_nav );
-		$this->db->where ( 'navtype', $navtype );
-		$this->db->where ( 'disabled', $_normal );
-		$this->db->order_by ( 'listorder' );
-		$result = $this->db->select ();
-		if ($result == $this->db->cw) {
-			return $result;
-		}
-		$result = $this->db->get_list ();
-		while ( $val = $this->db->fetch_array ( $result ) ) {
-			$navids [$val ['navids']] [] = $val ['navid'];
-			$navid [$val ['navid']] = $val ['navid'];
-			$navids_arr [$val ['navid']] = $val ['navids'];
-			$listorder [$val ['navid']] = $val ['listorder'];
-			$title [$val ['navid']] = $val ['title'];
-			$navurl [$val ['navid']] = $val ['navurl'];
-			$disabled [$val ['navid']] = $val ['disabled'];
-		}
-		$content = $this->_nav_show ( $navids [0], $navids, $navid, $navids_arr, $listorder, $title, $navurl, $disabled, $template, $old_navid, $is_move );
-		return $content;
-	}
-	/* 导航获取显示 */
-	function _nav_show($parents, $navids, $navid, $navids_arr, $listorder, $title, $navurl, $disabled, $template, $old_navid, $is_move, $indent = 0) {
-		if (is_array ( $parents )) {
-			foreach ( $parents as $parent ) {
-				$arr = "array('indent'=>'{$indent}','navid'=>'{$navid[$parent]}','navids'=>'{$navids_arr[$parent]}','listorder'=>'{$listorder[$parent]}','title'=>'{$title[$parent]}','navurl'=>'{$navurl[$parent]}','disabled'=>'{$disabled[$parent]}','description'=>'{$description[$parent]}','disabled'=>'{$disabled[$parent]}','old_navid'=>'{$old_navid}');";
-				$content .= get_fetch ( $template, array (
-						'arr' => $arr 
-				) );
-				/* 遍历父id下的子id */
-				
-				if (array_key_exists ( $parent, $navids )) {
-					$content .= $this->_nav_show ( $navids [$parent], $navids, $navid, $navids_arr, $listorder, $title, $navurl, $disabled, $template, $old_navid, $is_move, ($indent + 1) );
-				}
+			$rs = $this->find ( 'navid', $id );
+			if (! $this->db->is_success ( $rs )) {
+				smsg ( lang ( '110013' ) );
+				return null;
+			}
+			if (! is_array ( $rs )) {
+				continue;
+			}
+			
+			/* doing */
+			$data = array ();
+			if (_g ( 'validate' )->num ( my_array_value ( $id, $listorder ) )) {
+				$data ['listorder'] = $listorder [$id];
+			}
+			if (strlen ( my_array_value ( $id, $nname ) ) >= 1) {
+				$data ['nname'] = $nname [$id];
+			}
+			$data['status'] = _g('value')->sb( my_array_value ( $id, $status ) );
+			
+			$this->db->from ( $this->t_common_nav );
+			$this->db->where ( 'navid', $id );
+			$this->db->set ( $data );
+			$this->db->update ();
+			if (! $this->db->is_success ()) {
+				smsg ( lang ( '110013' ) );
+				return null;
 			}
 		}
-		return $content;
+		smsg ( lang ( '100061' ), null, 1 );
 	}
-	/* 删除导航分类 */
-	function _categoryNavDel($key, $val = NULL) {
-		$this->db->from ( $this->table_common_nav );
-		if (! is_array ( $key )) {
-			$this->db->where ( $key, $val );
-		} else {
-			foreach ( $key as $k => $v ) {
-				if (! is_array ( $v )) {
-					$this->db->where ( $k, $v );
-				} else {
-					$this->db->where_in ( $k, $v );
-				}
+	
+	/* 添加 or 编辑 */
+	function write_save($navid, $data) {
+		$isEdit = _g ( 'validate' )->pnum ( $navid );
+		if ($isEdit) {
+			$navSub = $this->find ( 'navid', $navid );
+			if (! $this->db->is_success ( $navSub )) {
+				smsg ( lang ( '110013' ) );
+				return null;
+			}
+			if (! is_array ( $navSub )) {
+				smsg ( lang ( 'common:100000' ) );
+				return null;
 			}
 		}
-		$result = $this->db->delete ();
-		return $result;
-	}
-	/* 将分类添加为导航 */
-	function _categoryAppendToNav($data, $key = NULL, $val = NULL) {
-		$this->db->from ( $this->table_common_nav );
-		if (! empty ( $key )) {
-			$this->db->where ( $key, $val );
+		/* execute */
+		$this->db->from ( $this->t_common_nav );
+		if ($isEdit) {
+			my_unset ( $data, 'ctime' );
+			$this->db->where ( 'navid', $navid );
 		}
 		$this->db->set ( $data );
-		if (empty ( $key )) {
-			$result = $this->db->insert ();
+		if ($isEdit) {
+			$this->db->update ();
 		} else {
-			$result = $this->db->update ();
+			$this->db->insert ();
 		}
-		return $result;
+		return $this->db->is_success ();
+	}
+	/* 删除 */
+	function delete($navid) {
+		if (! _g ( 'validate' )->pnum ( $navid )) {
+			smsg ( lang ( '110014' ) );
+			return null;
+		}
+		$rs = $this->find ( 'navid', $navid );
+		if (! $this->db->is_success ( $rs )) {
+			smsg ( lang ( '110013' ) );
+			return null;
+		}
+		if (! is_array ( $rs )) {
+			continue;
+		}
+		
+		$values = $this->child ( $navid, true );
+		
+		/* execute */
+		$this->db->from ( $this->t_common_nav );
+		$this->db->where_in ( 'navid', $values );
+		$this->db->delete ();
+		if (! $this->db->is_success ()) {
+			smsg ( lang ( '110013' ) );
+			return null;
+		}
+		smsg ( lang ( '100061' ), null, 1 );
 	}
 }
 ?>

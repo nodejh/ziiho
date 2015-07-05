@@ -117,107 +117,240 @@ function updatePassword(_this, _url){
 	});
 };
 
-function cUserProfileUpdate(_this, _url){
-	return _GESHAI.fsubmit(_this, _url, {
+/*********** info update *************/
+/* base */
+function cuserInfo_base(_this){
+	return _GESHAI.fsubmit(_this, __actUrl, {
 		"start": function(){
 			_GESHAI.disbtn("", true);
-			window.top._GESHAI.dialog({isBg: true, isHeader: false, isFooter: false, data: "Loading..."});
+			window.top._GESHAI.dialog({isBg: false, isHeader: false, isFooter: false, data: "Loading..."});
 		},
 		"success": function(d){
 			_GESHAI.disbtn("", false);
-			
 			d.isCloseBtn = false;
 			d.clickBgClose = true;
+			
 			if(d.status != 1){
-				d.title = "错误原因：";
-			}else if(d.status == 1){
-				
+				d.title = "操作失败";
 			}
 			window.top._GESHAI.dialog(d);
 		}
 	});
 };
-
-function cUserProfileDel(_this, _url){
-	var _form = document.getElementById("form-cuser-upload01");
-	var _flag = $(_this).attr("delete-flag");
-	_form.filetype.value = _flag;
-	return _GESHAI.fsubmit(_form, _url, {
-		"start": function(){
-			_GESHAI.disbtn("", true);
-			window.top._GESHAI.dialog({isBg: true, isHeader: false, isFooter: false, data: "Loading..."});
-		},
-		"success": function(d){
-			_GESHAI.disbtn("", false);
-			
-			d.isCloseBtn = false;
-			d.clickBgClose = true;
-			if(d.status != 1){
-				d.title = "错误原因：";
-				window.top._GESHAI.dialog(d);
-			}else if(d.status == 1){
-				window.top._GESHAI.dialog.close();
-				if(_flag == 'logo'){
-					$("#logo-area-status").html("×未上传");
-					$("#logo-area-upload").show();
-					$("#logo-area-view").hide().html("");
-				}else{
-					$("#licence-area-status").html("×未上传");
-					$("#licence-area-upload").show();
-					$("#licence-area-view").hide().html("");
-				}
-			}
-		}
-	});
+/* des */
+function cuserInfo_des(_this){
+	return cuserInfo_base(_this);
 };
-
-function cUserProfileUpload(_this, _url){
-	_this.form.filetype.value = _this.name;
-	_this.form[_this.name + "_local_name"].value = _this.value;
-	
-	
-	return _GESHAI.fsubmit(_this.form, _url, {
-		"start": function(){
-			_GESHAI.disbtn("", true);
-			window.top._GESHAI.dialog({isBg: true, isHeader: false, isFooter: false, data: "Loading..."});
-		},
-		"success": function(d){
-			_GESHAI.disbtn("", false);
-			
-			var _nTypeStr = '';
-			if(_this.name == 'logo'){
-				_nTypeStr = '上传“logo”文件';
-			}else if(_this.name == 'licence'){
-				_nTypeStr = '上传“营业执照”文件';
-			}
-			
-			/* 清空值 */
-			_this.form.filetype.value = "";
-			_this.form[_this.name + "_local_name"].value = "";
-			
-			if(_this.name == 'logo'){
-				$("#logo-area-upload").find("span[flag=\"file\"]").html("<input type=\"file\" class=\"z f-file\" name=\"logo\" onchange=\"_cUserProfileUpload(this);\" />");
-			}else{
-				$("#licence-area-upload").find("span[flag=\"file\"]").html("<input type=\"file\" class=\"z f-file\" name=\"licence\" onchange=\"_cUserProfileUpload(this);\" />");
-			}
-			
-			if(d.status != 1){
+/* logo */
+function cuserInfo_logo(_this, _type){
+	if(_this.getAttribute("flag") == "del"){
+		_type = _this.getAttribute("flag");
+		_this = document.getElementById("form_logo");
+		_this.act_type.value = _type;
+	}else{
+		_this.form.act_type.value = _type;
+	}
+	if(_type == "del"){
+		window.top._GESHAI.dialog({
+				"title": "删除“logo”",
+				"data": "<p>若删除，将不可恢复。</p><p>如果删除请点击“确定”，则点击“取消”按钮</p>",
+				"isCloseBtn": false,
+				"isCancelBtn": true,
+				"okBtnFunc" : function(){
+					return _GESHAI.fsubmit(_this, __actUrl, {
+						"start": function(){
+							_GESHAI.disbtn("", true);
+							window.top._GESHAI.dialog({isHeader: false, isFooter: false, data: "Loading..."});
+						},
+						"success": function(d){
+							_GESHAI.disbtn("", false);
+							
+							d.isCloseBtn = false;
+							d.clickBgClose = true;
+							d.title = "删除“logo”";
+							window.top._GESHAI.dialog(d);
+							if(d.status == 1){
+								window.location.href = __curHref;
+							}
+						}
+					});
+				}
+			});
+	}else{
+		if(_this.value.length < 1){
+			window.top._GESHAI.dialog({ title: "错误：", data: "请选择“logo”上传文件", clickBgClose: true, isCloseBtn: false });
+			return null;
+		}
+		_this.form.fname.value = _this.value;
+		return _GESHAI.fsubmit(_this, __actUrl, {
+			"start": function(){
+				_GESHAI.disbtn("", true);
+				window.top._GESHAI.dialog({isBg: false, isHeader: false, isFooter: false, data: "Loading..."});
+			},
+			"success": function(d){
+				_GESHAI.disbtn("", false);
 				d.isCloseBtn = false;
 				d.clickBgClose = true;
-				d.title = _nTypeStr + "错误原因：";
-				window.top._GESHAI.dialog(d);
-			}else if(d.status == 1){
-				window.top._GESHAI.dialog.close();
-				if(_this.name == 'logo'){
-					$("#logo-area-status").html("<a href=\"javascript:;\" delete-flag=\"logo\" onclick=\"_cUserProfileDel(this);\">重新上传</a>");
-					$("#logo-area-upload").hide();
-					$("#logo-area-view").show().html("<img src=\"" + (_GESHAI.dir("uploadfile") + "/" + d.filename) + "\" width=\"100\"/>");
-				}else{
-					$("#licence-area-status").html("<a href=\"javascript:;\" delete-flag=\"licence\" onclick=\"_cUserProfileDel(this);\">重新上传</a>");
-					$("#licence-area-upload").hide();
-					$("#licence-area-view").show().html("<img src=\"" + (_GESHAI.dir("uploadfile") + "/" + d.filename) + "\" width=\"100\"/>");
+				
+				if(d.status != 1){
+					d.title = "操作失败";
 				}
+				window.top._GESHAI.dialog(d);
+				if(d.status == 1){
+						window.location.href = __curHref;
+					}
 			}
+		});
+	}
+};
+/* licence */
+function cuserInfo_licence(_this, _type){
+	if(_this.getAttribute("flag") == "del"){
+		_type = _this.getAttribute("flag");
+		_this = document.getElementById("form_licence");
+		_this.act_type.value = _type;
+	}else{
+		_this.form.act_type.value = _type;
+	}
+	
+	if(_type == "del"){
+		window.top._GESHAI.dialog({
+				"title": "删除“营业执照”",
+				"data": "<p>若删除，将不可恢复，且恢复为“未认证”状态。</p><p>如果删除请点击“确定”，则点击“取消”按钮</p>",
+				"isCloseBtn": false,
+				"isCancelBtn": true,
+				"okBtnFunc" : function(){
+					return _GESHAI.fsubmit(_this, __actUrl, {
+						"start": function(){
+							_GESHAI.disbtn("", true);
+							window.top._GESHAI.dialog({isHeader: false, isFooter: false, data: "Loading..."});
+						},
+						"success": function(d){
+							_GESHAI.disbtn("", false);
+							
+							d.isCloseBtn = false;
+							d.clickBgClose = true;
+							d.title = "删除操作";
+							window.top._GESHAI.dialog(d);
+							if(d.status == 1){
+								window.location.href = __curHref;
+							}
+						}
+					});
+				}
+			});
+	}else{
+		if(_this.value.length < 1){
+			window.top._GESHAI.dialog({ title: "错误：", data: "请选择“营业执照”上传文件", clickBgClose: true, isCloseBtn: false });
+			return null;
 		}
-	});
+		_this.form.fname.value = _this.value;
+		
+		return _GESHAI.fsubmit(_this, __actUrl, {
+			"start": function(){
+				_GESHAI.disbtn("", true);
+				window.top._GESHAI.dialog({isBg: false, isHeader: false, isFooter: false, data: "Loading..."});
+			},
+			"success": function(d){
+				_GESHAI.disbtn("", false);
+				d.isCloseBtn = false;
+				d.clickBgClose = true;
+				
+				if(d.status != 1){
+					d.title = "操作失败";
+				}
+				window.top._GESHAI.dialog(d);
+				if(d.status == 1){
+						window.location.href = __curHref;
+					}
+			}
+		});
+	}
+};
+/* zplx */
+function cuserInfo_zplx(_this, _type){
+	var __id = _this.getAttribute("data-id");
+	var __form = document.getElementById("form_zplx");
+		__form.zplxid.value = __id;
+	if(_type == "del"){
+		window.top._GESHAI.dialog({
+				"title": "删除操作",
+				"data": "您确定要删除联系人“<strong>" + ($("#zname_" + __id).text()) + "</strong>”吗？",
+				"isCloseBtn": false,
+				"isCancelBtn": true,
+				"okBtnFunc" : function(){
+					return _GESHAI.fsubmit(__form, __actDel, {
+						"start": function(){
+							_GESHAI.disbtn("", true);
+							window.top._GESHAI.dialog({isHeader: false, isFooter: false, data: "Loading..."});
+						},
+						"success": function(d){
+							_GESHAI.disbtn("", false);
+							
+							d.isCloseBtn = false;
+							d.clickBgClose = true;
+							d.title = "删除操作";
+							window.top._GESHAI.dialog(d);
+							if(d.status == 1){
+								window.top._GESHAI.dialog.close();
+								_GESHAI.redirect(d);
+							}
+						}
+					});
+				}
+			});
+	} else {
+	}
+};
+function cuserInfo_zplxWrite(id){
+	var _html = $("#zplx_write_wrap").html().replace("{form}", "form_zplx_write");
+	var _titleStr = "+新增联系人";
+	var _value = {
+			"zplxid": 0,
+			"zname": "",
+			"mp0": "",
+			"mp1": "",
+			"mp2": "",
+			"tp": "",
+			"email": ""
+		};
+	if(id){
+		_value.zplxid = id;
+		_value.zname = $("#zname_" + id).text();
+		_value.mp0 = $("#mp0_" + id).text();
+		_value.mp1 = $("#mp1_" + id).text();
+		_value.mp2 = $("#mp2_" + id).text();
+		_value.tp = $("#tp_" + id).text();
+		_value.email = $("#email_" + id).text();
+		
+		_titleStr = "修改联系人“" + _value.zname + "”";
+	}
+	for(var k in _value){
+		_html = _html.replace("v=\"{" + k + "}\"", "value=\"" + _value[k] + "\"");
+	}
+	window.top._GESHAI.dialog({
+				"title": _titleStr,
+				"data": _html,
+				"isCancelBtn": true,
+				"okBtnFunc" : function(){
+					var _this = document.getElementById("form_zplx_write");
+					
+					return _GESHAI.fsubmit(_this, __actUrl, {
+						"start": function(){
+							_GESHAI.disbtn("", true);
+							
+						},
+						"success": function(d){
+							_GESHAI.disbtn("", false);
+							if(d.status != 1){
+								alert(d.data);
+							}
+							if(d.status == 1 || d.type == 'n'){
+								window.top._GESHAI.dialog.close();
+								_GESHAI.redirect(d);
+							}
+						}
+					});
+				}
+			});
 };

@@ -92,12 +92,12 @@
 			<li class="clearfix is">
 				<div class="clearfix tit">模块:</div>
 				<div class="clearfix inp">
-                	<?php $arr = array('admin'=>'admin', 'common'=>'公共模块', 'content'=>'内容模块', 'user'=>'会员模块', 'job'=>'求职模块'); ?>
+                	<?php $arr = array('admin'=>'admin', 'common'=>'公共模块', 'content'=>'内容模块', 'user'=>'用户模块', 'cuser'=>'企业模块', 'job'=>'求职模块'); ?>
                 	<select name="module" class="fs-ts-200">
                     	<option value="">==请选择==</option>
                         <?php foreach($arr as $k=>$v){ ?>
                         <option value="<?php prt($k); ?>" <?php prt(_g('validate')->v2eq(my_array_value('module', $menuSub), $k) ? 'selected="selected"' : '');?>><?php prt($v); ?></option>
-                        <? } ?>
+                        <?php } ?>
                     </select>
 				</div>
 			</li>

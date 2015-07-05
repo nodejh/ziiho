@@ -3,7 +3,7 @@ if (! defined ( 'IN_GESHAI' )) {
 	exit ( 'no direct access allowed' );
 }
 
-$CUSER = _g('module')->trigger('user', 'cuser');
+$CUSER = _g('module')->trigger('cuser');
 $CUMODEL = _g('module')->trigger('user', 'model');
 $JMODEL = _g('module')->trigger('job', 'model');
 $JTYPE = _g('module')->trigger('job', 'jtype');
@@ -20,7 +20,7 @@ switch (_get ( 'op' )) {
 			return null;
 		}
 		
-		$JJOB->db->join($JJOB->t_job_job, 'a.cuid', $CUSER->t_user_cuser, 'b.cuid', 'LEFT JOIN');
+		$JJOB->db->join($JJOB->t_job_job, 'a.cuid', $CUSER->t_cuser, 'b.cuid', 'LEFT JOIN');
 		$JJOB->db->where('jtypeid', $jtypeid);
 		$JJOB->db->select('a.jobid,a.jname,a.pnum,a.ctime,a.jtypeid,a.cuid,b.cname,b.area,b.area_detail');
 		$JJOBResult = $JJOB->db->get_list();
@@ -68,7 +68,7 @@ switch (_get ( 'op' )) {
 			$__scidArr[] = $scid;
 		}
 		/* 获取职位 */
-		$JJOB->db->join($JJOB->t_job_job, 'a.cuid', $CUSER->t_user_cuser, 'b.cuid', 'LEFT JOIN');
+		$JJOB->db->join($JJOB->t_job_job, 'a.cuid', $CUSER->t_cuser, 'b.cuid', 'LEFT JOIN');
 		$JJOB->db->where_in('a.sortid', $__scidArr);
 		$pageData = _g('page')->c($JJOB->db->count(), 15, 10, _get('page'));
 		$JJOB->db->order_by('a.ctime', 'DESC');

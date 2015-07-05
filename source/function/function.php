@@ -41,6 +41,12 @@ function my_explode($s, $str) {
 	}
 	return explode ( $s, $str );
 }
+function my_fisrt($arr, $def = null) {
+	if(!my_is_array($arr)){
+		return $def;
+	}
+	return current( $arr );
+}
 function my_end($arr, $def = null) {
 	if(!my_is_array($arr)){
 		return $def;
@@ -89,7 +95,6 @@ function my_array_filp($val, $isRe = false) {
 	return $val;
 }
 
-/* 增加数组元素 */
 function my_array_push(&$data, $v = null, $k = null) {
 	$data = (! is_array ( $data ) ? array () : $data);
 	switch (func_num_args ()) {
@@ -103,7 +108,6 @@ function my_array_push(&$data, $v = null, $k = null) {
 	return $v;
 }
 
-/* 首插入 */
 function my_array_unshift(&$data, $v = null) {
 	if (! is_array ( $data )) {
 		$data = array ();
@@ -112,7 +116,6 @@ function my_array_unshift(&$data, $v = null) {
 	return $data;
 }
 
-/* 按键值获取一个数组中的值,如果多个以 a>b>c... 形式 */
 function my_array_value($keys = null, $value = array(), $def = null) {
 	if (strlen ( $keys ) < 1) {
 		return $def;
@@ -130,35 +133,30 @@ function my_array_value($keys = null, $value = array(), $def = null) {
 	return $value;
 }
 
-/* 设置 _G 值 */
+function than2eq($v, $v2, $r1 = null, $r2 = null){
+	if ($v == $v2) {
+		return $r1;
+	} else {
+		return $r2;
+	}
+}
+
 function _g_set($k, $v = null) {
 	global $_G;
 	$_G [$k] = $v;
 	return $v;
 }
 
-/* 获取 _G 值 */
 function _g($keys = null, $def = null) {
 	global $_G;
 	
 	if (strlen ( $keys ) < 1) {
-		return null;
+		return $def;
 	}
-	if (! preg_match ( "/^:/", $keys )) {
-		$keyStr = $keys;
-	} else {
-		$dm = 'common';
-		if (! preg_match ( "/^:\>\>/", $keys )) {
-			$keyStr = substr ( str_replace ( '@', $dm, $keys ), 1 );
-		} else {
-			$keyStr = str_replace ( ':>>', ($dm . '>set>'), $keys );
-		}
-		$keyStr = ('option>' . $keyStr);
-	}
-	return my_array_value ( $keyStr, $_G, $def );
+	$keys = str_ireplace('@', 'common', $keys);
+	return my_array_value ( $keys, $_G, $def );
 }
 
-/* 预定义字符前添加反斜杠 */
 function my_addslashes($_data) {
 	if (is_array ( $_data )) {
 		foreach ( $_data as $key => $val ) {
@@ -170,7 +168,6 @@ function my_addslashes($_data) {
 	return $_data;
 }
 
-/* 预定义字符前删除反斜杠 */
 function my_stripslashes($_data) {
 	if (is_array ( $_data )) {
 		foreach ( $_data as $key => $val ) {
@@ -182,7 +179,6 @@ function my_stripslashes($_data) {
 	return $_data;
 }
 
-/* 预定义的字符转换为 HTML 实体 */
 function my_htmlspecialchars($_data) {
 	if (is_array ( $_data )) {
 		foreach ( $_data as $key => $val ) {
@@ -194,7 +190,6 @@ function my_htmlspecialchars($_data) {
 	return $_data;
 }
 
-/* 预定义的 HTML 实体转换为字符 */
 function my_htmlspecialchars_decode($_data) {
 	if (is_array ( $_data )) {
 		foreach ( $_data as $key => $val ) {
@@ -206,7 +201,6 @@ function my_htmlspecialchars_decode($_data) {
 	return $_data;
 }
 
-/* 设置或获取 GET 值 */
 function _get($k, $v = null) {
 	$len = func_num_args ();
 	if ($len == 1) {
@@ -216,7 +210,6 @@ function _get($k, $v = null) {
 	}
 }
 
-/* 设置或获取 POST 值 */
 function _post($k, $v = null) {
 	$len = func_num_args ();
 	if ($len == 1) {
@@ -226,12 +219,10 @@ function _post($k, $v = null) {
 	}
 }
 
-/* 获取 input file 值 */
 function _ifile($key = null) {
 	return my_array_value ( $key, $_FILES );
 }
 
-/* 设置或获取 一个 session 值 */
 function my_session($k, $v = null) {
 	$arglen = func_num_args ();
 	if ($arglen == 1) {
@@ -241,22 +232,18 @@ function my_session($k, $v = null) {
 	}
 }
 
-/* 取得 session ID */
 function my_session_id($v = null) {
 	return _g ( 'session' )->id ( $v );
 }
 
-/* 删除一个 session 值 */
 function my_session_delete($k) {
 	_g ( 'session' )->delete ( $k );
 }
 
-/* 注销 session */
 function my_session_destroy(){
 	_g ( 'session' )->destroy ();
 }
 
-/* 序列化数组 或 变回序列化, t = true 为变回 */
 function my_serialize($value, $t = false) {
 	if (func_num_args () == 1) {
 		if (! is_array ( $value )) {
@@ -278,7 +265,6 @@ function my_serialize($value, $t = false) {
 	}
 }
 
-/* 对一个字符串 进行 md5, n 为次数 */
 function my_md5($s, $n = 1) {
 	$n = intval ( $n );
 	if (strlen ( $s ) < 1 || $n < 1) {
@@ -289,7 +275,6 @@ function my_md5($s, $n = 1) {
 	return $s;
 }
 
-/* 注销一个变量值 */
 function my_unset(&$data = null, $name = null) {
 	$len = func_num_args ();
 	if ($len == 1) {
@@ -304,7 +289,22 @@ function my_unset(&$data = null, $name = null) {
 	}
 }
 
-/* system dir */
+function my_less0value($v, $def = null){
+	return (_g('validate')->num($v) ? $v : $def);
+}
+
+function my_less1value($v, $def = null){
+	return (_g('validate')->pnum($v) ? $v : $def);
+}
+
+function v2bool($v){
+	$arr = array( '1', 1, 'true', 'on', 't', 'y');
+	if(preg_match("/^(\d+)$/", $v)){
+		$v = strtolower($v);
+	}
+	return in_array($v, $arr);
+}
+
 function sdir($kn = null) {
 	if (func_num_args () < 1) {
 		return _g ( 'loader' )->sdir ();
@@ -312,24 +312,29 @@ function sdir($kn = null) {
 		return _g ( 'loader' )->sdir ( $kn );
 	}
 }
-/* lang */
 function lang($name = null, $rep = null) {
 	return _g ( 'module' )->lang ( $name, $rep );
 }
 
-/* print message */
 function smsg($message = null, $redirectUrl = null, $param = null) {
 	return _g ( 'loader' )->print_message ( $message, $redirectUrl, $param );
 }
 
-/* print */
 function prt() {
 	foreach ( func_get_args () as $v ) {
 		print_r ( $v );
 	}
 }
 
-/* 可视化数组 */
+function uploadfile($v = null, $isdefault = false){
+	if(_g('validate')->em($v)){
+		return (_g('template')->dir('@')  . '/image/default.jpg');
+	}
+	$path = sdir('uploadfile');
+	$path = ($path . '/' . $v);
+	return $path;
+}
+
 function str2array($data) {
 	if (! preg_match ( "/array\((.+?)\)(;)?$/i", $data )) {
 		return array ();
@@ -339,7 +344,6 @@ function str2array($data) {
 	return $arr;
 }
 
-/* 可视化数组 */
 function array2str($data) {
 	if (my_is_array ( $data )) {
 		$i = 0;
@@ -364,7 +368,6 @@ function array2str($data) {
 	return ('array()');
 }
 
-/* 数组转为json格式 */
 function array2json($array) {
 	if (! my_is_array ( $array )) {
 		return '{}';
@@ -400,51 +403,49 @@ function array2json($array) {
 	return $result;
 }
 
-/* 人性化时间计算 */
-function person_time($beforeTime, $dt_format = 'm/d') {
-$nowTime = time();
-		$times = $nowTime - $beforeTime;
-		
-		if($times < 86400){
-			if(date('Ymd', $beforeTime) != date('Ymd', $nowTime)){
-				return ('昨天' . date('H:i', $beforeTime));
+function person_time($beforeTime, $dt_format = 'Y-m-d') {
+	$nowTime = time();
+	$times = $nowTime - $beforeTime;
+	
+	if($times < 86400){
+		if(date('Ymd', $beforeTime) != date('Ymd', $nowTime)){
+			return ('昨天' . date('H:i', $beforeTime));
+		}else{
+			if($times >= 3600){
+				$hours = ($times - ($times % 3600)) / 3600;
+				return ($hours . '小时前');
 			}else{
-				if($times >= 3600){
-					$hours = ($times - ($times % 3600)) / 3600;
-					return ('今天' . $hours . '小时前');
+				if($times > 60){
+					$minutes = ($times - ($times % 60)) / 60;
+					return ($minutes . '分钟前');
 				}else{
-					if($times > 60){
-						$minutes = ($times - ($times % 60)) / 60;
-						return ('今天' . $minutes . '分钟前');
+					if($times > 3){
+						return ($times . '秒钟前');
 					}else{
-						if($times > 3){
-							return ($times . '秒钟前');
-						}else{
-							return ('刚刚');
-						}
+						return ('刚刚');
 					}
 				}
 			}
-		}else{
-			$day = round($times / 86400);
-			switch($day){
-				case 1:
-					return ('昨天' . date('H:i', $beforeTime));
-					break;
-				case 2:
-					return ('前天' . date('H:i', $beforeTime));
-					break;
-				default:
-					if($day < 15){
-						return ($day . '天前');
-					}else{
-						return date('Y-m-d', $beforeTime);
-					}
-					break;
-			}
 		}
+	}else{
+		$day = round($times / 86400);
+		switch($day){
+			case 1:
+				return ('昨天' . date('H:i', $beforeTime));
+				break;
+			case 2:
+				return ('前天' . date('H:i', $beforeTime));
+				break;
+			default:
+				if($day < 15){
+					return ($day . '天前');
+				}else{
+					return date($dt_format, $beforeTime);
+				}
+				break;
+		}
+	}
 }
-/* 字符串截取 */
 function my_substr($content, $start, $length = NULL, $appendStr = NULL){
 	$content = trim($content);
 	$length = intval($length);
@@ -486,7 +487,92 @@ function my_substr($content, $start, $length = NULL, $appendStr = NULL){
 		return $str;
 	}
 }
-/* 获得客户端真实的IP地址 */
+
+function image_size($v) {
+	$arr = NULL;
+	if (is_file ( $v )) {
+		$arr = getimagesize ( $v );
+		if (!my_is_array ( $arr )) {
+			$arr = array (
+					0,
+					0
+			);
+		}
+	}
+	return $arr;
+}
+function imagenewseize($imgsrc, $img_w, $img_h = NULL) {
+	$srcsize = image_size ( $imgsrc );
+	if (!my_is_array ( $srcsize )) {
+		return array (
+				0,
+				0
+		);
+	}
+	
+	if ($img_w < 1) {
+		$img_w = $srcsize [0];
+	}
+	if ($img_h < 1) {
+		$img_h = $srcsize [1];
+	}
+	
+	$fill_w = ( int ) $img_w;
+	$fill_h = ( int ) $img_h;
+	$rate_w = $srcsize [0] / $fill_w;
+	$rate_h = $srcsize [1] / $fill_h;
+	
+	if ($rate_w < 1 && $rate_h < 1) {
+		$new_w = ( int ) $srcsize [0];
+		$new_h = ( int ) $srcsize [1];
+	} else {
+		if ($rate_w >= $rate_h) {
+			$new_w = ( int ) $fill_w;
+			$new_h = round ( $srcsize [1] / $rate_w );
+		} else {
+			$new_w = round ( $srcsize [0] / $rate_h );
+			$new_h = ( int ) $fill_h;
+		}
+	}
+	return array (
+			max ( 0, $new_w ),
+			max ( 0, $new_h )
+	);
+}
+function imagethumb($src_img, $dst_img, $w, $h, $img_quality = 90) {
+	global $_G;
+	$iObj = _g('loader')->lib ( 'image', null, true );
+	$iObj->img_display_quality = $img_quality;
+	$iObj->srcimage ( $src_img );
+	$iObj->dstimage ( $dst_img );
+	$sv = $iObj->createimage ( $w, $h );
+	return $sv;
+}
+function imagecut($img = NULL, $des_img = NULL, $xy = NULL, $wh = NULL, $display_quality = 90) {
+	$arr = image_size ( $img );
+	if ($arr [0] < 1) {
+		return $img;
+	}
+	_g('loader')->lib ( 'image', null, true );
+	new geshai_imagecutwater ( $img, $des_img, 2, $xy, $wh, $display_quality );
+}
+function imagewater($img = NULL, $des_img = NULL, $waterimg = NULL, $postion = NULL, $display_quality = 90, $merge_quality = 90, $ox = 0, $oy = 0) {
+	$arr = image_size ( $img );
+	if ($arr [0] < 1) {
+		return $img;
+	}
+	_g('loader')->lib ( 'image', null, true );
+	new geshai_imagecutwater ( $img, $des_img, 1, $waterimg, $postion, $display_quality, $merge_quality, $ox, $oy );
+}
+function textwater($img, $des_img = NULL, $ttf, $txt = NULL, $fontsize = NULL, $position = NULL, $fontcolor = NULL, $jiaodu = NULL, $display_quality = 90, $ox = 0, $oy = 0) {
+	$arr = image_size ( $img );
+	if ($arr [0] < 1) {
+		return $img;
+	}
+	_g('loader')->lib ( 'image', null, true );
+	new geshai_imagetxtwater ( $img, $des_img, $ttf, $txt, $fontsize, $position, $fontcolor, $jiaodu, $display_quality, $ox, $oy );
+}
+
 function getip() {
 	if (getenv ( "HTTP_CLIENT_IP" ) && strcasecmp ( getenv ( "HTTP_CLIENT_IP" ), "unknown" )) {
 		$ip = getenv ( "HTTP_CLIENT_IP" );
@@ -506,23 +592,6 @@ function getip() {
 		}
 	}
 	return $ip;
-}
-/* 字符标示符分页 */
-function contentpage($contentstr = '', $page_size = 20, $page_nums = 7, $page = 1) {
-	$page_count = 0;
-	if (str_len ( $contentstr ) >= 1) {
-		$sign_str = value_get ( NULL, 'content_page_sign', 'hr' );
-		list ( $contentstr, $total_num ) = explode_str ( $contentstr, $sign_str, true );
-		/* 计算页码 */
-		$page_nav = pagephow ( $total_num, $page_size, $page_nums, $page );
-		/* 返回字符串 */
-		$k = max ( 0, $page_nav ['page'] - 1 );
-		$contentstr = $contentstr [$k];
-	}
-	return array (
-			$page_nav,
-			$contentstr 
-	);
 }
 /* 数字转为大写 */
 function numtostr($number) {
@@ -578,39 +647,6 @@ function html_clear($str) {
 	}
 	$str = str_replace ( $stmp, NULL, $str );
 	return $str;
-}
-/* 随机数 */
-function getrand($length = 6, $mode = 0) {
-	switch ($mode) {
-		case 1 :
-			$str = '0123456789';
-			break;
-		case 2 :
-			$str = 'abcdefghijklmnopqrstuvwxyz';
-			break;
-		case 3 :
-			$str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-			break;
-		case 4 :
-			$str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-			break;
-		case 5 :
-			$str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-			break;
-		case 6 :
-			$str = 'abcdefghijklmnopqrstuvwxyz0123456789';
-			break;
-		default :
-			$str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-			break;
-	}
-	$rand_str = NULL;
-	$len = strlen ( $str ) - 1;
-	for($i = 0; $i < $length; $i ++) {
-		$num = mt_rand ( 0, $len );
-		$rand_str .= $str [$num];
-	}
-	return $rand_str;
 }
 /* 读取网络图片并保持于本地 */
 function remote_img_local($url, $filename = NULL) {
@@ -709,37 +745,6 @@ function get_webinfo() {
 	$result ['port'] = $_SERVER ['SERVER_PORT'] == '80' ? '' : ':' . $_SERVER ['SERVER_PORT'];
 	$result ['url'] = $result ['scheme'] . $result ['domain'] . $result ['port'];
 	return $result;
-}
-/* 获取服务器平台信息 */
-function get_serverinfo() {
-	global $_G;
-	$S = array ();
-	$S ['servdomain'] = array (
-			'name' => '服务器域名',
-			'value' => $_SERVER ['SERVER_NAME'] 
-	);
-	$S ['opsys'] = array (
-			'name' => '服务器操作系统',
-			'value' => @getenv ( 'OS' ) 
-	);
-	;
-	$S ['sysserver'] = array (
-			'name' => '服务器解译引擎',
-			'value' => $_SERVER ['SERVER_SOFTWARE'] 
-	);
-	$S ['phpversion'] = array (
-			'name' => 'PHP版本',
-			'value' => phpversion () 
-	);
-	$S ['mysqlversion'] = array (
-			'name' => 'MySql版本',
-			'value' => $_G ['db']->mysql_server ( 1 ) 
-	);
-	$S ['fileupload'] = array (
-			'name' => '上传文件',
-			'value' => (@ini_get ( 'file_uploads' ) ? ini_get ( 'upload_max_filesize' ) : 'unknown') 
-	);
-	return $S;
 }
 /* 获取url地址名 */
 function url_domain($url) {

@@ -39,18 +39,18 @@
         	<?php while($rs = _g('db')->result($dataResult)){ ?>
         	<li class="clearfix">
             	<div class="pic clearfix">
-                	<a href="<?php prt(_g('uri')->su('job/ac/learn/op/view/jobid/' . $rs['jobid'])); ?>" target="_blank"><img src="<?php prt($CUSER->logo(my_array_value('logo', $CUSER->find_jion('a.cuid', $rs['cuid'])))); ?>" /></a>
+                	<a href="<?php prt(_g('uri')->su('job/ac/learn/op/view/jobid/' . $rs['jobid'])); ?>" ><img src="<?php prt($CUSER->logo(my_array_value('logo', $CUSER->find_jion('a.cuid', $rs['cuid'])))); ?>" /></a>
                 </div>
                 <div class="ddd clearfix">
                 	<div class="aaa clearfix">
-                    	<p class="t1"><a href="<?php prt(_g('uri')->su('job/ac/learn/op/view/jobid/' . $rs['jobid'])); ?>" target="_blank"><?php prt($rs['jname']); ?></a></p>
+                    	<p class="t1"><a href="<?php prt(_g('uri')->su('job/ac/learn/op/view/jobid/' . $rs['jobid'])); ?>" ><?php prt($rs['jname']); ?></a></p>
                         <p class="t2">共有<em><?php prt($JSKILL->count('jobid', $rs['jobid'])); ?></em>项</p>
                     </div>
                     <div class="bbb clearfix">
                     	<p class="t1">职位说明</p>
                         <p class="t2"><?php prt(my_substr(strip_tags($rs['content']), 0, 120)); ?>...</p>
                     </div>
-                    <div class="gogo clearfix"><a href="<?php prt(_g('uri')->su('job/ac/learn/op/view/jobid/' . $rs['jobid'])); ?>" target="_blank">查看方案</a></div>
+                    <div class="gogo clearfix"><a href="<?php prt(_g('uri')->su('job/ac/learn/op/view/jobid/' . $rs['jobid'])); ?>" >查看方案</a></div>
                 </div>
             </li>
             <?php } ?>

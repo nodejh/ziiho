@@ -4,6 +4,7 @@ if (! defined ( 'IN_GESHAI' )) {
 }
 class geshai_template {
 	public $_skin = null;
+	
 	function __construct() {
 	}
 	function geshai_template() {
@@ -12,15 +13,18 @@ class geshai_template {
 	
 	
 	function init() {
-		$this->_skin = 'aaa';
+		$this->_skin = _g('option>@>setting>siteskin');
 	}
-	
 	
 	function dir($module = null, $isLocal = false) {
 		$root = sdir ( ($isLocal === true ? ':' : null) . 'template' );
-		$module = _g ( 'module' )->flag ( $module );
 		
-		$path = ($root . '/main/' . $this->_skin . '/' . $module);
+		$path = ( $root . '/main/' . $this->_skin );
+		if(func_num_args() >= 1){
+			$module = _g ( 'module' )->flag ( $module );
+			$path = ($path . '/' . $module);
+		}
+		
 		return $path;
 	}
 	

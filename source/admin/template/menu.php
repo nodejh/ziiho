@@ -57,6 +57,8 @@
 <!-- //javascript -->
 <script language="javascript">
 _GESHAI.checkbox({
+	"fClass": "icon-checkbox",
+	"tClass": "icon-checkboxed",
 	"checkbox": "span[checkbox-all=menuid]",
 	"checkboxItem": "span[checkbox-item=menuid]",
 	"name": "menuid[]"

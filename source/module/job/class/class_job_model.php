@@ -153,5 +153,19 @@ class class_job_model extends geshai_model {
 		$arr = array( A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z );
 		return my_array_value($num, $arr, $num);
 	}
+	function qsSAnswer($answer, $option, $isStr = false){
+		$answer = $this->qsOptionDe($answer);
+		$option = $this->qsOptionDe($option);
+		
+		$value = array();
+		$i = 0;
+		foreach($option as $k=>$v){
+			if(my_in_array($k, $answer)){
+				$value[] = $this->qsOptionOrder($i);
+			}
+			$i++;
+		}
+		return ($isStr != true ? $value : my_join(',', $value));
+	}
 }
 ?>

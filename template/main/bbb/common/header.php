@@ -1,0 +1,79 @@
+<?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php prt(_g('cfg>charset')); ?>" />
+<title>网站首页 - <?php prt(_g('value')->geshai('powered')); ?></title>
+<meta name="generator" content="cloud,jolly" />
+<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('@')); ?>/css/style.css" />
+<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('@')); ?>/css/ooo.css" />
+<link rel="stylesheet" type="text/css" href="<?php prt(sdir('static')); ?>/dialog/default/default.css" />
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('common')); ?>/font-awesome-4.3.0/css/font-awesome.min.css" />
+
+<script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/geshai.common.min.js"></script>
+<script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.cjslip-v1.0.3.min.js"></script>
+
+<script type="text/javascript">
+_GESHAI.setting("path", "<?php prt(sdir()); ?>");
+_GESHAI.setting("fsubmitKey_get", "<?php prt(_g('cfg>fmkey>get')); ?>");
+_GESHAI.setting("fsubmitKey_post", "<?php prt(_g('cfg>fmkey>post')); ?>");
+_GESHAI.setting("fsubmitKey_ajax", "<?php prt(_g('cfg>fmkey>ajax')); ?>");
+_GESHAI.setting("fsubmitKey_onlybody", "<?php prt(_g('cfg>fmkey>onlybody')); ?>");
+
+</script>
+
+</head>
+
+<body id="body">
+<?php if(_g('validate')->hasget('ac') && !in_array(_get('ac'), array('index', 'home', 'login', 'register', 'forget')) && !preg_match("/\/user\.php/", $_SERVER['PHP_SELF'])){ ?>
+    <!-- //header -->
+    <div class="nav clearfix" id="nav">
+        <div class="shadow shadow-bg shadow-header clearfix"></div>
+        <div class="shadow-border clearfix"></div>
+
+        <div class="area clearfix">
+            <div class="bd clearfix">
+                <ul class="box clearfix">
+                    <li class="z ss ss-w aa clearfix">
+                        <p class="z sy tbg2">
+                            <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>" class="fs head-font">首页</a>
+                        </p>
+                    </li>
+                    <li class="z ss ss-w bb clearfix">
+                        <p class="z xx tbg2">
+                            <a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>" class="fs">学习中心</a>
+                        </p>
+                        <p class="y qz tbg2">
+                            <a href="<?php prt(_g('uri')->su('job/ac/company')); ?>"
+                               class="fs">求职中心</a>
+                        </p>
+                    </li>
+                    <li class="z ss ss-w cc clearfix">
+                        <?php $UM = _g('module')->trigger('user', 'model');?>
+                        <?php if(my_is_array($UM->suser())){ ?>
+                            <div class="y uinfo_101">
+                                <a href="<?php prt(_g('uri')->su('user')); ?>" style="font-size:14px;"><?php prt($UM->suser('username')); ?></a>
+                                <div class="ui_box">
+                                    <a href="<?php prt(_g('uri')->su('user')); ?>">个人中心</a>
+                                    <a href="<?php prt(_g('uri')->su('user/ac/logout')); ?>">退出</a>
+                                </div>
+                            </div>
+                        <?php }else{ ?>
+                            <p class="y zc tbg2">
+                                <a href="<?php prt(_g('uri')->su('user/ac/register')); ?>"
+                                   class="icon"><i class="fa fa-user-plus"></i> 注册</a>
+                            </p>
+                            <p class="y dl tbg2">
+                                <a href="<?php prt(_g('uri')->su('user/ac/login')); ?>"
+                                   class="icon"><i class="fa fa-user"></i> 登录</a>
+                            </p>
+                        <?php } ?>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <!-- header// -->
+<?php } ?>

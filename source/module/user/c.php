@@ -8,6 +8,7 @@ $CUSER = _g('module')->trigger('user', 'cuser');
 $UModel = _g('module')->trigger('user', 'model');
 $JModel = _g('module')->trigger('job', 'model');
 $JSort = _g('module')->trigger('job', 'sort');
+$CZPLX = _g('module')->trigger('job', 'zplx');
 
 if(!my_is_array($UModel->suser())){
 	smsg(lang('user:100013'), _g('uri')->su('user/ac/login'));
@@ -23,7 +24,7 @@ switch ($UModel->suser('login_type')) {
 		include _g ( 'module' )->filename ( 'user', _get('t') );
 		break;
 	default :
-		$ts = array('profile', 'password', 'setting', 'avatar');
+		$ts = array('profile', 'password', 'setting', 'avatar', 'answer', 'myauth');
 		_get('t', (in_array(_get('t'), $ts) ? _get('t') : 'center'));
 		
 		include _g ( 'module' )->filename ( 'user', _get('t') );

@@ -7,7 +7,11 @@ $cuid = $UModel->suser('cuid');
 
 switch (_get ( 'op' )) {
 	case 'do':
-		$tabTypeArr = array('base', 'cdescription', 'recruit', 'file');
+		if (! _g ( 'validate' )->fm ( true )) {
+			return null;
+		}
+		
+		$tabTypeArr = array('base', 'des', 'logo', 'licence', 'zplx');
 		$tabtype = _post('tabtype');
 		if(!my_in_array($tabtype, $tabTypeArr)){
 			smsg(lang(200001));
@@ -15,6 +19,7 @@ switch (_get ( 'op' )) {
 		}
 		
 		$data = array();
+		
 		if($tabtype == 'base'){
 			$cname = _post('cname');
 			$csortid = _post('csortid');
@@ -77,137 +82,245 @@ switch (_get ( 'op' )) {
 					'cnatureid'=>$cnatureid,
 					'csize'=>$csize
 				);
-		}elseif ($tabtype == 'cdescription'){
+			
+			$CUSER->updateCUser($cuid, $data);
+			
+		}elseif ($tabtype == 'des'){
 			$cdescription = _post('cdescription');
+			
 			$data['profile'] = array('cdescription'=>$cdescription);
-		}elseif ($tabtype == 'recruit'){
-			$recruitment = _post('recruitment');
-			$rtelephone = _post('rtelephone');
-			$rmobilephone = _post('rmobilephone');
-			$remail = _post('remail');
 			
-			/* 联系人 */
-			if(!_g('validate')->vm(strlen($recruitment), 1, 20)){
-				smsg ( lang ( 'user:cuser>100007', array(1, 20)) );
-				return null;
-			}
-			/* 手机号 */
-			if(!_g('validate')->pnum($rmobilephone) || !_g('validate')->vm(strlen($rmobilephone), 8, 11)){
-				smsg ( lang ( 'user:cuser>100008') );
-				return null;
-			}
-			/* 公司邮箱 */
-			if(!_g('validate')->email($remail, 1)){
-				smsg ( lang ( 'user:cuser>100016') );
-				return null;
-			}
+			$CUSER->updateCUser($cuid, $data);
 			
-			/* 座机 */
-			$rtelephone[0] = substr(my_array_value(0, $rtelephone), 0, 6);
-			$rtelephone[1] = substr(my_array_value(1, $rtelephone), 0, 10);
-			$rtelephone[2] = substr(my_array_value(2, $rtelephone), 0, 6);
-			$rtelephone = array2str($rtelephone);
+		}elseif ($tabtype == 'logo'){
+			$act_type = _post('act_type');
 			
-			$data['profile'] = array(
-					'recruitment'=>$recruitment,
-					'rtelephone'=>my_addslashes($rtelephone),
-					'rmobilephone'=>$rmobilephone,
-					'remail'=>$remail
-				);
-		}else{
-			$fileTypeArr = array('logo', 'licence');
-			$filetype = _post('filetype');
-			$extMsg = my_join(';', _g('module')->dv('@', 200000));
-			
-			if(!my_in_array($filetype, $fileTypeArr)){
-				smsg ( lang ( 200001) );
+			$profileRs = $CUSER->profile_find('cuid', $cuid);
+			if(!$CUSER->db->is_success($profileRs)){
+				smsg(lang('200013'));
 				return null;
 			}
-			
-			$cUserData = $CUSER->find_jion('a.cuid', $cuid);
-			if(!my_is_array($cUserData)){
-				smsg(lang('user:cuser>300001'));
-				return null;
-			}
-			
-			/* 上传文件处理 */
-			$fileDataArr = ($filetype == 'logo' ? _ifile('logo') : _ifile('licence'));
-			if($fileDataArr['size'] < 1){
-				smsg(lang(300001));
-				return null;
-			}
-			$info = getimagesize($fileDataArr['tmp_name']);
-			if(!_g('validate')->imagetype($fileDataArr['tmp_name'])){
-				smsg(lang(300005, $extMsg));
-				return null;
-			}
-			if(_g('validate')->fsover($fileDataArr['size'], 4)){
-				smsg(lang(300006, 4));
-				return null;
-			}
-			if($info[0] < 1 || $info[1] < 1){
-				smsg(lang(300008));
-				return null;
-			}
-			/* 保存目录 */
 			$rootDir = sdir(':uploadfile');
-			$saveDir = 'job/cuser/company/' . date('Ym');
-			if(!_g('file')->create_dir($rootDir, $saveDir)){
-				smsg(lang('300003'));
-				return null;
-			}
-			/* 文件名 */
-			$sfname = $saveDir . '/' . _g('file')->nname($fileDataArr['name']);
+			$old_logoSrc = my_array_value('logo', $profileRs);
 			
-			/* 更新原文件 */
-			if($filetype == 'logo'){
-				if(!_g('file')->delete($rootDir . '/' . my_array_value('logo', $cUserData))){
-					smsg(lang('user:cuser>400000'));
-					return null;
+			/* data */
+			$data = array('logo'=>null);
+			
+			if($act_type == 'del'){
+				if(strlen($old_logoSrc) >= 1){
+					if(!_g('file')->delete($rootDir . '/' . $old_logoSrc)){
+						smsg(lang('user:cuser>400000'));
+						return null;
+					}
+					if(!$CUSER->profileUpdate($cuid, array('logo'=>null))){
+						smsg(lang('200013'));
+						return null;
+					}
 				}
-				$data['profile'] = array('logo'=>$sfname);
 			}else{
-				if(!_g('file')->delete($rootDir . '/' . my_array_value('licence', $cUserData))){
-					smsg(lang('user:cuser>400001'));
+				$extMsg = my_join(';', _g('module')->dv('@', 200000));
+				/* 上传文件处理 */
+				$fileDataArr = _ifile('ufile');
+				if($fileDataArr['size'] < 1){
+					smsg(lang(300001));
 					return null;
 				}
-				$data['profile'] = array('licence'=>$sfname);
+				$info = getimagesize($fileDataArr['tmp_name']);
+				if(!_g('validate')->imagetype($fileDataArr['tmp_name'])){
+					smsg(lang(300005, $extMsg));
+					return null;
+				}
+				if(_g('validate')->fsover($fileDataArr['size'], 4)){
+					smsg(lang(300006, 4));
+					return null;
+				}
+				if($info[0] < 1 || $info[1] < 1){
+					smsg(lang(300008));
+					return null;
+				}
+				/* 保存目录 */
+				$saveDir = 'job/logo/' . date('Ym');
+				if(!_g('file')->create_dir($rootDir, $saveDir)){
+					smsg(lang('300003'));
+					return null;
+				}
+				/* 文件名 */
+				$sfname = $saveDir . '/' . _g('file')->nname($fileDataArr['name']);
+				
+				/* 更新原文件 */
+				if(strlen($old_logoSrc) >= 1){
+					if(!_g('file')->delete($rootDir . '/' . $old_logoSrc)){
+						smsg(lang('user:cuser>400000'));
+						return null;
+					}
+				}
+				$data['logo'] = $sfname;
+				if(!$CUSER->profileUpdate($cuid, $data)){
+					smsg(lang('200013'));
+					return null;
+				}
+				if(!move_uploaded_file($fileDataArr['tmp_name'], ($rootDir . '/' . $sfname))){
+					smsg(lang('300002'));
+					return null;
+				}
 			}
-			if(!$CUSER->updateCUser($cuid, $data)){
+			
+		}elseif ($tabtype == 'licence'){
+			$act_type = _post('act_type');
+				
+			$profileRs = $CUSER->profile_find('cuid', $cuid);
+			if(!$CUSER->db->is_success($profileRs)){
+				smsg(lang('200013'));
 				return null;
 			}
-			if(!move_uploaded_file($fileDataArr['tmp_name'], ($rootDir . '/' . $sfname))){
-				smsg(lang('300002'));
-				return null;
+				
+			$rootDir = sdir(':uploadfile');
+			$old_licenceSrc = my_array_value('licence', $profileRs);
+			/* data */
+			$data = array(
+					'authlicence'=>_g('value')->sb(false),
+					'licence'=>null
+			);
+			
+			if($act_type == 'del'){
+				if(strlen($old_licenceSrc) >= 1){
+					if(!_g('file')->delete($rootDir . '/' . $old_licenceSrc)){
+						smsg(lang('user:cuser>400000'));
+						return null;
+					}
+					if(!$CUSER->profileUpdate($cuid, $data)){
+						smsg(lang('200013'));
+						return null;
+					}
+				}
+			}else{
+				$extMsg = my_join(';', _g('module')->dv('@', 200000));
+			
+				/* 上传文件处理 */
+				$fileDataArr = _ifile('ufile');
+				if($fileDataArr['size'] < 1){
+					smsg(lang(300001));
+					return null;
+				}
+				$info = getimagesize($fileDataArr['tmp_name']);
+				if(!_g('validate')->imagetype($fileDataArr['tmp_name'])){
+					smsg(lang(300005, $extMsg));
+					return null;
+				}
+				if(_g('validate')->fsover($fileDataArr['size'], 4)){
+					smsg(lang(300006, 4));
+					return null;
+				}
+				if($info[0] < 1 || $info[1] < 1){
+					smsg(lang(300008));
+					return null;
+				}
+				/* 保存目录 */
+				$saveDir = 'job/licence/' . date('Ym');
+				if(!_g('file')->create_dir($rootDir, $saveDir)){
+					smsg(lang('300003'));
+					return null;
+				}
+				/* 文件名 */
+				$sfname = $saveDir . '/' . _g('file')->nname($fileDataArr['name']);
+			
+				/* 更新原文件 */
+				if(strlen($old_licenceSrc) >= 1){
+					if(!_g('file')->delete($rootDir . '/' . $old_licenceSrc)){
+						smsg(lang('user:cuser>400000'));
+						return null;
+					}
+				}
+				
+				$data['licence'] = $sfname;
+				if(!$CUSER->profileUpdate($cuid, $data)){
+					smsg(lang('200013'));
+					return null;
+				}
+				if(!move_uploaded_file($fileDataArr['tmp_name'], ($rootDir . '/' . $sfname))){
+					smsg(lang('300002'));
+					return null;
+				}
 			}
-			smsg(lang('100063'), null, array('status'=>1, 'filename'=>$sfname));
-			return null;
+		}else if ($tabtype == 'zplx'){
+			$act_type = _post('act_type');
+			if($act_type == 'write'){
+				$zplxid = _post('zplxid');
+				$zname = _post('zname');
+				$mp0 = _post('mp0');
+				$mp1 = _post('mp1');
+				$mp2 = _post('mp2');
+				$tp = _post('tp');
+				$email = _post('email');
+				$ctime = _g('cfg>time');
+				
+				if(!_g('validate')->num($zplxid)){
+					smsg(lang(200010));
+					return null;
+				}
+				
+				if(strlen($zname) < 1){
+					smsg(lang('user:cuser>500000'));
+					return null;
+				}
+				
+				if(strlen($mp1) < 1 && strlen($tp) < 1){
+					smsg(lang('user:cuser>500001'));
+					return null;
+				}
+				
+				$zplxRs = null;
+				if(_g('validate')->pnum($zplxid)){
+					$zplxRs = $CZPLX->find('zplxid', $zplxid);
+					if(!$CZPLX->db->is_success($zplxRs)){
+						smsg(lang('200013'));
+						return null;
+					}
+					if(!my_is_array($zplxRs)){
+						smsg(lang('100061'), null, array('type'=>'n'));
+						return null;
+					}
+				}
+				
+				$data = array(
+						'zname'=>$zname,
+						'mp0'=>$mp0,
+						'mp1'=>$mp1,
+						'mp2'=>$mp2,
+						'tp'=>$tp,
+						'email'=>$email,
+						'ctime'=>$ctime,
+						'cuid'=>$cuid
+				);
+				if(!(!$zplxRs ? $CZPLX->insert($data) : $CZPLX->update($zplxid, $data))){
+					smsg(lang('200013'));
+					return null;
+				}
+			}
 		}
-		$CUSER->updateCUser($cuid, $data);
+		smsg(lang('100061'), null, 1);
 		break;
-	case 'fdel':
-		$fileTypeArr = array('logo', 'licence');
-		$filetype = _post('filetype');
-			
-		if(!my_in_array($filetype, $fileTypeArr)){
-			smsg ( lang ( 200001) );
+	case 'delete':
+		if (! _g ( 'validate' )->fm ( true )) {
 			return null;
 		}
-			
-		$cUserData = $CUSER->find_jion('a.cuid', $cuid);
-		if(!my_is_array($cUserData)){
-			smsg(lang('user:cuser>300001'));
+		$zplxid = _post('zplxid');
+		if(!_g('validate')->pnum($zplxid)){
+			smsg(lang(200010));
 			return null;
 		}
-		
-		if(!_g('file')->delete(sdir(':uploadfile') . '/' . my_array_value($filetype, $cUserData))){
-			smsg(lang('user:cuser>400000'));
+		$zplxRs = $CZPLX->find('zplxid', $zplxid);
+		if(!$CZPLX->db->is_success($zplxRs)){
+			smsg(lang('200013'));
 			return null;
 		}
-		$data = array();
-		$data['profile'][$filetype] = null;
-		
-		$CUSER->updateCUser($cuid, $data);
+		if(my_is_array($zplxRs)){
+			if(!$CZPLX->delete($zplxid)){
+				smsg(lang('200013'));
+				return null;
+			}
+		}
+		smsg(lang('100061'), null, 1);
 		break;
 	default :
 		$cUserData = $CUSER->find_jion('a.cuid', $cuid);
@@ -216,6 +329,17 @@ switch (_get ( 'op' )) {
 			smsg(lang('user:cuser>300001'));
 			return null;
 		}
+		
+		/* 联系人 */
+		$CZPLX->db->from($CZPLX->t_job_zplx);
+		$CZPLX->db->where('cuid', $cuid);
+		$zplxPageData = _g('page')->c($CZPLX->db->count(), 10, 10, _get('page'));
+		$CZPLX->db->limit($zplxPageData['start'], $zplxPageData['size']);
+		$CZPLX->db->order_by('ctime');
+		$CZPLX->db->select($CZPLX->t_field);
+		$zplxResult = $CZPLX->db->get_list();
+		$zplxPageData['uri'] = 'user/t/c_company/tab/3/page/';
+		
 		include _g ( 'template' )->name ( 'user', 'c_company', true );
 		break;
 }

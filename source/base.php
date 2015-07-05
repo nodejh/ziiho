@@ -8,6 +8,8 @@ require GESHAI_DIR . '/source/init.php';
 
 $_G ['session']->init ();
 $_G ['cookie']->init ();
+
+_g ( 'module' )->trigger ( '@', 'option', null, 'read' );
 $_G ['template']->init ();
 
 

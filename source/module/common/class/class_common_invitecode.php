@@ -1,11 +1,10 @@
 <?php
-if (! defined ( 'IN_PATH' )) {
+if (! defined ( 'IN_GESHAI' )) {
 	exit ( 'no direct access allowed' );
 }
-class class_common_invitecode extends class_model {
-	public $table_common_invitecode = 'common_invitecode';
+class class_common_invitecode extends geshai_model {
+	public $t_common_invitecode = 'common_invitecode';
 	
-	/* 析构函数 */
 	function __construct() {
 		parent::__construct ();
 	}
@@ -13,24 +12,31 @@ class class_common_invitecode extends class_model {
 		$this->__construct ();
 	}
 	
-	/* 单个查询 */
-	function invitecode_query($_key, $_val = NULL) {
-		$this->db->from ( $this->table_common_invitecode );
-		$this->db->where ( $_key, $_val );
-		$result = $this->db->select ();
-		if ($result == $this->db->cw) {
-			return $result;
-		}
-		$result = $this->db->get_one ();
-		return $result;
+	function find($k, $v = null) {
+		$this->db->from ( $this->t_common_invitecode );
+		$this->db->where ( $k, $v );
+		$this->db->order_by ('ugid');
+		$this->db->select ();
+		return $this->db->get_one ();
 	}
-	/* 更新 */
-	function invitecode_update($data, $_key, $_val = NULL) {
-		$this->db->from ( $this->table_common_invitecode );
-		$this->db->where ( $_key, $_val );
-		$this->db->set ( $data );
-		$result = $this->db->update ();
-		return $result;
+	function insert($data){
+		$this->db->from ( $this->t_common_invitecode );
+		$this->db->set ($data);
+		$this->db->insert ();
+		return $this->db->is_success();
+	}
+	function update($data, $k, $v = null){
+		$this->db->from ( $this->t_common_invitecode );
+		$this->db->where ( $k, $v );
+		$this->db->set ($data);
+		$this->db->update ();
+		return $this->db->is_success();
+	}
+	function delete($k, $v = null){
+		$this->db->from ( $this->t_common_invitecode );
+		$this->db->where ( $k, $v );
+		$this->db->delete ();
+		return $this->db->is_success();
 	}
 }
 ?>

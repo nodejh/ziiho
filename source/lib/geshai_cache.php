@@ -10,6 +10,21 @@ class geshai_cache {
 	function geshai_cache() {
 		$this->__construct ();
 	}
+	
+	function filename($module = null, $dir = null, $name = null, $ext = '.php'){
+		$filename = $this->root . '/cache';
+		$module = _g ( 'module' )->flag ( $module );
+		if(!empty($module)){
+			$filename .= '/' . $module;
+		}
+		if(!empty($dir)){
+			$filename .= '/' . $dir;
+		}
+		if(!empty($name)){
+			$filename .= '/' . $name . $ext;
+		}
+		return $filename;
+	}
 	function read($module, $fdir, $fname, $def = null) {
 		$module = _g ( 'module' )->flag ( $module );
 		if (strlen ( $module ) < 1 || strlen ( $fname ) < 1) {
@@ -39,6 +54,14 @@ class geshai_cache {
 	function delete() {
 	}
 	function clear() {
+	}
+	function iLoad($module, $fdir, $fname, $def = null){
+		$data = $def;
+		$f = $this->filename($module, $fdir, $fname);
+		if(is_file($f)){
+			$data = include ($f);
+		}
+		return $data;
 	}
 }
 ?>

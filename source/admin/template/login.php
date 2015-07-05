@@ -12,8 +12,8 @@ body {
 	<div class="clearfix z ml">
 		<div class="clearfix d">
 			<p class="rline"></p>
-			<p class="tit fb fspace"><?php prt(_g('value')->geshai('name')); ?></p>
-			<p class="desc fspace"><?php prt(_g('value')->geshai('description')); ?></p>
+			<!--<p class="tit fb fspace"><?php prt(_g('value')->geshai('name')); ?></p>
+			<p class="desc fspace"><?php prt(_g('value')->geshai('description')); ?></p>-->
 		</div>
 	</div>
 	<!-- ml// -->
@@ -69,12 +69,10 @@ function admin_login_do(_this){
 			_GESHAI.disbtn("", false);
 			d.isCloseBtn = false;
 			if(d.status != 1){
-				d.isErrorIcon = true;
 				d.clickBgClose = true;
 				d.title = "登陆失败";
 			}else{
 				d.isFooter = false;
-				d.isSuccessIcon = true;
 				d.title = "登陆成功";
 				d.data = "Loading...";
 			}

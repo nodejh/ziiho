@@ -6,16 +6,18 @@
 <!-- //job-company-data -->
 <div class="com-w job-company-data clearfix" id="job-company-data">
 	<ul class="dbox">
+    	<?php $i = 0; ?>
     	<?php while($rs = _g('db')->result($cUserResult)){ ?>
-        <li class="<?php prt(($i + 1) % 5 != 0 ? 'mrpx' : '');?>" >
-        	<a class="pic" href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $rs['cuid'])); ?>" target="_blank"><img src="<?php prt($CUSER->logo($rs['logo'])); ?>" /></a>
+        <?php $i = $i + 1; ?>
+        <li class="<?php prt($i % 4 != 0 ? 'mrpx' : '');?>" >
+        	<a class="pic" href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $rs['cuid'])); ?>" ><img src="<?php prt($CUSER->logo($rs['logo'])); ?>" /></a>
             <div class="info">
             	<div class="di">
                     <p class="tt"><a href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $rs['cuid'])); ?>"><img class="s-logo" src="<?php prt($CUSER->logo($rs['logo'])); ?>" width="20" height="20" /><?php prt($rs['cname']); ?></a></p>
                     <p class="dd">
                         <?php $jobResult = $CJOB->finds('cuid', $rs['cuid']); ?>
                         <?php while($jRs = _g('db')->result($jobResult[1])){ ?>
-                        <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $jRs['cuid'] . '/jobid/' . $jRs['jobid'])); ?>" target="_blank"><?php prt($JMODEL->sortValue($jRs['sortid'], 'sname')); ?></a>
+                        <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $jRs['cuid'] . '/jobid/' . $jRs['jobid'])); ?>" ><?php prt($JMODEL->sortValue($jRs['sortid'], 'sname')); ?></a>
                         <?php } ?>
                     </p>
                 </div>

@@ -25,25 +25,43 @@ _GESHAI.setting("fsubmitKey_onlybody", "<?php prt(_g('cfg>fmkey>onlybody')); ?>"
 </head>
 
 <body id="body">
-<?php if(_g('validate')->hasget('ac') && !in_array(_get('ac'), array('index', 'home', 'login', 'register', 'forget')) && !preg_match("/\/user\.php/", $_SERVER['PHP_SELF'])){ ?>
+<?php if(_g('validate')->hasget('ac') && !in_array(_get('ac'), array('index', 'home', 'login', 'register', 'forget'))){ ?>
 <!-- //com-header -->
-<div class="com-w com-header clearfix" id="com-header">
-	<div class="hd1 clearfix">
-    	<a href="<?php prt(_g('uri')->su('job/ac/home')); ?>"><img src="<?php prt(_g('template')->dir('@')); ?>/image/logo.png" height="62" /></a>
-    </div>
-    <div class="hd2 clearfix">
-    	<a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>" class="ml">学习中心</a>
-        <a href="<?php prt(_g('uri')->su('job/ac/company')); ?>" class="mr">求职中心</a>
-    </div>
-    <div class="hd3 clearfix">
-    	<?php $UM = _g('module')->trigger('user', 'model');?>
-		<?php if(my_is_array($UM->suser())){ ?>
-        <p class="y"><a href="<?php prt(_g('uri')->su('user')); ?>" style="font-size:14px;"><?php prt($UM->suser('username')); ?></a></p>
-        <?php }else{ ?>
-    	<a href="<?php prt(_g('uri')->su('user/ac/login')); ?>" class="dl">登陆</a>
-        <a href="<?php prt(_g('uri')->su('user/ac/register')); ?>" class="zc">注册</a>
-        <?php } ?>
+<div class="clearfix com-header-wrap">
+    <div class="clearfix com-w com-header clearfix" id="com-header">
+        <div class="hd1 clearfix">
+            <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>"><img src="<?php prt(_g('template')->dir('@')); ?>/image/logo.png" height="62" /></a>
+        </div>
+        <div class="hd2 clearfix">
+            <a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>" class="ml">学习中心</a>
+            <a href="<?php prt(_g('uri')->su('job/ac/company')); ?>" class="mr">求职中心</a>
+        </div>
+        <div class="hd3 clearfix">
+            <?php $UM = _g('module')->trigger('user', 'model');?>
+			<?php if(my_is_array($UM->suser())){ ?>
+            <div class="y uinfo_101">
+                <a href="<?php prt(_g('uri')->su('user')); ?>" class="un"><em><?php prt(substr($UM->suser('username'), 0, 12)); ?></em></a>
+                <div class="ui_box">
+                    <a href="<?php prt(_g('uri')->su('user')); ?>">个人中心</a>
+                    <a href="<?php prt(_g('uri')->su('user/ac/logout')); ?>">退出</a>
+                </div>
+            </div>
+            <?php }else{ ?>
+            <a href="<?php prt(_g('uri')->su('user/ac/login')); ?>" class="co dl">登陆</a>
+            <a href="<?php prt(_g('uri')->su('user/ac/register')); ?>" class="co zc">注册</a>
+            <?php } ?>
+        </div>
     </div>
 </div>
 <!-- com-header// -->
+<script language="javascript">
+$("#com-header").cjslip({
+	type: 'menu',
+	effect: "slideDown",
+	speed: 80,
+	defaultShow: false,
+	mainState: ".uinfo_101",
+	mainEl: ".ui_box"
+})
+</script>
 <?php } ?>

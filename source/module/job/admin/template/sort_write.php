@@ -5,7 +5,7 @@
     <ul class="ubox">
         <li class="clearfix is">
 			<?php $sort->include_cpos(my_array_value('parentid', $sortSub)); ?>
-			<?php if(my_array_key_exist('sortid', $sortSub)){ ?><span class="pos-sp">-</span><span class="tc-a t-fw"><?php prt(my_array_value('sname', $sortSub)); ?></span><?php } ?>
+			<?php if(my_array_key_exist('sortid', $sortSub)){ ?><span class="pos-sp">-</span><span class="tc-a fw"><?php prt(my_array_value('sname', $sortSub)); ?></span><?php } ?>
 		</li>
 	</ul>
 </div>

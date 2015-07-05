@@ -3,13 +3,15 @@ if (! defined ( 'IN_GESHAI' )) {
 	exit ( 'no direct access allowed' );
 }
 
-$CUSER = _g('module')->trigger('user', 'cuser');
+$CUSER = _g('module')->trigger('cuser');
 $CUMODEL = _g('module')->trigger('user', 'model');
 $JMODEL = _g('module')->trigger('job', 'model');
 $CJOB = _g('module')->trigger('job', 'job');
 $CJSKILL = _g('module')->trigger('job', 'skill');
 $JEXAMS = _g('module')->trigger('job', 'examsubject');
 $JEXAMSA = _g('module')->trigger('job', 'examsubject_answer');
+$JEXAMAUTH = _g('module')->trigger('job', 'examsubject_auth');
+$MYAUTH = _g('module')->trigger('job', 'myauth');
 
 switch (_get ( 'op' )) {
 	case 'detail' :
@@ -110,14 +112,16 @@ switch (_get ( 'op' )) {
 		$cUserData = $CUSER->find_jion('a.cuid', $id);
 		
 		/* 如果已答卷 */
-		$answerResult = $JEXAMSA->count(array('cuid'=>$id, 'jobid'=>$jobid, 'uid'=>$uid));
-		if(!$answerResult[0]){
+		$answerResult = $JEXAMSA->find(array('cuid'=>$id, 'jobid'=>$jobid, 'uid'=>$uid));
+		if(!$JEXAMSA->db->is_success($answerResult)){
 			smsg ( lang ( '200013' ), $backUrl);
 			return null;
 		}
-		if($answerResult[1] >= 1){
-			smsg(lang('job:600007'), $backUrl);
-			return null;
+		if(my_is_array($answerResult)){
+			if((_g('cfg>time') - $answerResult['ctime']) < 86400){
+				smsg(lang('job:600007'), $backUrl);
+				return null;
+			}
 		}
 		
 		/* 测试题 */
@@ -128,6 +132,11 @@ switch (_get ( 'op' )) {
 		$JEXAMS->db->order_by('ctime');
 		$JEXAMS->db->select();
 		$examsubjectResult = $JEXAMS->db->get_list();
+		
+		if($pageData['total'] < 1){
+			smsg(lang('job:600010'), $backUrl);
+			return null;
+		}
 		
 		include _g ( 'template' )->name ( 'job', 'company_exam', true );
 		break;
@@ -200,15 +209,33 @@ switch (_get ( 'op' )) {
 		}
 		
 		/* 如果已答卷 */
-		$answerResult = $JEXAMSA->count(array('cuid'=>$id, 'jobid'=>$jobid, 'uid'=>$uid));
-		if(!$answerResult[0]){
+		$answerResult = $JEXAMSA->find(array('cuid'=>$id, 'jobid'=>$jobid, 'uid'=>$uid));
+		if(!$JEXAMSA->db->is_success($answerResult)){
 			smsg ( lang ( '200013' ) );
 			return null;
 		}
-		if($answerResult[1] >= 1){
-			smsg(lang('job:600007'));
+		if(my_is_array($answerResult)){
+			if((_g('cfg>time') - $answerResult['ctime']) < 86400){
+				smsg(lang('job:600007'));
+				return null;
+			}
+		}
+		
+		/* 总共多少道题 */
+		$esCount = $JEXAMS->count(array('cuid'=>$id, 'jobid'=>$jobid));
+		if(!$esCount[0]){
+			smsg ( lang ( '200013' ) );
 			return null;
 		}
+		if($esCount[1] < 1){
+			smsg(lang('job:600009'));
+			return null;
+		}
+		
+		/* 计算平均分 */
+		$average = ($esCount[1] < 1 ? 0 : (100 / $esCount[1]));
+		$myEsCount = 0;
+		$myScore = 0;
 		
 		/* doing*/
 		$defGroupid = $JMODEL->qsOptionId();
@@ -246,6 +273,11 @@ switch (_get ( 'op' )) {
 						smsg ( lang ( '200013' ) );
 						return null;
 					}
+					/* 阅题 */
+					if(my_join('', $esoption[$esid]) == my_join('', $JMODEL->qsOptionDe($esQrs['esanswer']))){
+						$myScore = ($myScore + $average);
+						$myEsCount = $myEsCount + 1;
+					}
 				}else if($v == 'input' || $v == 'textarea'){
 					if(strlen($esoption[$esid]) < 1){
 						continue;
@@ -257,7 +289,48 @@ switch (_get ( 'op' )) {
 					}
 				}
 			}
+			/* 记录该会员的答题分数 */
+			$authData = array(
+					'jname' => my_addslashes($jobData['jname']),
+					'ctime' => $ctime,
+					'score' => $myScore,
+					'ispass' => ($myScore < 60 ? -1 : 1),
+					'sortid' => $jobData['sortid'],
+					'cuid' => $id,
+					'jobid' => $jobid,
+					'uid' => $uid
+			);
+			if(!$JEXAMAUTH->insertValue($authData)){
+				smsg ( lang ( '200013' ) );
+				return null;
+			}
+			
+			/* 如果大于满60分, 则记录认证合格信息 */
+			if($myScore >= 60){
+				$myAuthRs = $MYAUTH->find(array('jobid'=>$jobid, 'uid'=>$uid));
+				if(!$MYAUTH->db->is_success($myAuthRs)){
+					smsg ( lang ( '200013' ) );
+					return null;
+				}
+				if(!my_is_array($myAuthRs)){
+					$myAuthData = array(
+							'score' => $myScore,
+							'ctime' => $ctime,
+							'sortid' => $jobData['sortid'],
+							'cname'=> my_addslashes($cUserData['cname']),
+							'cuid' => $id,
+							'jname'=> my_addslashes($jobData['jname']),
+							'jobid' => $jobid,
+							'uid' => $uid
+					);
+					if(!$MYAUTH->insertValue($myAuthData)){
+						smsg ( lang ( '200013' ) );
+						return null;
+					}
+				}
+			}
 		}
+		
 		$EmptyParam = ($isEmptyData ? '/empty/yes' : '');
 		$redirectUrl = _g('uri')->su('job/ac/company/op/exam_s/id/' . $id . '/jobid/' . $jobid . $EmptyParam);
 		smsg ( lang ( '100061' ), $redirectUrl, 1 );

@@ -21,7 +21,7 @@
         	<?php if($pageData['total'] >= 1){ ?>
         	<?php while($rs = _g('db')->result($compayResult)){ ?>
         	<li class="clearfix">
-            	<div class="a1"><a href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $rs['cuid'])); ?>" target="_blank"><?php prt($rs['cname']); ?></a></div>
+            	<div class="a1"><a href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $rs['cuid'])); ?>"><?php prt($rs['cname']); ?></a></div>
                 <div class="a2"><?php prt(my_substr($rs['cdescription'], 0, 40)); ?>...</div>
                 <div class="a3"><?php prt($JMODEL->sortShow($rs['csortid'], 'sname')); ?></div>
                 <div class="a4"><?php prt($JMODEL->areaPos($rs['area'], $rs['area_detail'])); ?></div>
