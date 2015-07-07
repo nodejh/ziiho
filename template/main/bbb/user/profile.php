@@ -1,21 +1,19 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
-<?php include _g('template')->name('@', 'header', true); ?>
+<?php include _g('template')->name('@', 'header_center', true); ?>
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
 
 <!-- //cuser_center -->
-<div class="cuser_center clearfix" id="cuser_center">
+<div class="cuser_center clearfix o-main" id="cuser_center">
     <!-- //cuser_z -->
-    <div class="cuser_z clearfix">
+    <div class="cuser_z clearfix o-left">
         <?php include _g('template')->name('user', 'center_nav', true); ?>
     </div>
     <!-- cuser_z// -->
 
     <!-- //cuser_y -->
-    <div class="cuser_y clearfix">
-        <div class="company-tab-hd clearfix">
-            <a href="javascript:;">基本资料</a>
-        </div>
+    <div class="cuser_y clearfix o-right">
+        <h1 class="o-title">个人资料</h1>
         
         <div class="company-tab-bd clearfix">
             <!-- //基本信息 -->
@@ -25,18 +23,18 @@
                 <ul>
                     <li class="bline clearfix">
                         <div class="nn">用户名:</div>
-                        <div class="ii"><?php prt(my_array_value('username', $userData)); ?></div>
+                        <div class="ii"><input class="o-input" value="<?php prt(my_array_value('username', $userData)); ?>" disabled="disabled"></div>
                     </li>
                     
                     <li class="bline clearfix">
                         <div class="nn">昵称:</div>
-                        <div class="ii"><input type="text" class="ii-inp" name="nickname" value="<?php prt(my_array_value('nickname', $userData)); ?>" /></div>
+                        <div class="ii"><input type="text" class="o-input" name="nickname" value="<?php prt(my_array_value('nickname', $userData)); ?>" /></div>
                     </li>
                     
                     <li class="bline clearfix">
                         <div class="nn">性别:</div>
                         <div class="ii">
-                        	<select class="sel" name="gender">
+                        	<select class="sel o-input o-fix-select" name="gender">
                                 <?php foreach(_g('value')->ra(_g('module')->dv('user', 100000)) as $v): ?>
                                 <option value="<?php prt($v['v']); ?>" <?php if($v['v'] == my_array_value('gender', $userData, -1)){ ?>selected="selected"<?php } ?> ><?php prt($v['name']); ?></option>
                                 <?php endforeach; ?>
@@ -47,14 +45,15 @@
                     <li class="bline clearfix">
                         <div class="nn">生日:</div>
                         <div class="ii">
-                            <input type="text" name="birthday" class="ii-calendar" value="<?php prt(date("Y-m-d", my_array_value('birthday',$userData)));?>" readonly="readonly" onclick="WdatePicker({isShowClear:false,readOnly:true,'dateFmt':'yyyy-MM-dd',isShowToday:false,qsEnabled:false,isShowOK:false,minDate:'1960-01-01',maxDate:'<?php prt(date("Y-m-d", _g('cfg>time'))); ?>'})"/>
+                            <input type="text" name="birthday" class="o-input" value="<?php prt(date("Y-m-d", my_array_value('birthday',$userData)));?>" readonly="readonly"/>
+<!--                            onclick="WdatePicker({isShowClear:false,readOnly:true,'dateFmt':'yyyy-MM-dd',isShowToday:false,qsEnabled:false,isShowOK:false,minDate:'1960-01-01',maxDate:'--><?php //prt(date("Y-m-d", _g('cfg>time'))); ?><!--'})"-->
                         </div>
                     </li>
                     
                     <li class="bline clearfix">
                         <div class="nn">感情状况:</div>
                         <div class="ii">
-                        <select class="sel" name="emotion">
+                        <select class="sel o-input o-fix-select" name="emotion">
                         	<option value="-1">==请选择==</option>
                             <?php foreach(_g('value')->ra(_g('module')->dv('user', 100001)) as $v): ?>
                             <option value="<?php prt($v['v']); ?>" <?php if($v['v'] == my_array_value('emotion', $userData)){ ?>selected="selected"<?php } ?> ><?php prt($v['name']); ?></option>
@@ -74,7 +73,7 @@
                     
                     <li class="clearfix">
                     	<div class="nn">个性签名:</div>
-                        <div class="ii"><textarea name="sign" style="width:540px; height:80px;"><?php prt(my_array_value('sign', $userData)); ?></textarea></div>
+                        <div class="ii"><textarea class="o-input" name="sign" style="width:400px; height:80px;"><?php prt(my_array_value('sign', $userData)); ?></textarea></div>
                     </li>
                     
                     <li class="clearfix">
@@ -95,7 +94,7 @@
 <!-- cuser_center// -->
 
 
-<?php include _g('template')->name('job', 'footer', true); ?>
+<?php include _g('template')->name('user', 'footer', true); ?>
 
 
 <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/calendar/WdatePicker.js"></script>
@@ -115,7 +114,7 @@ _GESHAI.levelselect({
 		selected: "<?php prt(my_array_value('residence', $userData)); ?>".split(","), 
 		container: "#area-data-1", 
 		name: "", 
-		selectClass: "sel mr8", 
+		selectClass: "sel mr8 o-input o-fix-select",
 		optionFunc: function(d){
 			return {"id": d.id, "parentid": d.parentid, "text": d.aname};
 		},
@@ -136,7 +135,7 @@ _GESHAI.levelselect({
 		selected: "<?php prt(my_array_value('hometown', $userData)); ?>".split(","), 
 		container: "#area-data-2", 
 		name: "", 
-		selectClass: "sel mr8", 
+		selectClass: "sel mr8 o-input o-fix-select",
 		optionFunc: function(d){
 			return {"id": d.id, "parentid": d.parentid, "text": d.aname};
 		},

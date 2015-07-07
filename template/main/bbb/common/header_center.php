@@ -8,6 +8,7 @@
         <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('@')); ?>/css/style.css" />
         <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('@')); ?>/css/ooo.css" />
         <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('@')); ?>/css/over.css" />
+        <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('@')); ?>/font-awesome-4.3.0/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="<?php prt(sdir('static')); ?>/dialog/default/default.css" />
 
         <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.min.js"></script>
@@ -30,17 +31,17 @@
     <!-- //com-header -->
     <div class="clearfix com-header-wrap o-nav">
         <div class="clearfix com-w com-header clearfix" id="com-header">
-            <div class="hd1 clearfix">
-                <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>"><img src="<?php prt(_g('template')->dir('@')); ?>/image/logo.png" height="62" /></a>
+            <div class="hd1 clearfix o-logo">
+                <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>"><img src="<?php prt(_g('template')->dir('@')); ?>/image/logo.png" class="o-nav-img" /></a>
             </div>
             <div class="hd3 clearfix o-menu">
                 <?php $UM = _g('module')->trigger('user', 'model');?>
                 <?php if(my_is_array($UM->suser())){ ?>
                     <div class="y uinfo_101">
-                        <a href="<?php prt(_g('uri')->su('user')); ?>" class="un"><em><?php prt(substr($UM->suser('username'), 0, 12)); ?></em></a>
+                        <a href="<?php prt(_g('uri')->su('user')); ?>" class="un"><?php prt(substr($UM->suser('username'), 0, 12)); ?> <i class="fa fa-sort-desc"></i></a>
                         <div class="ui_box">
-                            <a href="<?php prt(_g('uri')->su('user')); ?>">个人中心</a>
-                            <a href="<?php prt(_g('uri')->su('user/ac/logout')); ?>">退出</a>
+                            <a href="<?php prt(_g('uri')->su('user')); ?>"><i class="fa fa-user fa-fw"></i> 个人中心</a>
+                            <a href="<?php prt(_g('uri')->su('user/ac/logout')); ?>"><i class="fa fa-sign-out  fa-fw"></i> 退出</a>
                         </div>
                     </div>
                 <?php }else{ ?>
@@ -49,6 +50,7 @@
                 <?php } ?>
             </div>
             <div class="clearfix o-menu">
+                <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>" class="ml o-menu-a">首页</a>
                 <a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>" class="ml o-menu-a">学习中心</a>
                 <a href="<?php prt(_g('uri')->su('job/ac/company')); ?>" class="mr o-menu-a">求职中心</a>
             </div>
