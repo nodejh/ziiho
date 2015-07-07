@@ -1,7 +1,6 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
-<?php include _g('template')->name('@', 'header', true); ?>
-<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
-<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
+<?php include _g('template')->name('user', 'head', true); ?>
+<?php include _g('template')->name('user', 'navigation', true); ?>
 
 <!-- //cuser_center -->
 <div class="cuser_center clearfix" id="cuser_center">

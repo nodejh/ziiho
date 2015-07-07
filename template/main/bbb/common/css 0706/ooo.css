@@ -62,9 +62,16 @@
 	opacity: 0.4;
 }
 
-.nav .shadow-bg { background:#000; }
-.nav .shadow-bg2 { background:#fff; }
-
+.nav .shadow-bg {
+    background:#000;
+}
+.nav .shadow-bg2 {
+    background:#fff;
+}
+.nav .shadow-header {
+    background: #29C2CF;
+    opacity: 1;
+}
 .nav .shadow-border {
 	width: 100%;
 	height: 0px;
@@ -389,3 +396,18 @@
 	.page-nav .pn-ns em { margin:0px 2px; padding:0px 5px; display:inline-block; }
 	.page-nav .pn-ns em.on { color:#F00; font-weight:bold; }
 	.page-nav .pn-ns em.dis { color:#999; }
+
+
+/*company*/
+.company-vertical {
+    margin-top: 15%;
+}
+.company-element-center {
+    text-align: center;
+}
+.company-font-white {
+    color: #fff;
+}
+.company-font-white:hover {
+    color: #fff;
+}

@@ -2,12 +2,14 @@
 <?php include _g('template')->name('@', 'header', true); ?>
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
+    
+<?php include _g('template')->name('user', 'nav', true); ?>
 
 <!-- //cuser_center -->
 <div class="cuser_center clearfix" id="cuser_center">
 <!-- //cuser_z -->
 <div class="cuser_z clearfix">
-	<?php include _g('template')->name('user', 'center_nav', true); ?>
+	<?php $UModel->userCenterNav(); ?>
 </div>
 <!-- cuser_z// -->
 

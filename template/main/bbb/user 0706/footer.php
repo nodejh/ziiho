@@ -26,8 +26,7 @@
 
 </body>
 
-<!-- jQuery -->
-<script src="<?php  prt(_g('template')->dir('bootstrapUI')); ?>/bower_components/jquery/dist/jquery.min.js"></script>
+
 
 <!-- Bootstrap Core JavaScript -->
 <script src="<?php  prt(_g('template')->dir('bootstrapUI')); ?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -43,3 +42,4 @@
 <!-- Custom Theme JavaScript -->
 <script src="<?php  prt(_g('template')->dir('bootstrapUI')); ?>/dist/js/sb-admin-2.js"></script>
 
+</html>

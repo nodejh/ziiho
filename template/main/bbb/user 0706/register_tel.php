@@ -16,9 +16,9 @@
 <!-- //register-nav -->
 <div class="register-nav">
 	<div class="f1 clearfix">
-        <div class="sp pp1">▲</div>
+        <div class="sp pp2">▲</div>
         <div class="tn"></div>
-        <div class="tt"><a href="javascript:;" flag="1" class="on">邮箱注册</a></div>
+        <div class="tt"><a href="<?php prt(_g('uri')->su('job/ac/register/op/email')); ?>" flag="1" class="on">邮箱注册</a></div>
         <div class="tt"><a href="javascript:;" flag="2">手机注册</a></div>
     </div>
 </div>
@@ -30,24 +30,29 @@
 	<!-- //steps -->
 	<div class="step step-1 clearfix">
     	<div class="acc a1 clearfix"><strong>第一步：填写注册信息</strong></div>
-        <div class="acc a2 clearfix">第二步：进入邮箱验证</div>
+        <div class="acc a2 clearfix">第二步：输入手机验证码</div>
         <div class="acc a3 clearfix">第三步：注册成功</div>
     </div>
 	<!-- steps// -->
     
     <!-- //ib -->
-    <form method="post" onsubmit="return false;">
     <div class="z ib clearfix">
         <div class="ibs clearfix">
-            <div class="nl clearfix">注册邮箱</div>
+            <div class="nl clearfix">手机号码</div>
             <div class="clear"></div>
-            <div class="inp-area clearfix"><input type="text" class="itext" name="email" value="" /></div>
+            <div class="inp-area clearfix"><input type="text" class="itext" value="" /></div>
+        </div>
+        
+        <div class="ibs clearfix">
+            <div class="nl clearfix">常用邮箱</div>
+            <div class="clear"></div>
+            <div class="inp-area clearfix"><input type="text" class="itext" value="" /></div>
         </div>
         
         <div class="ibs clearfix">
             <div class="nl clearfix">密码</div>
             <div class="clear"></div>
-            <div class="inp-area clearfix"><input type="password" class="itext" name="password" id="password" value="" /></div>
+            <div class="inp-area clearfix"><input type="text" class="itext" value="" /></div>
             <div class="pws clearfix">
             	<div class="ss"><p class="tf">弱</p><p class="ts ts-c0"></p></div>
                 <div class="ss"><p class="tf">中</p><p class="ts ts-c0"></p></div>
@@ -58,24 +63,24 @@
         <div class="ibs clearfix">
             <div class="nl clearfix">确认密码</div>
             <div class="clear"></div>
-            <div class="inp-area clearfix"><input type="password" class="itext" name="password2" value="" /></div>
+            <div class="inp-area clearfix"><input type="text" class="itext" value="" /></div>
         </div>
         
         <div class="ibs clearfix">
             <div class="nl clearfix">验证码</div>
             <div class="clear"></div>
-            <div class="is-area clearfix"><input type="text" class="itext" name="checkcode" value="" /></div>
+            <div class="is-area clearfix"><input type="text" class="itext" value="" /></div>
             <div class="ccode clearfix">
-                <span id="captcha-box"></span><a href="javascript:;" id="captcha-click"></a>
+            	<img src="<?php prt(_g('template')->dir('job')); ?>/image/f/code.png" width="90" height="28" />
+                <a href="javascript:;">看不清，换一张?</a>
             </div>
         </div>
         <div class="clear"></div>
         
         <div class="ibs clearfix">
-            <div class="ibtn clearfix"><button type="button" class="reg" name="disabled-buttons" onclick="register_email(this, '<?php prt(_g('uri')->su('user/ac/register/op/email_do')); ?>');">同意服务条款并注册</button></div>
+            <div class="ibtn clearfix"><button type="button" class="reg" onclick="_GESHAI.redirect({'url': '<?php prt(_g('uri')->su('job/ac/register/op/tel2')); ?>'});">同意服务条款并注册</button></div>
         </div>
     </div>
-    </form>
     <!-- ib// -->
     
     <!-- //iser -->
@@ -95,7 +100,6 @@
 </div>
 <!-- register-iarea// -->
 
-<script type="text/javascript" src="<?php prt(_g('template')->dir('user')); ?>/js/user.js"></script>
 <script language="javascript">
 $(document).ready(function(e){
 	var _ms = {"w": 1920, "h": 930};
@@ -126,45 +130,12 @@ $(document).ready(function(e){
 			alert("页面制作中...");
 			return false;
 		}else{
-			_GESHAI.redirect({"url": "<?php prt(_g('uri')->su('job/ac/register/op/register_auth')); ?>"});
+			_GESHAI.redirect({"url": "<?php prt(_g('uri')->su('job/ac/register/op/email2')); ?>"});
 		}
     });
-	
-	/* captcha */
-	_GESHAI.captcha({ captcha: "captcha-box", click: "captcha-click" });
-	
-	/* password status */
-	var _levers = $("#register_index .ib .ibs .pws .ss .ts");
-	var _styles = ["ts-c0", "ts-c1", "ts-c2", "ts-c3"];
-	_GESHAI.password_status({
-			"length": 6,
-			"input": "password",
-			"callback": function(_level){
-				switch(_level){
-					case 1:
-					_levers.eq(0).addClass(_styles[1]).removeClass(_styles[0]);
-					_levers.eq(1).addClass(_styles[0]).removeClass(_styles[2]);
-					_levers.eq(2).addClass(_styles[0]).removeClass(_styles[3]);
-					break;
-					case 2:
-					_levers.eq(0).addClass(_styles[1]).removeClass(_styles[0]);
-					_levers.eq(1).addClass(_styles[2]).removeClass(_styles[0]);
-					_levers.eq(2).addClass(_styles[0]).removeClass(_styles[3]);
-					break;
-					case 3:
-					_levers.eq(0).addClass(_styles[1]).removeClass(_styles[0]);
-					_levers.eq(1).addClass(_styles[2]).removeClass(_styles[0]);
-					_levers.eq(2).addClass(_styles[3]).removeClass(_styles[0]);
-					break;
-					default:
-					_levers.eq(0).addClass(_styles[0]).removeClass(_styles[1]);
-					_levers.eq(1).addClass(_styles[0]).removeClass(_styles[2]);
-					_levers.eq(2).addClass(_styles[0]).removeClass(_styles[3]);
-					break;
-				}
-			}
-	});
 });
+
+
 </script>
 
 <?php include _g('template')->name('@', 'footer', true); ?>

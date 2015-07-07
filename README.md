@@ -70,4 +70,4 @@ common/bt
 
 
 
-主题配置 ./data/common/option.php
+主题配置 ./data/cache/common/option.php
