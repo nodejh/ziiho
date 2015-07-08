@@ -22,9 +22,10 @@
                     <span>5</span><br>认证书
                 </div>
             </div>
-            <a href="#">
+            <a href="<?php prt(_g('uri')->su('user/ac/myauth')); ?>">
                 <div class="o-panel-bottom">
-                    <span>查看详情</span><i class="fa fa-arrow-circle-right"></i>
+                    <span class="o-panel-bottomn-tips o-color-blue">查看详情</span>
+                    <span class="o-panel-bottomn-icon o-color-blue"><i class="fa fa-arrow-circle-right"></i></span>
                 </div>
             </a>
         </div>
@@ -37,7 +38,8 @@
             </div>
             <a href="#">
                 <div class="o-panel-bottom">
-                    <span>查看详情</span><i class="fa fa-arrow-circle-right"></i>
+                    <span class="o-panel-bottomn-tips o-color-green">查看详情</span>
+                    <span class="o-panel-bottomn-icon o-color-green"><i class="fa fa-arrow-circle-right"></i></span>
                 </div>
             </a>
         </div>
@@ -48,9 +50,10 @@
                     <span>15</span><br>答卷
                 </div>
             </div>
-            <a href="#">
+            <a href="<?php prt(_g('uri')->su('user/ac/answer')); ?>">
                 <div class="o-panel-bottom">
-                    <span>查看详情</span><i class="fa fa-arrow-circle-right"></i>
+                    <span class="o-panel-bottomn-tips o-color-yellow">查看详情</span>
+                    <span class="o-panel-bottomn-icon o-color-yellow"><i class="fa fa-arrow-circle-right"></i></span>
                 </div>
             </a>
         </div>
@@ -63,11 +66,14 @@
             </div>
             <a href="#">
                 <div class="o-panel-bottom">
-                    <span>查看详情</span><i class="fa fa-arrow-circle-right"></i>
+                    <span class="o-panel-bottomn-tips o-color-pink">查看详情</span>
+                    <span class="o-panel-bottomn-icon o-color-pink"><i class="fa fa-arrow-circle-right"></i></span>
                 </div>
             </a>
         </div>
     </div>
+
+
 </div>
 <!-- cuser_y// -->
 

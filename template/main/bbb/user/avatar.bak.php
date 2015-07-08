@@ -17,7 +17,6 @@
 
     <!-- //cuser_y -->
     <div class="cuser_y clearfix o-right">
-        <h1 class="o-title">上传头像</h1>
         <!-- //txt-message -->
         <div class="txt-message clearfix">
         	<p class="fsb">提示:</p>
@@ -28,13 +27,13 @@
         <!-- txt-message// -->
         
         <!-- //company-tab-avatar -->
-        <div class="company-tab-avatar clearfix o-avatar">
-        	<form method="post" enctype="multipart/form-data" onsubmit="return false;" id="form_avatar">
+        <div class="company-tab-avatar clearfix">
+        	<form method="post" enctype="multiparac/form-data" onsubmit="return false;" id="form_avatar">
             <div class="clearfix isbox">
                 <div class="clearfix uploadbox">
                 	<span id="uploadbox01"></span>
-                    <input type="text" name="avatarname" id="avatarname" class="o-input o-avatar-upname" />
-                    <button type="button" class="o-button o-button-default">选择文件</button>
+                    <input type="text" name="avatarname" id="avatarname" class="name" />
+                    <button type="button" class="up">选择文件</button>
 				</div>
                 <div class="clear"></div>
                 
@@ -44,7 +43,7 @@
                     </div>
                     <div class="clear"></div>
                     <div class="clearfix s_btn_box">
-                        <button type="button" class="s_btn o-button o-button-red o-button-block">提交并保存</button>
+                        <button type="button" class="s_btn">提交并保存</button>
                     </div>
                 </div>
                 

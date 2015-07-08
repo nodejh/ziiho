@@ -13,6 +13,7 @@
 
     <!-- //cuser_y -->
     <div class="cuser_y clearfix o-right">
+        <h1 class="o-title">修改密码</h1>
         <!-- //txt-message -->
         <div class="txt-message clearfix">
         	<p class="fsb">提示:</p>
@@ -27,17 +28,17 @@
                     
                     <li class="bline clearfix">
                         <div class="nn">原密码:</div>
-                        <div class="ii"><input type="password" class="ii-inp" name="password" /></div>
+                        <div class="ii"><input type="password" class="o-input" name="password" /></div>
                     </li>
                     
                     <li class="bline clearfix">
                         <div class="nn">新密码:</div>
-                        <div class="ii"><input type="password" class="ii-inp" name="new_password" /></div>
+                        <div class="ii"><input type="password" class="o-input" name="new_password" /></div>
                     </li>
                     
                     <li class="bline clearfix">
                         <div class="nn">确认新密码:</div>
-                        <div class="ii"><input type="password" class="ii-inp" name="new_password2" /></div>
+                        <div class="ii"><input type="password" class="o-input" name="new_password2" /></div>
                     </li>
                     
                     <li class="clearfix">

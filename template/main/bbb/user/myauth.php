@@ -13,7 +13,7 @@
 
 <!-- //cuser_y -->
 <div class="cuser_y clearfix o-right">
-    
+    <h1 class="o-title">我的认证书</h1>
     <div class="tttc">共<em><?php prt($pageData['total']); ?></em>个认证书</div>
     
     <?php if($pageData['total'] >=1 ){ ?>

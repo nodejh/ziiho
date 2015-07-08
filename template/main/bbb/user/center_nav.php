@@ -7,7 +7,7 @@
 		'profile'=> array('uri'=>'user/ac/profile', 'name'=>'<i class="fa fa-user fa-fw o-fa-right"></i> &nbsp;个人资料'),
 		'avatar'=> array('uri'=>'user/ac/avatar', 'name'=>'<i class="fa fa-upload fa-fw o-fa-right"></i> &nbsp;上传头像'),
 		'password'=> array('uri'=>'user/ac/password', 'name'=>'<i class="fa fa-wrench fa-fw o-fa-right"></i> &nbsp;密码修改'),
-		'answer'=> array('uri'=>'user/ac/answer', 'name'=>'<i class="fa fa-newspaper-o fa-fw o-fa-right"></i> &nbsp;我的答卷'),
+		'answer'=> array('uri'=>'user/ac/answer', 'name'=>'<i class="fa fa-newspaper-o fa-fw o-fa-right"></i> &nbsp;我的认证记录'),
 		'myauth'=> array('uri'=>'user/ac/myauth', 'name'=>'<i class="fa fa-certificate fa-fw o-fa-right"></i> &nbsp;我的认证书')
 	);
  ?>

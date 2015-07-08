@@ -13,7 +13,7 @@
 
 <!-- //cuser_y -->
 <div class="cuser_y clearfix o-right">
-    
+    <h1 class="o-title">我的认证记录</h1>
     <div class="tttc">共<em><?php prt($pageData['total']); ?></em>条记录</div>
     
     <div class="clearfix datas">
@@ -51,11 +51,12 @@
             <?php } ?>
         </table>
         <div class="clear"></div>
-        
-        <div class="clearfix btns">
-    		<span class="btns_qx" checkbox-all="authid">全选</span>
-        	<button type="button" class="btns_201" onclick="fsdo(this, 'delete');">删除所选</button>
-    	</div>
+            <?php if($pageData['total'] >= 1){ ?>
+            <div class="clearfix btns">
+                <span class="o-button o-button-default" checkbox-all="authid">全选</span>
+                <button type="button" class="o-button o-button-default" onclick="fsdo(this, 'delete');">删除所选</button>
+            </div>
+            <?php } ?>
         </form>
     </div>
     <div class="page-tab"><?php prt($JModel->page($pageData)); ?></div>

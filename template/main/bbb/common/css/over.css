@@ -3,6 +3,145 @@
 * date: 2015.07.06
 *
 */
+.o-input {
+    display: inline-block;
+    width: 100%;
+    height: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    border: 1px solid #ccc;;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.o-input:focus {
+    border-color: #ff1500;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(248, 0, 0, 0.77);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(248, 0, 0, 0.77);
+}
+.o-button {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.o-button-default {
+    counter-reset: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.o-button:focus,
+.o-button:active:focus,
+.o-button.active:focus,
+.o-button.focus,
+.o-button:active.focus,
+.o-button.active.focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+.o-button:hover,
+.o-button:focus,
+.o-button.focus {
+    color: #333;
+    text-decoration: none;
+}
+.o-button:active,
+.o-button.active {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+.o-button.disabled,
+.o-button[disabled],
+fieldset[disabled] .o-button {
+    pointer-events: none;
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .65;
+}
+.o-button-default:hover,
+.o-button-default:focus,
+.o-button-default.focus,
+.o-button-default:active,
+.o-button-default.active {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+.o-button-red {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.o-button-red:hover,
+.o-button-red:focus,
+.o-button-red.focus,
+.o-button-red:active,
+.o-button-red.active,
+.open > .dropdown-toggle.o-button-red {
+    color: #fff;
+    background-color: #c9302c;
+    border-color: #ac2925;
+}
+.o-button-red:active,
+.o-button-red.active,
+.open > .dropdown-toggle.o-button-red {
+    background-image: none;
+}
+.o-button-red.disabled,
+.o-button-red[disabled],
+fieldset[disabled] .o-button-red,
+.o-button-red.disabled:hover,
+.o-button-red[disabled]:hover,
+fieldset[disabled] .o-button-red:hover,
+.o-button-red.disabled:focus,
+.o-button-red[disabled]:focus,
+fieldset[disabled] .o-button-red:focus,
+.o-button-red.disabled.focus,
+.o-button-red[disabled].focus,
+fieldset[disabled] .o-button-red.focus,
+.o-button-red.disabled:active,
+.o-button-red[disabled]:active,
+fieldset[disabled] .o-button-red:active,
+.o-button-red.disabled.active,
+.o-button-red[disabled].active,
+fieldset[disabled] .o-button-red.active {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.o-button-red .badge {
+    color: #d9534f;
+    background-color: #fff;
+}
+.o-button-block {
+    width: 100%;
+}
+
 .o-fa-right {
     margin-right: 6px;
 }
@@ -119,18 +258,25 @@
     font-size: 40px;
 }
 .o-panel-bottom {
-    margin-top: 90px;
+    top: 110px;
     width: 100%;
-    height: 30px;
+    height: 35px;
     background-color: #F5F5F5;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
+    position: relative;
 }
 .o-panel-bottom span {
-    float: left;
+    margin: 5px 0;
 }
-div.o-panel-bottom i  {
-    float: right;
+.o-panel-bottom .o-panel-bottomn-tips {
+    left: 10px;
+    position: absolute;
+}
+.o-panel-bottom .o-panel-bottomn-icon {
+    margin: 0;
+    right: 10px;
+    position: absolute;
 }
 .o-panel-blue {
     background-color: rgb(51, 122, 183);
@@ -144,33 +290,47 @@ div.o-panel-bottom i  {
 .o-panel-pink {
     background-color: rgb(217, 83, 79);
 }
+.o-color-blue {
+    color: rgb(51, 122, 183);
+}
+.o-color-green {
+    color: rgb(92, 184, 92);
+}
+.o-color-yellow {
+    color: rgb(240, 173, 78);
+}
+.o-color-pink {
+    color: rgb(217, 83, 79);
+}
 .o-color-white {
     color: #fff;
 }
 
-.o-input {
-    display: block;
-    width: 100%;
-    height: 20px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    border: 1px solid #ccc;;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+.o-panel-bottom:hover .o-color-blue {
+    color: rgb(27, 90, 144);
 }
-.o-input:focus {
-    border-color: #ff1500;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(248, 0, 0, 0.77);
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(248, 0, 0, 0.77);
+.o-panel-bottom:hover .o-color-green {
+    color: rgb(46, 102, 46);
 }
+.o-panel-bottom:hover .o-color-yellow {
+    color: rgb(207, 150, 71);
+}
+.o-panel-bottom:hover .o-color-pink {
+    color: rgb(161, 61, 58);
+}
+
 
 .cuser_center .cuser_y .company-tab-bd .bd-box ul li .ii .sel.o-fix-select {
     height: auto;
 }
+.cuser_center .cuser_y .company-tab-avatar.o-avatar {
+    border: none;
+    background-color: #fff;
+}
+.cuser_center .cuser_y .company-tab-avatar.o-avatar .isbox {
+    height: auto;
+}
+.o-avatar-upname {
+    width: 120px;
+}
+
