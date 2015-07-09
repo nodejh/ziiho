@@ -2,7 +2,8 @@
 <?php include _g('template')->name('@', 'header_center', true); ?>
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
-
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/js/cuser.js" />
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/js/user.js" />
 <!-- //cuser_center -->
 <div class="cuser_center clearfix o-main" id="cuser_center">
 <!-- //cuser_z -->

@@ -3,6 +3,9 @@
 * date: 2015.07.06
 *
 */
+body {
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
 .o-input {
     display: inline-block;
     width: 100%;
@@ -20,10 +23,17 @@
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 .o-input:focus {
-    border-color: #ff1500;
+    /*border-color: #ff1500;*/
+    /*outline: 0;*/
+    /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(248, 0, 0, 0.77);*/
+    /*box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(248, 0, 0, 0.77);*/
+    border-color: #66afe9;
     outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(248, 0, 0, 0.77);
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(248, 0, 0, 0.77);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.o-input:disabled {
+    background: #E4E4E4;
 }
 .o-button {
     display: inline-block;
@@ -146,7 +156,7 @@ fieldset[disabled] .o-button-red.active {
     margin-right: 6px;
 }
 .o-nav {
-    background-color: #f8f8f8;
+    background-color: #00C0FF;
     border-bottom: 1px solid #e7e7e7;
     width: 100%;
     height: 45px;
@@ -157,7 +167,7 @@ fieldset[disabled] .o-button-red.active {
     font-size: 16px;
     float: right;
     margin: 0 5px;
-    background-color: #f8f8f8;
+    background-color: #00c0ff;
 }
 .o-nav .com-header .hd1.o-logo {
     width: auto;
@@ -166,7 +176,8 @@ fieldset[disabled] .o-button-red.active {
     height: 45px;
 }
 .o-menu-a {
-    padding: 12px 10px;
+    color: #fff;
+    padding: 13px 10px;
     top: 10px;
     position: relative;
 }
@@ -174,7 +185,7 @@ fieldset[disabled] .o-button-red.active {
     background-color: #e7e7e7;
 }
 .hd3.o-menu .y.uinfo_101 {
-    background-color: #f8f8f8;
+    background-color: #00c0ff;
     line-height: 45px;
 }
 .hd3.o-menu .uinfo_101 .ui_box {
@@ -183,6 +194,9 @@ fieldset[disabled] .o-button-red.active {
 .hd3.o-menu .uinfo_101 .ui_box a {
     text-align: left;
     padding: 5px 15px;
+}
+.hd3.o-menu .y.uinfo_101.on {
+    color: #000;
 }
 .hd3.o-menu .y.uinfo_101:hover {
     background-color: #e7e7e7;
@@ -221,6 +235,12 @@ fieldset[disabled] .o-button-red.active {
 }
 .cuser_z.clearfix.o-left .ul-item ul li a:hover {
     background-color: #e7e7e7;
+}
+.com-header .hd3.o-menu .uinfo_101 a.un {
+    color: #fff;
+}
+.com-header .hd3.o-menu .uinfo_101 a.un:hover{
+    color: #000;
 }
 
 .o-title {
@@ -322,6 +342,7 @@ fieldset[disabled] .o-button-red.active {
 
 .cuser_center .cuser_y .company-tab-bd .bd-box ul li .ii .sel.o-fix-select {
     height: auto;
+    width: 120px;
 }
 .cuser_center .cuser_y .company-tab-avatar.o-avatar {
     border: none;

@@ -5,13 +5,17 @@ body {
 /*
 * the conmon css to cover bootstrap css
 */
+.dropdown:hover ul, .dropdown:active ul, .dropdown:focus ul {
+    display: block;
+    margin-right: 10px;
+}
 .zh-noradius {
 	border-radius: 0;
 }
 .navbar-zh {
-	min-height: 60px;
-	padding: 5px;
-} 
+	min-height: 50px;
+	padding: 0;
+}
 .navbar-zh .navbar-toggle {
 	border: 1px solid #fff;
 }
@@ -53,7 +57,8 @@ body {
 	color: #fff;
 }
 .nav.nav-zh > li > a:focus, .nav.nav-zh > li > a:hover {
-	background-color: #71B9D1;
+	background-color: #e7e7e7;
+    color: #000;
 }
 .zh-well-white {
 	background-color: #fff;
@@ -125,7 +130,7 @@ body {
 }
 
 .zh-learn-div {
-	height: 290px;
+	height: 250px;
 	background-color: #fff;
 	border-radius: 4px;
 	margin-bottom: 20px;
@@ -133,11 +138,11 @@ body {
 	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
 }
 .zh-learn-div .media {
-	padding: 15px 10px;
+	padding: 10px 10px;
 }
 .zh-learn-desription {
 	color: #6f6f6f;
-	height: 140px;
+	height: 100px;
 	overflow: hidden;
 	margin: 5px 10px;
 }

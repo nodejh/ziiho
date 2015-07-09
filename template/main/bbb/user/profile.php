@@ -42,11 +42,11 @@
 						</div>
                     </li>
                     
+
                     <li class="bline clearfix">
                         <div class="nn">生日:</div>
                         <div class="ii">
-                            <input type="text" name="birthday" class="o-input" value="<?php prt(date("Y-m-d", my_array_value('birthday',$userData)));?>" readonly="readonly"/>
-<!--                            onclick="WdatePicker({isShowClear:false,readOnly:true,'dateFmt':'yyyy-MM-dd',isShowToday:false,qsEnabled:false,isShowOK:false,minDate:'1960-01-01',maxDate:'--><?php //prt(date("Y-m-d", _g('cfg>time'))); ?><!--'})"-->
+                            <input type="text" name="birthday" class="o-input" value="<?php prt(date("Y-m-d", my_array_value('birthday',$userData)));?>" readonly="readonly" onclick="WdatePicker({isShowClear:false,readOnly:true,'dateFmt':'yyyy-MM-dd',isShowToday:false,qsEnabled:false,isShowOK:false,minDate:'1960-01-01',maxDate:'<?php prt(date("Y-m-d", _g('cfg>time'))); ?>'})"/>
                         </div>
                     </li>
                     

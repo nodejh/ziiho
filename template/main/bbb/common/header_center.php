@@ -15,6 +15,8 @@
         <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/geshai.common.min.js"></script>
         <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.cjslip-v1.0.3.min.js"></script>
 
+        <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.cjslip-v1.0.3.min.js"></script>
+
         <script type="text/javascript">
             _GESHAI.setting("path", "<?php prt(sdir()); ?>");
             _GESHAI.setting("fsubmitKey_get", "<?php prt(_g('cfg>fmkey>get')); ?>");
@@ -37,9 +39,9 @@
             <div class="hd3 clearfix o-menu">
                 <?php $UM = _g('module')->trigger('user', 'model');?>
                 <?php if(my_is_array($UM->suser())){ ?>
-                    <div class="y uinfo_101">
-                        <a href="<?php prt(_g('uri')->su('user')); ?>" class="un"><?php prt(substr($UM->suser('username'), 0, 12)); ?> <i class="fa fa-sort-desc"></i></a>
-                        <div class="ui_box">
+                    <div class="y uinfo_101" id="dropdown">
+                        <a href="<?php prt(_g('uri')->su('user')); ?>" id="dropdown-title" class="un"><?php prt(substr($UM->suser('username'), 0, 12)); ?> <i class="fa fa-sort-desc"></i></a>
+                        <div class="ui_box" id="dropdow-menu">
                             <a href="<?php prt(_g('uri')->su('user')); ?>"><i class="fa fa-user fa-fw"></i> 个人中心</a>
                             <a href="<?php prt(_g('uri')->su('user/ac/logout')); ?>"><i class="fa fa-sign-out  fa-fw"></i> 退出</a>
                         </div>
@@ -65,6 +67,28 @@
             defaultShow: false,
             mainState: ".uinfo_101",
             mainEl: ".ui_box"
-        })
+        });
+
+        $('#dropdown-title').mouseover(function() {
+            $('#dropdown-title').css('color', '#000');
+        });
+
+        $('#dropdown-title').mouseout(function() {
+            $('#dropdown-title').css('color', '#fff');
+        });
+
+        $('#dropdow-title').blur(function() {
+            $('#dropdown-title').css('color', '#fff');
+        });
+
+        $('#dropdow-menu a').hover(function() {
+            $('#dropdown-title').css('color', '#000');
+        });
+
+        $('#dropdow-menu a').mouseout(function() {
+            $('#dropdown-title').css('color', '#fff');
+        });
+
+
     </script>
 <?php } ?>

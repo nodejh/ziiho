@@ -24,7 +24,7 @@ a { -webkit-transition:all 0.4s ease; transition:all 0.4s ease; text-decoration:
 .icon-14 { padding-left:18px; background:url(../image/14.png) no-repeat left center; }
 
 .color100 { color:#390; }
-.color101 { color:#F00; }
+.color101 { color:#3385ff; }
 .color102 { color:#939393; }
 .color103 { color:#090; }
 
@@ -43,7 +43,7 @@ a { -webkit-transition:all 0.4s ease; transition:all 0.4s ease; text-decoration:
 				.com-header .hd3 .uinfo_101.on a.un em { background:url(../image/18.png) no-repeat right center; }
 			.com-header .hd3 .uinfo_101 .ui_box { position:absolute; z-index:2; right:0px; top:62px; width:160px; background:#fff; border:1px solid #eee; border-top:none; display:none; }
 				.com-header .hd3 .uinfo_101 .ui_box a { display:block; outline:none; height:26px; line-height:26px; padding:5px; text-align:center; }
-				.com-header .hd3 .uinfo_101 .ui_box a:hover { text-decoration:underline; color:#F00; background:#CCC; }
+				.com-header .hd3 .uinfo_101 .ui_box a:hover { text-decoration:underline; color:#3385ff; background:#CCC; }
 		.com-header .hd3 a.co { display:block; line-height:62px; font-family: "arial","SimSun"; font-size:20px; }
 		.com-header .hd3 a.dl { float:left; padding-left:32px; background:url(../image/com-header-dl.png) no-repeat left 12px; }
 		.com-header .hd3 a.zc { float:left; margin-left:20px; padding-left:32px; background:url(../image/com-header-zc.png) no-repeat left 12px; }
@@ -66,12 +66,12 @@ a { -webkit-transition:all 0.4s ease; transition:all 0.4s ease; text-decoration:
 /* page-bar */
 .page-bar { width:100%; line-height:26px; padding:20px 0px; text-align:center; font-family: "SimSun"; }
 	.page-bar .pn-t { margin-right:5px; color:#999; }
-		.page-bar .pn-t .light { color:#F00; padding:0px 2px; }
+		.page-bar .pn-t .light { color:#3385ff; padding:0px 2px; }
 	.page-bar .pn-ns { font-size:20px; }
 	.page-bar .pn-ns a { color:#5f5f5f; margin:0px 2px; padding:0px 5px; border:1px solid #f2f2f2; display:inline-block; }
 	.page-bar .pn-ns a:hover { border:1px solid #f2f2f2; color:#fff; background:#5f5f5f; text-decoration:none; }
 	.page-bar .pn-ns em { margin:0px 2px; padding:0px 5px; display:inline-block; }
-	.page-bar .pn-ns em.on { color:#F00; font-weight:bold; }
+	.page-bar .pn-ns em.on { color:#3385ff; font-weight:bold; }
 	.page-bar .pn-ns em.dis { color:#999; }
 
 		

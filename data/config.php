@@ -19,7 +19,7 @@ $_G ['dns'] ['user'] = 'root';
 /* 密码 */
 $_G ['dns'] ['password'] = 'root';
 /* 数据库名 */
-$_G ['dns'] ['database'] = 'zh';
+$_G ['dns'] ['database'] = 'ziiho';
 /* 0=及时链接,1=持久链接 */
 $_G ['dns'] ['conn'] = '0';
 /* 表前缀 */
@@ -38,7 +38,7 @@ $_G ['dns'] ['error'] = 'error';
 /* --------------------------------------------------------------- */
 
 /* root */
-$_G ['dir'] ['root'] = '';
+$_G ['dir'] ['root'] = 'http://localhost/ziiho';
 
 /* --------------------------------------------------------------- */
 /* 系统设置 */
@@ -67,7 +67,7 @@ $_G ['cfg'] ['lang'] = 'ch';
 /* domain */
 $_G ['cfg'] ['domain'] = 'localhost';
 /* url */
-$_G ['cfg'] ['url'] = 'http://lziiho.com';
+$_G ['cfg'] ['url'] = 'http://localhost/ziiho';
 /* form method key */
 $_G ['cfg'] ['fmkey'] = array (
 		'post' => '1e1a92b494c18a9955e591a2902dcd02',
