@@ -355,3 +355,14 @@ fieldset[disabled] .o-button-red.active {
     width: 120px;
 }
 
+
+
+.o-cuser-infotitle {
+    padding-top: 30px;
+}
+.o-cuser-infologo {
+    width: 300px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    margin:20px 20px 20px 0;
+}

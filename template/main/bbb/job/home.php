@@ -1,8 +1,5 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
-<?php include _g('template')->name('@', 'header', true); ?>
-<link rel="stylesheet" type="text/css"
-	href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
-<?php include _g('template')->name('job', 'nav', true); ?>
+<?php include _g('template')->name('@', 'home_nav', true); ?>
 
 <!-- //banner -->
 <div class="banner clearfix" id="banner">
@@ -11,9 +8,9 @@
 		<div class="shadow clearfix"></div>
 		<ul class="box clearfix">
 			<li class="clearfix"><img
-				src="<?php prt(_g('template')->dir('job')); ?>/image/f/index-header-bg2.jpg" /></li>
+				src="<?php prt(_g('template')->dir('job')); ?>/image/f/index-header-bg2.jpg" height="400"/></li>
 			<li class="clearfix"><img
-				src="<?php prt(_g('template')->dir('job')); ?>/image/f/index-header-bg3.jpg" /></li>
+				src="<?php prt(_g('template')->dir('job')); ?>/image/f/index-header-bg3.jpg" height="400"/></li>
 		</ul>
 	</div>
 

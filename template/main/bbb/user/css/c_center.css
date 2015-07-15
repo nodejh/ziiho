@@ -106,8 +106,8 @@
 						.cuser_center .cuser_y .company-tab-bd .bd-box ul li .ii .sel { height:24px; line-height:24px; }
 						.cuser_center .cuser_y .company-tab-bd .bd-box ul li .ii .ii-calendar { width:240px; height:24px; line-height:24px; text-indent:18px; outline:none; border:1px solid #ccc; background:url(../../common/image/calendar.png) no-repeat 2px center; }
 						.cuser_center .cuser_y .company-tab-bd .bd-box ul li .ii .ii-inp { width:240px; height:24px; line-height:24px; text-indent:3px; outline:none; border:1px solid #ccc; }
-						.cuser_center .cuser_y .company-tab-bd .bd-box ul li .ii .ii-inp2 { width:80px; height:24px; line-height:24px; text-indent:3px; outline:none; }
-						.cuser_center .cuser_y .company-tab-bd .bd-box ul li .ii .ii-inp3 { width:160px; height:24px; line-height:24px; text-indent:3px; outline:none; }
+						.cuser_center .cuser_y .company-tab-bd .bd-box ul li .ii .ii-inp2 { width:80px; line-height:24px; text-indent:3px; outline:none; }
+						.cuser_center .cuser_y .company-tab-bd .bd-box ul li .ii .ii-inp3 { width:160px;line-height:24px; text-indent:3px; outline:none; }
 				
 					.cuser_center .cuser_y .company-tab-bd .bd-box ul li .file-area { float:left; width:280px; line-height:26px; position:relative; }
 						.cuser_center .cuser_y .company-tab-bd .bd-box ul li .file-area .f-file { position:absolute; top:0px; left:0px; width:280px; height:26px; outline:none; cursor:pointer; display:block; background:#fff; filter: alpha(opacity = 0.00001); -moz-opacity: 0.00001; -khtml-opacity: 0.00001; opacity: 0.00001; }
@@ -115,7 +115,7 @@
 						.cuser_center .cuser_y .company-tab-bd .bd-box ul li .file-area .f-btn { width:60px; height:26px; line-height:26px; margin-left:5px; background:#999; border-radius:3px; border:none; color:#fff; font-size:14px; font-weight:bold; }
 						
 						
-						.cuser_center .cuser_y .company-tab-bd .bd-box ul li .select-c { width:280px; height:220px; line-height:24px; padding:8px; border:1px solid #eee; overflow-x:hidden; overflow-y:auto; }
+						.cuser_center .cuser_y .company-tab-bd .bd-box ul li .select-c { width:280px; height:220px; line-height:24px; padding:8px; border:1px solid #eee; overflow-x:hidden; overflow-y:auto; border-radius:4px;}
 						.cuser_center .cuser_y .company-tab-bd .bd-box ul li .select-sort { float:left; }
 							.cuser_center .cuser_y .company-tab-bd .bd-box ul li .select-sort a {  }
 							.cuser_center .cuser_y .company-tab-bd .bd-box ul li .select-sort a.on { color:#3385ff; }
