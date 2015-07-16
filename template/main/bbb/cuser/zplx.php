@@ -17,7 +17,7 @@
 
         <!-- //cuser_y -->
         <div class="cuser_y clearfix o-right">
-            <h1 class="o-title">招聘联系人</h1>
+            <h1 class="o-title">招聘联系人<a href="javascript:;" onclick="cuserInfo_zplxWrite();" class="o-title-tips"><button class="o-button o-button-info">+新增联系人</button></a></h1>
             <div class="o-content">
                 <!-- //招聘联系人 -->
                 <div class="clearfix bd-box clearfix">
@@ -25,9 +25,9 @@
                         <form method="post" onsubmit="return false;" id="form_zplx">
                             <input type="hidden" name="zplxid" value="" />
                             <table class="tbox">
-                                <tr class="trow-blinetrow-bg" >
-                                    <td width="15%" colspan="5"><a href="javascript:;" onclick="cuserInfo_zplxWrite();">+新增联系人</a></td>
-                                </tr>
+<!--                                <tr class="trow-blinetrow-bg" >-->
+<!--                                    <td width="15%" colspan="5"><a href="javascript:;" onclick="cuserInfo_zplxWrite();">+新增联系人</a></td>-->
+<!--                                </tr>-->
                                 <tr class="trow-fw trow-bg" >
                                     <td width="15%">联系人</td>
                                     <td width="20%">区号/座机/转机</td>
