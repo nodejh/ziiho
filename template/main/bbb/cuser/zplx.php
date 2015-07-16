@@ -25,9 +25,6 @@
                         <form method="post" onsubmit="return false;" id="form_zplx">
                             <input type="hidden" name="zplxid" value="" />
                             <table class="tbox">
-<!--                                <tr class="trow-blinetrow-bg" >-->
-<!--                                    <td width="15%" colspan="5"><a href="javascript:;" onclick="cuserInfo_zplxWrite();">+新增联系人</a></td>-->
-<!--                                </tr>-->
                                 <tr class="trow-fw trow-bg" >
                                     <td width="15%">联系人</td>
                                     <td width="20%">区号/座机/转机</td>
