@@ -1,22 +1,26 @@
-<?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
-<?php include _g('template')->name('@', 'header', true); ?>
-<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
-<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
+<?php if (!defined('IN_GESHAI')) {
+    exit('no direct access allowed');
+} ?>
+<?php include _g('template')->name('@', 'header_center', true); ?>
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/js/cuser.js"/>
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/js/user.js"/>
 
-<!-- //cuser_center -->
-<div class="cuser_center clearfix" id="cuser_center">
-<!-- //cuser_z -->
-<div class="cuser_z clearfix">
-	<?php include _g('template')->name('cuser', 'center_nav', true); ?>
-</div>
-<!-- cuser_z// -->
+
+    <!-- //cuser_center -->
+    <div class="cuser_center clearfix o-main" id="cuser_center">
+        <!-- //cuser_z -->
+        <div class="cuser_z clearfix o-left">
+            <?php include _g('template')->name('cuser', 'center_nav', true); ?>
+        </div>
+        <!-- cuser_z// -->
 
 <!-- //cuser_y -->
-<div class="cuser_y clearfix">
-	<div class="label clearfix">
-    	<span class="tit">[<?php prt($JModel->sortValue($jobData['sortid'], 'sname')); ?>]&nbsp;<?php prt($jobData['jname']); ?></span>
-    	<a class="add" href="<?php prt(_g('uri')->su('user/ac/job/op/jexams_write/jobid/' . $jobid)); ?>">+添加测试题目</a>
-    </div>
+<div class="cuser_y clearfix o-right">
+    <h2 class="o-title-small">[<?php prt($JModel->sortValue($jobData['sortid'], 'sname')); ?>]&nbsp;<?php prt($jobData['jname']); ?><a href="<?php prt(_g('uri')->su('user/ac/job/op/jexams_write/jobid/' . $jobid)); ?>">
+            <button class="o-button o-button-info o-title-tips">+添加测试题目</button>
+        </a></h2>
     
     <div class="light">
     	<p class="t1">提示：</p>
@@ -26,7 +30,8 @@
     </div>
     
     <div class="tttc">共有<em><?php prt($pageData['total']); ?></em>题目</div>
-    
+
+    <?php if($pageData['total'] >= 1) { ?>
     <div class="datas">
     	<form method="post" onsubmit="return false;" id="form-jexams-post">
         <input type="hidden" name="esid" value="" />
@@ -37,8 +42,6 @@
                 <td width="20%">题型</td>
                 <td width="30%">操作</td>
             </tr>
-            
-            <?php if($pageData['total'] >= 1) { ?>
             <?php while($esRs = _g('db')->result($examsubjectResult)): ?>
             <tr class="trow-bline trow-hover" >
                 <td width="50%"><?php prt($esRs['estitle']); ?></td>
@@ -46,13 +49,12 @@
                 <td width="30%" class="ops"><a href="<?php prt(_g('uri')->su('user/ac/job/op/jexams_write/jobid/' . $jobid . '/esid/' . $esRs['esid'])); ?>">修改</a><a href="javascript:;" onclick="cUserJexamDelete(this, '<?php prt(_g('uri')->su('user/ac/job/op/jexams_delete')); ?>');" data-id="<?php prt($esRs['esid']); ?>">删除</a></td>
             </tr>
             <?php endwhile; ?>
-            <?php }else{ ?>
-            <tr class="trow-bline trow-hover" >
-            	<td width="100%" colspan="3">暂无内容信息</td>
-            </tr>
-            <?php } ?>
+
         </table>
     </div>
+    <?php }else{ ?>
+        <div class="clearfix yes_empty">暂无内容信息~</div>
+    <?php } ?>
     <div class="page-tab"><?php prt($JModel->page($pageData)); ?></div>
 </div>
 <!-- cuser_y// -->

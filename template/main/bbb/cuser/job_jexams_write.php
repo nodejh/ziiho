@@ -1,9 +1,15 @@
-<?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
-<?php include _g('template')->name('@', 'header', true); ?>
-<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
-<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
+<?php if (!defined('IN_GESHAI')) {
+    exit('no direct access allowed');
+} ?>
+<?php include _g('template')->name('@', 'header_center', true); ?>
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/js/cuser.js"/>
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/js/user.js"/>
 
-<style type="text/css">
+
+
+    <style type="text/css">
 .qs-item { line-height:32px; margin-top:5px; }
 	.qs-item .qs-create { margin:0px 5px; color:#0263ad; }
 	.qs-item .qs-create:hover { text-decoration:underline; color:#F00; }
@@ -14,19 +20,20 @@
 .qs-html { position:absolute; left:0px; top:-100px; width:0px; height:0px; overflow:hidden; }
 </style>
 
-<!-- //cuser_center -->
-<div class="cuser_center clearfix" id="cuser_center">
-<!-- //cuser_z -->
-<div class="cuser_z clearfix">
-	<?php include _g('template')->name('cuser', 'center_nav', true); ?>
-</div>
-<!-- cuser_z// -->
+    <!-- //cuser_center -->
+    <div class="cuser_center clearfix o-main" id="cuser_center">
+        <!-- //cuser_z -->
+        <div class="cuser_z clearfix o-left">
+            <?php include _g('template')->name('cuser', 'center_nav', true); ?>
+        </div>
+        <!-- cuser_z// -->
 
 <!-- //cuser_y -->
-<div class="cuser_y clearfix">
-	<div class="label">
-    	<a href="<?php prt(_g('uri')->referer()); ?>">&laquo;返回</a>
-    </div>
+<div class="cuser_y clearfix o-right">
+    <h1 class="o-title">添加测试题目<a href="<?php prt(_g('uri')->referer()); ?>">
+            <button class="o-button o-button-info o-title-tips">&laquo;返回</button>
+        </a></h1>
+
     <div class="form-item clearfix">
     	<form method="post" onsubmit="return false;">
         <input type="hidden" name="jobid" value="<?php prt($jobid); ?>" />
@@ -34,12 +41,12 @@
     	<ul class="form-box">
         	<li class="clearfix">
             	<div class="lab">职位名称：</div>
-                <div class="inp"><?php prt($jobData['jname']); ?></div>
+                <div class="inp"><input class="o-input" value="<?php prt($jobData['jname']); ?>" disabled="disabled"></div>
             </li>
             
             <li class="clearfix">
             	<div class="lab">题目：</div>
-                <div class="inp"><input type="text" name="estitle" class="it" value="<?php prt(my_array_value('estitle', $examSub)); ?>" /></div>
+                <div class="inp"><input type="text" name="estitle" class="o-input" value="<?php prt(my_array_value('estitle', $examSub)); ?>" /></div>
             </li>
             
             <li class="clearfix">
@@ -56,7 +63,7 @@
             	<div class="lab">题目选项：</div>
                 <div class="clearfix inp" flag="qsbox">
                 	<div class="clearfix qs-item">
-                		<span class="icc icc-icon" title="勾选此项，将作为题目的正确答案。"><input type="checkbox" name="_answer_flag_a" value="checked='checked'" /></span><input type="text" class="it" data="value" /><a href="javascript:;" class="qs-create" boxid="100">创建</a>
+                		<span class="icc icc-icon" title="勾选此项，将作为题目的正确答案。"><input type="checkbox" name="_answer_flag_a" value="checked='checked'" /></span><input type="text" class="o-input o-exams-input" data="value" /><a href="javascript:;" class="qs-create" boxid="100">创建</a>
                 	</div>
                 </div>
             </li>
@@ -78,7 +85,7 @@
 
 <!--//qs-100-->
 <textarea class="qs-html" id="i-qs-100">
-	<div class="clearfix qs-item"><span class="icc"><input type="{type}" name="answer_flag[]" value="{id}" {ck} /></span><input type="text" name="esoption[{id}]" class="it" value="{value}" /><a href="javascript:;" class="qs-remove" onclick="_qs_remove(this);">移除</a></div>
+	<div class="clearfix qs-item"><span class="icc"><input type="{type}" name="answer_flag[]" value="{id}" {ck} /></span><input type="text" name="esoption[{id}]" class="o-input o-exams-input" value="{value}" /><a href="javascript:;" class="qs-remove" onclick="_qs_remove(this);">移除</a></div>
 </textarea>
 <!--qs-100//-->
 

@@ -67,6 +67,22 @@
 		</div>
 		<div class="clear"></div>
 
+        <div class="i-box i-box-bline clearfix">
+            <div class="z i-box-hd clearfix">
+                <div class="icons icon-rz clearfix"></div>
+            </div>
+
+            <div class="z i-box-bd clearfix">
+                <div class="i-box-bd-a clearfix">认证中心</div>
+                <div class="i-box-bd-b clearfix">(CERTIFICATION CENTER)</div>
+                <div class="i-box-bd-c clearfix">
+                    <p>专业的职业能力认证，科获得证书。</p>
+                    <p>严格按照企业的职位要求制定的学习方案，通过品台的测试可以获得认证。</p>
+                </div>
+                <div class="i-box-bd-d clearfix"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
 
 		<div class="i-box i-box-bline clearfix">
 			<div class="z i-box-hd clearfix">
@@ -80,24 +96,6 @@
 					<p>精选疙瘩职业的职位信息与实习信息。</p>
 					<p>严格按照企业的职位要求制定的学习方案，通过品台的测试可以获得认证。严格按照企业的职位要求制定的学习方案，通过品台的测试</p>
 					<p>通过品台的测试可以获得认证。</p>
-				</div>
-				<div class="i-box-bd-d clearfix"></div>
-			</div>
-		</div>
-		<div class="clear"></div>
-
-
-		<div class="i-box i-box-bline clearfix">
-			<div class="z i-box-hd clearfix">
-				<div class="icons icon-rz clearfix"></div>
-			</div>
-
-			<div class="z i-box-bd clearfix">
-				<div class="i-box-bd-a clearfix">认证中心</div>
-				<div class="i-box-bd-b clearfix">(CERTIFICATION CENTER)</div>
-				<div class="i-box-bd-c clearfix">
-					<p>专业的职业能力认证，科获得证书。</p>
-					<p>严格按照企业的职位要求制定的学习方案，通过品台的测试可以获得认证。</p>
 				</div>
 				<div class="i-box-bd-d clearfix"></div>
 			</div>

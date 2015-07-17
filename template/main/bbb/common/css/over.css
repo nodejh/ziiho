@@ -342,6 +342,16 @@ fieldset[disabled] .o-button-info.active {
     line-height: 1.1;
     padding-bottom: 9px;
 }
+.o-title-small {
+    font-size: 26px;
+    font-weight: 500;
+    border-bottom: 1px solid #eee;
+    line-height: 1.1;
+    padding-bottom: 9px;
+}
+.o-title-tips {
+    float: right;
+}
 .o-footer {
     margin-top: 20px;
 }
@@ -462,10 +472,6 @@ fieldset[disabled] .o-button-info.active {
     margin:20px 20px 20px 0;
 }
 
-
-.o-title-tips {
-    float: right;
-}
 .cuser_center .cuser_y .form-item ul.form-box li .zplx a.o-zplx-a {
     margin-right: 0px;
     padding: 0;
@@ -483,4 +489,7 @@ fieldset[disabled] .o-button-info.active {
 }
 em {
     top: 4px !important;
+}
+.o-exams-input {
+    width: 160px;
 }
