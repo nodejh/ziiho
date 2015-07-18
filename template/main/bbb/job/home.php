@@ -1,5 +1,5 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
-<?php include _g('template')->name('@', 'home_nav', true); ?>
+<?php include _g('template')->name('@', 'home_nav2', true); ?>
 
 <!-- //banner -->
 <div class="banner clearfix" id="banner">

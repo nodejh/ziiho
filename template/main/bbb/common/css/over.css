@@ -493,3 +493,31 @@ em {
 .o-exams-input {
     width: 160px;
 }
+
+
+
+/**
+* home_nav2
+*/
+.o-nav2 {
+    background-color: rgba(0,0,0,0.3);
+    z-index: 999;
+    position: absolute;
+    width: 100%;
+    height: 45px;
+}
+.o-nav2 .o-menu {
+    background-color: rgba(0,0,0,0);
+}
+.o-nav2.com-header-wrap {
+    border-bottom: none;
+}
+.o-nav2 .o-menu-a {
+    color: #fff;
+}
+.o-nav2 .o-menu-a:hover {
+    color: #000;
+}
+.o-nav2 .hd3.o-menu .y.uinfo_101 {
+    background-color: rgba(0,0,0,0);
+}
