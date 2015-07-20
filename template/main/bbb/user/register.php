@@ -1,8 +1,7 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
-<?php include _g('template')->name('@', 'header', true); ?>
+<?php include _g('template')->name('@', 'home_nav2_login', true); ?>
     <link rel="stylesheet" type="text/css"
           href="<?php prt(_g('template')->dir('job')); ?>/css/login_register.css" />
-<?php include _g('template')->name('job', 'nav', true); ?>
 
     <!-- //wrap-bg -->
     <div class="wrap-bg clearfix">

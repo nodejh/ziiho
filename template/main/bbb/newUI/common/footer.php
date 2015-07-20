@@ -27,3 +27,17 @@
 <script src="<?php  prt(_g('template')->dir('newUI')); ?>/utils/bootstrap-3.3.4/js/bootstrap.min.js"></script>
 
 <script src="<?php  prt(_g('template')->dir('newUI')); ?>/assets/js/common.js"></script>
+
+
+<!--the js for navbar-->
+<script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/geshai.common.min.js"></script>
+<script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.cjslip-v1.0.3.min.js"></script>
+<script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.cjslip-v1.0.3.min.js"></script>
+<script type="text/javascript">
+    _GESHAI.setting("path", "<?php prt(sdir()); ?>");
+    _GESHAI.setting("fsubmitKey_get", "<?php prt(_g('cfg>fmkey>get')); ?>");
+    _GESHAI.setting("fsubmitKey_post", "<?php prt(_g('cfg>fmkey>post')); ?>");
+    _GESHAI.setting("fsubmitKey_ajax", "<?php prt(_g('cfg>fmkey>ajax')); ?>");
+    _GESHAI.setting("fsubmitKey_onlybody", "<?php prt(_g('cfg>fmkey>onlybody')); ?>");
+
+</script>

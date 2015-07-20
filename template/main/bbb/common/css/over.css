@@ -258,7 +258,7 @@ fieldset[disabled] .o-button-info.active {
 .o-menu {
     font-size: 16px;
     float: right;
-    margin: 0 5px;
+    margin: 0 5px 0 0;
     background-color: #00c0ff;
 }
 .o-nav .com-header .hd1.o-logo {
@@ -270,6 +270,7 @@ fieldset[disabled] .o-button-info.active {
 .o-menu-a {
     color: #fff;
     padding: 13px 10px;
+    margin-right: -5px;
     top: 10px;
     position: relative;
 }
@@ -500,7 +501,7 @@ em {
 * home_nav2
 */
 .o-nav2 {
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0);
     z-index: 999;
     position: absolute;
     width: 100%;
@@ -520,4 +521,17 @@ em {
 }
 .o-nav2 .hd3.o-menu .y.uinfo_101 {
     background-color: rgba(0,0,0,0);
+}
+
+/**
+* home_nav2_login
+*/
+.o-nav2-login {
+    top:0;
+    position:absolute;
+}
+.o-nav2-center {
+    top:0;
+    position:fixed;
+    border-bottom: 1px solid #00c0ff;
 }

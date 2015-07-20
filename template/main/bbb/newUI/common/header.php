@@ -20,3 +20,10 @@
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+<!---->
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('@')); ?>/css/style.css" />
+<!--    <link rel="stylesheet" type="text/css" href="--><?php //prt(_g('template')->dir('@')); ?><!--/css/ooo.css" />-->
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('@')); ?>/css/over.css" />
+<!--    <link rel="stylesheet" type="text/css" href="--><?php //prt(sdir('static')); ?><!--/dialog/default/default.css" />-->
+<!--    <link rel="stylesheet" type="text/css" href="--><?php //prt(_g('template')->dir('job')); ?><!--/css/home.css" />-->

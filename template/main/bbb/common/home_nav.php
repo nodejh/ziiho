@@ -35,28 +35,6 @@
             <div class="hd1 clearfix o-logo">
                 <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>"><img src="<?php prt(_g('template')->dir('@')); ?>/image/logo.png" class="o-nav-img" /></a>
             </div>
-<!--            <div class="hd3 clearfix o-menu">-->
-<!--                --><?php //$UM = _g('module')->trigger('user', 'model');?>
-<!--                --><?php //if(my_is_array($UM->suser())){ ?>
-<!--                    <div class="y uinfo_101" id="dropdown">-->
-<!--                        <a href="--><?php //prt(_g('uri')->su('user')); ?><!--" id="dropdown-title" class="un">--><?php //prt(substr($UM->suser('username'), 0, 12)); ?><!-- <i class="fa fa-sort-desc"></i></a>-->
-<!--                        <div class="ui_box" id="dropdow-menu">-->
-<!--                            <a href="--><?php //prt(_g('uri')->su('user')); ?><!--"><i class="fa fa-user fa-fw"></i> 个人中心</a>-->
-<!--                            <a href="--><?php //prt(_g('uri')->su('user/ac/logout')); ?><!--"><i class="fa fa-sign-out  fa-fw"></i> 退出</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                --><?php //}else{ ?>
-<!--                    <a href="--><?php //prt(_g('uri')->su('user/ac/login')); ?><!--" class="co dl">登陆</a>-->
-<!--                    <a href="--><?php //prt(_g('uri')->su('user/ac/register')); ?><!--" class="co zc">注册</a>-->
-<!--                --><?php //} ?>
-<!--            </div>-->
-<!--            <div class="clearfix o-menu">-->
-<!--                <a href="--><?php //prt(_g('uri')->su('job/ac/home')); ?><!--" class="ml o-menu-a">首页</a>-->
-<!--                <a href="--><?php //prt(_g('uri')->su('job/ac/learn')); ?><!--" class="ml o-menu-a">学习中心</a>-->
-<!--                <a href="--><?php //prt(_g('uri')->su('job/ac/company')); ?><!--" class="mr o-menu-a">求职中心</a>-->
-<!--            </div>-->
-
-
 
             <?php $UM = _g('module')->trigger('user', 'model');?>
             <?php if(my_is_array($UM->suser())){ ?>

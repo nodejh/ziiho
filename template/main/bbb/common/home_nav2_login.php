@@ -30,7 +30,7 @@
 
 <body id="body">
 <!-- //com-header -->
-<div class="clearfix com-header-wrap o-nav2">
+<div class="clearfix com-header-wrap o-nav2 o-nav2-login">
     <div class="clearfix com-w com-header clearfix" id="com-header">
         <div class="hd1 clearfix o-logo">
             <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>"><img src="<?php prt(_g('template')->dir('@')); ?>/image/logo.png" class="o-nav-img" /></a>
