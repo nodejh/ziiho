@@ -56,6 +56,10 @@
         <div class="hd1 clearfix o-logo">
             <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>"><img src="<?php prt(_g('template')->dir('@')); ?>/image/logo.png" class="o-nav-img" /></a>
         </div>
+        <form class="o-form">
+            <input type="text" class="o-form-input o-input" placeholder="请输入搜索内容" />
+            <button class="o-form-button o-button o-button-default"><i class="fa fa-search"></i></button>
+        </form>
         <div class="hd3 clearfix o-menu">
             <?php $UM = _g('module')->trigger('user', 'model');?>
             <?php if(my_is_array($UM->suser())){ ?>
@@ -67,8 +71,8 @@
                     </div>
                 </div>
             <?php }else{ ?>
-                <a href="<?php prt(_g('uri')->su('user/ac/login')); ?>" class="co dl">登陆</a>
-                <a href="<?php prt(_g('uri')->su('user/ac/register')); ?>" class="co zc">注册</a>
+                <a href="<?php prt(_g('uri')->su('user/ac/login')); ?>" class="ml o-menu-a"><i class="fa fa-user fa-fw"></i>登陆</a>
+                <a href="<?php prt(_g('uri')->su('user/ac/register')); ?>" class="ml o-menu-a"><i class="fa fa-user-plus fa-fw"></i>注册</a>
             <?php } ?>
         </div>
         <div class="clearfix o-menu">
@@ -80,7 +84,6 @@
     </div>
 </div>
 <!-- com-header// -->
-
 
 
 

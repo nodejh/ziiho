@@ -7,12 +7,11 @@ if (! defined ( 'IN_GESHAI' )) {
 set_time_limit ( 60 );
 
 ini_set ( 'memory_limit', '265M' );
-
+date_default_timezone_set('PRC');
 define ( 'DS', '/' );
 define ( 'GESHAI_ROOT', str_replace ( '\\', '/', dirname ( dirname ( __FILE__ ) ) ) );
 
 $_G = array ();
-
 
 $_G ['isadmin'] = false;
 

@@ -1,22 +1,26 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
-<?php include _g('template')->name('@', 'header', true); ?>
-<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
-<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
+<?php include _g('template')->name('@', 'header_center', true); ?>
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/js/cuser.js" />
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/js/user.js" />
 
-<!-- //cuser_center -->
-<div class="cuser_center clearfix" id="cuser_center">
-<!-- //cuser_z -->
-<div class="cuser_z clearfix">
-	<?php include _g('template')->name('cuser', 'center_nav', true); ?>
-</div>
-<!-- cuser_z// -->
+
+    <!-- //cuser_center -->
+    <div class="cuser_center clearfix o-main" id="cuser_center">
+        <!-- //cuser_z -->
+        <div class="cuser_z clearfix o-left">
+            <?php include _g('template')->name('cuser', 'center_nav', true); ?>
+        </div>
+        <!-- cuser_z// -->
 
 <!-- //cuser_y -->
-<div class="cuser_y clearfix">
-	<div class="label clearfix">
-    	<span class="tit">[<?php prt($JModel->sortValue($jobData['sortid'], 'sname')); ?>]&nbsp;<?php prt($jobData['jname']); ?></span>
-    	<a class="add" href="<?php prt(_g('uri')->su('user/ac/job/op/skill_write/jobid/' . $jobid)); ?>">+添加学习方案</a>
-    </div>
+<div class="cuser_y clearfix o-right">
+
+    <h1 class="o-title"><?php prt($JModel->sortValue($jobData['sortid'], 'sname')); ?>-<?php prt($jobData['jname']); ?><a href="<?php prt(_g('uri')->su('user/ac/job/op/skill_write/jobid/' . $jobid)); ?>">
+            <button class="o-button o-button-info o-title-tips">+添加学习方案</button>
+        </a></h1>
+
     <div class="datas">
     	<form method="post" onsubmit="return false;" id="form-skill-post">
         <input type="hidden" name="skillid" value="" />

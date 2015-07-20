@@ -35,6 +35,10 @@
         <div class="hd1 clearfix o-logo">
             <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>"><img src="<?php prt(_g('template')->dir('@')); ?>/image/logo.png" class="o-nav-img" /></a>
         </div>
+        <form class="o-form o-form-home">
+            <input type="text" class="o-form-input o-input o-form-input-home" placeholder="请输入搜索内容" />
+            <button class="o-form-button o-button o-button-default o-form-button-home"><i class="fa fa-search"></i></button>
+        </form>
 
         <?php $UM = _g('module')->trigger('user', 'model');?>
         <?php if(my_is_array($UM->suser())){ ?>

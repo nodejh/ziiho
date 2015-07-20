@@ -530,8 +530,44 @@ em {
     top:0;
     position:absolute;
 }
+
+/**
+* home_nav2_center
+*/
 .o-nav2-center {
     top:0;
     position:fixed;
     border-bottom: 1px solid #00c0ff;
+}
+.o-form {
+    width:250px;
+    display:inline-block;
+    float:left;
+    margin:6px;
+}
+.o-form-input {
+    width: 200px;
+    height:auto;
+    border-bottom-right-radius:0;
+    border-top-right-radius:0;
+}
+.o-form-button {
+    border-bottom-left-radius:0;
+    border-top-left-radius:0;
+    margin-left:-5px;
+    vertical-align:baseline;
+}
+.hd1.clearfix.o-logo {
+    width:auto;
+    margin-top:6px;
+}
+.o-form-home {
+    width:270px;
+}
+.o-form-input-home {
+    background:rgba(255,255,255,0.1);
+}
+.o-form-button-home {
+    height:34px;
+    background:rgba(255,255,255,0.5);
 }
