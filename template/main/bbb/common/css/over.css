@@ -270,7 +270,7 @@ fieldset[disabled] .o-button-info.active {
 .o-menu-a {
     color: #fff;
     padding: 13px 10px;
-    margin-right: -5px;
+    /*margin-right: -5px;*/
     top: 10px;
     position: relative;
 }
