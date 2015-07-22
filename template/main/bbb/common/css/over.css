@@ -283,6 +283,7 @@ fieldset[disabled] .o-button-info.active {
 }
 .hd3.o-menu .uinfo_101 .ui_box {
     top: 45px;
+    /*height: 64px;*/
 }
 .hd3.o-menu .uinfo_101 .ui_box a {
     text-align: left;
@@ -318,6 +319,7 @@ fieldset[disabled] .o-button-info.active {
 .cuser_y.o-right {
     padding-top: 30px;
     left: 10px;
+    min-height: 400px;
     position: relative;
 }
 .cuser_z.clearfix.o-left .ul-item ul {
@@ -325,6 +327,8 @@ fieldset[disabled] .o-button-info.active {
 }
 .cuser_z.clearfix.o-left .ul-item ul li a {
     border-bottom: 1px solid #e7e7e7;
+    border-top:1px solid #e7e7e7;
+    margin-top: -1px;
 }
 .cuser_z.clearfix.o-left .ul-item ul li a:hover {
     background-color: #e7e7e7;
@@ -337,7 +341,7 @@ fieldset[disabled] .o-button-info.active {
 }
 
 .o-title {
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 500;
     border-bottom: 1px solid #eee;
     line-height: 1.1;
@@ -462,10 +466,6 @@ fieldset[disabled] .o-button-info.active {
 }
 
 
-
-.o-cuser-infotitle {
-    padding-top: 30px;
-}
 .o-cuser-infologo {
     width: 300px;
     border: 1px solid #eee;
@@ -570,4 +570,16 @@ em {
 .o-form-button-home {
     height:34px;
     background:rgba(255,255,255,0.5);
+}
+
+
+/**
+* company center
+*/
+.o-company-list {
+    margin-left: 40px;
+    border-left: 1px solid #e7e7e7;
+}
+.o-company-file-fxied {
+    width: 360px !important;
 }

@@ -32,7 +32,7 @@
                                         <div class="di">
                                             <p class="tt zh-company-element-center zh-company-vertical">
                                                 <a href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $rs['cuid'])); ?>" class="zh-font-white zh-company-imgfont">
-                                                    <img class="s-logo" src="<?php prt($CUSER->logo($rs['logo'])); ?>" width="40" height="40" />
+                                                    <img class="s-logo" src="<?php prt($CUSER->logo($rs['logo'])); ?>" width="20" height="20" />
                                                     <p class="zh-company-element-center zh-hover-white"><?php prt($rs['cname']); ?>
                                                     </p>
                                                 </a>
@@ -48,7 +48,7 @@
             </div>
 
 
-      
+
         </div>
     </div>
 </div>

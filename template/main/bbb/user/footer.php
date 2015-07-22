@@ -73,3 +73,5 @@
         }
     });
 </script>
+
+<script src="<?php  prt(_g('template')->dir('newUI')); ?>/assets/js/common.js"></script>

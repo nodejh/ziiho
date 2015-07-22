@@ -14,13 +14,8 @@
         <!-- cuser_z// -->
 
         <!-- //cuser_y -->
-        <div class="cuser_y clearfix">
-            <div class="company-tab-hd clearfix o-cuser-infotitle">
-                <a href="javascript:;">基本信息</a>
-                <a href="javascript:;">公司简介</a>
-                <a href="javascript:;">公司logo</a>
-                <a href="javascript:;">营业执照</a>
-            </div>
+        <div class="cuser_y clearfix o-right">
+            <h1 id="company-center-title" class="o-title">基本信息</h1>
 
             <div class="company-tab-bd clearfix">
                 <!-- //基本信息 -->
@@ -117,10 +112,10 @@
                                 </li>
                             <?php }else{ ?>
                                 <li class="bline clearfix">
-                                    <div class="file-area clearfix">
+                                    <div class="file-area clearfix o-company-file-fxied">
                                         <span flag="file"><input type="file" class="z f-file" name="ufile" onchange="cuserInfo_logo(this);" /></span>
-                                        <input type="text" name="fname" class="z f-txt" />
-                                        <button type="button" class="o-button o-button-default">上传</button>
+                                        <input type="text" name="fname" class="z f-txt o-input" />
+                                        <button type="button" class="o-button o-button-blue">上传</button>
                                     </div>
                                 </li>
                             <?php } ?>
@@ -137,9 +132,9 @@
                         <ul>
                             <li class="bline clearfix"><strong>认证状态：</strong>
                                 <?php if(_g('validate')->v2eq(my_array_value('authlicence', $cUserData), 1)){ ?>
-                                    <span class="icon-14 color103">已认证</span>
+                                    <span class="icon-14 color103"><i class="fa fa-check"></i> 已认证</span>
                                 <?php }else{ ?>
-                                    <span class="icon-13 color101">未认证</span>
+                                    <span class="icon-13 color101"><i class="fa fa-times"></i> 未认证</span>
                                 <?php } ?>
                             </li>
 
@@ -151,10 +146,10 @@
                                 </li>
                             <?php }else{ ?>
                                 <li class="bline clearfix">
-                                    <div class="file-area clearfix">
+                                    <div class="file-area clearfix o-company-file-fxied">
                                         <span flag="file"><input type="file" class="z f-file" name="ufile" onchange="cuserInfo_licence(this);" /></span>
-                                        <input type="text" name="fname" class="z f-txt" />
-                                        <button type="button" class="z f-btn">上传</button>
+                                        <input type="text" name="fname" class="z f-txt o-input" />
+                                        <button type="button" class="o-button o-button-blue">上传</button>
                                     </div>
                                 </li>
                             <?php } ?>
@@ -252,6 +247,7 @@
         for(var i = 0; i < _placeholderData.length; i++){
             _GESHAI.placeholder({name: "input[" + _placeholderData[i].n + "]", text: _placeholderData[i].t});
         }
+
 
     </script>
 

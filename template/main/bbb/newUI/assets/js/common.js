@@ -72,4 +72,38 @@ $(document).ready(function() {
             }
         );
     });
+
+
+    function getUrlVars() {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+    function getUrlVar(name) {
+        return getUrlVars()[name];
+    }
+
+
+    $('#company-list').hide();
+    var urlVar = getUrlVar('ac');
+    if(urlVar == 'company') {
+        $('#company-list').show(300);
+    }
+    $('#company-url-'+urlVar).css('background-color', '#e7e7e7');
+    $('.company-tab-hd.clearfix.o-cuser-infotitle li a').each(function() {
+        $(this).click(function() {
+           console.log($(this).text());
+            var title = $(this).text();
+            $('#company-center-title').text(title);
+        });
+    });
+
+
+
 });
