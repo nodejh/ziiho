@@ -55,7 +55,7 @@
                     <?php while($rs = _g('db')->result($compayResult)){ ?>
                         <tr>
                             <td>
-                                <a href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $rs['cuid'])); ?>" target="_blank"><?php prt($rs['cname']); ?></a>
+                                <a href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $rs['cuid'])); ?>"  class="zh-work-a" target="_blank"><?php prt($rs['cname']); ?></a>
                             </td>
                             <td>
                                 <?php prt(my_substr($rs['cdescription'], 0, 40)); ?>...

@@ -50,7 +50,7 @@
 <!-- cuser_center// -->
 
 
-<?php include _g('template')->name('job', 'footer', true); ?>
+<?php include _g('template')->name('user', 'footer', true); ?>
 
 
 <script type="text/javascript" src="<?php prt(_g('template')->dir('job')); ?>/js/job_job.js"></script>

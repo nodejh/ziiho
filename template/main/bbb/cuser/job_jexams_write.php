@@ -63,9 +63,12 @@
             	<div class="lab">题目选项：</div>
                 <div class="clearfix inp" flag="qsbox">
                 	<div class="clearfix qs-item">
-                		<span class="icc icc-icon" title="勾选此项，将作为题目的正确答案。"><input type="checkbox" name="_answer_flag_a" value="checked='checked'" /></span><input type="text" class="o-input o-exams-input" data="value" /><a href="javascript:;" class="qs-create" boxid="100">创建</a>
+                		<input type="text" class="o-input o-exams-input" data="value" />
+                        <span class="icc icc-icon" title="勾选此项，将作为题目的正确答案。"><input type="checkbox" name="_answer_flag_a" value="checked='checked'" /></span>
+                        <a href="javascript:;" class="qs-create" boxid="100">+创建</a>
                 	</div>
                 </div>
+
             </li>
             <!--qs-100//-->
             
@@ -89,7 +92,7 @@
 </textarea>
 <!--qs-100//-->
 
-<?php include _g('template')->name('job', 'footer', true); ?>
+<?php include _g('template')->name('user', 'footer', true); ?>
 
 
 <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/editor/kindeditor.js"></script>

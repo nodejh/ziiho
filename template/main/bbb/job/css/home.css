@@ -207,16 +207,19 @@
 	font-size: 16px;
 }
 
-/*
-* 修改首页一些细节样式
-* Added By JiangHang
-*/
+
 .color-white {
     color:#fff;
 }
-.color-background:hover {
-    animation: 1s rainbow forwards;
+.banner .cbox .bi .aa:hover {
+    color: #fff;
 }
-@keyframes rainbow {
-    100% { background: #fff;}
+.banner .cbox .bi .aa:focus {
+    color: #fff;
 }
+/*.color-background:hover {*/
+    /*animation: 1s rainbow forwards;*/
+/*}*/
+/*@keyframes rainbow {*/
+    /*100% { background: #fff;}*/
+/*}*/

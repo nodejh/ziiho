@@ -75,7 +75,7 @@
 			  					</div>
 							</div>
 							<div class="zh-learn-desription">
-								<?php prt(my_substr(strip_tags($rs['content']), 0, 60)); ?>...
+                                <a href="<?php prt(_g('uri')->su('job/ac/learn/op/view/jobid/' . $rs['jobid'])); ?>" target="_blank" class="zh-learn-view-a"><?php prt(my_substr(strip_tags($rs['content']), 0, 60)); ?>...</a>
 							</div>
 							<a href="<?php prt(_g('uri')->su('job/ac/learn/op/view/jobid/' . $rs['jobid'])); ?>" target="_blank" class="zh-learn-view-a">
 								<div class="zh-learn-view">

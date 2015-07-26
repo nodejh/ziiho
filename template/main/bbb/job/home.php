@@ -24,13 +24,13 @@
 	<div class="cbox clearfix">
 
 		<div class="z bi clearfix">
-			<a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>" class="color-white"><div class="aa clearfix color-background">学习中心</div></a>
+			<a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>" id="home-learn" class="color-white"><div class="aa clearfix">学习中心</div></a>
 			<div class="bb clearfix">LEARNING CENTER</div>
 			<div class="cc clearfix">针对于职位的职业能力训练</div>
 		</div>
 
 		<div class="y bi clearfix">
-            <a href="<?php prt(_g('uri')->su('job/ac/job')); ?>" class="color-white"><div class="aa clearfix color-background">求职中心</div></a>
+            <a href="<?php prt(_g('uri')->su('job/ac/job')); ?>" id="home-job" class="color-white"><div class="aa clearfix">求职中心</div></a>
 			<div class="bb clearfix">JOB CENTER</div>
 			<div class="cc clearfix">针对于职业的职位寻找</div>
 		</div>
@@ -148,7 +148,7 @@ $(document).ready(function(e) {
 	var _ms = {"w": 1920, "h": 900};
 	var _cs = {"w": _GESHAI.clientsize("clientWidth"), "h": _GESHAI.clientsize("clientHeight")};
 	var _ss = {"w": Math.min(_ms.w, _cs.w), "h": Math.min(_ms.h, _cs.h)};
-	
+
 	var _bannero = $("#banner");
 		_bannero.width(_ss.w).height(_ss.h);
 		_bannero.find(".bd .box li img").width(_ss.w).height(_ss.h);
@@ -167,17 +167,18 @@ $("#banner").cjslip({
 	mNext: ".next",
 	mainState: '.hd .box li',
 	startFunc: function(i){
-		
+
 	},
 	completeFunc: function(i, total, page, pageTotal, mainState, pageState, scrollEl, mainEl){
 		_bannerContItem.stop(true, true);
 		_bannerContItem.not(":eq(" + i + ")").hide();
 		_bannerContItem.eq(i).show();
-			
+
 		mainState.not(":eq(" + i + ")").css("opacity", 0.5);
 		mainState.eq(i).css("opacity", "");
 	}
 });
+
 </script>
 
 <?php include _g('template')->name('@', 'footer', true); ?>

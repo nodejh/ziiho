@@ -71,10 +71,10 @@
                     <?php while($rs = _g('db')->result($JJOBResult)){ ?>
                         <tr>
                             <td>
-                                <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $rs['cuid'] . '/jobid/' . $rs['jobid'])); ?>" target="_blank"><?php prt($rs['jname']); ?></a>
+                                <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $rs['cuid'] . '/jobid/' . $rs['jobid'])); ?>" class="zh-work-a" target="_blank"><?php prt($rs['jname']); ?></a>
                             </td>
                             <td>
-                                <a href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $rs['cuid'])); ?>" target="_blank"><?php prt($rs['cname']); ?></a>
+                                <a href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $rs['cuid'])); ?>"  class="zh-work-a" target="_blank"><?php prt($rs['cname']); ?></a>
                             </td>
                             <td>
                                 <?php prt($JMODEL->areaPos($rs['area'], $rs['area_detail'])); ?>

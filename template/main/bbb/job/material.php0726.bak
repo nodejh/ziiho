@@ -33,8 +33,8 @@
                             <!-- <div class="col-xs-2 zh-list-tips-div"> -->
                                 <a <?php prt($spid == $value['sortid'] ? 'class="zh-active zh-list-tips"' : 'class="zh-font-grey zh-list-tips"'); ?> href="<?php prt(_g('uri')->su('job/ac/material/spid/' . $value['sortid'])); ?>"><?php prt($value['sname']); ?></a>
                             <!-- </div> -->
-                            <?php } ?>  
-                        <!-- </div>  -->                    
+                            <?php } ?>
+                        <!-- </div>  -->
                     </div>
                 </div>
                 <hr class="zh-hr" />
@@ -46,7 +46,7 @@
                         <a <?php prt($scid == 'a' ? 'class="zh-active zh-list-tips-right"' : 'class="zh-font-grey zh-list-tips-right"'); ?> href="<?php prt(_g('uri')->su('job/ac/material/spid/' . $spid . '/scid/a')); ?>">全部</a>
                         <?php foreach($childResult as $child){ ?>
                             <a <?php prt($scid == $child['sortid'] ? 'class="class="zh-active zh-list-tips"' : 'class="zh-font-grey zh-list-tips"'); ?> href="<?php prt(_g('uri')->su('job/ac/material/spid/' . $spid . '/scid/' . $child['sortid'])); ?>"><?php prt($child['sname']); ?></a>
-                        <?php } ?>              
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                             <div class="caption zh-caption">
                                 <div class="zh-caption-title">
                                     <h4 class="zh-job-title"><a href="<?php prt(_g('uri')->su('job/ac/material/op/view/id/' . $rs['materialid'])); ?>" role="button"><?php prt($rs['title']); ?></a></h4>
-                                    <h6 class="zh-job-title-tips">作者：<?php prt($rs['author']); ?></h6>
+                                    <h6>作者：<?php prt($rs['author']); ?></h6>
                                 </div>
                                 <div class="zh-job-description"><?php prt(my_substr($rs['description'], 0, 30)); ?>...</div>
                                 <a href="<?php prt(_g('uri')->su('job/ac/material/op/view/id/' . $rs['materialid'])); ?>" target="_blank" class="zh-learn-view-a">
@@ -87,12 +87,12 @@
                 <?php } ?>
 
             </div>
-            
 
 
 
-            
-            
+
+
+
         </div>
     </div>
 </div>

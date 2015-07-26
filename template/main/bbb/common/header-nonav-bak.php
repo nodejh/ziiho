@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('@')); ?>/css/style.css" />
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('@')); ?>/css/ooo.css" />
 <link rel="stylesheet" type="text/css" href="<?php prt(sdir('static')); ?>/dialog/default/default.css" />
-    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('common')); ?>/font-awesome-4.3.0/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('common')); ?>/font-awesome-4.3.0/css/font-awesome.min.css" />
 
 <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/geshai.common.min.js"></script>
