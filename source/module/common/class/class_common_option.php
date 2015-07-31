@@ -100,21 +100,23 @@ class class_common_option extends geshai_model {
 	function cacheWrite(){
 		$data = array();
 		$this->db->from ( $this->t_common_option );
-		$this->db->where ( $k, $v );
+		$this->db->where ();
 		$this->db->select ();
-		if($this->db->is_success()){
-			$result = $this->db->get_list ();
-			$data = array();
-			while ( $rs = $this->db->fetch_array ( $result ) ) {
-				if(v2bool($rs['array'])){
-					$rs['sval'] = str2array( $rs['sval'] );
-					$rs['sval'] = (is_array($rs['sval']) ? $rs['sval'] : array());
-				}
-				$data[$rs['module']][$rs['stype']][$rs['skey']] = $rs ['sval'];
+		if(!$this->db->is_success()){
+			return null;
+		}
+		$result = $this->db->get_list ();
+		$data = array();
+		while ( $rs = $this->db->fetch_array ( $result ) ) {
+			if(v2bool($rs['array'])){
+				$rs['sval'] = str2array( $rs['sval'] );
+				$rs['sval'] = (is_array($rs['sval']) ? $rs['sval'] : array());
 			}
+			$data[$rs['module']][$rs['stype']][$rs['skey']] = $rs ['sval'];
 		}
 		
-		$content .= '<?php if (! defined ( \'IN_GESHAI\' )) { exit ( \'no direct access allowed\' ); } ';
+		$content .= '<?php /* author Jolly, date ' . date('Y-m-d H:i:s', _g('cfg>time')) . ' */ ';
+		$content .= 'if (! defined ( \'IN_GESHAI\' )) { exit ( \'no direct access allowed\' ); }';
 		$content .= 'return ';
 		$content .= array2str($data);
 		$content .= '; ?>';

@@ -76,7 +76,7 @@ if (strlen ( trim ( $redirectUrl ) ) < 1) {
 	$param ['data'] = '';
 	$param ['url'] = $redirectUrl;
 	?>
-	<textarea><?php prt($message);?></textarea>
+	<textarea><?php prt(htmlspecialchars($message));?></textarea>
 
 	<script language="javascript">
 		window.onload = function(){

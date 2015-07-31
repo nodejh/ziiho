@@ -138,8 +138,16 @@ class class_job_model extends geshai_model {
 		}
 	}
 	
+	function qsOptionIdChk($value = null){
+		if(strlen($value) < 15){
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	function qsOptionId($value = null){
-		if(strlen($value) < 19){
+		if (!$this->qsOptionIdChk ( $value )) {
 			return (_g('cfg>time') . _g('value')->randchar(9));
 		}else{
 			return $value;
@@ -150,8 +158,8 @@ class class_job_model extends geshai_model {
 		return _g('value')->ra(str2array($option));
 	}
 	function qsOptionOrder($num){
-		$arr = array( A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z );
-		return my_array_value($num, $arr, $num);
+		$arr = 'A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z';
+		return my_array_value($num, explode(',', $arr), $num);
 	}
 	function qsSAnswer($answer, $option, $isStr = false){
 		$answer = $this->qsOptionDe($answer);
@@ -166,6 +174,10 @@ class class_job_model extends geshai_model {
 			$i++;
 		}
 		return ($isStr != true ? $value : my_join(',', $value));
+	}
+	function Provide2QuestionFrom ($v) {
+		$arr = array( 1 => '自定义' , 2 => '系统' );
+		return my_array_value ( $v, $arr, '未知' );
 	}
 }
 ?>

@@ -39,7 +39,7 @@ switch (_get ( 'f' )) {
 			}
 			$qSubjectRs = $JQS->find ( 'qsid', $qsid );
 			if (! is_array ( $qSubjectRs )) {
-				smsg ( lang ( 'job:400000' ), $gobackUrl );
+				smsg ( lang ( 'job:600003' ), $gobackUrl );
 				return null;
 			}
 			
@@ -56,45 +56,88 @@ switch (_get ( 'f' )) {
 		$title = _post ( 'title' );
 		$stype = _post ( 'stype' );
 		$option = _post ( 'option' );
+		$answer = _post ( 'answer' );
+		$status = _post ( 'status' );
 		
 		$optionData = array();
+		$answerData = array();
 		
 		if (! _g ( 'validate' )->num ( $qsid )) {
 			smsg ( lang ( '200014' ) );
 			return null;
 		}
-		
 		if (strlen ( $title ) < 1) {
 			smsg ( lang ( 'job:600000' ) );
 			return null;
 		}
 		
-		if($JMODEL->qsTypeGroup($stype) == 100){
-			if(!my_is_array($option)){
+		if(my_in_array($stype, array('radio', 'checkbox'))){
+			if(!my_is_array( $option )){
 				smsg ( lang ( 'job:600001' ) );
 				return null;
 			}
+			if (!my_is_array( $answer )) {
+				smsg ( lang ( 'job:600011' ) );
+				return null;
+			}
 			
+			/* option */
+			$optIndex = 0;
 			foreach ($option as $optKey => $optVal){
 				if(strlen($optVal) < 1){
 					$optVal = 'undefined';
 				}
-				$optionData[$JMODEL->qsOptionId($optKey)] = $optVal;
+				/* option id key */
+				$optIdStr = $JMODEL->qsOptionId($optKey);
+				/* answer */
+				if (my_in_array($optKey, $answer)) {
+					my_array_push( $answerData, $optIdStr );
+				}
+				
+				$optionData[$optIdStr] = array(
+						'flag' => $JMODEL->qsOptionOrder ( $optIndex ),
+						'name' => my_stripslashes($optVal)
+					);
+				$optIndex = $optIndex + 1;
 			}
 		}
 		
+		/* set data */
 		$listorder = (_g ( 'validate' )->num ( $listorder ) ? $listorder : 0);
 		$data = array(
 				'listorder'=>$listorder,
 				'title'=>$title,
 				'stype'=>$stype,
 				'option'=>my_addslashes(array2str($optionData)),
+				'answer'=>my_addslashes(array2str($answerData)),
 				'ctime'=>_g('cfg>time'),
+				'status'=>_g('value')->sb($status),
 				'questionid'=>$questionid,
 				'sortid'=>$sortid,
 		);
 		
 		$JQS->writeSave ( $data, $qsid );
+		break;
+	case 'update':
+		if (! _g ( 'validate' )->fm ( true )) {
+			return null;
+		}
+		$_qsid = _post ( 'qsid' );
+		$status = _post ( 'status' );
+		
+		if (! my_is_array( $_qsid )) {
+			smsg ( lang ( '200014' ) );
+			return null;
+		}
+		foreach ($_qsid as $qsid){
+			$data = array ();
+			$data['status'] = _g('value')->sb($status[$qsid]);
+			if(!$JQS->updateValue (array('qsid'=>$qsid), $data )){
+				smsg ( lang ( '200013' ) );
+				return null;
+			}
+		}
+		smsg ( lang ( '100061' ), null, 1 );
 		break;
 	case 'move':
 		if (! _g ( 'validate' )->fm ( true )) {

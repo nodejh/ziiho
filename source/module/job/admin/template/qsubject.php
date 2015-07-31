@@ -5,7 +5,7 @@
     <input type="hidden" name="sortid" value="<?php prt($sortid); ?>" />
     <table class="tbox">
         <tr class="trow-bline">
-        	<td width="100%" colspan="4">
+        	<td width="100%" colspan="5">
             	<a href="<?php prt(_g('cp')->uri($subjectWriteUrl)); ?>" class="fa-cd icon-add">添加</a>
             	<a href="<?php prt(_g('cp')->uri('mod/job/ac/question')); ?>" class="fa-cd icon-page-goback">返回首页</a>
                 <?php prt($pageNow); ?>
@@ -15,7 +15,8 @@
             <td width="4%"><span class="icon-checkbox" checkbox-all="qsid" checkbox-icon="true"><input type="checkbox" class="vis-n" /></span></td>
             <td width="30%">题目</td>
             <td width="16%">题型</td>
-            <td width="50%">操作</td>
+            <td width="6%">启用</td>
+            <td width="44%">操作</td>
         </tr>
         
         <?php if(my_array_value('total', $pageData) >= 1){ ?>
@@ -24,19 +25,21 @@
         	<td width="4%"><span class="icon-checkbox" checkbox-item="qsid" checkbox-icon="true"><input type="checkbox" name="qsid[]" value="<?php prt($rs['qsid']); ?>" class="vis-n" /></span></td>
             <td width="30%"><?php prt($rs['title']); ?></td>
             <td width="16%"><?php prt($JMODEL->qsType($rs['stype'], 'name')); ?></td>
-            <td width="50%"><a href="<?php prt(_g('cp')->uri($subjectWriteUrl . '/qsid/' . $rs['qsid'])); ?>" class="tc-a">编辑</a></td>
+            <td width="6%"><input type="checkbox" name="status[<?php prt($rs['qsid']); ?>]" value="true" <?php if(_g('validate')->sb2eq($rs['status'])){ ?>checked="checked"<?php } ?> /></td>
+            <td width="44%"><a href="<?php prt(_g('cp')->uri($subjectWriteUrl . '/qsid/' . $rs['qsid'])); ?>" class="tc-a">编辑</a></td>
         </tr>
         <?php } ?>
         <?php }else{ ?>
         <tr class="trow-bline bg-hover-a">
-            <td colspan="4" class="tc-b"><?php prt(lang(':100008')); ?></td>
+            <td colspan="5" class="tc-b"><?php prt(lang(':100008')); ?></td>
         </tr>
         <?php } ?>
         
   		<tr class="bg-b trow-bline">
-            <td colspan="4">
+            <td colspan="5">
 				<div class="clearfix z">
                 	<button type="button" name="disabled-buttons" class="fbtn-ds" onclick="fsdo(this, 'delete');">删除</button>
+                    <button type="button" name="disabled-buttons" class="fbtn-ds" onclick="fsdo(this);">更新</button>
                     
                     <select name="new_questionid" class="fs-ts">
                     	<option value="0">==请选择题库==</option>
@@ -116,6 +119,24 @@ function fsdo(_this, _t){
 					});
 				}
 			});
+	} else {
+		return _GESHAI.fsubmit(_this, "<?php prt(_g('cp')->uri('mod/job/ac/question/op/qsubject/f/update/sortid/' . $sortid . '/questionid/' . $questionid)); ?>", {
+			  "start": function(){
+				  _GESHAI.disbtn("", true);
+				  window.top._GESHAI.dialog({isHeader: false, isFooter: false, data: "Loading..."});
+			  },
+			  "success": function(d){
+				  _GESHAI.disbtn("", false);
+				  
+				  d.isCloseBtn = false;
+				  d.clickBgClose = true;
+				  d.title = "更新操作";
+				  window.top._GESHAI.dialog(d);
+				  if(d.status == 1){
+					  _GESHAI.redirect(d);
+				  }
+			  }
+		  });
 	}
 };
 </script>

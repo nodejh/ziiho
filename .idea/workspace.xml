@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e5e5951-beaa-493e-b1d2-8079b6fa2dcb" name="Default" comment="">
+<<<<<<< Updated upstream
       <change type="DELETED" beforePath="D:\www\ziiho.com\data\session\sess_11be3390c0dcfa5eae73e6db497a7597" afterPath="" />
       <change type="DELETED" beforePath="D:\www\ziiho.com\data\session\sess_i33p6a87u61t8n9n20i7suvf81" afterPath="" />
       <change type="DELETED" beforePath="D:\www\ziiho.com\data\session\sess_svu6rsaum95hdc0bq892q75h63" afterPath="" />
@@ -35,6 +36,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/main/bbb/newUI/assets/css/style.css" afterPath="$PROJECT_DIR$/template/main/bbb/newUI/assets/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/main/bbb/job/work.php" afterPath="$PROJECT_DIR$/template/main/bbb/job/work.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/session/sess_tfaibv20u84m6plss4tvgl1cc7" afterPath="$PROJECT_DIR$/data/session/sess_tfaibv20u84m6plss4tvgl1cc7" />
+>>>>>>> Stashed changes
     </list>
     <ignored path="ziiho.com.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -78,8 +82,13 @@
       <file leaf-file-name="work.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/template/main/bbb/job/work.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state vertical-scroll-proportion="-8.0" vertical-offset="1320" max-vertical-offset="2520">
               <caret line="76" column="135" selection-start-line="76" selection-start-column="135" selection-end-line="76" selection-end-column="135" />
+=======
+            <state vertical-scroll-proportion="0.12147887">
+              <caret line="142" column="24" selection-start-line="142" selection-start-column="24" selection-end-line="142" selection-end-column="24" />
+>>>>>>> Stashed changes
               <folding />
             </state>
           </provider>
@@ -994,8 +1003,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/template/main/bbb/common/css/over.css">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state vertical-scroll-proportion="0.41264558" vertical-offset="6052" max-vertical-offset="12640">
           <caret line="315" column="30" selection-start-line="315" selection-start-column="30" selection-end-line="315" selection-end-column="30" />
+=======
+        <state vertical-scroll-proportion="0.12147887">
+          <caret line="142" column="24" selection-start-line="142" selection-start-column="24" selection-end-line="142" selection-end-column="24" />
+>>>>>>> Stashed changes
           <folding />
         </state>
       </provider>

@@ -97,7 +97,7 @@ class geshai_module {
 		}
 		return $c;
 	}
-
+	
 	
 	function c($module, $name = null, $param = null, $is_instance = false) {
 		if (empty ( $module )) {

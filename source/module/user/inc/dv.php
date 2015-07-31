@@ -7,7 +7,7 @@ return array(
  	'100000'=>array(
 			'2' => array ( 'v' => 2, 'name' => '男' ),
 			'1' => array ( 'v' => 1, 'name' => '女' ),
- 			'0' => array ( 'v' => -1, 'name' => '保密' )
+ 			'0' => array ( 'v' => 0, 'name' => '保密' )
 	),
 	'100001'=>array(
 			'1' => array ( 'v' => 1, 'name' => '单身' ),
@@ -25,8 +25,8 @@ return array(
 			'4' => array ( 'v' => 4, 'name' => '默认用户组' )
 		),
 	'100003'=>array(
-			'1' => array ( 'v' => 1, 'name' => '用户名注册' ),
-			'2' => array ( 'v' => 2, 'name' => '邮箱注册' )
+			'1' => array ( 'v' => 1, 'name' => '用户名' ),
+			'2' => array ( 'v' => 2, 'name' => '邮箱' )
 		),
 	'100004'=>array(
 			'1' => array ( 'v' => 1, 'name' => '站内消息' ),

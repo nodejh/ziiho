@@ -5,25 +5,12 @@
 <!-- //tabs -->
 <div class="clearfix ul-box" tab="yes">
 	<ul class="ubox">
-    	<li class="clearfix is">
-            <div class="clearfix tit">分类类别:</div>
-            <div class="clearfix inp">
-                <select name="sortid" class="fs-ts-200">
-                    <option value="0">==请选择==</option>
-                    <?php $sortStatusTrue = _g('value')->sb( true ); ?>
-                	<?php $sParentResult = $sort->finds(array('parentid'=> 0, 'status' => $sortStatusTrue)); ?>
-                    <?php while($sPV = _g('db')->fetch_array($sParentResult)){ ?>
-                    <optgroup label="<?php prt($sPV['sname']); ?>">
-                    	<?php $sChildResult = $sort->finds(array('parentid'=> $sPV['sortid'], 'status' => $sortStatusTrue)); ?>
-                        <?php while($sCV = _g('db')->fetch_array($sChildResult)){ ?>
-                    		<option value="<?php prt($sCV['sortid']); ?>" <?php if(my_array_value('sortid', $materialSub) == $sCV['sortid']){ ?>selected="selected"<?php } ?> ><?php prt($sCV['sname']); ?></option>
-                        <?php } ?>
-                    </optgroup>
-                    <?php } ?>
-            	</select>
-            </div>
+        <li class="clearfix is">
+            <a href="<?php prt(_g('cp')->uri($materialWriteUrl)); ?>" class="fa-cd icon-add">添加</a>
+            <a href="<?php prt(_g('cp')->uri('mod/job/ac/provide')); ?>" class="fa-cd icon-page-goback">返回首页</a>
+			<?php prt($pageNow); ?>
         </li>
-    
+        
         <li class="clearfix is">
             <div class="clearfix tit">封面图:</div>
             <div class="clearfix inp">
@@ -101,7 +88,7 @@
 _GESHAI.radio({ radioItem: 'span[radio="status"]', name: "status" });
 	
 function fsdo(_this){
-	return _GESHAI.fsubmit(_this, "<?php prt(_g('cp')->uri('mod/job/ac/material/op/write_save')); ?>", {
+	return _GESHAI.fsubmit(_this, "<?php prt(_g('cp')->uri('mod/job/ac/provide/op/item/f/material/d/write_save/sortid/' . $sortid . '/provideid/' . $provideid . '/itemid/' . $itemid)); ?>", {
 		"goback": "<?php prt($gobackUrl); ?>",
 		"start": function(){
 			_GESHAI.disbtn("", true);

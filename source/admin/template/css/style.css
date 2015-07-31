@@ -116,6 +116,17 @@ a:hover { color: #F00; text-decoration: none; }
 				.adm-main .mb .m-pos .nn .ns { float: left; padding: 0px 1px; }
 			.adm-main .mb .m-frame { position: absolute; _position: absolute; left: 0px; top: 25px; overflow: hidden; }
 
+/* 锁屏 */
+.lockscreen_box { position:absolute; left:0px; top:0px; z-index:10000; display:none; }
+	.lockscreen_box .shadow { position:absolute; left:0px; top:0px; z-index:-1; width:100%; height:100%; background:#000; filter: alpha(opacity = 90); -moz-opacity: 0.9; -khtml-opacity: 0.9; opacity: 0.9; }
+	.lockscreen_box .form { position:absolute; left:38%; top:35%; z-index:1; width:340px; height:auto; background:#fff; border:6px solid #eee; border-radius:5px; }
+		.lockscreen_box .form .hd { width:100%; height:34px; background:url(../image/lockscreen-header.png) repeat-x; }
+			.lockscreen_box .form .hd em { line-height:34px; margin-left:10px; font-size:14px; font-weight:bold; color:#fff; }
+		.lockscreen_box .form .info { padding:10px 10px 0px 10px; line-height:24px; font-size:12px; }
+		.lockscreen_box .form .bd { padding:0px 10px 20px 10px; }
+			.lockscreen_box .form .bd .it { float:left; width:260px; height:26px; line-height:24px; border:1px solid #999; }
+			.lockscreen_box .form .bd .bt { float:left; width:50px; height:30px; line-height:30px; margin-left:5px; cursor:pointer; }
+
 /* 表单 - 文本,按钮 - 样式 */
 .fbtn-ds { margin-right: 8px; padding: 3px 8px; height: 28px; line-height: 24px; outline: none; cursor: pointer; }
 .fs-ts { height: 22px; line-height: 22px; }
@@ -168,6 +179,7 @@ a:hover { color: #F00; text-decoration: none; }
 .icon-rz { padding: 8px; background: url(../image/201.png) no-repeat 0 center; }
 .icon-set { padding: 0px 8px 0px 17px; background: url(../image/204.png) no-repeat 0 center; }
 .icon_205 { padding: 0px 8px 0px 17px; background: url(../image/icon_205.png) no-repeat 0 center; }
+.icon_206 { padding: 0px 8px 0px 17px; background: url(../image/icon_206.png) no-repeat 0 center; }
 
 
 .fbtn-delete, .fa-h { background: none; border: none; outline: none; cursor: pointer; color: #F00; }

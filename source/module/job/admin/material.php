@@ -5,13 +5,10 @@ if (! defined ( 'IN_GESHAI' )) {
 
 $JMODEL = _g ( 'module' )->trigger ( 'job', 'model' );
 $sort = _g ( 'module' )->trigger ( 'job', 'sort' );
-$JMaterial = _g ( 'module' )->trigger ( 'job', 'material' );
 
-$gobackUrl = _g('uri')->referer();
+$materialWriteUrl = 'mod/job/ac/provide/op/item/f/material/d/write/sortid/' . $sortid . '/provideid/' . $provideid . '/itemid/' . $itemid;
 
-$writeUrlStr = 'mod/job/ac/material/op/write';
-
-switch (_get ( 'op' )) {
+switch (_get ( 'd' )) {
 	case 'write' :
 		$materialSub = array ();
 		$materialid = null;
@@ -49,11 +46,6 @@ switch (_get ( 'op' )) {
 			return null;
 		}
 		
-		if (! _g ( 'validate' )->pnum ( $sortid )) {
-			smsg ( lang ( '200014' ) );
-			return null;
-		}
-		
 		if (strlen ( $title ) < 1) {
 			smsg ( lang ( 'job:400001' ) );
 			return null;
@@ -69,7 +61,9 @@ switch (_get ( 'op' )) {
 				'description'=>$description,
 				'ctime'=>_g('cfg>time'),
 				'status'=>$status,
-				'sortid'=>$sortid,
+				'sortid'=>$proItemSub['sortid'],
+				'provideid'=>$proItemSub['provideid'],
+				'itemid'=>$proItemSub['itemid']
 		);
 		
 		$JMaterial->writeSave ( $materialid, $data );
@@ -92,13 +86,16 @@ switch (_get ( 'op' )) {
 	default :
 		_g('uri')->referer(true);
 		$JMaterial->db->from($JMaterial->t_job_material);
+		$JMaterial->db->where('sortid', $proItemSub['sortid']);
+		$JMaterial->db->where('provideid', $proItemSub['provideid']);
+		$JMaterial->db->where('itemid', $proItemSub['itemid']);
 		$pageData = _g('page')->c($JMaterial->db->count(), 15, 10, _get('page'));
 		$JMaterial->db->limit($pageData['start'], $pageData['size']);
 		$JMaterial->db->order_by('ctime', 'DESC');
 		$JMaterial->db->select();
 		$dataResult = $JMaterial->db->get_list();
 		
-		$pageData['uri'] = 'mod/job/ac/material/page/';
+		$pageData['uri'] = 'mod/job/ac/provide/op/item/f/material/sortid/' . $sortid . '/provideid/' . $provideid . '/itemid/' . $itemid . '/page/';
 		_g ( 'cp' )->set_template ( 'job', 'material' );
 		break;
 }

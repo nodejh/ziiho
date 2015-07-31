@@ -1,11 +1,17 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
 
+<div class="clearfix page-inform">
+	<p class="light">提示：</p>
+    <p class="txts"><em class="st">•</em>请按“职位分类”查询关联的认证题库。在题库的集合，依次进入添加认证试题</p>
+    <p class="txts"><em class="st">•</em>可用，当设置试题“启用”时，该试题被保留，将不被使用</p>
+</div>
+
 <div class="clearfix where-search">
 	<form action="<?php prt(_g('cp')->uri()); ?>">
     <input type="hidden" name="mod" value="job" />
     <input type="hidden" name="ac" value="question" />
 	<div class="item">
-        <span class="w-label">筛选分类：</span>
+        <span class="w-label">职位分类：</span>
         <span class="w-ss">
         <select name="sortid" class="fs-ts">
             <option value="0">==请选择分类==</option>

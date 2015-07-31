@@ -63,5 +63,17 @@ class geshai_cache {
 		}
 		return $data;
 	}
+	function selectitem($k = null) {
+		$arglen = func_num_args();
+		$data = $this->iLoad('@', null, 'selectitem');
+		
+		if ($arglen != 0) {
+			$data = my_array_value($k, $data);
+			if (my_count(my_explode('>', $k)) != 3) {
+				$data = (is_array($data) ? $data : array());
+			}
+		}
+		return $data;
+	}
 }
 ?>

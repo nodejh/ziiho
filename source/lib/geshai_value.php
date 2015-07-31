@@ -163,6 +163,20 @@ class geshai_value {
 		}
 		return $d;
 	}
+	function s2pnsplit($v) {
+		$str = null;
+		$d = $v;
+		if (!is_array( $v )) {
+			if (strlen( $v ) < 1) {
+				return $str;
+			}
+			$d = my_explode( ',', $v );
+		}
+		foreach ( $d as $_d ) {
+			$str .= (',' . $_d . ',');
+		}
+		return $str;
+	}
 	function serverinfo() {
 		$S = array ();
 		$S ['servdomain'] = array (

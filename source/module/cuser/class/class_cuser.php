@@ -87,8 +87,8 @@ class class_cuser extends geshai_model {
 	function getList(){
 		$this->db->join($this->t_cuser, 'a.cuid', $this->t_cuser_profile, 'b.cuid', 'LEFT JOIN');
 		$pageData = _g('page')->c($this->db->count(), 15, 10, _get('page'));
-		$this->db->limit($pageData['start'], $pageData['size']);
 		$this->db->order_by('a.cuid');
+		$this->db->limit($pageData['start'], $pageData['size']);
 		$this->db->select($this->t_field);
 		$result = $this->db->get_list();
 		

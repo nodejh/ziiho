@@ -35,37 +35,6 @@ class class_job_job extends geshai_model {
 		$this->db->select ();
 		return ($this->db->is_success($c) ? $c : 0);
 	}
-	
-	function writeSave($jobid, $data){
-		$isUpdate = _g('validate')->pnum($jobid);
-		
-		if($isUpdate){
-			$jobRs = $this->find('jobid', $jobid);
-			if (! $this->db->is_success ()) {
-				smsg ( lang ( '200013' ) );
-				return null;
-			}
-			if(!my_is_array($jobRs)){
-				smsg ( lang ( 'job:job>100000' ) );
-				return null;
-			}
-		}
-		
-		$this->db->from($this->t_job_job);
-		if($isUpdate){
-			$this->db->where('jobid', $jobid);
-			$this->db->set($data);
-			$this->db->update();
-		}else{
-			$this->db->set($data);
-			$this->db->insert();
-		}
-		if (! $this->db->is_success ()) {
-			smsg ( lang ( '200013' ) );
-			return null;
-		}
-		smsg ( lang ( '100061' ), null, 1 );
-	}
 	function delete($jobid){
 		$jobRs = $this->find('jobid', $jobid);
 		if (! $this->db->is_success ()) {
@@ -79,6 +48,24 @@ class class_job_job extends geshai_model {
 		
 		/* skill */
 		$this->db->from('job_skill');
+		$this->db->where('jobid', $jobid);
+		$this->db->delete();
+		if (! $this->db->is_success ()) {
+			smsg ( lang ( '200013' ) );
+			return null;
+		}
+		
+		/* examsubject */
+		$this->db->from('job_examsubject');
+		$this->db->where('jobid', $jobid);
+		$this->db->delete();
+		if (! $this->db->is_success ()) {
+			smsg ( lang ( '200013' ) );
+			return null;
+		}
+		
+		/* examsubject_answer */
+		$this->db->from('job_examsubject_answer');
 		$this->db->where('jobid', $jobid);
 		$this->db->delete();
 		if (! $this->db->is_success ()) {

@@ -33,7 +33,7 @@ switch ($UModel->suser('login_type')) {
 		include _g ( 'module' )->inc ( 'cuser', 'common' );
 		break;
 	default :
-		$acts = array('login', 'register', 'forget', 'profile', 'password', 'setting', 'avatar', 'answer', 'myauth');
+		$acts = array( 'login', 'register', 'forget', 'profile', 'password', 'setting', 'avatar', 'answer', 'myauth', 'resume' );
 		_get('ac', (in_array(_get('ac'), $acts) ? _get('ac') : 'center'));
 		
 		include _g ( 'module' )->filename ( 'user', _get('ac') );

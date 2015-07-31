@@ -11,13 +11,13 @@ class geshai_session {
 	function geshai_session() {
 		$this->__construct ();
 	}
+	
 	function init() {
 		$this->_sess_prefix = _g ( 'cfg>session_prefix' );
 		$this->_dir = sdir ( ':data' ) . '/session';
 		$this->_flag_file = 'flag.txt';
 		$this->set_path ();
 	}
-	
 	
 	function set_path() {
 		if (is_dir ( $this->_dir )) {
@@ -55,7 +55,6 @@ class geshai_session {
 		}
 	}
 	
-	
 	function destroy() {
 		$_SESSION = array ();
 		if (isset ( $_COOKIE [session_name ()] )) {
@@ -65,11 +64,9 @@ class geshai_session {
 		session_destroy ();
 	}
 	
-	
 	function name($v = null) {
 		return ($this->_sess_prefix . $v);
 	}
-	
 	
 	function id($v = null) {
 		if (! empty ( $v )) {
@@ -78,7 +75,6 @@ class geshai_session {
 			return session_id ();
 		}
 	}
-	
 	
 	function value($k, $v = null) {
 		$k = $this->name ( $k );
@@ -91,11 +87,9 @@ class geshai_session {
 		}
 	}
 	
-	
 	function is_exist($k = null) {
 		return my_array_key_exist ( $this->name ( $k ), $_SESSION );
 	}
-	
 	
 	function delete($k) {
 		if ($this->is_exist ( $k )) {

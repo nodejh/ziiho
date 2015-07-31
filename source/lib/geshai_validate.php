@@ -327,5 +327,18 @@ class geshai_validate {
 		}
 		return true;
 	}
+	
+	function filetype ($file, $arr) {
+		if (strlen( $file ) < 1 ) {
+			return false;
+		}
+		$fd = my_explode( '.', $file );
+		if (my_count( $fd ) < 2) {
+			return false;
+		}
+		$fd = strtolower( my_end( $fd ) );
+		$arr = (is_array( $arr ) ? $arr : my_explode( ',', $arr ));
+		return my_in_array( $fd , $arr);
+	}
 }
 ?>
