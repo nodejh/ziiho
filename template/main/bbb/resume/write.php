@@ -1,41 +1,42 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
-<?php include _g('template')->name('@', 'header', true); ?>
-<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
-<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
+<?php include _g('template')->name('@', 'header_center', true); ?>
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
 
-<style type="text/css">
+    <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/calendar/WdatePicker.js"></script>
+    <script type="text/javascript" src="<?php prt(sdir('data')); ?>/cache/job/sort.js"></script>
+    <script type="text/javascript" src="<?php prt(sdir('data')); ?>/cache/job/area.js"></script>
+    <script type="text/javascript" src="<?php prt(_g('template')->dir('resume')); ?>/js/resume.js"></script>
 
-.resumebtn { padding:3px 10px; background:none; border:none; color:#F00; cursor:pointer; }
-.resumebtn:hover { color:#F00; text-decoration:underline; }
+    <style type="text/css">
 
-.resume_r_data {  }
-	.resume_r_data .resume_r_data_i { margin-top:10px; padding:10px; background:#fafafa; border-bottom:2px solid #eee; position:relative; }
-		.resume_r_data .resume_r_data_i .ib99 { position:absolute; right:10px; top:10px; }
-		
-.resume_r_data_add_btn { margin-top:10px; text-align:center; }
-	.resume_r_data_add_btn a.btn { padding:5px 10px; color:#039; }
-	.resume_r_data_add_btn a.btn:hover { text-decoration:underline; }
-	
-.resume_r_data_write_wrap { display:none; }
-	.resume_r_data_write { margin-top:10px; }
-		.resume_r_data_write a.del_btn { margin-left:10px; }
-</style>
+        .resumebtn { padding:3px 10px; background:none; border:none; color:#F00; cursor:pointer; }
+        .resumebtn:hover { color:#F00; text-decoration:underline; }
 
-<script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/calendar/WdatePicker.js"></script>
-<script type="text/javascript" src="<?php prt(sdir('data')); ?>/cache/job/sort.js"></script>
-<script type="text/javascript" src="<?php prt(sdir('data')); ?>/cache/job/area.js"></script>
-<script type="text/javascript" src="<?php prt(_g('template')->dir('resume')); ?>/js/resume.js"></script>
+        .resume_r_data {  }
+        .resume_r_data .resume_r_data_i { margin-top:10px; padding:10px; background:#fafafa; border-bottom:2px solid #eee; position:relative; }
+        .resume_r_data .resume_r_data_i .ib99 { position:absolute; right:10px; top:10px; }
 
-<!-- //cuser_center -->
-<div class="cuser_center clearfix" id="cuser_center">
-    <!-- //cuser_z -->
-    <div class="cuser_z clearfix">
-        <?php include _g('template')->name('user', 'center_nav', true); ?>
-    </div>
-    <!-- cuser_z// -->
+        .resume_r_data_add_btn { margin-top:10px; text-align:center; }
+        .resume_r_data_add_btn a.btn { padding:5px 10px; color:#039; }
+        .resume_r_data_add_btn a.btn:hover { text-decoration:underline; }
 
-    <!-- //cuser_y -->
-    <div class="cuser_y clearfix">
+        .resume_r_data_write_wrap { display:none; }
+        .resume_r_data_write { margin-top:10px; }
+        .resume_r_data_write a.del_btn { margin-left:10px; }
+    </style>
+
+    <!-- //cuser_center -->
+    <div class="cuser_center clearfix o-main" id="cuser_center">
+        <!-- //cuser_z -->
+        <div class="cuser_z clearfix o-left">
+            <?php include _g('template')->name('user', 'center_nav', true); ?>
+        </div>
+        <!-- cuser_z// -->
+
+
+        <!-- //cuser_y -->
+        <div class="cuser_y clearfix o-right">
         <div class="company-tab-hd clearfix">
             <a href="javascript:;">基本信息</a>
             <a href="javascript:;">求职意向</a>

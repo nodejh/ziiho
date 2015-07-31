@@ -1,0 +1,98 @@
+{modtemplate admin/template/adm_header}
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_tid"
+				onclick="checkedall(this.name,'tid_arr')" /></td>
+			<td width="6%">ID编号</td>
+			<td width="8%">排序</td>
+			<td width="53%">标签名称</td>
+			<td width="8%">可用</td>
+			<td width="21%">操作时间</td>
+		</tr>
+
+		{dbres $lists $val}
+		<tr id="tid_{field:val.tid/}" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="checkbox" name="tid_arr"
+				value="{field:val.tid/}" /></td>
+			<td width="6%" class="color1">{field:val.tid/}</td>
+			<td width="8%"><input type="text" class="cont_zt7"
+				name="listorder_{field:val.tid/}" value="{field:val.listorder/}" /></td>
+			<td width="53%"><input type="text" class="cont_zt6"
+				name="title_{field:val.tid/}" value="{field:val.title/}" /></td>
+			<td width="8%"><input type="checkbox"
+				name="disabled_{field:val.tid/}"
+				value="{print yesno_val('normal')/}"
+				{if $val['disabled']==yesno_val( 'normal')}checked="checked" {/if} /></td>
+			<td width="21%" class="color1">{datestyle $val['ctime'],'Y-m-d
+				H:i'/}</td>
+		</tr>
+		<!--{/dbres}-->
+
+		<tr id="menu_list_p" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="10%" colspan="2" style="text-align: right;"><span
+				class="cont_c2">添加:</span></td>
+			<td width="8%"><input type="text" class="cont_zt7"
+				name="listorder" /></td>
+			<td width="53%"><input type="text" class="cont_zt6" name="title" /></td>
+			<td width="29%" colspan="2"><input type="checkbox"
+				name="disabled" value="{print yesno_val('normal')/}" />&nbsp;&nbsp;&nbsp;<input
+				type="button" class="cont_dod" id="addbt" value="添加"
+				onclick="article_adm_tag_add('{url 'index','mod/article/ac/admin/op/tag/ao/tag_baseadd'/}')" /></td>
+		</tr>
+		<tr class="cont_dbg">
+			<td colspan="6"><span class="c_l"> <input type="checkbox"
+					name="ck_dosign" value="1" />&nbsp;<span class="cont_c2">删?</span>&nbsp;&nbsp;<input
+					type="button" class="cont_dod" id="dobt" value="提交"
+					onclick="article_adm_tagdo('{url 'index','mod/article/ac/admin/op/tag/ao/tag_baseedit'/}','{url 'index','mod/article/ac/admin/op/tag/ao/tag_del'/}')" />
+			</span> <span class="c_r">{modtemplate admin/template/page}</span></td>
+		</tr>
+	</table>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=['#addbt','#dobt'];
+
+function article_adm_tag_add(do_url){
+	var listorder=inputval("listorder");
+	var title=inputval("title");
+	var disabled=getboxfirst("disabled");
+	var datas={'listorder':listorder,'title':title,'disabled':disabled};
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'showStatusId':'#statusshow','offButton':button_ids,'urlTarget':_CJG.MF});
+}
+
+function article_adm_tagdo(editurl,delurl){
+	var tid_arr=checkedval("tid_arr");
+	var tid_len=tid_arr.length;
+	var listorder_arr=[],title_arr=[],disabled_arr=[];
+	if(tid_len<1){
+		mydialog({'data':'{lang global:select_is_null/}'});
+		return false;
+	}
+	var datas={};
+	if(!isVal(getboxfirst("ck_dosign"))){
+		/*编辑操作*/
+		for(var i=0;i<tid_len;i++){
+			listorder_arr.push(inputval("listorder_"+tid_arr[i]));
+			title_arr.push(inputval("title_"+tid_arr[i]));
+			disabled_arr.push(getboxfirst("disabled_"+tid_arr[i],'name',"{print yesno_val('check')/}"));
+		}
+		datas={'tid':tid_arr,'listorder':listorder_arr,'title':title_arr,'disabled':disabled_arr};
+		ajaxAction({'actionUrl':editurl,'actionData':arr_merge(datas,callback_param),'showStatusId':'#statusshow','offButton':button_ids,'urlTarget':_CJG.MF});
+	}else{
+		datas=arr_merge({'tid':tid_arr},callback_param);
+		mydialog({'data':'{lang global:del_info_prompt/}','showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':delurl,'actionData':datas,'urlTarget':_CJG.MF}});
+	}
+}
+</script>
+
+{modtemplate admin/template/adm_footer}

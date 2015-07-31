@@ -1,0 +1,539 @@
+{eval $isshowmenuitem=false/} {modtemplate admin/template/adm_header}
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<link rel="stylesheet" type="text/css"
+		href="{field:_G.web.sourcepath/}module/admin/template/css/article/article_adm.css" />
+	<script type="text/javascript"
+		src="{field:_G.web.staticpath/}js/editor/kindeditor.js"></script>
+	<script type="text/javascript"
+		src="{field:_G.web.staticpath/}js/calendar/WdatePicker.js"></script>
+	<script type="text/javascript">
+var keditor;
+KindEditor.ready(function(K) {
+	keditor=K.create('textarea[name="content"]', {
+		cssData:'body{font-size:14px;}',
+		pasteType : 1,
+		allowImageUpload : false,
+		allowFlashUpload :false,
+		allowMediaUpload :false,
+		allowFileUpload : false
+	});
+});
+</script>
+	<div class="c_w100">
+		<ul>
+			{if $isdraft==1}
+			<li class="textc"><span class="color6">您有上次未发布的草稿，</span><span
+				class=""><a
+					href="{url 'index','mod/article/ac/admin/op/content/ao/content_write/id/'.$draftid/}">现在去发布</a></span></li>
+			{/if}
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>标题:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="cont_li_p2 c_ml5px">
+					<span class="c_l"><input type="text" name="title"
+						class="tbs cont_zt12"
+						value="{print array_key_val('title',$article)/}" /></span> <span
+						class="c_l c_ml5px">&raquo;</span> <span class="c_l c_ml5px">
+						<select name="iconid" class="width200px cont_sh">
+							<option value="0">==请选择==</option> {dbres $icon_result $val}
+							<option value="{field:val.iconid/}" {if
+								array_key_val('iconid',$article)==$val[
+								'iconid']} selected="selected"{/if}>{field:val.title/}</option>
+							{/dbres}
+					</select>
+					</span> <span class="c_l c_ml5px c_mt2px color1">为标题指定图标</span>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>跳转URL:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="cont_li_p2 c_ml5px">
+					<input type="text" name="tourl" class="tbs cont_zt12"
+						value="{print array_key_val('tourl',$article)/}" />
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px">
+					<strong>关键词:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="contbm_a">
+						<input type="text" name="keywords" class="tbs cont_zt12"
+							value="{print array_key_val('keywords',$article)/}" />
+					</div>
+					<div class="contbm_b">
+						<p class="c_mt2px color1">{lang article:keywords_info/}</p>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px">
+					<strong>来源:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="contbm_a">
+						<input type="text" name="origin" class="tbs cont_zt12"
+							value="{print array_key_val('origin',$article)/}" />
+					</div>
+					<div class="contbm_b">
+						<p class="c_mt2px color1">{lang article:origin_info/}</p>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>来源URL:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="cont_li_p2 c_ml5px">
+					<input type="text" name="originurl" class="tbs cont_zt12"
+						value="{print array_key_val('originurl',$article)/}" />
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px">
+					<strong>内容分类:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="contbm_a">
+						<select name="catid" class="width260px cont_sh">
+							<option value="0">==请选择分类==</option> {field:category_option/}
+						</select>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px">
+					<strong>上传图片:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="contbm_a">
+						<button type="button" class="cont_dod" id="uploadbt"
+							onclick="article_adm_upload_dialog();">上传附件</button>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px">
+					<strong>内容:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="c_ml5px">
+						<textarea name="content"
+							style="width: 900px; height: 600px; visibility: hidden;">{print array_key_val('content',$article)/}</textarea>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px">
+					<strong>内容简介:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="c_ml5px">
+						<textarea name="description" class="tbs tbs2"
+							style="width: 898px; height: 98px;">{print array_key_val('description',$article)/}</textarea>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px">
+					<strong>显示导读:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="c_ml5px">
+						{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+							class="c_l {if $index>1}c_ml10px{/if}"><input type="radio"
+							name="isdescription" value="{field:val.val/}" {if
+							array_key_val('isdescription',$article,yesno_val('check'))==$val[
+							'val']} checked="checked" {/if} />&nbsp;{field:val.title/}</span>
+						{/loop}
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px">
+					<strong>显示组图:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="c_ml5px">
+						{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+							class="c_l {if $index>1}c_ml10px{/if}"><input type="radio"
+							name="isslide" value="{field:val.val/}" {if
+							array_key_val('isslide',$article,yesno_val('check'))==$val[
+							'val']} checked="checked" {/if} />&nbsp;{field:val.title/}</span>
+						{/loop}
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px">
+					<strong>允许评论:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="c_ml5px">
+						{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+							class="c_l {if $index>1}c_ml10px{/if}"><input type="radio"
+							name="iscomment" value="{field:val.val/}" {if
+							array_key_val('iscomment',$article,yesno_val('normal'))==$val[
+							'val']} checked="checked" {/if} />&nbsp;{field:val.title/}</span>
+						{/loop}
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px">
+					<strong>浏览数量:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="c_ml5px">
+						<input type="text" name="views" class="cont_zt1"
+							value="{print array_key_val('views',$article,0)/}" />
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px">
+					<strong>发布时间:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="c_ml5px">
+						<input type="text" name="ctime" class="cont_zt1"
+							value="{print array_key_val('ctime',$article)/}"
+							readonly="readonly"
+							onclick="WdatePicker({isShowClear:false,readOnly:true,'dateFmt':'yyyy-MM-dd HH:mm:ss'})" />
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px">
+					<strong>显示内容模板:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="contbm_a">
+						<input type="text" name="template" class="tbs cont_zt12"
+							value="{print array_key_val('template',$article)/}" />
+					</div>
+					<div class="contbm_b">
+						<p class="c_mt2px color1">留空则为默认，目录为{print
+							array_key_val('templatepath',array_key_val('web',$_G)).$module/}</p>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px">
+					<strong>聚合标签:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="contbm_a">
+						{eval $labelidrs=NULL;/} {dbres $label_list $val} {if $aid>=1}
+						{eval
+						$labelidrs=$labelObj->labelid_query(array('aid'=>$aid,'labelid'=>$val['labelid']))/}
+						{/if} <span class="c_l c_ml10px"><input type="checkbox"
+							name="labelidarr" value="{field:val.labelid/}" {if
+							array_key_val('labelid',$labelidrs)==$val[
+							'labelid']} checked="checked" {/if}/>&nbsp;{field:val.title/}</span>
+						{/dbres}
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px">
+					<strong>属性标签:</strong>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="contbm_a">
+						<select name="attrid" class="width200px cont_sh">
+							<option value="0">==请选择==</option> {eval
+							list($attrpg,$attrlist)=common_attr_list();/} {if
+							array_key_val('total_num',$attrpg)>=1} {dbres $attrlist $val}
+							<option value="{field:val.attrid/}"
+								{if $val['attrid']==array_key_val(
+								'attrid',$article)}selected="selected"{/if}>{field:val.title/}</option>
+							{/dbres} {/if}
+						</select>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="c_ml5px fw">
+					<span class="c_l">添加相关阅读</span><span class="c_l c_ml5px"><a
+						href="javascript:;" onclick="article_adm_write_about()">添加</a></span>
+				</div>
+				<div class="clr"></div>
+
+				<div class="contbm">
+					<div class="c_ml5px" id="aboutlist">
+						{dbres array_key_val('abouts',$article) $val}
+						<p class="c_mt2px" id="aboutlist_{field:val.aid/}">
+							<span class="c_l color1">(ID:{field:val.aid/})</span> <span
+								class="c_l c_ml5px"><a
+								href="{url 'index','mod/article/ac/content/op/detail/id/'.$val['aid']/}"
+								target="_blank" title="{field:val.title/}"
+								id="yxok_{field:val.aid/}">{field:val.title/}</a></span> <span
+								class="c_l c_ml10px"><a href="javascript:;"
+								class="color1"
+								onclick="javascript:$('#aboutlist_{field:val.aid/}').remove();">删除</a></span>
+							<input type="checkbox" checked="checked" name="about_arr"
+								class="vhidden" value="{field:val.aid/}" />
+						<div class="clr"></div>
+						</p>
+						<div class="clr"></div>
+						{/dbres}
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<!--
+                <li>
+                	<div class="c_l c_mt2px"><font class="fs14px">标签:</font></div>
+                    <div class="c_l c_ml5px">
+                    	{eval $st_i=0;/}
+                        {eval $sids=NULL;/}
+                        {dbres $tagname_list $val}
+                        {eval $st_i++;/}
+                        {if str_in_array($val['tid'],$tag_arr)==1}{eval $st_i_val[]=$st_i;/}{/if}
+                        <p id="stag_{$st_i}" class="c_l a_tag_select c_mt10px {if $st_i==1 || ($st_i%13)==1}{else}c_ml10px{/if}"><a href="javascript:;" onclick="checkbox_select('stag_',{field:st_i/},'a_tag_select','a_tag_selects','stag_ss','stag_val_','checkbox')">{field:val.title/}<input type="checkbox" id="stag_val_{field:st_i/}" name="tag_val" value="{field:val.tid.}" class="c_h0px c_w0px" /></a></p>
+                        {if ($st_i%13)==0}<div class="clr"></div>{/if}
+                        {/dbres}
+                    </div>
+                    <div class="clr"></div>
+                </li>
+                -->
+		</ul>
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+
+	<div class="c_w100 c_mt5px">
+		<input type="hidden" name="aid"
+			value="{print array_key_val('aid',$article,0)/}" /> <span
+			class="c_l c_ml5px"><button type="button" class="cont_dod"
+				id="dobt" onClick="article_adm_write_save()">{if
+				$showdrftbutton==1}保存并发布{else}保存{/if}</button></span> {if $showdrftbutton==1} <span
+			class="c_l c_ml10px"><button type="button" class="cont_dod"
+				id="draftbt" onClick="article_adm_write_save('draft')">保存为草稿</button></span>
+		{/if} <span class="c_l c_ml10px"><button type="button"
+				class="cont_dod" id="gobt"
+				onClick="redirectUrl({'url':'{field:callback_url/}'})">返回</button></span> <span
+			class="c_l c_ml10px color7" id="statusshow"></span>
+		<div class="clr"></div>
+	</div>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script type="text/javascript">
+/*标签*/
+<!--{if check_is_array($st_i_val)==1}-->
+var st_i_val="{echo array_join_str(',',$st_i_val);}";
+st_i_val=st_i_val.split(',');
+for(var i=0;i<st_i_val.length;i++){
+checkbox_select('stag_',st_i_val[i],'a_tag_select','a_tag_selects','stag_ss','stag_val_','checkbox');
+}
+<!--{/if}-->
+function article_adm_upload_dialog(){
+	dialog({'title':"附件上传",'type':"iframe",'url':"{url 'index','mod/article/ac/admin/op/content/ao/content_picupload'/}",'width':520,'height':320,'showbg':false,'showOkButton':false,'showCancelButton':false});
+}
+function article_adm_write_about(){
+	dialog({'title':"管理相关阅读",'type':"iframe",'url':"{url 'index','mod/article/ac/admin/op/content/ao/content_about'/}",'width':640,'height':400,'showbg':false,'showOkButton':true,'okClick':'_CJG.dialog.iframe.article_adm_about_addok','showCancelButton':true});
+}
+var callback_param={'callback_param':{'callFunc':'article_adm_write_callback','callFunc_c':'article_adm_write_draft','url':"{field:successurl/}",'isajax':1}};
+var button_ids=['#uploadbt','#dobt','#draftbt','#gobt'];
+function article_adm_write_save(statusname){
+	var aid=inputval("aid");
+	var title=inputval("title");
+	var tourl=inputval("tourl");
+	var keywords=inputval("keywords");
+	var origin=inputval("origin");
+	var originurl=inputval("originurl");
+	var catid=selectval("catid");
+	var content=keditor.html();
+	var description=textareaval('description');
+	/*关联标签*/
+	var tag_arr=checkedval('tag_val');
+	
+	var iscomment=getboxfirst("iscomment");
+	var isslide=getboxfirst('isslide');
+	var isdescription=getboxfirst('isdescription');
+	
+	var views=inputval("views");
+	var ctime=inputval("ctime");
+	
+	var template=inputval("template");
+	var labelid=checkedval("labelidarr");
+	var attrid=selectval("attrid");
+	var iconid=selectval("iconid");
+	var abouts=checkedval('about_arr');
+	abouts=(abouts.length<1)?'':abouts.join(',');
+	if(!isVal(statusname)) statusname='';
+	var datas={'statusname':statusname,'aid':aid,'tourl':tourl,'title':title,'keywords':keywords,'origin':origin,'originurl':originurl,'catid':catid,'origin':origin,'catid':catid,'content':content,'description':description,'tid':tag_arr,'iscomment':iscomment,'isslide':isslide,'isdescription':isdescription,'views':views,'ctime':ctime,'template':template,'labelid':labelid,'attrid':attrid,'iconid':iconid,'abouts':abouts};
+	ajaxAction({'actionUrl':"{url 'index','mod/article/ac/admin/op/content/ao/content_writedo'/}",'actionData':arr_merge(datas,callback_param),'showStatusId':'#statusshow','offButton':button_ids,'urlTarget':_CJG.MF});
+}
+function article_adm_write_callback(d,o){
+	if(!isObject(d)) d={};
+	if(!isObject(o)) o={};
+	if(isVal(d.aid)){
+		inputval('aid','name',d.aid);
+	}
+	ajaxActionDialog(d,o);
+	<!--{if $showdrftbutton==1}-->
+	article_adm_write_autosave(_writeAutoSaveTime);
+	<!--{/if}-->
+}
+<!--{if $showdrftbutton==1}-->
+var _writeAutoSaveTimeId=null;
+var _writeSaveMsgTimeId=null;
+/*5分钟保存一次*/
+var _writeAutoSaveTime=5*60;
+$(document).ready(function(){
+	setHtmlData('#body','<div class="middlemsgmain c_none" id="middlemsgmain"><p class="width200px textc middlemsgcont c_bg1">&nbsp;</p></div>',true);
+	article_adm_write_autosave(_writeAutoSaveTime);
+});
+function article_adm_write_autosave(_time){
+	clearTimeout(_writeAutoSaveTimeId);
+	if(_time<1){
+		article_adm_write_save('draft');
+		_time=_writeAutoSaveTime;
+	}
+	_writeAutoSaveTimeId=setTimeout(function(){
+		setHtmlDisplay("#middlemsgmain");
+		setHtmlData("#middlemsgmain p","<span class=\"color6\">&nbsp;"+_time+"&nbsp;</span><span class=\"color1\">秒后自动保存为草稿</span>");
+		article_adm_write_autosave(_time-1);
+	},1000);
+}
+function article_adm_write_draft(serverData){
+	clearTimeout(_writeAutoSaveTimeId);
+	clearTimeout(_writeSaveMsgTimeId);
+	if(!isObject(serverData)) serverData={};
+	if(isVal(serverData.aid)){
+		inputval('aid','name',serverData.aid);
+	}
+	var msg='';
+	switch(serverData.status){
+		case "ok":
+			msg='草稿已于'+serverData.savetime+'保存成功';
+		break;
+		case "ex":
+			msg="草稿保存失败,内部出现异常";
+		break;
+		case "no":
+			msg="草稿保存失败<br/>"+serverData.data;
+		break;
+	}
+	setHtmlData("#middlemsgmain p",msg);
+	_writeSaveMsgTimeId=setTimeout(function(){
+		article_adm_write_autosave(_writeAutoSaveTime);
+	},5000);
+}
+<!--{/if}-->
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

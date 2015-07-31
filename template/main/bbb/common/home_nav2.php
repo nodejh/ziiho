@@ -66,14 +66,14 @@
             <div class="clearfix o-menu">
                 <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>" class="ml o-menu-a">首页</a>
                 <a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>" class="ml o-menu-a">学习中心</a>
-                <a href="<?php prt(_g('uri')->su('job/ac/company')); ?>" class="mr o-menu-a">认证中心</a>
+                <a href="<?php prt(_g('uri')->su('job/ac/learn/op/assess')); ?>" class="mr o-menu-a">认证中心</a>
                 <a href="<?php prt(_g('uri')->su('job/ac/company')); ?>" class="mr o-menu-a">求职中心</a>
             </div>
         <?php }else{ ?>
             <div class="clearfix o-menu">
                 <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>" class="ml o-menu-a">首页</a>
                 <a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>" class="ml o-menu-a">学习中心</a>
-                <a href="<?php prt(_g('uri')->su('job/ac/company')); ?>" class="mr o-menu-a">认证中心</a>
+                <a href="<?php prt(_g('uri')->su('job/ac/learn/op/assess')); ?>" class="mr o-menu-a">认证中心</a>
                 <a href="<?php prt(_g('uri')->su('job/ac/company')); ?>" class="mr o-menu-a">求职中心</a>
                 <a href="<?php prt(_g('uri')->su('user/ac/login')); ?>" class="ml o-menu-a"><i class="fa fa-user fa-fw"></i>登陆</a>
                 <a href="<?php prt(_g('uri')->su('user/ac/register')); ?>" class="ml o-menu-a"><i class="fa fa-user-plus fa-fw"></i>注册</a>

@@ -1,0 +1,26 @@
+{eval $isshowmenunav=false/} {modtemplate admin/template/adm_header}
+
+<script type="text/javascript"
+	src="{field:_G.web.staticpath/}js/swfupload.js"></script>
+<script type="text/javascript"
+	src="{field:_G.web.sourcepath/}module/article/admin/template/js/article_icon_upload.js"></script>
+<script language="javascript">
+var swfu;
+</script>
+
+<div class="c_l uploadbt">
+	<div id="iconselect"></div>
+</div>
+<div class="c_l c_mt5px c_ml5px color6" id="uploadmsg"></div>
+<div class="clr"></div>
+
+<div class="c_mt5px">
+	<font class="color1">{field:upload_file_info/}</font>
+</div>
+<div class="clr"></div>
+
+<script language="javascript">
+swfu=article_icon_upload_init("{url 'index','mod/article/ac/admin/op/icon/ao/icon_uploaddo'/}",'{field:filesize/}','{field:filetypes/}','{field:uid/}','{field:iconid/}');
+</script>
+
+{modtemplate admin/template/adm_footer}

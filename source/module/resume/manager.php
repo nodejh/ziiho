@@ -10,7 +10,7 @@ switch (_get ( 'op' )) {
 		$resumeSub = array ( 'rname' => ('我的简历' . _g('value')->randchar(4)) );
 		$wishSub = array ();
 		$educateData = array (0, null);
-		
+
 		$resumeid = 0;
 		if (_g( 'validate' )->hasget( 'rid' )) {
 			$resumeid = _get( 'rid' );
@@ -22,36 +22,36 @@ switch (_get ( 'op' )) {
 		} else {
 			$resumeid = $RESUME->getId ();
 		}
-		
+
 		/* profile */
 		$resumeProfile = $RESUME->find ($RESUME->t_resume_profile, 'uid', $uid);
 		/* result */
 		if (!empty( $resumeid )) {
 			$resumeSub = $RESUME->find ($RESUME->t_resume, 'resumeid', $resumeid);
 			$wishSub = $RESUME->find ($RESUME->t_resume_wish, 'resumeid', $resumeid);
-			
+
 			/* educate */
 			$educateData = $RESUME->finds ( $RESUME->t_resume_educate, 'resumeid', $resumeid);
-			
+
 			/* train */
 			$trainData = $RESUME->finds ( $RESUME->t_resume_train, 'resumeid', $resumeid);
-			
+
 			/* language */
 			$languageData = $RESUME->finds ( $RESUME->t_resume_language, 'resumeid', $resumeid);
-			
+
 			/* projectexp */
 			$projectexpData = $RESUME->finds ( $RESUME->t_resume_projectexp, 'resumeid', $resumeid);
-			
+
 			/* workexp */
 			$workexpData = $RESUME->finds ( $RESUME->t_resume_workexp, 'resumeid', $resumeid);
-			
+
 			/* attach */
 			$attachData = $RESUME->finds ( $RESUME->t_resume_attach, 'resumeid', $resumeid);
-			
+
 			/* relate */
 			$relateData = $RESUME->find ( $RESUME->t_resume_relate, 'resumeid', $resumeid);
 		}
-		
+
 		include _g ( 'template' )->name ( 'resume', 'write', true );
 		break;
 	case 'writedo':
@@ -59,21 +59,21 @@ switch (_get ( 'op' )) {
 		/* var */
 		$m_rname = _post ( 'm_rname' );
 		$m_publishlv = _post ( 'm_publishlv' );
-		
+
 		if(!_g('validate')->vm(strlen ( $m_rname ), 1, 60)){
 			smsg( lang('resume:100002', array ( 1, 20 )) );
 			return null;
 		}
 		$m_publishlv = ( _g ( 'validate' )->pnum ( $m_publishlv ) ? $m_publishlv : -1 );
-		
+
 		$ctime = _g ( 'cfg>time' );
 		/* resume data */
-		$data = array ( 
-				'rname' => $m_rname,
-				'ctime' => $ctime,
-				'mtime' => $ctime,
-				'publishlv' => $m_publishlv,
-				'uid' => $uid
+		$data = array (
+			'rname' => $m_rname,
+			'ctime' => $ctime,
+			'mtime' => $ctime,
+			'publishlv' => $m_publishlv,
+			'uid' => $uid
 		);
 		if (!$RESUME->chkId ()) {
 			if (!$RESUME->insert( $RESUME->t_resume, $data )) {
@@ -89,7 +89,7 @@ switch (_get ( 'op' )) {
 				return null;
 			}
 		}
-		
+
 		include _g( 'module' )->helper ( 'resume', 'writedo' );
 		break;
 	case 'delete':
@@ -120,10 +120,10 @@ switch (_get ( 'op' )) {
 					}
 				}
 			}
-			
+
 			/* data delete */
 			$tables = array( 'resume', 'resume_attach', 'resume_educate', 'resume_language',
-					'resume_projectexp', 'resume_relate', 'resume_train', 'resume_wish', 'resume_workexp' );
+				'resume_projectexp', 'resume_relate', 'resume_train', 'resume_wish', 'resume_workexp' );
 			foreach ($tables as $t) {
 				if (!$RESUME->delete( $t, 'resumeid', $resumeid )) {
 					smsg(lang('200013'));
@@ -131,13 +131,13 @@ switch (_get ( 'op' )) {
 				}
 			}
 		}
-		
+
 		smsg(lang('100061'), null, 1);
 		break;
 	/* form */
 	case 'educate_form':
 		$educateid = _post( 'educateid' );
-		
+
 		$educateRs = array ();
 		if (!_g( 'validate' )->num ( $educateid )) {
 			smsg ( lang( '200010' ) );
@@ -151,17 +151,17 @@ switch (_get ( 'op' )) {
 			}
 			$educateRs = $RESUME->toData( $educateRs );
 		}
-		
+
 		ob_start();
 		include _g ( 'template' )->name ( 'resume', 'write_educate_form', true );
 		$contentStr = ob_get_clean ();
-		
+
 		smsg(($contentStr), null, 1);
 		break;
-		
+
 	case 'train_form':
 		$trainid = _post( 'trainid' );
-		
+
 		$trainRs = array ();
 		if (!_g( 'validate' )->num ( $trainid )) {
 			smsg ( lang( '200010' ) );
@@ -175,17 +175,17 @@ switch (_get ( 'op' )) {
 			}
 			$trainRs = $RESUME->toData( $trainRs );
 		}
-		
+
 		ob_start();
 		include _g ( 'template' )->name ( 'resume', 'write_train_form', true );
 		$contentStr = ob_get_clean ();
-		
+
 		smsg(($contentStr), null, 1);
 		break;
-		
+
 	case 'language_form':
 		$languageid = _post( 'languageid' );
-		
+
 		$languageRs = array ();
 		if (!_g( 'validate' )->num ( $languageid )) {
 			smsg ( lang( '200010' ) );
@@ -199,17 +199,17 @@ switch (_get ( 'op' )) {
 			}
 			$languageRs = $RESUME->toData( $languageRs );
 		}
-		
+
 		ob_start();
 		include _g ( 'template' )->name ( 'resume', 'write_language_form', true );
 		$contentStr = ob_get_clean ();
-		
+
 		smsg(($contentStr), null, 1);
 		break;
-		
+
 	case 'projectexp_form':
 		$projectexpid = _post( 'projectexpid' );
-		
+
 		$projectexpRs = array ();
 		if (!_g( 'validate' )->num ( $projectexpid )) {
 			smsg ( lang( '200010' ) );
@@ -223,17 +223,17 @@ switch (_get ( 'op' )) {
 			}
 			$projectexpRs = $RESUME->toData( $projectexpRs );
 		}
-		
+
 		ob_start();
 		include _g ( 'template' )->name ( 'resume', 'write_projectexp_form', true );
 		$contentStr = ob_get_clean ();
-		
+
 		smsg(($contentStr), null, 1);
 		break;
-	
+
 	case 'workexp_form':
 		$workexpid = _post( 'workexpid' );
-		
+
 		$workexpRs = array ();
 		if (!_g( 'validate' )->num ( $workexpid )) {
 			smsg ( lang( '200010' ) );
@@ -247,17 +247,17 @@ switch (_get ( 'op' )) {
 			}
 			$workexpRs = $RESUME->toData( $workexpRs );
 		}
-		
+
 		ob_start();
 		include _g ( 'template' )->name ( 'resume', 'write_workexp_form', true );
 		$contentStr = ob_get_clean ();
-		
+
 		smsg(($contentStr), null, 1);
 		break;
-		
+
 	case 'attach_form':
 		$attachid = _post( 'attachid' );
-		
+
 		$attachRs = array ();
 		if (!_g( 'validate' )->num ( $attachid )) {
 			smsg ( lang( '200010' ) );
@@ -274,16 +274,16 @@ switch (_get ( 'op' )) {
 				$attachRs['srcname'] = my_end(my_explode('/', $attachRs['src']));
 			}
 		}
-		
+
 		ob_start();
 		include _g ( 'template' )->name ( 'resume', 'write_attach_form', true );
 		$contentStr = ob_get_clean ();
-		
+
 		smsg(($contentStr), null, 1);
 		break;
 	case 'attach_fdel':
 		$attachid = _post( 'attachid' );
-		
+
 		if (!_g( 'validate' )->pnum ( $attachid )) {
 			smsg ( lang( '200010' ) );
 			return null;
@@ -303,14 +303,17 @@ switch (_get ( 'op' )) {
 					smsg(lang('200013'));
 					return null;
 				}
-			}	
+			}
 		}
 		smsg(lang('100061'), null, 1);
+		break;
+	case 'view':
+		include _g ( 'template' )->name ( 'resume', 'view_resume', true );
 		break;
 	default :
 		_g('uri')->referer(true);
 		$RESUME->delId ();
-		
+
 		$RESUME->db->from($RESUME->t_resume);
 		$RESUME->db->where('uid', $uid);
 		$pageData = _g('page')->c($RESUME->db->count(), 10, 10, _get('page'));
@@ -318,7 +321,7 @@ switch (_get ( 'op' )) {
 		$RESUME->db->select();
 		$resumeResult = $RESUME->db->get_list();
 		$pageData['uri'] = 'resume/ac/manager/page/';
-		
+
 		$writeUrl = _g('uri')->su('resume/ac/manager/op/write');
 		$delUrl = _g('uri')->su('resume/ac/manager/op/delete');
 		include _g ( 'template' )->name ( 'resume', 'manager', true );

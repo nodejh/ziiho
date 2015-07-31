@@ -1,0 +1,139 @@
+@charset "utf-8";
+/*CSS Document*/
+.a_about_label {
+	width: 300px;
+	height: 20px;
+	line-height: 20px;
+}
+
+.a_aboutmm {
+	width: 627px;
+}
+
+.a_aboutlist {
+	width: 298px;
+	height: 288px;
+	border: 1px solid #dadbde;
+	overflow-y: scroll;
+}
+
+.a_aboutlist ul li {
+	width: 264px;
+	padding: 5px 8px 5px 8px;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.a_aboutc {
+	width: 27px;
+	height: 290px;
+	text-align: center;
+	font-size: 18px;
+	overflow: hidden;
+}
+
+.a_aboutcb {
+	position: relative;
+	top: 45%;
+	color: #808080;
+}
+
+.a_yxinput {
+	position: absolute;
+	top: 0px;
+	visibility: hidden;
+}
+
+/*内容图片上传*/
+.a_upload_bt {
+	background: url(../../../../admin/template/image/sfile.png) no-repeat;
+	width: 120px;
+	height: 24px;
+}
+
+.a_upload_area {
+	height: 280px;
+	overflow-y: auto;
+}
+
+.a_upload_lists {
+	
+}
+
+.a_upload_lists ul li {
+	list-style: none;
+	float: left;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 2px;
+	width: 110px;
+}
+
+.a_upload_pic_text {
+	width: 98%;
+	height: 20px;
+	line-height: 20px;
+}
+
+.a_upload_cover {
+	
+}
+
+.a_upload_coverc a {
+	color: #FF0000;
+	text-decoration: none;
+}
+
+.a_upload_coverc a:hover {
+	color: #FF0000;
+	text-decoration: underline;
+}
+
+.a_upload_wait {
+	
+}
+
+.a_upload_wait ul li {
+	border-bottom: 1px solid #dadbde;
+}
+
+.a_upload_wait ul li p {
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.a_upload_wait_title {
+	margin-left: 5px;
+	width: 40%;
+	overflow: hidden;
+}
+
+.a_upload_wait_size {
+	margin-left: 5px;
+	width: 20%;
+	overflow: hidden;
+}
+
+.a_upload_wait_pro {
+	margin-left: 5px;
+	width: 25%;
+	color: #FF0000;
+	overflow: hidden;
+}
+
+.a_upload_wait_do {
+	margin-left: 5px;
+	width: 10%;
+	color: #808080;
+	overflow: hidden;
+}
+
+.a_upload_wait_do a {
+	color: #FF0000;
+	text-decoration: none;
+}
+
+.a_upload_wait_do a:hover {
+	color: #FF0000;
+	text-decoration: underline;
+}

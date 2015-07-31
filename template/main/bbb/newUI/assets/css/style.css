@@ -390,3 +390,10 @@ padding:5px;/* border:1px solid #edeef0;*/ }
     color: rgb(0, 92, 255);
     text-decoration: underline;
 }
+
+/** job.php?ac=assess
+*
+*/
+.zh-assess-border-top {
+	border-top: 1px solid #ddd;
+}

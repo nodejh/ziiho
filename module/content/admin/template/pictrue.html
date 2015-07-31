@@ -1,0 +1,160 @@
+{modtemplate admin/template/adm_header}
+
+<!--条件筛选开始-->
+<div class="cont_z">
+	<table>
+		<tr>
+			<td width="8%">主题ID:</td>
+			<td width="92%"><input type="text" class="cont_zt6" name="qaid"
+				value="{field:qaid/}" /></td>
+		</tr>
+
+		<tr>
+			<td width="8%">按时间段:</td>
+			<td width="92%"><select name="qday"
+				class="width160px cont_sh cont_zt0">
+					<option value="0">不限</option> {loop config_value_get('where_day')
+					$k $val}
+					<option value="{field:k/}" {if $val['val']==$day}selected="selected"{/if}>{field:val.title/}</option>
+					{/loop}
+			</select></td>
+		</tr>
+
+		<tr>
+			<td width="8%">排序方式:</td>
+			<td width="92%"><span class="c_l"> <select name="qorder"
+					class="width100px cont_sh cont_zt0"> {loop
+						config_value_get('orderby') $k $val}
+						<option value="{field:k/}" {if $val['val']==$orderby}selected="selected"{/if}>{field:val.title/}</option>
+						{/loop}
+				</select>
+			</span> <span class="c_l c_ml10px"> <select name="qnum"
+					class="width100px cont_sh cont_zt0"> {loop
+						config_value_get('data_num') $k $val}
+						<option value="{field:k/}" {if $val['val']==$data_num}selected="selected"{/if}>{field:val.title/}</option>
+						{/loop}
+				</select>
+			</span> <span class="c_l c_ml10px">
+					<button type="button" class="cont_dod" id="query_bt"
+						onclick="article_adm_picture_query();">提交查询</button>
+			</span></td>
+		</tr>
+
+	</table>
+</div>
+<div class="clr"></div>
+<!--条件筛选结束-->
+
+<!--内容开始-->
+<div class="cont_z">
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_picid"
+				onclick="checkedall(this.name,'picid_arr')" /></td>
+			<td width="8%">ID编号</td>
+			<td width="6%">图片预览</td>
+			<td width="38%">主题名称</td>
+			<td width="10%">发布者</td>
+			<td width="8%">图片类型</td>
+			<td width="8%">图片大小</td>
+			<td width="14%">发布时间</td>
+		</tr>
+
+		{if array_key_val('total_num',$pg)>=1} {dbres $lists $val}
+		<tr id="clist_{field:val.picid/}" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="checkbox" name="picid_arr"
+				value="{field:val.picid/}" /></td>
+			<td width="8%" class="color1">{field:val.picid/}</td>
+			<td width="6%" class="anc"><a
+				href="{print show_uf($val['file_name'])/}" target="_blank"><img
+					src="{print show_uf($val['file_name'])/}" width="50" /></a></td>
+			<td width="38%">{eval
+				$article=$A->article_query('aid',$val['aid']);/} <a
+				href="{url 'index','mod/article/ac/content/op/detail/id/'.$article['aid']/}"
+				target="_blank">{field:article.title/}</a> {eval $article=NULL;/}
+			</td>
+			<td width="10%" class="anc">{eval
+				$member=member_query($val['uid']);/} <a
+				href="{url 'index','mod/member/ac/index/uid/'.$member['uid']/}"
+				target="_blank">{field:member.nickname/}</a> {eval $member=NULL;/}
+			</td>
+			<td width="8%">{field:val.file_type/}</td>
+			<td width="8%">{print
+				format_file_size(get_filesize(show_uf($val['file_name'],true)))/}</td>
+			<td width="14%" class="color1">{datestyle $val['ctime'],'Y-m-d
+				H:i'/}</td>
+		</tr>
+		{/dbres} {else}
+		<tr id="clist_0" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td colspan="8"><font class="color6">暂无内容显示</font></td>
+		</tr>
+		{/if}
+
+		<tr class="cont_dbg">
+			<td colspan="8">{modtemplate admin/template/page}</td>
+		</tr>
+
+		<tr style="border-bottom-style: dashed;">
+			<td colspan="8"><strong>操作选项</strong></td>
+		</tr>
+
+		<tr id="do_s3" style="border-bottom-style: dashed;"
+			onmouseover="currentbg(this)" onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="radio" name="ck_dosign"
+				value="{field:doaction.delete.field/}" /></td>
+			<td colspan="7"><span>删除</span><span class="sign_a cont_c2"></span>
+			</td>
+		</tr>
+
+		<tr style="border: none;">
+			<td colspan="8"><input type="button" class="cont_dod" id="dobt"
+				value="提交" onclick="article_picture_list_do()" /></td>
+		</tr>
+
+	</table>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=['#query_bt','#dobt'];
+/*操作类型*/
+var actionType={'del':"{field:doaction.delete.field/}"};
+var actionTypeUrl={'del':"{url 'index','mod/article/ac/admin/op/picture/ao/picture_del'/}"};
+
+function article_adm_picture_query(t){
+	var qday=selectval("qday");
+	var qorder=selectval("qorder");
+	var qnum=selectval("qnum");
+	var qaid=inputval("qaid");
+	var datas={'qday':qday,'qorder':qorder,'qnum':qnum,'qaid':qaid};
+	var do_url="{url 'index','mod/article/ac/admin/op/picture/ao/picture_qrs'/}";
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+
+function article_picture_list_do(){
+	var actionValue=getboxfirst("ck_dosign");
+	var picid_arr=checkedval("picid_arr");
+	var picid_len=picid_arr.length;
+	if(!isVal(actionValue)){
+		return false;
+	}
+	if(picid_len<1){
+		mydialog({'data':'{lang global:select_is_null/}'});
+		return false;
+	}
+	switch(actionValue){
+		case actionType.del:
+			/*删除操作*/
+			datas=arr_merge({'picid':picid_arr},callback_param);
+			mydialog({'data':'{lang global:del_info_prompt/}','showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':actionTypeUrl.del,'actionData':datas,'urlTarget':_CJG.MF}});
+		break;
+	}
+}
+</script>
+
+{modtemplate admin/template/adm_footer}

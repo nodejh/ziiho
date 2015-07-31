@@ -1,0 +1,96 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--提示信息开始-->
+<div class="c_w100 c_mt5px adm_bb_dashed c_pb10px">
+	<p class="c_mt5px c_ml5px color2 fw">提示:</p>
+	<p class="c_mt5px c_ml5px color1">1、通过此聚合标签来指定主题显示方式</p>
+	<div class="clr"></div>
+</div>
+<div class="clr"></div>
+<!--提示信息结束-->
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_labelid"
+				onclick="checkedall(this.name,'labelid_arr')" /></td>
+			<td width="6%">ID编号</td>
+			<td width="70%">标签名称</td>
+			<td width="20%">操作时间</td>
+		</tr>
+
+		{if array_key_val('total_num',$pg)>=1} {dbres $result $val}
+		<tr id="labelid_{field:val.labelid/}" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="checkbox" name="labelid_arr"
+				value="{field:val.labelid/}" /></td>
+			<td width="6%" class="color1">{field:val.labelid/}</td>
+			<td width="70%"><input type="text" class="cont_zt6"
+				name="title_{field:val.labelid/}" value="{field:val.title/}" /></td>
+			<td width="20%" class="color1">{datestyle $val['ctime'],'Y-m-d
+				H:i'/}</td>
+		</tr>
+		{/dbres} {/if}
+		<tr id="menu_list_p" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="10%" colspan="2" style="text-align: right;"><span
+				class="cont_c2">添加:</span></td>
+			<td width="70%"><input type="text" class="cont_zt6" name="title" /></td>
+			<td width="20%" colspan="2"><input type="button"
+				class="cont_dod" id="addbt" value="添加"
+				onclick="article_adm_label_add()" /></td>
+		</tr>
+		<tr class="cont_dbg">
+			<td colspan="4"><span class="c_l"> <input type="checkbox"
+					name="ck_dosign" value="1" />&nbsp;<span class="cont_c2">删?</span>&nbsp;&nbsp;<input
+					type="button" class="cont_dod" id="dobt" value="提交"
+					onclick="article_adm_label_listdo()" /></span> <span class="c_r">{modtemplate
+					admin/template/page}</span></td>
+		</tr>
+	</table>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=['#addbt','#dobt'];
+var urls={
+	'baseadd':"{url 'index','mod/article/ac/admin/op/label/ao/label_baseadd'/}",
+	'baseedit':"{url 'index','mod/article/ac/admin/op/label/ao/label_baseedit'/}",
+	'del':"{url 'index','mod/article/ac/admin/op/label/ao/label_del'/}"
+};
+function article_adm_label_add(do_url){
+	var title=inputval("title");
+	var datas={'title':title};
+	ajaxAction({'actionUrl':urls.baseadd,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+function article_adm_label_listdo(do_url_edit,do_url_del){
+	var labelid_arr=checkedval("labelid_arr");
+	var labelid_len=labelid_arr.length;
+	var title_arr=[];
+	if(labelid_len<1){
+		mydialog({'data':'{lang global:select_is_null/}'});
+		return false;
+	}
+	var datas={};
+	if(!isVal(getboxfirst("ck_dosign"))){
+		/*编辑操作*/
+		for(var i=0;i<labelid_len;i++){
+			title_arr.push(inputval("title_"+labelid_arr[i]));	
+		}
+		datas={'labelid':labelid_arr,'title':title_arr};
+		ajaxAction({'actionUrl':urls.baseedit,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});	
+	}else{
+		/*删除操作*/
+		datas=arr_merge({'labelid':labelid_arr},callback_param);
+		mydialog({'data':'{lang global:del_info_prompt/}','showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':urls.del,'actionData':datas,'urlTarget':_CJG.MF}});
+	}
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

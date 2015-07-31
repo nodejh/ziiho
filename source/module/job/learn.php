@@ -37,6 +37,56 @@ switch (_get ( 'op' )) {
 		
 		include _g ( 'template' )->name ( 'job', 'learn-view', true );
 		break;
+    case 'assess':
+        $parentResult = $JMODEL->readSort();
+
+        $spid = null;
+        if(!_g('validate')->hasget('spid')){
+            $spid = my_array_value('sortid', $parentResult[0]);
+        }else{
+            $spid = _get('spid');
+            if(!_g('validate')->pnum($spid)){
+                smsg(lang('200010'));
+                return null;
+            }
+        }
+        $childResult = array();
+        if(_g('validate')->pnum($spid)){
+            $childResult = $JMODEL->readSort($spid);
+            $childResult = (!is_array($childResult) ? array() : $childResult);
+        }
+
+        /* 职位条件id */
+        $scid = 'a';
+        if(_g('validate')->hasget('scid')){
+            $scid = _get('scid');
+            if($scid != 'a' && !_g('validate')->pnum($scid)){
+                smsg(lang('200010'));
+                return null;
+            }
+        }
+
+        $__scidArr = array();
+        if($scid == 'a'){
+            foreach ($childResult as $cvalue){
+                $__scidArr[] = $cvalue['sortid'];
+            }
+        }else{
+            $__scidArr[] = $scid;
+        }
+        /* 获取职位 */
+        $JJOB->db->from($JJOB->t_job_job);
+        $JJOB->db->where_in('sortid', $__scidArr);
+        $pageData = _g('page')->c($JJOB->db->count(), 15, 10, _get('page'));
+        $JJOB->db->order_by('ctime', 'DESC');
+        $JJOB->db->limit($pageData['start'], $pageData['size']);
+        $JJOB->db->select();
+        $dataResult = $JJOB->db->get_list();
+
+        $pageData['uri'] = 'job/ac/learn/spid/' . $spid . '/scid/' . $scid . '/page/';
+
+        include _g ( 'template' )->name ( 'job', 'assess', true );
+        break;
 	default :
 		$parentResult = $JMODEL->readSort();
 		

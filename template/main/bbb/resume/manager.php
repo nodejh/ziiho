@@ -1,20 +1,20 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
-<?php include _g('template')->name('@', 'header', true); ?>
-<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
-<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
+<?php include _g('template')->name('@', 'header_center', true); ?>
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
 
 <script type="text/javascript" src="<?php prt(_g('template')->dir('resume')); ?>/js/resume.js"></script>
 
 <!-- //cuser_center -->
-<div class="cuser_center clearfix" id="cuser_center">
+<div class="cuser_center clearfix o-main" id="cuser_center">
 <!-- //cuser_z -->
-<div class="cuser_z clearfix">
+<div class="cuser_z clearfix o-left">
 	<?php include _g('template')->name('user', 'center_nav', true); ?>
 </div>
 <!-- cuser_z// -->
 
 <!-- //cuser_y -->
-<div class="cuser_y clearfix">
+<div class="cuser_y clearfix o-right">
 	<div class="label">
     	<a href="<?php prt($writeUrl); ?>">+创建简历</a>
     </div>
@@ -45,7 +45,7 @@
                 <td width="15%"><?php prt(person_time($rRs['ctime'])); ?></td>
                 <td width="15%"><?php prt($rRs['ctime'] == $rRs['mtime'] ? '-' : person_time($rRs['mtime'])); ?></td>
                 <td width="15%">&nbsp;</td>
-                <td width="5%"><a href="#">预览</a></td>
+                <td width="5%"><a href="<?php prt(_g('uri')->su('resume/ac/manager/op/view')); ?>">预览</a></td>
                 <td width="30%" class="ops"><a href="<?php prt($writeUrl . '&rid=' . $rRs['resumeid']); ?>">修改</a><a href="#" onclick="return resumeDo_delete(<?php prt($rRs['resumeid'])?>);">删除</a></td>
             </tr>
             <?php endwhile; ?>

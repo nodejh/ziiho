@@ -1,0 +1,306 @@
+{modtemplate admin/template/adm_header}
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<ul>
+
+		<ul>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>水印功能:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						{eval $index=0;/} {loop yesno_val() $key $val} {eval $index++;/} <span
+							class="c_l {if $index>1}c_ml10px{/if}"><input type="radio"
+							name="iswater" value="{field:key/}" {if
+							config_val('iswater',$sets,yesno_val('check','field'))==$key}
+							checked="checked" {/if} />&nbsp;{field:val.title3/}</span> {/loop}
+					</div>
+					<div class="cont_li_p2_2">是否为图片添加水印</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>水印位置:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						{eval $index=0;/} {loop config_value_get('imagewaterpostion') $key
+						$val} {eval $index++;/}
+						<p class="c_l c_mt5px c_mr10px">
+							<input type="radio" name="position" value="{field:key/}" {if
+								config_val('position',$sets)==$key} checked="checked" {/if} />&nbsp;{field:val.title/}
+						</p>
+						{if $index==1}
+						<div class="clr"></div>
+						{else} {eval $indexflag=$index-1/} {if $indexflag>1 &&
+						$indexflag%3<1}
+						<div class="clr"></div>
+						{/if} {/if} {/loop}
+					</div>
+					<div class="cont_li_p2_2">设置添加水印的位置，不支持动画*.GIF格式</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>添加水印条件:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						w:&nbsp;<input type="text" class="cont_zt4" name="allow_width"
+							value="{print config_val('allow_width',$sets)/}" />&nbsp;&nbsp;h:&nbsp;<input
+							type="text" class="cont_zt4" name="allow_height"
+							value="{print config_val('allow_height',$sets)/}" />
+					</div>
+					<div class="cont_li_p2_2">设置水印添加的条件，两个参数分别代表(width、height)，参数值必须为大于或等于0的整数，小于此尺寸的图片附件将不添加水印</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>水印位置偏移:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						x:&nbsp;<input type="text" class="cont_zt4" name="x"
+							value="{print config_val('x',$sets)/}" />&nbsp;&nbsp;y:&nbsp;<input
+							type="text" class="cont_zt4" name="y"
+							value="{print config_val('y',$sets)/}" />
+					</div>
+					<div class="cont_li_p2_2">设置添加水印坐标偏移，二个参数分别代表(x、y)，参数值必须为大于或等于0的整数。</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>水印融合度:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_z_txt" name="fusenum"
+							value="{print config_val('fusenum',$sets)/}" />
+					</div>
+					<div class="cont_li_p2_2">设置 GIF 类型水印图片与原始图片的融合度，参数值为 0～100
+						的整数，数值越大水印图片透明度越低。PNG 类型水印本身具有真彩透明效果，无须此设置。</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>水印质量:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_z_txt" name="quality"
+							value="{print config_val('quality',$sets)/}" />
+					</div>
+					<div class="cont_li_p2_2">设置 JPEG 类型的图片附件添加水印后的质量参数，数值为 0～100
+						的整数，数值越大结果图片效果越好，但尺寸也越大。</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>水印类型:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						{loop config_value_get('imgagewatertype') $key $val}
+						<p class="cont_li_p2_3">
+							<input type="radio" name="type" id="type_{field:key/}"
+								value="{field:key/}" {if config_val('type',$sets)==$key}
+								checked="checked" {/if} onclick="w_enable('{field:key/}')" />&nbsp;{field:val.title/}
+						</p>
+						{/loop}
+					</div>
+					<div class="cont_li_p2_2">请选择添加水印类型</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li fielditem="image" class="c_none">
+				<div class="cont_li_p1">
+					<strong>水印图片文件:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_z_txt" name="image"
+							value="{print config_val('image',$sets)/}" />
+					</div>
+					<div class="cont_li_p2_2">填写水印图片文件作为添加水印的图片文件，文件路径为{field:_G.web.staticpath/}image/下，若该水印图片不存在，水印图片功能无效。</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li fielditem="text" class="c_none">
+				<div class="cont_li_p1">
+					<strong>水印字体文件:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_z_txt" name="ttf"
+							value="{print config_val('ttf',$sets)/}" />
+					</div>
+					<div class="cont_li_p2_2">填写水印字体文件作为添加水印的字体文件，文件路径为{field:_G.web.staticpath/}font/下，若该水字体不存在，水印文本文字功能无效。</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li fielditem="text" class="c_none">
+				<div class="cont_li_p1">
+					<strong>水印文本:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_z_txt" name="text"
+							value="{print config_val('text',$sets)/}" />
+					</div>
+					<div class="cont_li_p2_2">设置添加水印文本，不能超过200个字</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li fielditem="text" class="c_none">
+				<div class="cont_li_p1">
+					<strong>水印文本字体大小:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_z_txt" name="fontsize"
+							value="{print config_val('fontsize',$sets)/}" />
+					</div>
+					<div class="cont_li_p2_2">设置添加水印文本字体大小</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li fielditem="text" class="c_none">
+				<div class="cont_li_p1">
+					<strong>水印文本字体颜色:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_z_txt" name="fontcolor"
+							value="{print config_val('fontcolor',$sets)/}" />
+					</div>
+					<div class="cont_li_p2_2">输入十六进制颜色，代表添加水印文本字体颜色，如#FFFFFF</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li fielditem="text" class="c_none">
+				<div class="cont_li_p1">
+					<strong>水印文本字体倾斜角度:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_z_txt" name="angle"
+							value="{print config_val('angle',$sets)/}" />
+					</div>
+					<div class="cont_li_p2_2">设置水印文本字体倾斜角度，参数值为大于或等于0的整数</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+		</ul>
+
+		<div class="clr"></div>
+
+		<div class="cont_doc">
+			<span class="cont_dobt"><input type="button" class="cont_dod"
+				id="dobt" value="提交"
+				onclick="article_adm_picturewater_set('{url 'index','mod/article/ac/admin/op/set/ao/picturewater_do'/}')" /></span>
+		</div>
+
+		<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+$(document).ready(function(){
+	w_enable("{print config_val('type',$sets)/}");
+});
+function w_enable(type){
+	if(type=='text'){
+		setHtmlDisplay($("li[fielditem=text]"));
+		setHtmlDisplay($("li[fielditem=image]"),'none');
+	}else{
+		setHtmlDisplay($("li[fielditem=text]"),'none');
+		setHtmlDisplay($("li[fielditem=image]"));
+	}
+	setchecked("type_"+type,"id",true);
+}
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','isajax':1}};
+var button_ids='#dobt';
+function article_adm_picturewater_set(do_url){
+	var position=getboxfirst("position");
+	var allow_width=inputval("allow_width");
+	var allow_height=inputval("allow_height");
+	var x=inputval("x");
+	var y=inputval("y");
+	var fusenum=inputval("fusenum");
+	var quality=inputval("quality");
+	var type=getboxfirst("type");
+	var image=inputval("image");
+	var ttf=inputval("ttf");
+	var text=inputval("text");
+	var _fontsize=inputval("fontsize");
+	var _fontcolor=inputval("fontcolor");
+	var angle=inputval("angle");
+	
+	var datas={'position':position,'allow_width':allow_width,'allow_height':allow_height,'x':x,'y':y,'fusenum':fusenum,'quality':quality,'type':type,'image':image,'ttf':ttf,'text':text,'fontsize':_fontsize,'fontcolor':_fontcolor,'angle':angle};
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+</script>
+
+{modtemplate admin/template/adm_footer}

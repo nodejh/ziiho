@@ -561,6 +561,8 @@ em {
 .hd1.clearfix.o-logo {
     width:auto;
     margin-top:6px;
+    left: 20px;
+    position: absolute;
 }
 .o-form-home {
     width:270px;

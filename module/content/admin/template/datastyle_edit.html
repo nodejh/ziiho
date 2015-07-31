@@ -1,0 +1,145 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<div class="main_cont">
+
+	<!--导航开始-->
+	<!--{modtemplate admin/template/menu_nav}-->
+	<!--导航结束-->
+
+	<!--提示开始-->
+	<!--{modtemplate common/admin/template/datastyle_description}-->
+	<!--提示结束-->
+
+	<!--内容列表开始-->
+	<div class="cont_z">
+
+		<ul>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>{lang common:module}:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">{echo get_module($module,'title')}</div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>排序编号:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_z_txt" name="ds_listorder"
+							value="{array_value 'listorder',$datastyle,0}" />
+					</div>
+					<div class="cont_li_p2_2">
+						<p class="cont_c1">排序编号，用于列表排列顺序显示</p>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>模板名称:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<input type="text" class="cont_z_txt" name="ds_title"
+							value="{array_value 'title',$datastyle}" />
+					</div>
+					<div class="cont_li_p2_2">
+						<p class="cont_c1">模板名称</p>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="adm_dv">
+					<!--{loop $variable_arr $val}-->
+					<p>
+						<span>
+							<!--{$val['title']}-->:
+						</span><span class="c_ml2px"><a href="javascript:;"
+							onclick="insertchar('#content',('{$val['val']}'))">
+								<!--{echo array_key_val('tag',$val,$val['val'])}-->
+						</a></span>
+					</p>
+					<!--{/loop}-->
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<!--提示开始-->
+			<!--{modtemplate common/admin/template/htmltag}-->
+			<!--提示结束-->
+
+			<li>
+				<div class="contbm">
+					<div class="c_ml5px">
+						<textarea name="content" id="content" class="tbs adm_dvt">{echo array_key_val('content',$datastyle)}</textarea>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+		</ul>
+
+		<div class="clr"></div>
+
+		<div class="cont_doc">
+			<span class="c_l cont_dobt"><input type="button"
+				class="cont_dod" id="dobt" value="{lang common:submit}"
+				onclick="article_adm_datastyle_edit('{$save_url}','{$dsid}')" /></span> <span
+				class="c_l c_ml10px"><input type="button" class="cont_dod"
+				id="gobt" value="{lang common:goback}"
+				onclick="gourl('{$callback_url}')" /></span>
+			<div class="clr"></div>
+		</div>
+
+		<div class="clr"></div>
+	</div>
+	<!--内容列表结束-->
+
+	<div class="clr"></div>
+</div>
+<script type="text/javascript"
+	src="{$_G['app']['path_static']}js/insertfocus.js"></script>
+<script language="javascript">
+$(document).ready(function(){
+	//$("#content").textareaheightauto({maxHeight:300,minHeight:138});
+});
+/*数据调用操作*/
+var callback_param={'callback_param':{'msg_call':'myalert','msg_call_b':'myalert','msg_call_c':'common_adm_datablock_back','msg_href':'{$callback_url}'}};
+var param_back={'input_id':'input_id_0','input_dourl':'input_dourl_0'};
+function article_adm_datastyle_edit(do_url,dsid){
+	var listorder=inputvals('ds_listorder');
+	var title=inputvals('ds_title');
+	var content=textareaval('content');
+	
+	/*回调参数*/
+	var id=inputvals(param_back.input_id);
+	var url=inputvals(param_back.input_dourl);
+	dsid=(id.length<1)?dsid:id;
+	do_url=(url.length<1)?do_url:url;
+	
+	var datas={'dsid':dsid,'listorder':listorder,'title':title,'content':content};
+	publishdo(do_url,arr_merge(datas,callback_param),'',"",["#dobt","#gobt"],param_back);
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

@@ -1,0 +1,311 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--条件筛选开始-->
+<div class="cont_z">
+	<table>
+		<tr>
+			<td width="8%">主题状态:</td>
+			<td width="92%"><span class="c_l"> <select
+					name="subject_status" class="width160px cont_sh cont_zt0">
+						<option
+							value="{print article_value_get('status','normal','field')/}" {if
+							article_value_get('status','normal','field')==$status_name}selected="selected"{/if}>{print
+							article_value_get('status','normal',title)/}</option>
+						<option
+							value="{print article_value_get('status','check','field')/}" {if
+							article_value_get('status','check','field')==$status_name}selected="selected"{/if}>{print
+							article_value_get('status','check',title)/}</option>
+						<option
+							value="{print article_value_get('status','recycle','field')/}"
+							{if
+							article_value_get('status','recycle','field')==$status_name}selected="selected"{/if}>{print
+							article_value_get('status','recycle',title)/}</option>
+				</select>
+			</span> <span class="c_l c_mt2px c_ml20px">主题ID:</span> <span
+				class="c_l c_ml5px"><input type="text" class="cont_zt6"
+					name="subject_id" value="{field:get_id/}" /></span></td>
+		</tr>
+
+		<tr>
+			<td width="8%">按时间段:</td>
+			<td width="92%"><select name="subject_day"
+				class="width160px cont_sh cont_zt0">
+					<option value="0">不限</option> {loop config_value_get('where_day')
+					$k $val}
+					<option value="{field:k/}" {if $val['val']==$day}selected="selected"{/if}>{field:val.title/}</option>
+					{/loop}
+			</select></td>
+		</tr>
+
+		<tr>
+			<td width="8%">排序方式:</td>
+			<td width="92%"><span class="c_l"> <select
+					name="subject_order" class="width100px cont_sh cont_zt0">
+						{loop config_value_get('orderby') $k $val}
+						<option value="{field:k/}" {if $val['val']==$orderby}selected="selected"{/if}>{field:val.title/}</option>
+						{/loop}
+				</select>
+			</span> <span class="c_l c_ml10px"> <select name="subject_num"
+					class="width100px cont_sh cont_zt0"> {loop
+						config_value_get('data_num') $k $val}
+						<option value="{field:k/}" {if $val['val']==$data_num}selected="selected"{/if}>{field:val.title/}</option>
+						{/loop}
+				</select>
+			</span> <span class="c_l c_ml10px">
+					<button type="button" class="cont_dod" id="query_bt"
+						onclick="article_adm_content_query();">提交查询</button>
+			</span></td>
+		</tr>
+
+	</table>
+</div>
+<div class="clr"></div>
+<!--条件筛选结束-->
+
+<!--内容开始-->
+<div class="cont_z">
+	<table>
+		<tr class="cont_zbg">
+			<td width="4%"><input type="checkbox" name="ck_aid"
+				onclick="checkedall(this.name,'aid_arr')" /></td>
+			<td width="6%">ID编号</td>
+			<td width="30%">主题名称</td>
+			<td width="14%">所属分类</td>
+			<td width="10%">发布者</td>
+			<td width="6%">图片数</td>
+			<td width="6%">评论数</td>
+			<td width="14%">发布时间</td>
+			<td width="10%">操作</td>
+		</tr>
+
+		{if array_key_val('total_num',$pg)>=1} {dbres $contentList $val}
+		<tr id="clist_{field:val.aid/}" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="checkbox" name="aid_arr"
+				value="{field:val.aid/}" /></td>
+			<td width="6%" class="color1">{field:val.aid/}</td>
+			<td width="30%" class="anc">
+				<p>
+					<a
+						href="{url 'index','mod/article/ac/content/op/detail/id/'.$val['aid']/}"
+						target="_blank">{field:val.title/}</a>
+				</p> {eval $labels=$al->labelidlist($val['aid']);/} {if
+				array_key_val('total_num',array_key_val(0,$labels))>=1}
+				<p>
+					<span class="color1">聚合标签:</span> {dbres array_key_val(1,$labels)
+					$labelval} {eval
+					$label=$al->label_query('labelid',$labelval['labelid'])/} <span
+						class="c_mr5px">[{field:label.title/}]</span> {eval $label=NULL/}
+					{/dbres}
+				</p> {/if} {eval $labels=NULL/} {eval
+				$attrrs=common_attr_query('attrid',$val['attrid']);/} {if
+				check_is_array($attrrs)==1}
+				<p class="c_mt2px">
+					<span class="color1">属性标签:</span><span class="color7">
+						[{print array_key_val('title',$attrrs)/}]</span>
+				</p> {/if} {eval $attrrs=NULL/}
+			</td>
+			<td width="14%" class="anc">{eval $n=0;/} {eval
+				$cat_nav=common_category_nav(array('module'=>$module,'catid'=>$val['catid']),NULL,$val['catid']);/}
+				{if check_is_array(array_key_val('title_arr',$cat_nav))==1} {loop
+				$cat_nav['title_arr'] $cval} {eval $n++;/} {eval
+				$ccatid=array_key_val(($n-1),array_key_val('catid_arr',$cat_nav))/}
+				<a
+				href="{url 'index','mod/article/ac/content/op/lists/catid/'.$ccatid/}"
+				target="_blank">{field:cval/}</a>{if
+				$n!=$cat_nav['len']}&nbsp;&raquo;&nbsp;{/if} {/loop} {/if} {eval
+				$cat_nav=NULL;/}
+			</td>
+			<td width="10%" class="anc">{eval
+				$member=member_query($val['uid']);/} <a
+				href="{url 'index','mod/member/ac/index/uid/'.$val['uid']/}"
+				target="_blank">{field:member.nickname/}</a> {eval $member=NULL;/}
+			</td>
+			<td width="6%">{field:val.pictures/}</td>
+			<td width="6%">{field:val.comments/}</td>
+			<td width="14%" class="color1">{datestyle $val['ctime'],'Y-m-d
+				H:i'/}</td>
+			<td width="10%" class="anc"><a
+				href="{url 'index','mod/article/ac/admin/op/content/ao/content_write/id/'.$val['aid']/}">编辑</a></td>
+		</tr>
+		{/dbres} {else}
+		<tr id="clist_0" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+			<td colspan="9"><font class="color6">暂无内容显示</font></td>
+		</tr>
+		{/if}
+
+		<tr class="cont_dbg">
+			<td colspan="9">{modtemplate admin/template/page}</td>
+		</tr>
+
+		<tr style="border-bottom-style: dashed;">
+			<td colspan="9"><strong>操作选项</strong></td>
+		</tr>
+
+		{if $doaction['normal']['field']==$status_name}
+		<tr id="do_label" style="border-bottom-style: dashed;"
+			onmouseover="currentbg(this)" onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="radio" name="ck_dosign"
+				value="{field:doaction.label.field/}" /></td>
+			<td colspan="8"><span class="c_l">{field:doaction.label.title/}:</span>
+				{dbres $label_list $val} <span class="c_l c_ml10px"> <input
+					type="checkbox" name="labelid_arr" value="{field:val.labelid/}">&nbsp;{field:val.title/}
+					</option>
+			</span> {/dbres}</td>
+		</tr>
+
+		<tr id="do_attr" style="border-bottom-style: dashed;"
+			onmouseover="currentbg(this)" onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="radio" name="ck_dosign"
+				value="{field:doaction.attr.field/}" /></td>
+			<td colspan="8"><span class="c_l">{field:doaction.attr.title/}:</span>
+				<span class="c_l c_ml5px"> <select name="attrid"
+					class="width160px c_h22px">
+						<option value="0">==请选择==</option> {eval
+						list($attrpg,$attrlist)=common_attr_list();/} {if
+						array_key_val('total_num',$attrpg)>=1} {dbres $attrlist $val}
+						<option value="{field:val.attrid/}">{field:val.title/}</option>
+						{/dbres} {/if}
+				</select>
+			</span></td>
+		</tr>
+
+		<tr id="do_s1" style="border-bottom-style: dashed;"
+			onmouseover="currentbg(this)" onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="radio" name="ck_dosign"
+				value="{field:doaction.move.field/}" /></td>
+			<td colspan="8"><span class="c_l">{field:doaction.move.title/}</span>
+				<span class="c_l c_ml5px"><select name="catid"
+					class="c_h22px">{field:category_option/}
+				</select></span></td>
+		</tr>
+		{/if} {if $doaction['normal']['field']!=$status_name}
+		<tr id="do_s10" style="border-bottom-style: dashed;"
+			onmouseover="currentbg(this)" onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="radio" name="ck_dosign"
+				value="{field:doaction.normal.field/}" /></td>
+			<td colspan="8">{field:doaction.normal.title/}</td>
+		</tr>
+		{/if} {if $doaction['check']['field']!=$status_name}
+		<tr id="do_s4" style="border-bottom-style: dashed;"
+			onmouseover="currentbg(this)" onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="radio" name="ck_dosign"
+				value="{field:doaction.check.field/}" /></td>
+			<td colspan="8">{field:doaction.check.title/}</td>
+		</tr>
+		{/if} {if $doaction['recycle']['field']!=$status_name}
+		<tr id="do_s2" style="border-bottom-style: dashed;"
+			onmouseover="currentbg(this)" onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="radio" name="ck_dosign"
+				value="{field:doaction.recycle.field/}" /></td>
+			<td colspan="8">{field:doaction.recycle.title/}</td>
+		</tr>
+		{/if}
+
+		<tr id="do_s3" style="border-bottom-style: dashed;"
+			onmouseover="currentbg(this)" onmouseout="currentbg(this,1)">
+			<td width="4%"><input type="radio" name="ck_dosign"
+				value="{field:doaction.delete.field/}" /></td>
+			<td colspan="8"><span>{field:doaction.delete.title/}</span></td>
+		</tr>
+
+		<tr style="border: none;">
+			<td colspan="9"><input type="button" class="cont_dod" id="dobt"
+				value="提交" onclick="article_adm_listdo()" /></td>
+		</tr>
+
+	</table>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':"{field:callback_url/}",'isajax':1}};
+var button_ids=['#query_bt','#dobt'];
+/*操作类型*/
+var actionStatusUrl="{url 'index','mod/article/ac/admin/op/content/ao/content_status'/}";
+var actionTypeName={
+	'v_attr':"{field:doaction.attr.field/}",
+	'v_label':"{field:doaction.label.field/}",
+	'v_move':"{field:doaction.move.field/}",
+	'v_normal':"{field:doaction.normal.field/}",
+	'v_check':"{field:doaction.check.field/}",
+	'v_re':"{field:doaction.recycle.field/}",
+	'v_del':"{field:doaction.delete.field/}"
+};
+var actionTypeUrl={
+	'v_attr':"{url 'index','mod/article/ac/admin/op/content/ao/content_attrset'/}",
+	'v_label':"{url 'index','mod/article/ac/admin/op/content/ao/content_labelset'/}",
+	'v_move':"{url 'index','mod/article/ac/admin/op/content/ao/content_move'/}",
+	'v_normal':actionStatusUrl,
+	'v_check':actionStatusUrl,
+	'v_re':actionStatusUrl,
+	'v_del':"{url 'index','mod/article/ac/admin/op/content/ao/content_del'/}"
+};
+/*搜索*/
+function article_adm_content_query(){
+	var subject_status=selectval("subject_status");
+	var subject_day=selectval("subject_day");
+	var subject_order=selectval("subject_order");
+	var subject_num=selectval("subject_num");
+	var subject_id=inputval("subject_id");
+	var datas={'subject_status':subject_status,'subject_day':subject_day,'subject_order':subject_order,'subject_num':subject_num,'subject_id':subject_id};
+	var do_url="{url 'index','mod/article/ac/admin/op/content/ao/content_qrs'/}";
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+/*列表操作*/
+function article_adm_listdo(){
+	var dosign=getboxfirst("ck_dosign");
+	var aid_arr=checkedval("aid_arr");
+	var aid_len=aid_arr.length;
+	if(!isVal(dosign)){
+		return false;
+	}
+	if(aid_len<1){
+		mydialog({'data':'{lang global:select_is_null/}'});
+		return false;
+	}
+	var datas={};
+	switch(dosign){
+		case actionTypeName.v_attr:
+			var attrid=selectval('attrid');
+			datas={'aid':aid_arr,'attrid':attrid};
+			ajaxAction({'actionUrl':actionTypeUrl.v_attr,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+		break;
+		case actionTypeName.v_label:
+			var labelid=checkedval("labelid_arr");
+			datas={'aid':aid_arr,'labelid':labelid};
+			ajaxAction({'actionUrl':actionTypeUrl.v_label,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+		break;
+		case actionTypeName.v_move:
+			var catid=selectval('catid');
+			if(check_nums(catid)<1){
+				myalert({'msg_str':'请选择分类'});
+				return false;
+			}
+			datas={'aid':aid_arr,'catid':catid};
+			ajaxAction({'actionUrl':actionTypeUrl.v_move,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+		break;
+		case actionTypeName.v_normal:
+			datas={'aid':aid_arr,'status':actionTypeName.v_normal};
+			ajaxAction({'actionUrl':actionTypeUrl.v_normal,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+		break;
+		case actionTypeName.v_check:
+			datas={'aid':aid_arr,'status':actionTypeName.v_check};
+			ajaxAction({'actionUrl':actionTypeUrl.v_check,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+		break;
+		case actionTypeName.v_re:
+			datas={'aid':aid_arr,'status':actionTypeName.v_re};
+			ajaxAction({'actionUrl':actionTypeUrl.v_re,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+		break;
+		case actionTypeName.v_del:
+			/*删除操作*/
+			datas=arr_merge({'aid':aid_arr},callback_param);
+			mydialog({'data':'{lang global:del_info_prompt/}','showCancelButton':true,'okClick':'ajaxAction','okClickValue':{'actionUrl':actionTypeUrl.v_del,'actionData':datas,'urlTarget':_CJG.MF}});
+		break;
+	}
+}
+</script>
+<!--{modtemplate admin/template/adm_footer}-->
