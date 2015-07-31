@@ -397,3 +397,9 @@ padding:5px;/* border:1px solid #edeef0;*/ }
 .zh-assess-border-top {
 	border-top: 1px solid #ddd;
 }
+.zh-assess-div {
+    height: 190px;
+}
+.zh-assess-description {
+    height: 40px;
+}

@@ -61,7 +61,7 @@
                 <?php if($pageData['total'] >= 1){ ?>
                     <?php while($rs = _g('db')->result($dataResult)){ ?>
                         <div class="col-sm-6 col-md-3">
-                            <div class="zh-learn-div">
+                            <div class="zh-learn-div zh-assess-div">
                                 <div class="media">
                                     <div class="media-left media-middle zh-learn-imgbox">
                                         <a href="<?php prt(_g('uri')->su('job/ac/company/op/jobrz/id/3/jobid/' . $rs['jobid'])); ?>" target="_blank">
@@ -69,10 +69,10 @@
                                         </a>
                                     </div>
                                     <div class="media-body">
-                                        <h4 class="media-heading"><a href="<?php prt(_g('uri')->su('job/ac/learn/op/assess/jobid/' . $rs['jobid'])); ?>" target="_blank"><?php prt($rs['jname']); ?></a><span class="zh-learn-tips"></span></h4>
+                                        <h4 class="media-heading"><a href="<?php prt(_g('uri')->su('job/ac/company/op/jobrz/id/3/jobid/' . $rs['jobid'])); ?>" target="_blank"><?php prt($rs['jname']); ?></a><span class="zh-learn-tips"></span></h4>
                                     </div>
                                 </div>
-                                <div class="zh-learn-desription">
+                                <div class="zh-learn-desription zh-assess-description">
                                     <a href="<?php prt(_g('uri')->su('job/ac/company/op/jobrz/id/3/jobid/' . $rs['jobid'])); ?>" target="_blank" class="zh-learn-view-a"> Web前端开发工程认证包括...</a>
                                 </div>
                                 <a href="<?php prt(_g('uri')->su('job/ac/company/op/jobrz/id/3/jobid/' . $rs['jobid'])); ?>" target="_blank" class="zh-learn-view-a">
