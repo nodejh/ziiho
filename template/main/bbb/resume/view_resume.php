@@ -16,7 +16,12 @@
         <!-- //cuser_y -->
         <div class="cuser_y clearfix o-right">
             <h1 class="o-title">预览简历</h1>
-
+            <div>
+                <div>
+                    标题
+                </div>
+                
+            </div>
         </div>
         <!-- cuser_y// -->
 
