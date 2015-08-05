@@ -400,6 +400,6 @@ padding:5px;/* border:1px solid #edeef0;*/ }
 .zh-assess-div {
     height: 190px;
 }
-.zh-assess-description {
-    height: 40px;
+div.zh-learn-desription.zh-assess-description {
+    height: 97px;
 }

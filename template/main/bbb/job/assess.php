@@ -17,8 +17,16 @@
 
 
 
+            <!-- //com-bar -->
+            <ul class="nav nav-tabs">
+                    <li role="presentation"  class="active">
+                        <a href="#" class="zh-font-h3 zh-bgcolor-whitegrey"  >认证中心</a>
+                    </li>
+            </ul>
+            <!-- com-bar// -->
+
             <div class="zh-list container-fluid">
-                <div class="row zh-row zh-assess-border-top">
+                <div class="row zh-row">
                     <div class="col-xs-1">
                         <div class="zh-list-title">行业分类：</div>
                     </div>
@@ -61,7 +69,7 @@
                 <?php if($pageData['total'] >= 1){ ?>
                     <?php while($rs = _g('db')->result($dataResult)){ ?>
                         <div class="col-sm-6 col-md-3">
-                            <div class="zh-learn-div zh-assess-div">
+                            <div class="zh-learn-div">
                                 <div class="media">
                                     <div class="media-left media-middle zh-learn-imgbox">
                                         <a href="<?php prt(_g('uri')->su('job/ac/company/op/jobrz/id/3/jobid/' . $rs['jobid'])); ?>" target="_blank">
@@ -73,7 +81,7 @@
                                     </div>
                                 </div>
                                 <div class="zh-learn-desription zh-assess-description">
-                                    <a href="<?php prt(_g('uri')->su('job/ac/company/op/jobrz/id/3/jobid/' . $rs['jobid'])); ?>" target="_blank" class="zh-learn-view-a"> Web前端开发工程认证包括...</a>
+                                    <a href="<?php prt(_g('uri')->su('job/ac/company/op/jobrz/id/3/jobid/' . $rs['jobid'])); ?>" target="_blank" class="zh-learn-view-a"> 该工程认证包括...</a>
                                 </div>
                                 <a href="<?php prt(_g('uri')->su('job/ac/company/op/jobrz/id/3/jobid/' . $rs['jobid'])); ?>" target="_blank" class="zh-learn-view-a">
                                     <div class="zh-learn-view">
