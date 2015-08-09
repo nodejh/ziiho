@@ -59,18 +59,23 @@
                     <li class="bline clearfix">
                         <div class="nn">简历名称:</div>
                         <div class="ii">
-                            <input type="text" class="ii-inp" name="m_rname" value="<?php prt(my_array_value('rname', $resumeSub)); ?>" />
-                            
-                            公开程度:
-                            <select class="sel" name="m_publishlv">
-                                <?php foreach(_g('value')->ra(_g('module')->dv('resume', 100001)) as $v): ?>
+                            <input type="text" class="o-input" name="m_rname" value="<?php prt(my_array_value('rname', $resumeSub)); ?>" />
+
+
+
+                        </div>
+
+                    <li class="bline clearfix">
+                        <div class="nn">公开程度:</div>
+                        <div class="ii">
+                            <select class="sel o-input o-fix-select o-resume-select" name="m_publishlv">
+                            <?php foreach(_g('value')->ra(_g('module')->dv('resume', 100001)) as $v): ?>
                                 <option value="<?php prt($v['v']); ?>" <?php if($v['v'] == my_array_value('publishlv', $resumeSub, -1)){ ?>selected="selected"<?php } ?> ><?php prt($v['name']); ?></option>
-                                <?php endforeach; ?>
+                            <?php endforeach; ?>
                             </select>
-                            
-                            <a class="resumebtn" onclick="return resumeDo_save('<?php prt(_g('uri')->su('resume/ac/manager/op/writedo')); ?>');">保存</a>
                         </div>
                     </li>
+                    <a class="resumebtn btn-ok o-resume-btn-ok" onclick="return resumeDo_save('<?php prt(_g('uri')->su('resume/ac/manager/op/writedo')); ?>');">保存</a>
                 </ul>
                 </form>
                 </div>

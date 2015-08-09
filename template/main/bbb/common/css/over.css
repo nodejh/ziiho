@@ -588,6 +588,52 @@ em {
 }
 
 
+/**
+* resume
+*/
+.cuser_center .cuser_y .company-tab-bd .bd-box ul li .ii .sel.o-fix-select.o-resume-select {
+    width: 215px;
+}
+.o-resume-btn-ok {
+    margin-left: 80px;
+}
+.o-resume-form-width {
+    width: 188px;
+}
+.o-resume-form-width-fix {
+    width: 188px;
+}
+.cuser_center .cuser_y .company-tab-bd .bd-box ul li .ii .sel.o-fix-select.o-resume-form-width {
+    width: 215px;
+}
+.cuser_center .cuser_y .company-tab-bd .bd-box ul li .ii .ii-calendar.o-resume-form-width {
+    width: 188px;
+}
+.o-resume-form-widthselect.sel.o-input.o-fix-select.o-resume-form-width-fix {
+    width: 215px;
+}
+.cuser_center .cuser_y .company-tab-bd .bd-box ul li .ii .sel.o-fix-select.o-resume-form-width-fix {
+    width: 215px;
+}
+.cuser_center .cuser_y .company-tab-bd .bd-box ul li .ii select.sel.mr8 {
+    height: 34px;
+    width: 215px;
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    border: 1px solid #ccc;;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+
+
 /*search form*/
 #searchform { float:left; margin-left:20px; margin:5px 0px 0px; padding:0px; }
 #searchform fieldset { padding:0px; border:none; margin:0px; }

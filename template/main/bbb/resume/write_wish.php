@@ -13,7 +13,7 @@
         <li class="bline clearfix">
             <div class="nn">行业:</div>
             <div class="ii">
-            <select class="sel" name="sortid" wish="sortid" def="<?php prt(my_array_value('sortid', $wishSub)); ?>">
+            <select class="sel o-input o-fix-select o-resume-form-width-fix" name="sortid" wish="sortid" def="<?php prt(my_array_value('sortid', $wishSub)); ?>">
                 <option value="-1">-</option>
             </select>
             </div>
@@ -23,7 +23,7 @@
         <li class="bline clearfix">
             <div class="nn">职位:</div>
             <div class="ii">
-            <select class="sel" name="sortid2" wish="sortid2" def="<?php prt(my_array_value('sortid2', $wishSub)); ?>">
+            <select class="sel o-input o-fix-select o-resume-form-width-fix" name="sortid2" wish="sortid2" def="<?php prt(my_array_value('sortid2', $wishSub)); ?>">
                 <option value="-1">-</option>
             </select>
             </div>
@@ -32,7 +32,7 @@
         <li class="bline clearfix">
             <div class="nn">工作类型:</div>
             <div class="ii">
-            <select class="sel" name="worktype">
+            <select class="sel o-input o-fix-select o-resume-form-width-fix" name="worktype">
                 <option value="-1">-</option>
                 <?php foreach(_g('cache')->selectitem(107) as $k=>$v): ?>
                 <option value="<?php prt($k); ?>" <?php if($k == my_array_value('worktype', $wishSub)){ ?>selected="selected"<?php } ?> ><?php prt($v['sname']); ?></option>
@@ -43,14 +43,14 @@
         <li class="bline clearfix">
             <div class="nn">期望薪资:</div>
             <div class="ii">
-            <select class="sel" name="wagetype">
+            <select class="sel o-input o-fix-select o-resume-form-width-fix" name="wagetype">
                 <option value="-1">-</option>
                 <?php foreach(_g('cache')->selectitem(108) as $k=>$v): ?>
                 <option value="<?php prt($k); ?>" <?php if($k == my_array_value('wagetype', $wishSub)){ ?>selected="selected"<?php } ?> ><?php prt($v['sname']); ?></option>
                 <?php endforeach; ?>
             </select>
             
-            <select class="sel" name="wage">
+            <select class="sel o-input o-fix-select o-resume-form-width-fix" name="wage">
                 <option value="-1">-</option>
                 <?php foreach(_g('cache')->selectitem(116) as $k=>$v): ?>
                 <option value="<?php prt($k); ?>" <?php if($k == my_array_value('wage', $wishSub)){ ?>selected="selected"<?php } ?> ><?php prt($v['sname']); ?></option>
@@ -62,7 +62,7 @@
         <li class="bline clearfix">
             <div class="nn">到岗时间:</div>
             <div class="ii">
-            <select class="sel" name="workstatus">
+            <select class="sel o-input o-fix-select o-resume-form-width-fix" name="workstatus">
                 <option value="-1">-</option>
                 <?php foreach(_g('cache')->selectitem(109) as $k=>$v): ?>
                 <option value="<?php prt($k); ?>" <?php if($k == my_array_value('workstatus', $wishSub)){ ?>selected="selected"<?php } ?> ><?php prt($v['sname']); ?></option>
@@ -73,7 +73,7 @@
         
         <li class="clearfix">
             <div class="nn">自我介绍:</div>
-            <div class="ii"><textarea wish="selfintroduce" name="selfintroduce" style="width:540px; height:80px;"><?php prt(my_array_value('selfintroduce', $wishSub)); ?></textarea></div>
+            <div class="ii"><textarea class="o-input" wish="selfintroduce" name="selfintroduce" style="width:540px; height:80px;"><?php prt(my_array_value('selfintroduce', $wishSub)); ?></textarea></div>
         </li>
     </ul>
     

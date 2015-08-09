@@ -8,24 +8,24 @@
       <li class="bline clearfix">
           <div class="nn">时间:</div>
           <div class="ii">
-          <select class="sel" name="syear">
+          <select class="sel o-input o-fix-select" name="syear">
               <?php for($i = 1960; $i < date('Y'); $i++){ ?>
               <option value="<?php prt($i); ?>" <?php prt($i == my_array_value('syear', $educateRs) ? 'selected="selected"' : null); ?> ><?php prt($i); ?></option>
               <?php } ?>
           </select>
-          <select class="sel" name="smonth">
+          <select class="sel o-input o-fix-select" name="smonth">
               <?php for($i = 1; $i <= 12; $i++){ ?>
               <option value="<?php prt($i); ?>" <?php prt($i == my_array_value('smonth', $educateRs) ? 'selected="selected"' : null); ?> ><?php prt($i); ?></option>
               <?php } ?>
           </select>
           到
-          <select class="sel" name="eyear">
+          <select class="sel o-input o-fix-select" name="eyear">
               <option value="-1"></option>
               <?php for($i = 1960; $i < date('Y'); $i++){ ?>
               <option value="<?php prt($i); ?>" <?php prt($i == my_array_value('eyear', $educateRs) ? 'selected="selected"' : null); ?> ><?php prt($i); ?></option>
               <?php } ?>
           </select>
-          <select class="sel" name="emonth">
+          <select class="sel o-input o-fix-select" name="emonth">
               <option value="-1"></option>
               <?php for($i = 1; $i <= 12; $i++){ ?>
               <option value="<?php prt($i); ?>" <?php prt($i == my_array_value('emonth', $educateRs) ? 'selected="selected"' : null); ?> ><?php prt($i); ?></option>
@@ -38,7 +38,7 @@
       <li class="bline clearfix">
           <div class="nn">学校:</div>
           <div class="ii">
-              <input type="text" class="ii-inp" name="school" _school="<?php prt(my_array_value('educateid', $educateRs)); ?>"  value="<?php prt(my_array_value('school', $educateRs)); ?>" />
+              <input type="text" class="o-input" name="school" _school="<?php prt(my_array_value('educateid', $educateRs)); ?>"  value="<?php prt(my_array_value('school', $educateRs)); ?>" />
           </div>
       </li>
       
@@ -46,20 +46,20 @@
           <div class="nn">专业:</div>
           <div class="ii">
           <span class="z">
-          <select class="sel" name="specialty">
+          <select class="sel o-input o-fix-select" name="specialty">
               <option value="-1">-</option>
               <?php foreach(_g('cache')->selectitem(110) as $k=>$v): ?>
               <option value="<?php prt($k); ?>" <?php prt($k == my_array_value('specialty', $educateRs) ? 'selected="selected"' : null); ?> ><?php prt($v['sname']); ?></option>
               <?php endforeach; ?>
           </select></span>
-          <span class="z"><input type="text" class="ii-inp3" educate="specialty_input" name="specialty_input" value="<?php prt(my_array_value('specialty_input', $educateRs)); ?>" /></span>
+          <span class="z"><input type="text" class="o-input" educate="specialty_input" name="specialty_input" value="<?php prt(my_array_value('specialty_input', $educateRs)); ?>" /></span>
           </div>
       </li>
       
       <li class="bline clearfix">
           <div class="nn">学历:</div>
           <div class="ii">
-          <select class="sel" name="degree">
+          <select class="sel o-input o-fix-select" name="degree">
               <option value="-1">-</option>
               <?php foreach(_g('cache')->selectitem(111) as $k=>$v): ?>
               <option value="<?php prt($k); ?>" <?php prt($k == my_array_value('degree', $educateRs) ? 'selected="selected"' : null); ?> ><?php prt($v['sname']); ?></option>
@@ -71,7 +71,7 @@
       
       <li class="clearfix">
           <div class="nn">专业描述:</div>
-          <div class="ii"><textarea educate="description" name="description" style="width:540px; height:80px;"><?php prt(my_array_value('description', $educateRs)); ?></textarea></div>
+          <div class="ii"><textarea class="o-input" educate="description" name="description" style="width:540px; height:80px;"><?php prt(my_array_value('description', $educateRs)); ?></textarea></div>
       </li>
       
       <li class="bline clearfix">
