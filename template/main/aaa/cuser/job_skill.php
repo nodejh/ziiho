@@ -24,17 +24,26 @@
     	<table class="tbox">
             <tr class="trow-fw trow-bg" >
                 <td width="50%">标题</td>
-                <td width="30%">&nbsp;</td>
+                <td width="20%">&nbsp;</td>
+                <td width="10%">来源</td>
                 <td width="20%">操作</td>
             </tr>
             
             <?php while($skRs = _g('db')->result($skillResult)): ?>
             <tr class="trow-bline trow-hover" >
                 <td width="50%"><?php prt($skRs['sname']); ?></td>
-                <td width="30%" class="cb">&nbsp;</td>
+                <td width="20%" class="cb">&nbsp;</td>
+                <td width="10%" class="cb"><?php prt($JModel->Provide2QuestionFrom($skRs['isdefine'])); ?></td>
                 <td width="20%" class="ops"><a href="<?php prt(_g('uri')->su('user/ac/job/op/skill_write/jobid/' . $jobid . '/skillid/' . $skRs['skillid'])); ?>">修改</a><a href="javascript:;" onclick="cUserSKillDelete(this, '<?php prt(_g('uri')->su('user/ac/job/op/skill_delete')); ?>');" data-id="<?php prt($skRs['skillid']); ?>">删除</a></td>
             </tr>
             <?php endwhile; ?>
+            
+            <?php if($pageData['total'] < 1){ ?>
+            <tr class="trow-bline trow-hover" >
+                <td width="100%" colspan="4">你还没有对该职位添加学习方案</td>
+            </tr>    
+            <?php } ?>
+            
         </table>
     </div>
     <div class="page-tab"><?php prt($JModel->page($pageData)); ?></div>

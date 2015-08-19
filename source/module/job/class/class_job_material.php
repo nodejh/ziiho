@@ -135,8 +135,6 @@ class class_job_material extends geshai_model {
 				return null;
 			}
 		}
-		
-		
 		smsg ( lang ( '100061' ), null, 1 );
 	}
 	function delete($materialid){

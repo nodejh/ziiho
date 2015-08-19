@@ -16,10 +16,10 @@
     <div class="clearfix center_ibox">
         <ul class="clearfix ibb">
             <li class="tit fw">我的个人信息</li>
-            <li>Jolly&nbsp;您好，欢迎回来!</li>
-            <li>管理级别:&nbsp;超级管理员</li>
-            <li>上次登录时间:&nbsp;2015-2-12 14:20:44</li>
-            <li>上次登录IP:&nbsp;192.168.0.90</li>
+            <li><span style="background:url(<?php prt(_g('cp')->admin->ranksrc()); ?>) no-repeat;" class="margin106 rank"><?php prt(_g('cp')->admin->getData('user>username')); ?></span>&nbsp;您好，欢迎你回来!</li>
+            <li>管理级别:&nbsp;<?php prt(_g('cp')->admin->getData('group>gname')); ?></li>
+            <li>上次登录时间:&nbsp;<?php prt(date('Y-m-d H:i:s', _g('cp')->admin->getData('user>lasttime'))); ?></li>
+            <li>上次登录IP:&nbsp;<?php prt(_g('cp')->admin->getData('user>lastip')); ?></li>
         </ul>
     </div>
     <div class="clear"></div>

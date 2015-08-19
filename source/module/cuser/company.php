@@ -73,12 +73,8 @@ switch (_get ( 'op' )) {
 					'mobilephone'=>$mobilephone
 				);
 			/* 资料 */
-			$__csortid = null;
-			foreach ($csortid as $__v){
-				$__csortid .= ',' . $__v . ',';
-			}
 			$data['profile'] = array(
-					'csortid'=>$__csortid,
+					'csortid'=>_g('value')->s2pnsplit( $csortid ),
 					'cnatureid'=>$cnatureid,
 					'csize'=>$csize
 				);

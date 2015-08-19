@@ -19,7 +19,7 @@
     
     <div class="light">
     	<p class="t1">提示：</p>
-        <p class="t2"><em>•</em>若需对发布的职位进行“认证测试”，建议在添加“测试题”时，请先关闭对应的职位信息，再开启职位信息。</p>
+        <p class="t2"><em>•</em>建议在含有“测试题”的职位时，为了确保数据的一致，请先“关闭”对应的职位信息，“测试题”添加完成后，再“开启”职位信息。</p>
     </div>
     
     <div class="datas">
@@ -39,7 +39,7 @@
                 <td width="30%"><?php prt($jRs['jname']); ?></td>
                 <td width="25%"><?php prt($JModel->sortValue($jRs['sortid'], 'sname')); ?></td>
                 <td width="15%"><?php prt($jRs['pnum']); ?>人</td>
-                <td width="30%" class="ops"><a href="<?php prt(_g('uri')->su('user/ac/job/op/jexams/jobid/' . $jRs['jobid'])); ?>">测题管理</a><a href="<?php prt(_g('uri')->su('user/ac/job/op/esanswer/jobid/' . $jRs['jobid'])); ?>">答卷管理</a><a href="<?php prt(_g('uri')->su('user/ac/job/op/skill/jobid/' . $jRs['jobid'])); ?>">方案</a><a href="<?php prt(_g('uri')->su('user/ac/job/op/write/jobid/' . $jRs['jobid'])); ?>">修改</a><a href="javascript:;" onclick="cUserJobDelete(this, '<?php prt(_g('uri')->su('user/ac/job/op/delete')); ?>');" data-id="<?php prt($jRs['jobid']); ?>">删除</a></td>
+                <td width="30%" class="ops"><a href="<?php prt(_g('uri')->su('user/ac/job/op/jexams/jobid/' . $jRs['jobid'])); ?>">测题</a><a href="<?php prt(_g('uri')->su('user/ac/job/op/esanswer/jobid/' . $jRs['jobid'])); ?>">答题</a><a href="<?php prt(_g('uri')->su('user/ac/job/op/skill/jobid/' . $jRs['jobid'])); ?>">方案</a><a href="<?php prt(_g('uri')->su('user/ac/job/op/write/jobid/' . $jRs['jobid'])); ?>">修改</a><a href="javascript:;" onclick="cUserJobDelete(this, '<?php prt(_g('uri')->su('user/ac/job/op/delete')); ?>');" data-id="<?php prt($jRs['jobid']); ?>">删除</a></td>
             </tr>
             <?php endwhile; ?>
         </table>

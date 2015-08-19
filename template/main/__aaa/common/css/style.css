@@ -1,0 +1,451 @@
+@charset "utf-8";
+/* Copyright 2010-2014, Jolly,Cloud,Bonejay */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin:0; padding:0; border:0; font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit; vertical-align:baseline; }
+
+table { border-collapse:collapse; border-spacing:0; } p { word-wrap:break-word; } em, i { font-style:normal; } li { list-style:none; } img { border:0; vertical-align:middle; }
+h1, h2, h3, h4, h5, h6 { font-family:"microsoft yahei", "SimHei"; font-weight:normal; }
+
+.clearfix:before, .clearfix:after { content:""; display:table; } .clearfix:after { clear:both; } .clearfix { zoom:1; }
+.clear { height:0; clear:both; overflow:hidden; }
+
+body { color:#333; font:14px/26px "microsoft yahei", "SimHei", "SimSun"; -webkit-text-size-adjust:100%; }
+a { -webkit-transition:all 0.4s ease; transition:all 0.4s ease; text-decoration:none; color:#333; } a:hover { -webkit-transition:all 0.2s ease; transition:all 0.2s ease; color:#333; text-decoration:none; }
+
+/* 全局样式 */
+.z { float:left; } .y { float:right; }
+.st { font-family:"segoe ui", "SimSun"; } .yh { font-family:"microsoft yahei", "SimHei"; font-weight:normal; }
+
+.com-w { width:1200px; margin:auto; }
+
+.icon-11 { padding-left:18px; background:url(../image/11.png) no-repeat left center; }
+.icon-12 { padding-left:18px; background:url(../image/12.png) no-repeat left center; }
+
+.icon-13 { padding-left:18px; background:url(../image/13.png) no-repeat left center; }
+.icon-14 { padding-left:18px; background:url(../image/14.png) no-repeat left center; }
+
+.color100 { color:#390; }
+.color101 { color:#F00; }
+.color102 { color:#939393; }
+.color103 { color:#090; }
+
+/* com-header */
+.com-header-wrap { border-bottom:1px solid #eee; }
+.com-header { height:62px; }
+	.com-header .hd1 { float:left; width:400px; }
+	.com-header .hd2 { float:left; width:400px; }
+		.com-header .hd2 a { display:block; line-height:62px; font-family: "arial","SimSun"; font-size:28px; color:#696969; }
+		.com-header .hd2 a.ml { float:left; }
+		.com-header .hd2 a.mr { float:right; }
+	.com-header .hd3 { float:right; }
+		.com-header .hd3 .uinfo_101 { position:relative; width:160px; line-height:62px; background:#fff; }
+			.com-header .hd3 .uinfo_101 a.un { margin-right:10px; text-align:right; display:block; overflow:hidden; }
+				.com-header .hd3 .uinfo_101 a.un em { padding-right:20px; background:url(../image/17.png) no-repeat right center; }
+				.com-header .hd3 .uinfo_101.on a.un em { background:url(../image/18.png) no-repeat right center; }
+			.com-header .hd3 .uinfo_101 .ui_box { position:absolute; z-index:2; right:0px; top:62px; width:160px; background:#fff; border:1px solid #eee; border-top:none; display:none; }
+				.com-header .hd3 .uinfo_101 .ui_box a { display:block; outline:none; height:26px; line-height:26px; padding:5px; text-align:center; }
+				.com-header .hd3 .uinfo_101 .ui_box a:hover { text-decoration:underline; color:#F00; background:#CCC; }
+		.com-header .hd3 a.co { display:block; line-height:62px; font-family: "arial","SimSun"; font-size:20px; }
+		.com-header .hd3 a.dl { float:left; padding-left:32px; background:url(../image/com-header-dl.png) no-repeat left 12px; }
+		.com-header .hd3 a.zc { float:left; margin-left:20px; padding-left:32px; background:url(../image/com-header-zc.png) no-repeat left 12px; }
+		
+		
+/* com-bar */
+.com-bar { height:44px; background:#f2f2f2; }
+	.com-bar .search { float:right; margin-top:5px; margin-right:15px; background:#fff; display:none; }
+		.com-bar .search .holder { color:#999; margin-left:5px; margin-top:3px; }
+		.com-bar .search input.txt { float:left; width:280px; height:30px; line-height:30px; padding-left:5px; border:1px solid #bcbabb; border-right:none; background:#fff; outline:none; }
+		.com-bar .search button.btn { float:left; width:34px; height:34px; line-height:30px; border:1px solid #bcbabb; border-left:none; outline:none; cursor:pointer; text-align:right; background:url(../image/com-bar-search.png) no-repeat left 4px; }
+		
+		
+	.com-bar .job-nav { float:left; font-size:20px; line-height:44px; }
+		.com-bar .job-nav a { float:left; padding:0px 10px; color:#5f5f5f; outline:none; }
+		.com-bar .job-nav a.on { color:#cf3030; }
+		.com-bar .job-nav em { float:left; color:#5f5f5f; font-family: "SimSun"; }
+
+
+/* page-bar */
+.page-bar { width:100%; line-height:26px; padding:20px 0px; text-align:center; font-family: "SimSun"; }
+	.page-bar .pn-t { margin-right:5px; color:#999; }
+		.page-bar .pn-t .light { color:#F00; padding:0px 2px; }
+	.page-bar .pn-ns { font-size:20px; }
+	.page-bar .pn-ns a { color:#5f5f5f; margin:0px 2px; padding:0px 5px; border:1px solid #f2f2f2; display:inline-block; }
+	.page-bar .pn-ns a:hover { border:1px solid #f2f2f2; color:#fff; background:#5f5f5f; text-decoration:none; }
+	.page-bar .pn-ns em { margin:0px 2px; padding:0px 5px; display:inline-block; }
+	.page-bar .pn-ns em.on { color:#F00; font-weight:bold; }
+	.page-bar .pn-ns em.dis { color:#999; }
+
+		
+/* job-company-data */
+.job-company-data { }
+	.job-company-data ul.dbox { float:left; }
+	.job-company-data ul.dbox li { float:left; margin-top:25px; width:285px; height:180px; padding-bottom:12px; background:url(../image/bg_100.png) no-repeat right bottom; overflow:hidden; position:relative; }
+	.job-company-data ul.dbox li.mrpx { margin-right:20px; }
+		.job-company-data ul.dbox li a.pic { position:absolute; left:0px; top:0px; width:279px; height:175px; padding:2px; border:1px solid #ccc; overflow:hidden; display:block; }
+			.job-company-data ul.dbox li a.pic img { width:100%; height:100%; }
+		.job-company-data ul.dbox li .info { position:absolute; left:0px; /*top:0px;*/ bottom:11px; width:279px; height:175px; padding:2px; border:1px solid #ccc; /*background:#fafafa;*/ background:url(../image/white_shadow_1.png) repeat;  overflow:hidden; display:none; }
+			.job-company-data ul.dbox li .info .di { width:275px; height:170px; padding:5px;/* border:1px solid #edeef0;*/ }
+				.job-company-data ul.dbox li .info .di .tt { height:28px; line-height:28px; overflow:hidden; }
+					.job-company-data ul.dbox li .info .di .tt a { color:#4a4a4a; /*color:#fff;*/ font-weight:bold; }
+					.job-company-data ul.dbox li .info .di .tt a:hover { text-decoration:underline; }
+						.job-company-data ul.dbox li .info .di .tt a img.s-logo { margin-right:4px; padding:1px; border:1px solid #13abab; }
+				.job-company-data ul.dbox li .info .di .dd { height:108px; padding:0px 8px; font-size:12px; overflow-x:hidden; overflow-y:auto; }
+					.job-company-data ul.dbox li .info .di .dd a { float:left; display:block; line-height:18px; padding:2px 4px; margin:8px 8px 0px 0px; color:#fff; /*border-bottom:1px solid #4a4a4a;*/ background:#0d9f9f; }
+					.job-company-data ul.dbox li .info .di .dd a:hover { text-decoration:underline; background:#0b6c6c; }
+		
+		
+/* job-company-view */
+.job-company-view {  }
+	.job-company-view .tit { width:100%; margin-top:20px; }
+		.job-company-view .tit span.ipic { float:left;padding:1px; border:1px solid #e6e5e5; width:40px; height:40px;  display:block; }
+			.job-company-view .tit span.ipic img { width:100%; height:100%; }
+		.job-company-view .tit em.t { float:left; margin-left:5px;line-height:40px; color:#303030; font-size:20px; font-family: "SimSun"; }
+	
+	.job-company-view .line { width:100%; height:1px; margin-top:5px; background:#ededed; overflow:hidden; }
+	
+	.job-company-view .hd { width:100%; height:44px; margin-top:1px; background:#f0f0f0; }
+		.job-company-view .hd em { float:left; line-height:44px; padding:0px 25px; color:#444444; font-size:16px; cursor:pointer; display:block; }
+		.job-company-view .hd em.on { background:#d2d2d2; }
+	
+	.job-company-view .bd {  }
+		.job-company-view .bd .t { margin-top:10px; line-height:24px; }
+			.job-company-view .bd .t p {  }
+		.job-company-view .bd .j {  }
+			.job-company-view .bd .j a { float:left; margin:10px 10px 0px 0px; padding:10px 10px; border:1px solid #e6e5e5; display:block; }
+			.job-company-view .bd .j a:hover { background:#d2d2d2; }
+			
+			
+/* job-company-job */
+.job-company-job {  }
+	.job-company-job .tit { width:100%; margin-top:20px; }
+		.job-company-job .tit span.ipic { float:left;padding:1px; border:1px solid #e6e5e5; width:40px; height:40px;  display:block; }
+			.job-company-job .tit span.ipic img { width:100%; height:100%; }
+		.job-company-job .tit em.t { float:left; margin-left:5px;line-height:40px; color:#303030; font-size:20px; font-family: "SimSun"; }
+	
+	.job-company-job .line { width:100%; height:1px; margin-top:5px; background:#ededed; overflow:hidden; }
+	
+	.job-company-job .hd { width:100%; height:44px; margin-top:1px; background:#f0f0f0; }
+		.job-company-job .hd em { float:left; line-height:44px; padding:0px 25px; color:#444444; font-size:16px; cursor:pointer; display:block; }
+		.job-company-job .hd em.on { background:#d2d2d2; }
+	
+	.job-company-job .bd { margin-top:10px; }
+		.job-company-job .bd .t { line-height:24px; }
+			.job-company-job .bd .t p {  }
+		.job-company-job .bd .j { line-height:24px; }
+			.job-company-job .bd .j .p {  }
+	
+	.job-company-job .nns { margin-top:20px; }
+		.job-company-job .nns a { float:left; height:40px; line-height:40px; margin-right:20px; padding:0px 20px; border:1px solid #e0e0e0; color:#676767; font-size:20px; font-family: "SimSun"; display:block; }
+		
+		
+		
+/* job-company-step */
+.job-company-step {  }
+	.job-company-step .tit { width:100%; line-height:40px; margin-top:10px; }
+		.job-company-step .tit em { float:left; padding:0px 5px; }
+		.job-company-step .tit strong { float:left; }
+		.job-company-step .tit a { float:left; }
+		.job-company-step .tit a.h { background:url(../../job/image/jobstep-home.png) no-repeat left center; padding-left:18px; }
+	
+	.job-company-step .nnn { line-height:40px; font-size:16px; color:#414141; }
+	
+	.job-company-step .steps { margin-top:5px; border:1px solid #d0d0d0; }
+		.job-company-step .steps .empty { padding:10px; color:#999; }
+		.job-company-step .steps .taaa { width:100%; height:40px; line-height:40px; position:relative; }
+		.job-company-step .steps .taaa-bt { border-top:1px solid #d0d0d0; }
+			.job-company-step .steps .taaa span { float:left; margin-left:2.4%; color:#5a5a5a; font-size:16px; }
+			.job-company-step .steps .taaa span.on { color:#414141; }
+			.job-company-step .steps .taaa a { float:right; margin-right:2.4%; color:#b2b2b2; }
+		.job-company-step .steps .tbbb { width:100%; height:280px; padding:10px 0px; border-top:1px solid #d0d0d0; }
+			.job-company-step .steps .tbbb .tarea { width:94%; height:280px; margin:auto; padding-right:1%; overflow-x:hidden; overflow-y:auto; }
+				.job-company-step .steps .tbbb .tarea p { line-height:24px; color:#6d6868; font-size:13px; }
+				
+	.job-company-step .nns { float:right; margin-top:20px; }
+		.job-company-step .nns a { float:left; height:40px; line-height:40px; margin-left:20px; padding:0px 20px; border:1px solid #e0e0e0; color:#676767; font-size:20px; font-family: "SimSun"; display:block; }
+		
+		
+		
+/* job-company-rz */
+.job-company-rz {  }
+	.job-company-rz .tt { width:100%; margin-top:20px; line-height:24px; }
+		.job-company-rz .ta { padding-bottom:5px; border-bottom:1px solid #ededed; font-size:16px; font-weight:bold; }
+		.job-company-rz .tb { margin-top:10px; height:420px; overflow-x:hidden; overflow-y:auto; }
+			.job-company-rz .tb p {  padding:5px 0px; color:#696767; text-indent:24px; }
+				
+	.job-company-rz .nns { float:right; margin-top:20px; }
+		.job-company-rz .nns .bbs { float:left; line-height:40px; }
+			.job-company-rz .nns .bbs em { cursor:pointer; }
+			.job-company-rz .nns .bbs button.ok { height:40px; margin-left:5px; padding:0px 30px; background:#2db81b; border:none; font-size:16px; color:#fff; font-weight:bold; outline:none; cursor:pointer; }
+			.job-company-rz .nns .bbs button.ok-off { background:#d0d0d0; }
+		.job-company-rz .nns a { float:left; height:40px; line-height:40px; margin-left:20px; padding:0px 20px; border:1px solid #e0e0e0; color:#676767; background:#eee; font-size:20px; font-family: "SimSun"; display:block; }
+		
+		
+		
+/* profession-data */
+.profession-data { margin-top:10px; }
+	.profession-data ul.dbox li { padding:25px 0px; border-bottom:1px solid #dbdbdb; }
+		.profession-data ul.dbox li .ttt { line-height:28px; margin-bottom:25px; padding-bottom:5px; border-bottom:1px solid #dbdbdb; font-family: "SimSun"; font-size:24px; }
+		.profession-data ul.dbox li .aaa { float:left; }
+		.profession-data ul.dbox li .bbb { float:right; width:800px; line-height:24px; }
+			.profession-data ul.dbox li .bbb .a1 { margin-top:10px; padding-bottom:25px; border-bottom:1px solid #f2f2f2; }
+				.profession-data ul.dbox li .bbb .a1 .n1 { font-size:16px; }
+				.profession-data ul.dbox li .bbb .a1 .n2 { color:#dc0000; }
+			.profession-data ul.dbox li .bbb .a2 { margin-top:10px; }
+				.profession-data ul.dbox li .bbb .a2 .n2 { color:#666666; }
+				
+				
+/* profession-job */
+.profession-job { margin-top:10px; }
+	.profession-job .n { line-height:40px; font-family: "SimSun"; font-size:20px; }
+	.profession-job .sbox { padding:0px 15px 15px 15px; border:1px solid #e2e2e2; line-height:18px; }
+		.profession-job .sbox .s1 { float:left; width:80px; margin-top:15px; }
+		.profession-job .sbox .s2 { padding-left:80px; }
+			.profession-job .sbox .s2 a { float:left; margin:15px 15px 0px 0px; display:block; }
+			.profession-job .sbox .s2 a:hover { color:#cb0000; }
+			.profession-job .sbox .s2 a.on { color:#cb0000; }
+			
+	.profession-job .dlist { margin-top:10px; }
+		.profession-job .dlist ul li { line-height:24px; padding:10px 0px; border-bottom:1px solid #edeef0; text-indent:14px; font-family: "SimSun"; }
+			.profession-job .dlist ul li:hover { background:#f7f8fa; }
+			.profession-job .dlist ul li .a1 { float:left; width:30%; }
+				.profession-job .dlist ul li .a1 a { color:#1155cc; font-size:16px; }
+				.profession-job .dlist ul li .a1 a:hover { text-decoration:underline; }
+			.profession-job .dlist ul li .a2 { float:left; width:50%; }
+				.profession-job .dlist ul li .a2 a { color:#666666; font-size:12px; }
+				.profession-job .dlist ul li .a2 a:hover { text-decoration:underline; }
+			.profession-job .dlist ul li .a3 { float:left; width:10%; color:#666666; font-size:12px; }
+			.profession-job .dlist ul li .a4 { float:left; width:10%; color:#666666; font-size:12px; }
+			
+			
+/* work-data */
+.work-data { margin-top:25px; }
+	.work-data ul.dbox li { padding-bottom:25px; /*padding:25px 0px; border-bottom:1px solid #dbdbdb;*/ }
+		.work-data ul.dbox li .ttt { line-height:28px; padding-bottom:5px; border-bottom:1px solid #dbdbdb; font-family: "SimSun"; font-size:24px; color:#3e3e3e; }
+			.work-data ul.dbox li .ttt a { float:right; margin-right:10px; font-size:14px; color:#1155cc; }
+		.work-data ul.dbox li .sss { line-height:18px; }
+			.work-data ul.dbox li .sss a { float:left; width:224px; height:100px; line-height:100px; margin-top:20px; /*margin:15px 15px 0px 0px;*/ text-align:center; color:#fff; font-size:16px; display:block; }
+			.work-data ul.dbox li .sss a:hover { /*color:#cb0000;*/ }
+			.work-data ul.dbox li .sss a.mr { margin-right:20px; }
+			
+			
+/* work-list */
+.work-list { margin-top:15px; }
+	.work-list .sbox { padding:0px 15px 15px 15px; border:1px solid #e2e2e2; line-height:18px; }
+		.work-list .sbox .ib {  }
+		.work-list .sbox .ib-sp { margin-top:15px; border-top:1px solid #e2e2e2; }
+			.work-list .sbox .ib .s1 { float:left; width:80px; margin-top:15px; }
+			.work-list .sbox .ib .s2 { padding-left:80px; }
+				.work-list .sbox .ib .s2 a { float:left; margin:15px 15px 0px 0px; display:block; }
+				.work-list .sbox .ib .s2 a:hover { color:#cb0000; }
+				.work-list .sbox .ib .s2 a.on { color:#cb0000; }
+	
+	.work-list .spp { margin-top:15px; }
+		.work-list .spp .line { width:100%; height:1px; background:#ededed; overflow:hidden; }
+		
+		.work-list .spp .nn { width:100%; height:44px; margin-top:1px; background:#f0f0f0; }
+			.work-list .spp .nn a { float:left; line-height:44px; padding:0px 25px; color:#444444; font-size:16px; cursor:pointer; display:block; }
+			.work-list .spp .nn a.on { background:#d2d2d2; }
+	
+	.work-list .dlist { margin-top:10px; }
+		.work-list .dlist ul li { line-height:24px; padding:10px 0px; border-bottom:1px solid #edeef0; text-indent:14px; font-family: "SimSun"; }
+		.work-list .dlist ul li:hover { background:#f7f8fa; }
+			.work-list .dlist ul li .empty { color:#666;  }
+			.work-list .dlist ul li .a1 { float:left; width:30%; }
+				.work-list .dlist ul li .a1 a { color:#1155cc; font-size:16px; }
+				.work-list .dlist ul li .a1 a:hover { text-decoration:underline; }
+			.work-list .dlist ul li .a2 { float:left; width:40%; }
+				.work-list .dlist ul li .a2 a { color:#666666; font-size:12px; }
+				.work-list .dlist ul li .a2 a:hover { text-decoration:underline; }
+			.work-list .dlist ul li .a3 { float:left; width:20%; color:#666666; font-size:12px; }
+			.work-list .dlist ul li .a4 { float:left; width:10%; color:#666666; font-size:12px; }
+			
+			
+			
+/* company-list */
+.company-list { margin-top:15px; }
+	.company-list .n { line-height:40px; font-family: "SimSun"; font-size:20px; }
+	.company-list .sbox { padding:0px 15px 15px 15px; border:1px solid #e2e2e2; line-height:18px; }
+		.company-list .sbox .s1 { float:left; width:80px; margin-top:15px; }
+		.company-list .sbox .s2 { padding-left:80px; }
+			.company-list .sbox .s2 a { float:left; margin:15px 15px 0px 0px; display:block; }
+			.company-list .sbox .s2 a:hover { color:#cb0000; }
+			.company-list .sbox .s2 a.on { color:#cb0000; }
+			
+	.company-list .dlist { margin-top:10px; }
+		.company-list .dlist ul li { line-height:24px; padding:10px 0px; border-bottom:1px solid #edeef0; font-family: "SimSun"; vertical-align:middle; }
+			.company-list .dlist ul li:hover { background:#f7f8fa; }
+			.company-list .dlist ul li .empty { color:#999; }
+			.company-list .dlist ul li .a1 { float:left; width:30%; }
+				.company-list .dlist ul li .a1 a { color:#1155cc; font-size:16px; }
+				.company-list .dlist ul li .a1 a:hover { text-decoration:underline; }
+			.company-list .dlist ul li .a2 { float:left; width:40%; color:#666666; font-size:12px; }
+			.company-list .dlist ul li .a3 { float:left; width:15%; color:#666666; font-size:12px; }
+			.company-list .dlist ul li .a4 { float:left; width:15%; color:#666666; font-size:12px; }
+			
+			
+/* learn-list */
+.learn-list { margin-top:15px; }
+	.learn-list .sbox { padding:0px 15px 15px 15px; border:1px solid #e2e2e2; line-height:18px; }
+		.learn-list .sbox .ib {  }
+		.learn-list .sbox .ib-sp { margin-top:15px; border-top:1px solid #e2e2e2; }
+			.learn-list .sbox .ib .s1 { float:left; width:80px; margin-top:15px; }
+			.learn-list .sbox .ib .s2 { padding-left:80px; }
+				.learn-list .sbox .ib .s2 a { float:left; margin:15px 15px 0px 0px; display:block; }
+				.learn-list .sbox .ib .s2 a:hover { color:#cb0000; }
+				.learn-list .sbox .ib .s2 a.on { color:#cb0000; }
+	
+	.learn-list .qqq { margin-top:15px; padding-bottom:5px; border-bottom:1px solid #e2e2e2; }
+		.learn-list .qqq a { float:left; line-height:24px; margin-right:15px; color:#a0a0a0; }
+		.learn-list .qqq a.on { color:#2479ba; }
+			
+			.learn-list .qqq a em { float:left; width:15px; height:15px; margin-top:4px; padding-right:2px; background:url(../../job/image/103.png) no-repeat; overflow:hidden; display:block; }
+			.learn-list .qqq a em.zx { background-position:0px 0px;}
+			.learn-list .qqq a em.rq { background-position:-16px 0px; }
+			.learn-list .qqq a em.xg { background-position:-32px 0px; }
+		
+			.learn-list .qqq a.on em.zx { background-position:0px -16px;}
+			.learn-list .qqq a.on em.rq { background-position:-16px -16px; }
+			.learn-list .qqq a.on em.xg { background-position:-32px -16px; }
+		
+	
+	.learn-list .dlist { margin-top:10px; }
+		.learn-list .dlist ul li { padding:25px 0px; border-bottom:1px solid #edeef0; }
+			.learn-list .dlist ul li.empty { line-height:24px; padding:0px 0px 10px 0px; color:#999; }
+			.learn-list .dlist ul li .pic { float:left; width:270px; height:180px; overflow:hidden; }
+				.learn-list .dlist ul li .pic img { width:100%; height:100%; }
+			.learn-list .dlist ul li .ddd { padding-left:300px; }
+				.learn-list .dlist ul li .ddd .aaa { height:50px; }
+					.learn-list .dlist ul li .ddd .aaa .t1 { line-height:24px; font-size:18px; font-weight:bold; font-family: "SimSun"; }
+						.learn-list .dlist ul li .ddd .aaa .t1 a { color:#4a4a4a; }
+						.learn-list .dlist ul li .ddd .aaa .t1 a:hover { color:#cb0000; text-decoration:underline; }
+					.learn-list .dlist ul li .ddd .aaa .t2 { line-height:20px; color:#777777; }
+						.learn-list .dlist ul li .ddd .aaa .t2 em { padding:0px 2px; }
+				.learn-list .dlist ul li .ddd .bbb { height:70px; line-height:20px; margin-top:15px; color:#4a4a4a; overflow:hidden; }
+					.learn-list .dlist ul li .ddd .bbb .t1 { font-weight:bold; }
+					.learn-list .dlist ul li .ddd .bbb .t2 { margin-top:2px; }
+				.learn-list .dlist ul li .ddd .gogo { margin-top:5px; }
+					.learn-list .dlist ul li .ddd .gogo a { width:120px; height:35px; line-height:35px; background:#f3f3f3; text-align:center; display:block; }
+					.learn-list .dlist ul li .ddd .gogo a:hover { color:#cb0000; }
+					
+					
+/* learn-view */
+.learn-view {  }
+	.learn-view .nv { width:100%; line-height:40px; margin-top:10px; }
+		.learn-view .nv em { float:left; padding:0px 5px; }
+		.learn-view .nv span { float:left; padding:0px 2px; }
+		.learn-view .nv span.l { color:#cb0000; }
+		.learn-view .nv a { float:left; }
+		.learn-view .nv a.h { background:url(../../job/image/jobstep-home.png) no-repeat left center; padding-left:18px; }
+	
+	.learn-view .nnn { line-height:40px; font-size:16px; color:#414141; }
+	
+	.learn-view .steps { margin-top:5px; border:1px solid #d0d0d0; }
+		.learn-view .steps .empty { padding:10px; color:#999; }
+		.learn-view .steps .taaa { width:100%; height:40px; line-height:40px; position:relative; }
+		.learn-view .steps .taaa-bt { border-top:1px solid #d0d0d0; }
+			.learn-view .steps .taaa span { float:left; margin-left:2.4%; color:#5a5a5a; font-size:16px; }
+			.learn-view .steps .taaa span.on { color:#414141; }
+			.learn-view .steps .taaa a { float:right; margin-right:2.4%; color:#b2b2b2; }
+		.learn-view .steps .tbbb { width:100%; height:280px; padding:10px 0px; border-top:1px solid #d0d0d0; }
+			.learn-view .steps .tbbb .tarea { width:94%; height:280px; margin:auto; padding-right:1%; overflow-x:hidden; overflow-y:auto; }
+				.learn-view .steps .tbbb .tarea p { line-height:24px; color:#6d6868; font-size:13px; }
+				
+	.learn-view .nns { float:right; margin-top:20px; }
+		.learn-view .nns a { float:left; height:40px; line-height:40px; margin-left:20px; padding:0px 20px; border:1px solid #e0e0e0; color:#676767; font-size:20px; font-family: "SimSun"; display:block; }
+		.learn-view .nns a.l { background:#ececec; }
+					
+/* material-list */
+.material-list { margin-top:15px; }
+	.material-list .sbox { padding:0px 15px 15px 15px; border:1px solid #e2e2e2; line-height:18px; }
+		.material-list .sbox .ib {  }
+		.material-list .sbox .ib-sp { margin-top:15px; border-top:1px solid #e2e2e2; }
+			.material-list .sbox .ib .s1 { float:left; width:80px; margin-top:15px; }
+			.material-list .sbox .ib .s2 { padding-left:80px; }
+				.material-list .sbox .ib .s2 a { float:left; margin:15px 15px 0px 0px; display:block; }
+				.material-list .sbox .ib .s2 a:hover { color:#cb0000; }
+				.material-list .sbox .ib .s2 a.on { color:#cb0000; }
+	
+	.material-list .qqq { margin-top:15px; padding-bottom:5px; border-bottom:1px solid #e2e2e2; }
+		.material-list .qqq a { float:left; line-height:24px; margin-right:15px; color:#a0a0a0; }
+		.material-list .qqq a.on { color:#2479ba; }
+			
+			.material-list .qqq a em { float:left; width:15px; height:15px; margin-top:4px; padding-right:2px; background:url(../../job/image/103.png) no-repeat; overflow:hidden; display:block; }
+			.material-list .qqq a em.zx { background-position:0px 0px;}
+			.material-list .qqq a em.rq { background-position:-16px 0px; }
+			.material-list .qqq a em.xg { background-position:-32px 0px; }
+		
+			.material-list .qqq a.on em.zx { background-position:0px -16px;}
+			.material-list .qqq a.on em.rq { background-position:-16px -16px; }
+			.material-list .qqq a.on em.xg { background-position:-32px -16px; }
+		
+	
+	.material-list .dlist { margin-top:10px; }
+		.material-list .dlist ul li { padding:25px 0px; border-bottom:1px solid #edeef0; }
+			.material-list .dlist ul li.empty { line-height:24px; padding:0px 0px 10px 0px; color:#999; }
+			.material-list .dlist ul li .pic { float:left; width:270px; height:180px; overflow:hidden; }
+				.material-list .dlist ul li .pic img { width:100%; height:100%; }
+			.material-list .dlist ul li .ddd { padding-left:300px; }
+				.material-list .dlist ul li .ddd .aaa { height:30px; }
+					.material-list .dlist ul li .ddd .aaa .t1 { line-height:24px; font-size:18px; font-weight:bold; font-family: "SimSun"; }
+						.material-list .dlist ul li .ddd .aaa .t1 a { color:#4a4a4a; }
+						.material-list .dlist ul li .ddd .aaa .t1 a:hover { color:#cb0000; text-decoration:underline; }
+					.material-list .dlist ul li .ddd .aaa .t2 { line-height:20px; color:#777777; }
+				.material-list .dlist ul li .ddd .bbb { height:100px; line-height:20px; margin-top:5px; color:#4a4a4a; overflow:hidden; }
+					.material-list .dlist ul li .ddd .bbb .t1 { font-weight:bold; }
+					.material-list .dlist ul li .ddd .bbb .t2 { margin-top:2px; }
+				.material-list .dlist ul li .ddd .gogo { margin-top:5px; }
+					.material-list .dlist ul li .ddd .gogo a { width:120px; height:35px; line-height:35px; background:#f3f3f3; text-align:center; display:block; }
+					.material-list .dlist ul li .ddd .gogo a:hover { color:#cb0000; }
+					
+					
+/* material-view */
+.material-view {  }
+	.material-view .nn { margin-top:10px; line-height:24px; padding-bottom:5px; border-bottom:1px solid #e2e2e2; }
+		.material-view .nn em { float:left; padding:0px 3px; }
+		.material-view .nn span { float:left; padding:0px 2px; }
+		.material-view .nn a { float:left; }
+		.material-view .nn a:hover { color:#cb0000; text-decoration:underline; }
+		.material-view .nn a.h { padding-left:16px; background:url(../../job/image/jobstep-home.png) no-repeat left center; }
+	
+	.material-view .mms { margin-top:10px; }
+		.material-view .mms .ml { float:left; width:800px; height:1000px; }
+			.material-view .mms .ml .tit { line-height:30px; font-size:24px; }
+			.material-view .mms .ml .info { width:100%; margin-top:15px; }
+				.material-view .mms .ml .info .pic { float:left; padding:2px; border:1px solid #eee; border-bottom-width:2px; border-right-width:3px; }
+					.material-view .mms .ml .info .pic img { width:140px; height:180px; }
+				.material-view .mms .ml .info .is { padding-left:160px; }
+						.material-view .mms .ml .info .is .ubs {  }
+						.material-view .mms .ml .info .is .ubs li { height:30px; line-height:30px; border-bottom:1px dashed #eee; }
+							.material-view .mms .ml .info .is .ubs li .s100 { padding:0px 5px; font-size:12px; }
+							.material-view .mms .ml .info .is .ubs li .s101 { float:left; width:309px; padding:0px 5px; font-size:12px; }
+							
+							.material-view .mms .ml .info .is .ubs li a.s200 { color:#37a; }
+							.material-view .mms .ml .info .is .ubs li a.s200:hover { text-decoration:underline; }
+							
+			.material-view .mms .ml .ops { height:30px; line-height:30px; margin-top:10px; }
+				.material-view .mms .ml .ops em.ops200 { float:left; height:22px; line-height:22px; padding:2px 5px; margin-left:10px; color:#666; }
+				.material-view .mms .ml .ops a.ops100 { float:left; height:22px; line-height:22px; padding:2px 5px; margin-left:10px; border:1px solid #37a; border-radius:3px; color:#37a; }
+				.material-view .mms .ml .ops a.ops100:hover { background:#37a; color:#fff; }
+			.material-view .mms .ml .cl { height:30px; line-height:28px; margin-top:10px; padding-left:10px; font-size:14px; font-weight:bold; color:#37a; background:#f2f2f2; }
+			.material-view .mms .ml .cd { margin-top:10px; line-height:24px; }
+			
+			
+			.material-view .mms .ml .pl { height:30px; line-height:28px; margin-top:10px; padding-left:10px; font-size:14px; font-weight:bold; color:#37a; background:#f2f2f2; }
+			
+		.material-view .mms .mr { float:right; width:360px; }
+			.material-view .mms .mr  .c100 { width:100%; }
+				.material-view .mms .mr  .c100 .label { height:34px; line-height:34px; padding-left:10px; background:#f2f2f2; font-size:14px; font-weight:bold; font-family: "SimSun"; }
+				.material-view .mms .mr  .c100 .box { width:100%; }
+					.material-view .mms .mr  .c100 .box ul.bs { }
+						.material-view .mms .mr  .c100 .box ul.bs li { height:30px; line-height:30px; padding:0px 10px; border-bottom:1px dashed #eee; font-size:14px; }
+							.material-view .mms .mr  .c100 .box ul.bs li a { color:#37a; }
+							.material-view .mms .mr  .c100 .box ul.bs li a:hover { text-decoration:underline; }
+							
+							
+			.material-view .mms .mr  .c101 { width:100%; margin-top:20px; }
+				.material-view .mms .mr  .c101 .label { height:34px; line-height:34px; padding-left:10px; background:#f2f2f2; font-size:14px; font-weight:bold; font-family: "SimSun"; }
+				.material-view .mms .mr  .c101 .box { width:100%; }
+					.material-view .mms .mr  .c101 .box ul.bs { }
+						.material-view .mms .mr  .c101 .box ul.bs li { height:30px; line-height:30px; padding:0px 10px; border-bottom:1px dashed #eee; font-size:14px; }
+							.material-view .mms .mr  .c101 .box ul.bs li a { color:#37a; }
+							.material-view .mms .mr  .c101 .box ul.bs li a:hover { text-decoration:underline; }
+							

@@ -177,6 +177,16 @@ class geshai_value {
 		}
 		return $str;
 	}
+	function s2pnsplit2($v) {
+		$data = array ();
+		if (strlen ( $v ) < 1) {
+			return $data;
+		}
+		if (preg_match_all("/\,(\d+)\,/", $v, $matchs)) {
+			$data = $matchs[1];
+		}
+		return $data;
+	}
 	function serverinfo() {
 		$S = array ();
 		$S ['servdomain'] = array (
@@ -205,6 +215,23 @@ class geshai_value {
 				'value' => (@ini_get ( 'file_uploads' ) ? ini_get ( 'upload_max_filesize' ) : 'unknown')
 		);
 		return $S;
+	}
+	function username($v, $offser = 10) {
+		$r = '-';
+		if (!my_is_array( $v )) {
+			return $r;
+		}
+		$str = my_array_value( 'nickname', $v );
+		if (strlen( $str ) < 1) {
+			$str = my_array_value( 'username', $v );
+		}
+		if (strlen( $str ) < 1) {
+			return $r;
+		}
+		if (func_num_args() == 1 ) {
+			return $str;
+		}
+		return my_substr($str, 0, $offser);
 	}
 }
 ?>

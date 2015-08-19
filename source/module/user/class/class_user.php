@@ -37,7 +37,7 @@ class class_user extends geshai_model {
 	function emailRegister($data){
 		$uRs = $this->find('username', $data['username']);
 		if(!$this->db->is_success($uRs)){
-			smsg(lang('110013'));
+			smsg(lang('200013'));
 			return null;
 		}
 		if(my_is_array($uRs)){
@@ -49,7 +49,7 @@ class class_user extends geshai_model {
 		$this->db->set($data);
 		$this->db->insert();
 		if(!$this->db->is_success()){
-			smsg(lang('110013'));
+			smsg(lang('200013'));
 			return null;
 		}
 		$data['uid'] = $this->db->insert_id();
@@ -191,6 +191,9 @@ class class_user extends geshai_model {
 	function updateOnline($k, $v = null){
 		$data = array( 'online' => _g('cfg>time')  );
 		return $this->update($data, $k, $v);
+	}
+	function enpwd($v){
+		return my_md5($v, 2);
 	}
 }
 ?>

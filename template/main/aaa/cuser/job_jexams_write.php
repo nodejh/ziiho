@@ -27,6 +27,14 @@
 	<div class="label">
     	<a href="<?php prt(_g('uri')->referer()); ?>">&laquo;返回</a>
     </div>
+    
+    <div class="light">
+    	<p class="t1">提示：</p>
+        <p class="t2"><em>•</em>建议在添加“测试题”时，请先“关闭”对应的职位信息，再“开启”职位信息。</p>
+        <p class="t2"><em>•</em>添加“测题”成功后，为了确保数据一致，将不能对其“题目选项”进行“移除”操作</p>
+        <p class="t2"><em>•</em>若要对其“题目选项”进行“移除”操作，可返回管理界面对该题进行“删除”</p>
+    </div>
+    
     <div class="form-item clearfix">
     	<form method="post" onsubmit="return false;">
         <input type="hidden" name="jobid" value="<?php prt($jobid); ?>" />
@@ -114,36 +122,59 @@ $("div[flag=\"qsbox\"] .qs-create").click(function(e) {
 });
 function _qs_create(_this){
 	var _p = $(_this).parent();
-	var _textObj = _p.children("input[data=\"value\"]");
+	var _textObj = _p.find("input[data=\"value\"]");
 	var _textValue = $.trim(_textObj.val());
 	_textObj.val("");
 	if(_textValue.length < 1){
 	   window.top._GESHAI.dialog({isCloseBtn: false, clickBgClose: true, title: "错误：", data: "创建问题选项内容不能为空！"});
 	   return null;
 	}
+	var _isChked = window._GESHAI.rchecked("_answer_flag_a");
 	var _rd = window._GESHAI.randstr(10);
+	
+	/* 新增时，清除单选项之前的选项 */
+	if(typeof(_isChked) != "undefined") {
+		var _clearCked = document.getElementsByName("answer_flag[]");
+		for(var i = 0; i < _clearCked.length; i++){
+			_clearCked.item(i).checked = "";
+		}
+	}
+	/* 新增选项 */
 	var _html = $("#i-qs-" + $(_this).attr("boxid")).val();
 		_html = _html.replace(/\{id\}/g, _rd);
 		_html = _html.replace("{type}", __oldEsType);
-		_html = _html.replace("{ck}", window._GESHAI.rchecked("_answer_flag_a"));
+		_html = _html.replace("{ck}", _isChked);
 	_p.before(_html.replace("{value}", _textValue));
 	
 	$("input[name=\"_answer_flag_a\"]").attr("checked", "");
 };
 function _qs_remove(_this){
-	$(_this).parent().remove();
+	window.top._GESHAI.dialog({
+			"title": "删除操作",
+			"data": "<p>移除该选项将会影响“认证测试”情况，您确定要移除吗？<p>如果是请点击“确定”，则点击“取消”按钮</p>",
+			"isCloseBtn": false,
+			"isCancelBtn": true,
+			"okBtnFunc" : function(){
+				$(_this).parent().remove();
+				window.top._GESHAI.dialog.close();
+			}
+	});
 };
 function _qs_init(_value){
+	var __defData = <?php prt(array2json(my_array_value('esoption', $examSub))); ?>;
+	var __answerData = <?php prt(array2json(my_array_value('esanswer', $examSub))); ?>;
 	if(_value == "100"){
 		var _appendObj = $("#qs-100 .qs-create").parent();
 		var _html = $("#i-qs-100").val();
 		var _str = "";
-		<?php foreach(my_array_value('esoption', $examSub) as $optKey => $optVal){ ?>
-			_str = _html.replace(/\{id\}/g, "<?php prt($optKey); ?>");
+		
+		for(var k in __defData) {
+			_str = _html.replace(/\{id\}/g, k);
 			_str = _str.replace("{type}", __oldEsType);
-			_str = _str.replace("{ck}", "<?php prt(my_in_array($optKey, my_array_value('esanswer', $examSub)) ? 'checked=\"checked\"' : ''); ?>");
-			_appendObj.before(_str.replace("{value}", "<?php prt(my_addslashes($optVal)); ?>"));
-		<?php } ?>
+			_str = _str.replace("{ck}", (_GESHAI.in_array(k, __answerData) ? "checked=\"checked\"" : ""));
+			_appendObj.before(_str.replace("{value}", __defData[k].name));
+		};
+		
 		$("#qs-100").show();
 	}
 };

@@ -4,6 +4,8 @@ if (! defined ( 'IN_GESHAI' )) {
 }
 class class_job_examsubject_answer extends geshai_model {
 	public $t_job_examsubject_answer = 'job_examsubject_answer';
+	public $t_job_examsubject_record = 'job_examsubject_record';
+	
 	function __construct() {
 		parent::__construct ();
 	}
@@ -53,32 +55,6 @@ class class_job_examsubject_answer extends geshai_model {
 		$this->db->set($data);
 		$this->db->insert();
 		return $this->db->is_success();
-	}
-	
-	/* show my answer */
-	function myAnswer($esid, $cuid, $jobid, $uid, $option, $model, $isStr = false){
-		$where = array(
-				'esid'=>$esid,
-				'cuid'=>$cuid,
-				'jobid'=>$jobid,
-				'uid'=>$uid
-		);
-		$answerData = $this->find($where);
-		if(my_is_array($answerData)){
-			$answer = _g('value')->ra(str2array($answerData['esoptionid']));
-			$option = _g('value')->ra(str2array($option));
-			
-			$value = array();
-			$i = 0;
-			foreach($option as $k=>$v){
-				if(my_in_array($k, $answer)){
-					$value[] = $model->qsOptionOrder($i);
-				}
-				$i++;
-			}
-		}
-		
-		return ($isStr != true ? $value : my_join(',', $value));
 	}
 }
 ?>

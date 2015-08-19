@@ -12,9 +12,7 @@
 		<div class="clearfix z ms">
         	<?php $myListResult = _g('cp')->menu->my_list(0); ?>
             <?php while($v = _g('db')->fetch_array($myListResult)){ ?>
-        	<div class="clearfix is is-default"
-				menuid="<?php prt($v['menuid']); ?>"
-				onclick="adm_menu_parent(this);"><?php prt($v['title']); ?></div>
+        	<div class="clearfix is is-default" menuid="<?php prt($v['menuid']); ?>" onclick="adm_menu_parent(this);"><?php prt($v['title']); ?></div>
             <?php } ?>
         </div>
 	</div>
@@ -24,7 +22,7 @@
 	<div class="clearfix y ops">
 		<div class="clearfix ops-a">
         	<div class="as as-fc">
-				<p class="as-fc-bb">上午好,<span style="background:url(<?php prt(_g('cp')->admin->ranksrc()); ?>) no-repeat;" class="margin106 rank"><?php prt(_g('cp')->admin->getData('user>username')); ?>[<?php prt(_g('cp')->admin->getData('group>gname')); ?>]</span></p>
+				<p class="as-fc-bb"><span id="greeting"></span>好,<span style="background:url(<?php prt(_g('cp')->admin->ranksrc()); ?>) no-repeat;" class="margin106 rank"><?php prt(_g('cp')->admin->getData('user>username')); ?>[<?php prt(_g('cp')->admin->getData('group>gname')); ?>]</span></p>
 			</div>
 			<div class="as as-a">
 				<a href="javascript:;" class="icon-manager-home" onclick="_GESHAI.redirect({'target': 'mcenter', 'url': '<?php prt(_g('cp')->uri('ac/mcenter')); ?>'});">管理中心</a>
@@ -37,10 +35,10 @@
 
 		<div class="clearfix ops-b">
 			<div class="bs bs-a">
-				<a href="javascript:;" class="icon-lock-screen">锁屏</a>
+				<a href="javascript:;" class="icon-lock-screen" onclick="lockscreenWindow();">锁屏</a>
 			</div>
             <div class="bs bs-a">
-				<a href="javascript:;" class="icon-logout">退出</a>
+				<a href="javascript:;" class="icon-logout" onclick="logout();">退出</a>
 			</div>
 		</div>
 	</div>
@@ -70,9 +68,7 @@
 		<div class="clear"></div>
 
 		<div class="clearfix m-frame" id="adm-main-frame-box">
-			<iframe width="100%" height="100%" frameborder="no" border="0"
-				framespacing="0" scrolling="auto" id="mcenter" name="mcenter"
-				src="<?php prt(_g('cp')->uri('ac/mcenter'));?>"></iframe>
+			<iframe width="100%" height="100%" frameborder="no" border="0" framespacing="0" scrolling="auto" id="mcenter" name="mcenter" src="<?php prt(_g('cp')->uri('ac/mcenter'));?>"></iframe>
 			<div class="clear"></div>
 		</div>
 
@@ -81,6 +77,22 @@
 </div>
 <!-- 内容// -->
 
+<!-- //锁屏 -->
+<div class="clearfix lockscreen_box" id="lockscreen_box">
+	<div class="clearfix shadow"></div>
+	<div class="clearfix form">
+    	<div class="clearfix hd"><em>锁屏提示</em></div>
+        <div class="clearfix info">请输入解锁密码:</div>
+        <div class="clearfix bd">
+        	<form method="post" onsubmit="return false;" id="form_lockscreen_de" _acturl="<?php prt(_g('cp')->uri('ac/lockscreen/op/de'));?>">
+        	<input type="password" class="it" name="password" autocomplete="off" />
+            <button type="button" class="bt" onclick="lockscreenDe();">确定</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 锁屏// -->
+
 <!-- //加载 -->
 <form method="post" onsubmit="return false;" id="form_menu_load">
 	<input type="hidden" name="menuid" value="" />
@@ -88,9 +100,13 @@
 <form method="post" onsubmit="return false;" id="form_menu_pos">
 	<input type="hidden" name="menuid" value="" />
 </form>
+<form method="post" onsubmit="return false;" id="form_logout" _acturl="<?php prt(_g('cp')->uri('ac/login/op/out'));?>"></form>
+<form method="post" onsubmit="return false;" id="form_lockscreen" _acturl="<?php prt(_g('cp')->uri('ac/lockscreen/op/en'));?>"></form>
 <!-- 加载// -->
 
 <script type="text/javascript">
+var _greetingObj = document.getElementById("greeting");
+
 /* 当前浏览器 */
 var _explorer = _GESHAI.explorer();
 /* 内容区域高度 */
@@ -427,6 +443,8 @@ window.onresize = function(){
 	_menu_child_itemsHeight_old = 0;
 	adm_main_layer();
 	adm_menu_child_scroll();
+	
+	lockscreenInput();
 };
 
 $(document).ready(function(e){
@@ -453,5 +471,7 @@ $(document).ready(function(e){
 	/* 初始化 */
 	adm_main_layer();
 	adm_menu_parent(_menu_parent_items.eq(0)[0]);
+	/* -- */
+	greetingMessage(_greetingObj);
 });
 </script>

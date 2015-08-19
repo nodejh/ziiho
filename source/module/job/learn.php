@@ -37,7 +37,7 @@ switch (_get ( 'op' )) {
 		
 		include _g ( 'template' )->name ( 'job', 'learn-view', true );
 		break;
-    case 'assess':
+	case 'assess':
         $parentResult = $JMODEL->readSort();
 
         $spid = null;

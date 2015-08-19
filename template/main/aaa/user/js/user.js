@@ -109,6 +109,27 @@ function userLogin(_this, _urlA, _urlB){
 };
 
 
+/* profile update */
+function profileUpdate(_this, _url){
+	return _GESHAI.fsubmit(_this, _url, {
+		"start": function(){
+			_GESHAI.disbtn("", true);
+			window.top._GESHAI.dialog({isBg: true, isHeader: false, isFooter: false, data: "Loading..."});
+		},
+		"success": function(d){
+			_GESHAI.disbtn("", false);
+			d.isCloseBtn = false;
+			
+			if(d.status != 1){
+				d.clickBgClose = true;
+				d.title = "错误：";
+				window.top._GESHAI.dialog(d);
+			}else{
+				window.top._GESHAI.dialog.close();
+			}
+		}
+	});
+};
 /* user avatar */
 function userUploadAvatar(_actUrl){
 	var __form = document.getElementById("form_avatar");
@@ -153,6 +174,27 @@ function userAvatarSave(_actUrl){
 				d.title = "错误：";
 				window.top._GESHAI.dialog(d);
 			}else if(d.status == 1){
+				window.top._GESHAI.dialog.close();
+				_GESHAI.redirect(d);
+			}
+		}
+	});
+};
+/* update password */
+function updatePassword(_this, _url){
+	return _GESHAI.fsubmit(_this, _url, {
+		"start": function(){
+			_GESHAI.disbtn("", true);
+			window.top._GESHAI.dialog({isBg: true, isHeader: false, isFooter: false, data: "Loading..."});
+		},
+		"success": function(d){
+			_GESHAI.disbtn("", false);
+			if(d.status != 1){
+				d.isCloseBtn = false;
+				d.clickBgClose = true;
+				d.title = "错误原因：";
+				window.top._GESHAI.dialog(d);
+			}else{
 				window.top._GESHAI.dialog.close();
 				_GESHAI.redirect(d);
 			}

@@ -11,12 +11,12 @@ return array(
 	),
 	'100001'=>array(
 			'1' => array ( 'v' => 1, 'name' => '单身' ),
-			'2' => array ( 'v' => 2, 'name' => '恋爱中' ),
-			'3' => array ( 'v' => 3, 'name' => '已订婚' ),
-			'4' => array ( 'v' => 4, 'name' => '已婚' ),
-			'5' => array ( 'v' => 5, 'name' => '分居' ),
-			'6' => array ( 'v' => 6, 'name' => '离异' ),
-			'0' => array ( 'v' => -1, 'name' => '保密' )
+			'2' => array ( 'v' => 2, 'name' => '' ),
+			'3' => array ( 'v' => 3, 'name' => '' ),
+			'4' => array ( 'v' => 4, 'name' => '' ),
+			'5' => array ( 'v' => 5, 'name' => '' ),
+			'6' => array ( 'v' => 6, 'name' => '' ),
+			'0' => array ( 'v' => -1, 'name' => '' )
 	),
 	'100002'=>array(
 			'1' => array ( 'v' => 1, 'name' => '系统用户组' ),

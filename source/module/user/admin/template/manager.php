@@ -1,5 +1,13 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
 
+<div class="clearfix ul-box">
+	<ul class="ubox">
+    	 <li class="clearfix is">
+         	<a class="fa-cd icon-add" onclick="_GESHAI.redirect({'url': '<?php prt(_g('cp')->uri('mod/user/ac/manager/op/create')); ?>'});">创建新用户</a>
+         </li>
+	</ul>
+</div>
+
 <div class="clearfix page-inform">
 	<p class="light">提示：</p>
     <p class="txts"><em class="st">•</em>输入相应的条件找关联用户</p>

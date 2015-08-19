@@ -7,10 +7,59 @@ $USER = _g ( 'module' )->trigger ( 'user' );
 $USERGROUP = _g ( 'module' )->trigger ( 'user', 'group' );
 $UAVATAR = _g ( 'module' )->trigger ( 'user', 'avatar' );
 
-$hUri = _g('cp')->uri('mod/user/ac/manager');
 $lsUri = _g('uri')->referer();
+$hUri = _g('cp')->uri('mod/user/ac/manager');
 
 switch (_get ( 'op' )) {
+	case 'create':
+		_g ( 'cp' )->set_template ( 'user', 'create' );
+		break;
+	case 'createdo':
+		$username = strtolower(_post( 'username' ));
+		$password = _post( 'password' );
+		
+		$ctime = _g( 'cfg>time' );
+		$ip = getip();
+		
+		if (! _g ( 'validate' )->en_e ( $username )) {
+			if(!_g('validate')->email($username)){
+				smsg ( lang ( 'user:100014' ) );
+				return null;
+			}
+		}
+		if(!_g('validate')->vm(strlen($password), 6, 30)){
+			smsg ( lang ( 'user:100001', array(6, 30)) );
+			return null;
+		}
+		$userRs = $USER->find( 'username', $username );
+		if(!$USER->db->is_success ($userRs)){
+			smsg(lang('200013'));
+			return null;
+		}
+		if(my_is_array($userRs)) {
+			smsg(lang('user:100023'));
+			return null;
+		}
+		
+		$data = array(
+				'username' => $username,
+				'password' => $USER->enpwd($password),
+				'regtime' => $ctime,
+				'regip' => $ip,
+				'lasttime' => $ctime,
+				'lastip' => $ip,
+				'status' => _g('value')->sb ( true )
+		);
+		$USER->db->from ( $USER->t_user );
+		$USER->db->set ( $data );
+		$USER->db->insert ();
+		if(!$USER->db->is_success ()){
+			smsg(lang('200013'));
+			return null;
+		}
+		
+		smsg(lang('100061'), null, 1);
+		break;
 	case 'do':
 		$act_flag_name = _post('act_flag_name');
 		$do_uid = _post('do_uid');
@@ -198,7 +247,7 @@ switch (_get ( 'op' )) {
 		/* get usergroup */
 		$userGroupResult = $USERGROUP->getList(1);
 		
-		_g ( 'cp' )->set_template ( 'user', 'setting' );
+		_g ( 'cp' )->set_template ( 'user', 'manager_setting' );
 		break;
 	case 'settingdo':
 		$do_uid = _post('do_uid');

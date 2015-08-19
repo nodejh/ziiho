@@ -1,0 +1,61 @@
+<?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
+<?php include _g('template')->name('@', 'header', true); ?>
+
+<?php _g('module')->trigger('job', 'model', null, 'nav', 'learn-nav'); ?>
+
+<!-- //learn-view -->
+<div class="com-w learn-view clearfix" id="learn-view">
+	<div class="nv clearfix">
+        <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>" class="h">首页</a>
+        <em>></em>
+        <a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>">学习方案</a>
+        <em>></em>
+        <a href="<?php prt(_g('uri')->su('job/ac/learn/spid/' . my_array_value('sortid', $sortParentData))); ?>">[<?php prt(my_array_value('sname', $sortParentData)); ?>]</a>
+        <span> - </span>
+        <a href="<?php prt(_g('uri')->su('job/ac/learn/spid/' . my_array_value('sortid', $sortParentData) . '/scid/' . my_array_value('sortid', $sortData))); ?>"><?php prt(my_array_value('sname', $sortData));?></a>
+        <em>></em>
+        <span class="l"><?php prt($jobData['jname']); ?></span>
+    </div>
+    
+    <div class="nnn clearfix">培训方案：<strong><?php prt(my_array_value('sname', $sortData));?></strong></div>
+    
+    <!-- //steps -->
+    <div class="steps clearfix">
+        <?php $fflag = false; ?>
+        <?php while($skRs = _g('db')->result($skillResult)){ ?>
+        <div class="taaa <?php prt(!$fflag ? '' : 'taaa-bt'); ?> clearfix"><span><?php prt($skRs['sname']); ?></span><a href="javascript:;">展开</a></div>
+        <div class="tbbb clearfix">
+            <div class="tarea clearfix">
+                <?php prt($skRs['content']); ?>
+            </div>
+        </div>
+        <?php $fflag = true; ?>
+        <?php } ?>
+        <?php if(!$fflag){ ?>
+        <div class="clearfix empty">对不起，该职位暂未添加学习方案。</div>
+        <?php } ?>
+    </div>
+    <!-- steps// -->
+    
+    <div class="nns clearfix">
+    	<a href="<?php prt(_g('uri')->su('job/ac/material/spid/' . my_array_value('sortid', $sortParentData) . '/scid/' . my_array_value('sortid', $sortData))); ?>" class="l">学习资料</a>
+        <a href="<?php prt($goBack); ?>">返回</a>
+    </div>
+</div>
+<!-- learn-view// -->
+<?php if($fflag){ ?>
+<script language="javascript">
+	$("#learn-view .steps").cjslip({mainEl: '.tbbb', mainState: '.taaa a', mainCur: true, curOff: true, defaultShow: false, eventType:"click", effect:'slideDown', speed:350, completeFunc: function(index, total, page, pageTotal, mainState, pageState, scrollEl, mainEl){
+		
+		mainState.not(":eq(" + index + ")").parent().children("span").removeClass("on");
+		mainState.eq(index).parent().children("span").addClass("on");
+		
+		mainState.not(":eq(" + index + ")").html("展开");
+		mainState.eq(index).html(mainEl.eq(index).is(":hidden") ? "展开" : "关闭");
+	}
+	});
+</script>
+<?php } ?>
+
+<?php include _g('template')->name('job', 'footer', true); ?>
+<?php include _g('template')->name('@', 'footer', true); ?>

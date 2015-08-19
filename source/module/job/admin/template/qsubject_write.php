@@ -132,6 +132,10 @@ function _qs_create(_this){
 		_html = _html.replace("{type}", _stypeValue);
 		_html = _html.replace(/\{id\}/gi, _rd);
 		
+		_textValue = _textValue.replace(/\"/gi, "&quot;");
+		_textValue = _textValue.replace(/\>/gi, "&gt;");
+		_textValue = _textValue.replace(/\</gi, "&lt;");
+		
 	_p.before(_html.replace("{value}", _textValue));
 	
 	/* 取消当前勾选 */

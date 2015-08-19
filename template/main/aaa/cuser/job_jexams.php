@@ -22,7 +22,7 @@
     	<p class="t1">提示：</p>
         <p class="t2"><em>•</em>建议在添加“测试题”时，请先关闭对应的职位信息，再开启职位信息。</p>
         <p class="t2"><em>•</em>当“求职者”认证测试，提交答卷后系统会自动进行阅卷，如果通过者会颁发一个该职位的“认证证书”。</p>
-        <p class="t2"><em>•</em>测试题满分为100分，每道题的分值为题目总数的平均值，答题限时位30分钟。</p>
+        <p class="t2"><em>•</em>满分为试题数量分数，每道题的分值为1，答题限时位30分钟。</p>
     </div>
     
     <div class="tttc">共有<em><?php prt($pageData['total']); ?></em>题目</div>
@@ -35,7 +35,8 @@
             <tr class="trow-fw trow-bg" >
                 <td width="50%">题目</td>
                 <td width="20%">题型</td>
-                <td width="30%">操作</td>
+                <td width="10%">来源</td>
+                <td width="20%">操作</td>
             </tr>
             
             <?php if($pageData['total'] >= 1) { ?>
@@ -43,12 +44,13 @@
             <tr class="trow-bline trow-hover" >
                 <td width="50%"><?php prt($esRs['estitle']); ?></td>
                 <td width="20%" class="cb"><?php prt($JModel->qsType($esRs['estype'], 'subname')); ?></td>
-                <td width="30%" class="ops"><a href="<?php prt(_g('uri')->su('user/ac/job/op/jexams_write/jobid/' . $jobid . '/esid/' . $esRs['esid'])); ?>">修改</a><a href="javascript:;" onclick="cUserJexamDelete(this, '<?php prt(_g('uri')->su('user/ac/job/op/jexams_delete')); ?>');" data-id="<?php prt($esRs['esid']); ?>">删除</a></td>
+                <td width="10%" class="cb"><?php prt($JModel->Provide2QuestionFrom($esRs['isdefine'])); ?></td>
+                <td width="20%" class="ops"><a href="<?php prt(_g('uri')->su('user/ac/job/op/jexams_write/jobid/' . $jobid . '/esid/' . $esRs['esid'])); ?>">修改</a><a href="javascript:;" onclick="cUserJexamDelete(this, '<?php prt(_g('uri')->su('user/ac/job/op/jexams_delete')); ?>');" data-id="<?php prt($esRs['esid']); ?>">删除</a></td>
             </tr>
             <?php endwhile; ?>
             <?php }else{ ?>
             <tr class="trow-bline trow-hover" >
-            	<td width="100%" colspan="3">暂无内容信息</td>
+            	<td width="100%" colspan="4">暂无内容信息</td>
             </tr>
             <?php } ?>
         </table>

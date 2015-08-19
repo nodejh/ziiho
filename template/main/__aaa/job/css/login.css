@@ -1,0 +1,53 @@
+@charset "utf-8";
+/* Copyright 2010-2014, Jolly,Cloud,Bonejay */
+
+/* c-area */
+.c-area { width:1200px; height:420px; margin:auto; margin-top:150px; position:relative; }
+	.c-area .shadow { z-index:-2; position:absolute; left:0px; top:0px; width:1200px; height:420px; background:#fff; filter: alpha(opacity = 20); -moz-opacity: 0.2; -khtml-opacity: 0.2; opacity: 0.2; }
+	.c-area .bl { z-index:-1; position:absolute; left:0px; top:0px; width:1198px; height:418px; border:1px solid #b3d1d9; background:none; filter: alpha(opacity = 60); -moz-opacity: 0.6; -khtml-opacity: 0.6; opacity: 0.6; }
+
+	/* login */
+	.c-area .m { width:380px; margin:auto; margin-top:65px; }
+		.c-area .m .f1 { width:100%; height:40px; margin-bottom:30px; border-bottom:3px solid #fff; position:relative; }
+			.c-area .m .f1 .sp { position:absolute; top:24px; width:16px; height:16px; font-size:14px; color:#fff; }
+				.c-area .m .f1 .pp1 { left:30px; }
+				.c-area .m .f1 .pp2 { left:125px; }
+			.c-area .m .f1 .tt { float:left; line-height:40px; padding-right:25px; font-size:18px; }
+				.c-area .m .f1 .tt a { color:#fff; }
+				.c-area .m .f1 .tt a:hover { text-decoration:none; }
+				
+		.c-area .m .f2 { margin-top:15px; }
+			.c-area .m .f2 .t1 { float:left; width:85px; line-height:33px; background:#000; color:#fff; text-align:center; font-size:16px; }
+			.c-area .m .f2 .t2 { float:left; width:295px; height:33px; background:#fff; }
+				.c-area .m .f2 .t2 .inp { width:285px; height:30px; line-height:30px; border:none; background:none; outline:none; text-indent:2px; }
+				
+		.c-area .m .f3 { margin-top:30px; height:40px; }
+			.c-area .m .f3 .t1 {  }
+				.c-area .m .f3 .t1 .btn { width:100px; height:40px; line-height:38px; background:#8f9037; border:none; text-align:center; font-size:16px; color:#fff; cursor:pointer; }
+			.c-area .m .f3 .t2 { font-size:16px; }
+				.c-area .m .f3 .t2 a { color:#33312b; line-height:40px; margin-left:15px; }
+				.c-area .m .f3 .t2 a:hover { text-decoration:underline; }
+				.c-area .m .f3 .t2 em { margin-left:15px; color:#999; }
+				
+				
+	/* forget */
+	.c-area .forget { width:1160px; margin:auto; margin-top:65px; }
+		.c-area .forget .f1 { width:100%; height:40px; margin-bottom:30px; border-bottom:3px solid #6b6e86; position:relative; }
+			.c-area .forget .f1 .sp { position:absolute; top:24px; width:16px; height:16px; font-size:14px; color:#6b6e86; }
+				.c-area .forget .f1 .pp1 { left:162px; }
+				.c-area .forget .f1 .pp2 { left:280px; }
+			.c-area .forget .f1 .tn { float:left; height:1px; padding-left:100px; }
+			.c-area .forget .f1 .tt { float:left; line-height:40px; padding-left:25px; font-size:18px; }
+				.c-area .forget .f1 .tt a { color:#9495a5; }
+				.c-area .forget .f1 .tt a:hover { text-decoration:none; }
+				.c-area .forget .f1 .tt a.on { color:#fff; }
+		
+		.c-area .forget .f2 { width:490px; margin:auto; margin-top:10px; }
+			.c-area .forget .f2 .t1 { float:left; width:105px; height:40px; line-height:40px; color:#fff; font-size:16px; text-align:right; padding-right:5px; }
+				.c-area .forget .f2 .t2 { float:left; width:255px; height:33px; background:#f4f6fa; }
+					.c-area .forget .f2 .t2 .inp { width:285px; height:30px; line-height:30px; border:none; background:none; outline:none; text-indent:2px; }
+					.c-area .forget .f2 .btn { width:100px; height:40px; line-height:36px; margin-left:110px; margin-top:15px; background:#69257c; border:none; text-align:center; color:#fff; font-size:16px; font-weight:bold; cursor:pointer; }
+				.c-area .forget .f2 .t3 { float:left; width:100px; height:30px; margin-left:20px; position:relative; }
+					.c-area .forget .f2 .t3 .shadow { z-index:-1; position:absolute; left:0px; top:0px; width:100%; height:100%; background:#fff; filter: alpha(opacity = 20); -moz-opacity: 0.2; -khtml-opacity: 0.2; opacity: 0.2; }
+					.c-area .forget .f2 .t3 .scbtn { width:100px; height:28px; line-height:28px; background:none; border:none; text-align:center; color:#fff; font-weight:bold; cursor:pointer; }
+		

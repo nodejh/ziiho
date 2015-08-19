@@ -64,6 +64,13 @@ class class_resume extends geshai_model {
 		return $this->db->is_success ();
 	}
 	
+	function rfind($k, $v = null) {
+		$this->db->from ( $this->t_resume );
+		$this->db->where ( $k, $v );
+		$this->db->select ();
+		return $this->db->get_one ();
+	}
+	
 	function chkId() {
 		return _g('session')->is_exist ( $this->s_id );
 	}

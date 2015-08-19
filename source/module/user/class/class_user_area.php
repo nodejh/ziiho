@@ -122,7 +122,7 @@ class class_user_area extends geshai_model {
 			}
 			$rs = $this->find ( 'areaid', $id );
 			if (! $this->db->is_success ( $rs )) {
-				smsg ( lang ( '110013' ) );
+				smsg ( lang ( '200013' ) );
 				return null;
 			}
 			if (! is_array ( $rs )) {
@@ -144,7 +144,7 @@ class class_user_area extends geshai_model {
 			$this->db->set ( $data );
 			$this->db->update ();
 			if (! $this->db->is_success ()) {
-				smsg ( lang ( '110013' ) );
+				smsg ( lang ( '200013' ) );
 				return null;
 			}
 		}
@@ -159,7 +159,7 @@ class class_user_area extends geshai_model {
 		if ($isEdit) {
 			$areaSub = $this->find ( 'areaid', $areaid );
 			if (! $this->db->is_success ( $areaSub )) {
-				smsg ( lang ( '110013' ) );
+				smsg ( lang ( '200013' ) );
 				return null;
 			}
 			if (! is_array ( $areaSub )) {
@@ -170,7 +170,7 @@ class class_user_area extends geshai_model {
 		if (_g ( 'validate' )->pnum ( $parentid )) {
 			$areaParentSub = $this->find ( 'areaid', $parentid );
 			if (! $this->db->is_success ( $areaParentSub )) {
-				smsg ( lang ( '110013' ) );
+				smsg ( lang ( '200013' ) );
 				return null;
 			}
 			if (! is_array ( $areaParentSub )) {
@@ -199,7 +199,7 @@ class class_user_area extends geshai_model {
 			$this->db->insert ();
 		}
 		if (! $this->db->is_success ()) {
-			smsg ( lang ( '110013' ) );
+			smsg ( lang ( '200013' ) );
 			return null;
 		}
 		smsg ( lang ( '100061' ), null, 1 );
@@ -212,7 +212,7 @@ class class_user_area extends geshai_model {
 		}
 		$rs = $this->find ( 'areaid', $areaid );
 		if (! $this->db->is_success ( $rs )) {
-			smsg ( lang ( '110013' ) );
+			smsg ( lang ( '200013' ) );
 			return null;
 		}
 		if (! is_array ( $rs )) {
@@ -226,7 +226,7 @@ class class_user_area extends geshai_model {
 		$this->db->where_in ( 'areaid', $values );
 		$this->db->delete ();
 		if (! $this->db->is_success ()) {
-			smsg ( lang ( '110013' ) );
+			smsg ( lang ( '200013' ) );
 			return null;
 		}
 		smsg ( lang ( '100061' ), null, 1 );

@@ -22,6 +22,8 @@ switch (_get ( 'op' )) {
 	case 'write':
 		$jobSub = null;
 		$zplxData = null;
+		$languageData = null;
+		$benefitData = null;
 		if(_g('validate')->hasget('jobid')){
 			$jobid = _get('jobid');
 			if(!_g('validate')->pnum($jobid)){
@@ -33,7 +35,9 @@ switch (_get ( 'op' )) {
 				smsg(lang('job:job>100000'), _g('uri')->referer());
 				return null;
 			}
-			$zplxData = $CZPLX->de($jobSub['zplxid']);
+			$zplxData = _g('value')->s2pnsplit2($jobSub['zplxid']);
+			$languageData = _g('value')->s2pnsplit2($jobSub['language']);
+			$benefitData = _g('value')->s2pnsplit2($jobSub['benefit']);
 		}
 		
 		$CZPLX->db->from($CZPLX->t_job_zplx);
@@ -49,6 +53,16 @@ switch (_get ( 'op' )) {
 	case 'write_save':
 		$zplxid = _post('zplxid');		
 		$jobid = _post('jobid');
+		
+		$areaid = _post ( 'areaid' );
+		$area_detail = _post ( 'area_detail' );
+		$workyear = _post ( 'workyear' );
+		$degree = _post ( 'degree' );
+		$language = _post ( 'language' );
+		$wagetype = _post('wagetype');
+		$wage = _post('wage');
+		$benefit = _post('benefit');
+		
 		$sortid = _post('sortid');
 		$jname = _post('jname');
 		$pnum = _post('pnum');
@@ -64,12 +78,25 @@ switch (_get ( 'op' )) {
 			return null;
 		}
 		
+		if (strlen( $areaid ) < 1) {
+			smsg(lang('job:job>100004'));
+			return null;
+		}
+		if (my_count( my_explode(',', $areaid) ) < 2){
+			smsg(lang('job:job>100005'));
+			return null;
+		}
+		if(!_g('validate')->vm(strlen($area_detail), 0, 180)){
+			smsg ( lang ( 'job:job>100006', 60) );
+			return null;
+		}
+		
 		if(!_g('validate')->pnum($sortid)){
 			smsg(lang('job:job>100003'));
 			return null;
 		}
 		
-		if(!_g('validate')->vm(strlen($jname), 1, 50)){
+		if(!_g('validate')->vm(strlen($jname), 1, 150)){
 			smsg ( lang ( 'job:job>100001', array(1, 50)) );
 			return null;
 		}
@@ -104,6 +131,14 @@ switch (_get ( 'op' )) {
 			'pnum'=>$pnum,
 			'content'=>$content,
 			'examtime'=>$examtime,
+			'areaid'=>_g( 'value' )->s2pnsplit ( $areaid ),
+			'area_detail'=>$area_detail,
+			'workyear'=>$workyear,
+			'degree'=>$degree,
+			'wagetype'=>$wagetype,
+			'wage'=>$wage,
+			'language'=>_g( 'value' )->s2pnsplit ( $language ),
+			'benefit'=>_g( 'value' )->s2pnsplit ( $benefit ),
 			'ctime'=>$ctime,
 			'isauth'=>$isauth,
 			'status'=>$status,
@@ -142,113 +177,6 @@ switch (_get ( 'op' )) {
 		if (!$isUpdate) {
 			$jobid = $JJOB->db->insert_id ();
 		}
-		/* input test */
-		if (my_array_value ( 'sortid', $jobRs ) != $sortid) {
-			/* 仅删除系统自动添加的 */
-			if ($isUpdate) {
-				$JEXAMS->db->from ( $JEXAMS->t_job_examsubject );
-				$JEXAMS->db->where ( 'isdefine', 2 );
-				$JEXAMS->db->where ( 'jobid', $jobid );
-				$JEXAMS->db->delete ();
-				if (! $JEXAMS->db->is_success ()) {
-					smsg ( lang ( '200013' ) );
-					return null;
-				}
-				
-				$JEXAMSA->db->from ( $JEXAMSA->t_job_examsubject_answer );
-				$JEXAMSA->db->where ( 'isdefine', 2 );
-				$JEXAMSA->db->where ( 'jobid', $jobid );
-				$JEXAMSA->db->delete ();
-				if (! $JEXAMSA->db->is_success ()) {
-					smsg ( lang ( '200013' ) );
-					return null;
-				}
-				
-				/* skill */
-				$JSKILL->db->from ( $JSKILL->t_job_skill );
-				$JSKILL->db->where ( 'isdefine', 2 );
-				$JSKILL->db->where ( 'jobid', $jobid );
-				$JSKILL->db->delete ();
-				if (! $JSKILL->db->is_success ()) {
-					smsg ( lang ( '200013' ) );
-					return null;
-				}
-			}
-			
-			$qs = $_QUESTION->finds ('sortid', $sortid);
-			if (!$_QUESTION->db->is_success ( $qs[1] )) {
-				smsg ( lang ( '200013' ) );
-				return null;
-			}
-			while ($__q = $_QUESTION_SUB->db->fetch_array ( $qs[1] )) {
-				$_QUESTION_SUB->db->from ( $_QUESTION_SUB->t_job_question_subject );
-				$_QUESTION_SUB->db->where ( 'status', 1 );
-				$_QUESTION_SUB->db->where ( 'questionid', $__q['questionid'] );
-				$_QUESTION_SUB->db->rand_limit ( 10 );
-				$_QUESTION_SUB->db->select ();
-				if (!$_QUESTION_SUB->db->is_success ()) {
-					smsg ( lang ( '200013' ) );
-					return null;
-				}
-				$__qsResult = $_QUESTION_SUB->db->get_list ();
-				/* insert */
-				while ($__qs = $_QUESTION_SUB->db->fetch_array ( $__qsResult )) {
-					$qDatas = array (
-							'estitle' => $__qs['title'],
-							'estype' => $__qs['stype'],
-							'esoption' => my_addslashes($__qs['option']),
-							'esanswer' => my_addslashes($__qs['answer']),
-							'ctime' => $ctime,
-							'isdefine' => 2,
-							'cuid' => $cuid,
-							'jobid' => $jobid,
-							'qsid' => $__qs['qsid']
-					);
-					$JEXAMS->db->from ( $JEXAMS->t_job_examsubject );
-					$JEXAMS->db->set ( $qDatas );
-					$JEXAMS->db->insert ();
-					if (!$JEXAMS->db->is_success ()) {
-						smsg ( lang ( '200013' ) );
-						return null;
-					}
-				}
-			}
-			/* skill */
-			$_PROVIDE->db->from ( $_PROVIDE->t_job_provide_item );
-			$_PROVIDE->db->where ( 'status', 1 );
-			$_PROVIDE->db->where ( 'sortid', $sortid );
-			$_PROVIDE->db->order_by ( 'listorder' );
-			$_PROVIDE->db->limit ( 0, 10 );
-			$_PROVIDE->db->select ();
-			if (!$_PROVIDE->db->is_success ()) {
-				smsg ( lang ( '200013' ) );
-				return null;
-			}
-			$provideItemResult = $_PROVIDE->db->get_list ();
-			while ($piRs = $_PROVIDE->db->fetch_array ( $provideItemResult )) {
-				$piData = array (
-						'listorder' => $piRs['listorder'],
-						'sname' => my_addslashes( $piRs['title'] ),
-						'content' => my_addslashes( $piRs['content'] ),
-						'ctime' => $ctime,
-						'isdefine' => 2,
-						'status' => 1,
-						'cuid' => $cuid,
-						'sortid' => $sortid,
-						'jobid' => $jobid,
-						'provideid' => $piRs['provideid'],
-						'itemid' => $piRs['itemid']
-				);
-				$JSKILL->db->from ( $JSKILL->t_job_skill );
-				$JSKILL->db->set ( $piData );
-				$JSKILL->db->insert ();
-				if (!$JSKILL->db->is_success ()) {
-					smsg ( lang ( '200013' ) );
-					return null;
-				}
-			}
-		}
-		
 		smsg ( lang ( '100061' ), null, 1 );
 		break;
 
@@ -492,6 +420,7 @@ switch (_get ( 'op' )) {
 				smsg ( lang ( 'job:600011' ) );
 				return null;
 			}
+			$__optIndex = 0;
 			foreach ($esoption as $optKey => $optVal){
 				if(strlen($optVal) < 1){
 					$optVal = 'undefined';
@@ -548,8 +477,8 @@ switch (_get ( 'op' )) {
 		$JEXAMSA->db->from($JEXAMSA->t_job_examsubject_answer);
 		$JEXAMSA->db->where('cuid', $cuid);
 		$JEXAMSA->db->where('jobid', $jobid);
-		$JEXAMSA->db->distinct('defgroupid');
 		$pageData = _g('page')->c($JEXAMSA->db->count(), 10, 10, _get('page'));
+		$JEXAMSA->db->order_by('ctime', 'DESC');
 		$JEXAMSA->db->limit($pageData['start'], $pageData['size']);
 		$JEXAMSA->db->select();
 		$JAnswerResult = $JEXAMSA->db->get_list();
@@ -557,23 +486,26 @@ switch (_get ( 'op' )) {
 		include _g ( 'template' )->name ( 'cuser', 'job_esanswer', true );
 		break;
 	case 'esanswer_read':
-		$__getUid = _get('uid');
-		$jobid = _get('jobid');
-		if(!_g('validate')->pnum($jobid) || !_g('validate')->pnum($__getUid)){
+		$answerid = _get('answerid');
+		if(!_g('validate')->pnum($answerid)){
 			smsg(lang('200010'), _g('uri')->referer());
 			return null;
 		}
 		
-		$jobData = $JJOB->find('jobid', $jobid);
+		$answerRs = $JEXAMSA->find ( 'answerid', $answerid );
+		if (!my_is_array( $answerRs )) {
+			smsg(lang('job:600013'), _g('uri')->referer());
+			return null;
+		}
+		$jobData = $JJOB->find('jobid', $answerRs['jobid']);
 		if(!my_is_array($jobData)){
-			smsg(lang('job:job>100000'), _g('uri')->referer());
+			smsg(lang('job:job>100000'), $goBack);
 			return null;
 		}
 		
 		/* 测试题 */
 		$JEXAMS->db->from($JEXAMS->t_job_examsubject);
-		$JEXAMS->db->where('cuid', $cuid);
-		$JEXAMS->db->where('jobid', $jobid);
+		$JEXAMS->db->where('jobid', $answerRs['jobid']);
 		$pageData['total'] = $JEXAMS->db->count();
 		$JEXAMS->db->order_by('ctime');
 		$JEXAMS->db->select();

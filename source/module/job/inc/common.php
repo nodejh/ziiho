@@ -17,7 +17,9 @@ $acts = array (
 		'jianligonglue',
 		'mianshizhinan',
 		'zhichangdaren',
-		'news'
+		'news',
+		'assess',
+		'request'
 );
 $ac = strtolower ( _get ( 'ac' ) );
 

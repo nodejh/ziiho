@@ -234,22 +234,34 @@ class class_job_area extends geshai_model {
 	
 	function cache(){
 		$result = $this->finds('status', _g('value')->sb(true));
-	
+		
 		$flag = false;
 		$data = null;
+		$sData = null;
+		$__ddd = null;
 		while($rs = $this->db->fetch_array($result)){
 			if($flag){
 				$data .= ',';
+				$sData .= ',';
 			}
 			$data .= '{"id": ' . $rs['areaid'];
 			$data .= ',"parentid": ' . $rs['parentid'];
 			$data .= ',"aname": "' . my_addslashes($rs['aname']) . '"';
 			$data .= '}';
-				
+			
+			$sData .= $rs['areaid']. '=>array(\'areaid\'=> ' . $rs['areaid'];
+			$sData .= ',\'parentid\'=>' . $rs['parentid'];
+			$sData .= ',\'aname\'=>' . '\'' . my_addslashes($rs['aname']) . '\'';
+			$sData .= ')';
+			
 			$flag = true;
 		}
 		$data = 'var _CACHE_job_area = [' . $data . '];';
 		_g('cache')->write('job', null, 'area.js', $data);
+		
+		$sData = "<?php \nif (! defined ( 'IN_GESHAI' )) {\n exit ( 'no direct access allowed' );\n} return array(" . $sData;
+		$sData .= "); ?>";
+		_g('cache')->write('job', null, 'area.php', $sData);
 	}
 }
 ?>

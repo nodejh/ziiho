@@ -24,21 +24,18 @@
         </form>
     	<table class="tbox">
             <tr class="trow-fw trow-bg" >
-                <td width="30%">答卷人</td>
+                <td width="30%">答卷者</td>
                 <td width="20%">答卷时间</td>
                 <td width="50%">操作</td>
             </tr>
-            
             <?php 
 				if($pageData['total'] >= 1) { 
             	while($esaRs = _g('db')->result($JAnswerResult)){
-					$userRs = $_USER->find_jion('a.uid', $esaRs['uid']);
 			 ?>
-            
             <tr class="trow-bline trow-hover" >
-                <td width="30%"><?php prt($userRs['nickname']); ?></td>
+                <td width="30%"><?php prt(_g('value')->username($_USER->find_jion('a.uid', $esaRs['uid']))); ?></td>
                 <td width="20%" class="cb"><?php prt(person_time($esaRs['ctime'])); ?></td>
-                <td width="50%" class="ops"><a href="<?php prt(_g('uri')->su('user/ac/job/op/esanswer_read/jobid/' . $jobid . '/uid/' . $esaRs['uid'])); ?>">查看答卷</a><!--<a href="javascript:;" onclick="cUserSKillDelete(this, '<?php prt(_g('uri')->su('user/ac/job/op/skill_delete')); ?>');" data-id="<?php prt($esaRs['esid']); ?>">删除</a>--></td>
+                <td width="50%" class="ops"><a href="<?php prt(_g('uri')->su('user/ac/job/op/esanswer_read/answerid/' . $esaRs['answerid'])); ?>">查看答卷</a><!--<a href="javascript:;" onclick="cUserSKillDelete(this, '<?php prt(_g('uri')->su('user/ac/job/op/skill_delete')); ?>');" data-id="<?php prt($esaRs['esid']); ?>">删除</a>--></td>
             </tr>
             <?php }; ?>
             <?php }else{ ?>

@@ -1,0 +1,60 @@
+@charset "utf-8";
+/* CSS Document */
+
+.answers-area { width:1200px; margin:auto; line-height:35px; position:relative; }
+	
+	.answers-area .txm { position:fixed;  top:62px; right:0px; line-height:35px; padding:0px 5px; background:#3C6; }
+		.answers-area .txm span { color:#fff; }
+		.answers-area .txm span.at { font-weight:bold; }
+		.answers-area .txm .tss { margin:0px 3px; padding:0px 3px; color:#FF6; font-weight:bold; }
+		.answers-area .txm .ut { margin:0px 3px; padding:0px 3px; background:#FF6; color:#F00; }
+
+	.answers-area .pos-box { width:100%; line-height:35px; }	
+		.answers-area .pos-box em { float:left; }
+		.answers-area .pos-box em.f1 { margin-right:5px; } 
+		.answers-area .pos-box em.f2 { color:#999; margin:0px 5px; } 
+		.answers-area .pos-box em.f3 { margin:0px 5px; }
+		.answers-area .pos-box a { float:left; }
+		.answers-area .pos-box a:hover { color:#F00; text-decoration:underline; }
+		
+		
+	.answers-area .des-box { line-height:24px; padding:15px; border-bottom:3px solid #ccc; background:#F2F2F2; font-size:12px; }
+		.answers-area .des-box .ln { background:url(../../common/image/light.png) no-repeat left center; padding-left:18px; font-weight:bold; }
+		.answers-area .des-box .tx { text-indent:28px; }
+			.answers-area .des-box .tx em { color:#F30; padding-right:5px; }
+		
+		
+	.answers-area .item-box { width:100%; }
+		.answers-area .item-box ul.is li { margin-top:10px; padding:15px; border-bottom:1px solid #eee; }
+		.answers-area .item-box ul.is li:hover { background:#F9F9F9; }
+		.answers-area .item-box ul.is li.light { border:2px solid #F60; border-radius:2px; }
+			.answers-area .item-box ul.is li .tit { width:100%; line-height:24px; letter-spacing:1px; font-weight:bold; }
+				.answers-area .item-box ul.is li .tit .hh { float:left; width:30px; font-weight:bold; color:#00C; }
+				.answers-area .item-box ul.is li .tit .tt { float:left; }
+			.answers-area .item-box ul.is li .opts { margin-left:30px; margin-top:8px; line-height:28px; }
+				.answers-area .item-box ul.is li .opts p { float:left; padding:2px 8px; cursor:pointer; }
+				.answers-area .item-box ul.is li .opts p.h:hover { background:#E0E0E0; border-radius:3px; }
+				.answers-area .item-box ul.is li .opts input.single-text { width:420px; height:28px; line-height:26px; text-indent:3px; outline:none; }
+				.answers-area .item-box ul.is li .opts textarea.multi-text { width:420px; height:100px; line-height:18px; text-indent:3px; outline:none; overflow-x:hidden; overflow-y:auto; }
+				
+				
+		.answers-area .btn-box { width:100%; margin-top:20px; padding-bottom:30px; text-align:center; }
+			.answers-area .btn-box .ok { line-height:28px; padding:5px 30px; border-radius:3px; cursor:pointer; font-size:16px; color:#fff; letter-spacing:1px; font-weight:bold; background:#093; border:none; outline:none; }
+			.answers-area .btn-box .fq { line-height:28px; margin-left:20px; padding:5px 30px; border-radius:3px; cursor:pointer; font-size:16px; color:#666; letter-spacing:1px; font-weight:bold; background:#E6E6E6; border:none; outline:none; }
+			
+			
+/* answers-success */
+.answers-success { width:1198px; border:1px solid #eee; border-radius:3px; margin:auto; margin-top:30px; padding:50px 0px; }
+	.answers-success .message { width:80%; margin:auto; line-height:48px; }
+	.answers-success .message-success { background:url(../image/success2.gif) no-repeat left top; }
+	.answers-success .message-error { background:url(../image/error.gif) no-repeat left top; }
+		.answers-success .message em.tt { float:left; font-size:18px; text-indent:60px; }
+	.answers-success .nnn { width:80%; margin:auto; margin-top:20px; }
+		.answers-success .nnn a { margin-right:10px; }
+		.answers-success .nnn a:hover { text-decoration:underline; color:#00C; }
+		.answers-success .nnn a.h { margin-left:50px; background:url(../image/jobstep-home.png) no-repeat left center; padding-left:18px; }
+			
+					
+			
+		
+

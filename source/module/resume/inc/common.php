@@ -28,7 +28,7 @@ switch ($UModel->suser('login_type')) {
 		smsg('error!');
 		break;
 	default :
-		$acts = array( 'resume' );
+		$acts = array( 'resume', 'view' );
 		_get('ac', (in_array(_get('ac'), $acts) ? _get('ac') : 'manager'));
 		
 		include _g ( 'module' )->filename ( 'resume', _get('ac') );

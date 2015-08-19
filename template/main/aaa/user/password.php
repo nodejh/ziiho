@@ -62,7 +62,7 @@
 <?php include _g('template')->name('job', 'footer', true); ?>
 
 
-<script type="text/javascript" src="<?php prt(_g('template')->dir('user')); ?>/js/cuser.js"></script>
+<script type="text/javascript" src="<?php prt(_g('template')->dir('user')); ?>/js/user.js"></script>
 <script language="javascript">
 	
 </script>

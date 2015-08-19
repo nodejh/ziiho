@@ -96,7 +96,7 @@ switch (_get ( 'f' )) {
 				
 				$optionData[$optIdStr] = array(
 						'flag' => $JMODEL->qsOptionOrder ( $optIndex ),
-						'name' => my_stripslashes($optVal)
+						'name' => my_htmlspecialchars( my_stripslashes( $optVal ) )
 					);
 				$optIndex = $optIndex + 1;
 			}
@@ -106,7 +106,7 @@ switch (_get ( 'f' )) {
 		$listorder = (_g ( 'validate' )->num ( $listorder ) ? $listorder : 0);
 		$data = array(
 				'listorder'=>$listorder,
-				'title'=>$title,
+				'title'=>my_htmlspecialchars( $title ),
 				'stype'=>$stype,
 				'option'=>my_addslashes(array2str($optionData)),
 				'answer'=>my_addslashes(array2str($answerData)),

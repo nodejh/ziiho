@@ -242,6 +242,7 @@ class geshai_mysql {
 		if ($this->is_result ( $r )) {
 			return mysql_fetch_array ( $r );
 		}
+		return null;
 	}
 	
 	public function fetch_assoc() {

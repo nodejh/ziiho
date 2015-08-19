@@ -29,15 +29,15 @@
     	<a class="add" href="<?php prt(_g('uri')->referer()); ?>">返回</a>
     </div>
     
+    <div class="">以下答卷为该职位的自定义试题：</div>
+    
     <!--//answer-read-->
     <div class="clearfix answer-read">
     	<ul class="clearfix ar-box">
         	<?php 
 				$i = 0;
-				$orderName = 0;
 				while($esRs = _g('db')->result($examsubjectResult)){
 				$i= $i + 1;
-				$orderName = 0;
 			?>
             <input type="hidden" name="estype[<?php prt($esRs['esid']); ?>]" value="<?php prt($esRs['estype']); ?>" />
             <?php 
@@ -50,15 +50,22 @@
                 </div>
                 
                 <div class="clearfix ti">
-                	<p class="obox"><span class="onn"></span><span class="ott"><em>A.</em>丰富的</span></p>
+                	<?php foreach($JModel->qsOptionDe($esRs['esoption']) as $optKey=>$optVal){ ?>
+                    <?php 
+						$okAnswer = $JModel->qs2Answer($esRs['esoption'], $esRs['esanswer'], true);
+						$myAnswer = $JModel->myExamAnswer($esRs['esid'], $esRs['estype'], $esRs['esoption'], $answerRs);
+						$isOk = ($okAnswer == $myAnswer);
+					 ?>
+                	<p class="obox"><span class="onn"></span><span class="ott"><em><?php prt($optVal['flag']); ?>.</em><?php prt($optVal['name']); ?></span></p>
                     <div class="clear"></div>
-                    <p class="obox"><span class="onn"></span><span class="ott"><em>A.</em>丰富的</span></p>
-                    <div class="clear"></div>
-                    <p class="obox"><span class="onn"></span><span class="ott"><em>A.</em>丰富的</span></p>
-                    <div class="clear"></div>
-                    <p class="obox"><span class="onn"></span><span class="ott"><em>A.</em>丰富的</span></p>
+                    <?php } ?>
                 </div>
                 
+                <div class="clearfix tas">
+                	<span class="as1">本题答案：<?php prt($okAnswer); ?></span>
+                    <span class="as2 <?php prt($isOk ? 'color100' : 'color101'); ?>">提交答题：<?php prt($myAnswer); ?></span>
+                    <span class="as3 <?php prt($isOk ? 'icon-12 color100' : 'icon-11 color101'); ?>">&nbsp;&nbsp;</span>
+                </div>
             </li>
             
             <?php break;
@@ -72,19 +79,18 @@
                 <div class="clearfix ti">
                 	<?php foreach($JModel->qsOptionDe($esRs['esoption']) as $optKey=>$optVal){ ?>
                     <?php 
-						$okAnswer = $JModel->qsSAnswer($esRs['esanswer'], $esRs['esoption'], true);
-						$myAnswer = $JEXAMSA->myAnswer($esRs['esid'], $esRs['cuid'], $esRs['jobid'], $__getUid, $esRs['esoption'], $JModel, true);
+						$okAnswer = $JModel->qs2Answer($esRs['esoption'], $esRs['esanswer'], true);
+						$myAnswer = $JModel->myExamAnswer($esRs['esid'], $esRs['estype'], $esRs['esoption'], $answerRs);
 						$isOk = ($okAnswer == $myAnswer);
 					 ?>
-                	<p class="obox"><span class="onn"></span><span class="ott"><em><?php prt($JModel->qsOptionOrder($orderName)); ?>.</em><?php prt($optVal); ?></span></p>
+                	<p class="obox"><span class="onn"></span><span class="ott"><em><?php prt($optVal['flag']); ?>.</em><?php prt($optVal['name']); ?></span></p>
                     <div class="clear"></div>
-                    <?php $orderName = $orderName + 1; ?> 
                     <?php } ?>
                 </div>
                 
                 <div class="clearfix tas">
                 	<span class="as1">本题答案：<?php prt($okAnswer); ?></span>
-                    <span class="as2 <?php prt($isOk ? 'color100' : 'color101'); ?>">答题：<?php prt($myAnswer); ?></span>
+                    <span class="as2 <?php prt($isOk ? 'color100' : 'color101'); ?>">提交答题：<?php prt($myAnswer); ?></span>
                     <span class="as3 <?php prt($isOk ? 'icon-12 color100' : 'icon-11 color101'); ?>">&nbsp;&nbsp;</span>
                 </div>
             </li>

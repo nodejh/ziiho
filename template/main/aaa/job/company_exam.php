@@ -7,7 +7,7 @@
 <div class="answers-area clearfix" id="answers-area">
 	<!-- //txm -->
     <div class="txm clearfix">
-    	<span>共<em class="tss"><?php prt($pageData['total']); ?></em>题,满分<em class="tss">100</em>分,合格<em class="tss">60</em>分;</span>&nbsp;&nbsp;<span>限时<em class="tss"><?php prt($jobData['examtime']); ?></em>分钟;</span>&nbsp;&nbsp;<span class="at">剩余<em class="ut" flag="activetime_m">00</em>分<em class="ut" flag="activetime_s">00</em>秒</span>
+    	<span>共<em class="tss"><?php prt($questionCount); ?></em>题,&nbsp;每题<em class="tss">1</em>分;</span>&nbsp;&nbsp;<span class="at">剩余答题时间<em class="ut" flag="activetime_m">00</em>分<em class="ut" flag="activetime_s">00</em>秒</span>
     </div>
     <!-- //txm -->
     	
@@ -27,10 +27,10 @@
     <!-- //des-box -->
     <div class="des-box clearfix">
     	<p class="ln">温馨提示:</p>
-        <p class="tx"><em>•</em>若你的本次答题分数未合格，将会限制在24小时后，可再次重新答题。</p>
-        <p class="tx"><em>•</em>您的答题分数，将会影响你的求职成果，分数越高求职机会越多...</p>
-        <p class="tx"><em>•</em>提交答题后，若测试合格，系统会自动颁发于你“职位认证书”。</p>
-        <p class="tx"><em>•</em>答题时间到，系统将自动提交答题内容。</p>
+        <p class="tx"><em>•</em>提交本次测试后，将会限制在24小时后，可再次重新答题。</p>
+        <p class="tx"><em>•</em>您的答题分数，将会影响你的求职率，分数越高求职机会越多...</p>
+        <p class="tx"><em>•</em>提交答题后，系统会自动生成“职位认证书”。</p>
+        <p class="tx"><em>•</em>若答题时间到，系统将自动提交答题内容。</p>
     </div>
     <!-- des-box// -->
     
@@ -39,74 +39,57 @@
     <!-- //item-box -->
     <div class="item-box clearfix">
     	<ul class="is">
-        	
-            <?php 
+            <?php
 				$i = 0;
-				while($esRs = _g('db')->result($examsubjectResult)){
-				$i= $i + 1;
+				foreach($questionDatas as $k=>$v) {
 			?>
-            <input type="hidden" name="estype[<?php prt($esRs['esid']); ?>]" value="<?php prt($esRs['estype']); ?>" />
+            
+            <?php if($k != 'my'){ ?>
+            <li style="background:#F2F2F2; color:#03C; text-align:center; padding:0px; font-size:16px; font-weight:bold;"><?php prt($k != 'sys' ? _g('cache')->selectitem('120>'.$k.'>sname') : '职位知识'); ?></li>
+            <?php } ?>
+            
+            <?php
+					foreach($v as $k2=>$v2) {
+						while($esRs = _g('db')->result($v2['result'])){
+						$i= $i + 1;
+						$esRs = $JMODEL->toExam($k, $esRs);
+			?>
+            <li class="clearfix" dataid="<?php prt($esRs['idstr']); ?>">
+            	<input type="hidden" name="estype[<?php prt($esRs['idstr']); ?>]" value="<?php prt($esRs['estype']); ?>" />
+            	<div class="tit clearfix">
+                	<div class="hh"><?php prt($i); ?>.</div>
+                    <div class="tt"><?php prt($esRs['estitle']); ?><em style="color:#03C; margin-left:10px;">[<?php prt($JMODEL->qsType($esRs['estype'], 'subname')); ?>]</em></div>
+                </div>
+                <div class="opts clearfix">
+                
             <?php 
             	switch($esRs['estype']){
-					case 'radio': ?>
-        	<li class="clearfix" dataid="<?php prt($esRs['esid']); ?>">
-            	<div class="tit clearfix">
-                	<div class="hh"><?php prt($i); ?>.</div>
-                    <div class="tt"><?php prt($esRs['estitle']); ?></div>
-                </div>
-                <div class="opts clearfix">
-                	<?php $order = 0; ?>
+				case 'radio': ?>
                 	<?php foreach($JMODEL->qsOptionDe($esRs['esoption']) as $optKey => $optVal){ ?>
-                	<p class="h" radio="esoption[<?php prt($esRs['esid']); ?>][]"><input type="radio" name="esoption[<?php prt($esRs['esid']); ?>][]" value="<?php prt($optKey); ?>" /><?php prt($JMODEL->qsOptionOrder($order)); ?>.&nbsp;<?php prt($optVal); ?></p>
-                    <?php $order = $order + 1; ?>
+                	<p class="h" radio="esoption[<?php prt($esRs['idstr']); ?>][]"><input type="radio" name="esoption[<?php prt($esRs['idstr']); ?>][]" value="<?php prt($optKey); ?>" /><?php prt($optVal['flag']); ?>.&nbsp;<?php prt($optVal['name']); ?></p>
                     <?php } ?>
                     <script language="javascript">
-                    	_GESHAI.radio({ radioItem: 'p[radio="esoption[<?php prt($esRs['esid']); ?>][]"]', name: "esoption[<?php prt($esRs['esid']); ?>][]" });
+                    	_GESHAI.radio({ radioItem: 'p[radio="esoption[<?php prt($esRs['idstr']); ?>][]"]', name: "esoption[<?php prt($esRs['idstr']); ?>][]" });
                     </script>
-                </div>
-            </li>
-            <?php break;
-					case 'checkbox': ?>
-        	<li class="clearfix" dataid="<?php prt($esRs['esid']); ?>">
-            	<div class="tit clearfix">
-                	<div class="hh"><?php prt($i); ?>.</div>
-                    <div class="tt"><?php prt($esRs['estitle']); ?></div>
-                </div>
-                <div class="opts clearfix">
-                	<?php $order = 0; ?>
+                
+            		<?php break;
+				case 'checkbox': ?>
                 	<?php foreach($JMODEL->qsOptionDe($esRs['esoption']) as $optKey => $optVal){ ?>
-                	<p class="h" checkbox="esoption[<?php prt($esRs['esid']); ?>][]"><input type="checkbox" name="esoption[<?php prt($esRs['esid']); ?>][]" value="<?php prt($optKey); ?>" /><?php prt($JMODEL->qsOptionOrder($order)); ?>.&nbsp;<?php prt($optVal); ?></p>
-                    <?php $order = $order + 1; ?>
+                	<p class="h" checkbox="esoption[<?php prt($esRs['idstr']); ?>][]"><input type="checkbox" name="esoption[<?php prt($esRs['idstr']); ?>][]" value="<?php prt($optKey); ?>" /><?php prt($optVal['flag']); ?>.&nbsp;<?php prt($optVal['name']); ?></p>
                     <?php } ?>
                     <script language="javascript">
-                    	_GESHAI.checkbox({ checkboxItem: 'p[checkbox="esoption[<?php prt($esRs['esid']); ?>][]"]', name: "esoption[<?php prt($esRs['esid']); ?>][]" });
+                    	_GESHAI.checkbox({ checkboxItem: 'p[checkbox="esoption[<?php prt($esRs['idstr']); ?>][]"]', name: "esoption[<?php prt($esRs['idstr']); ?>][]" });
                     </script>
-                </div>
+            		<?php break;
+				case 'input': ?>
+                	<input class="single-text" type="text" name="esoption[<?php prt($esRs['idstr']); ?>]" />
+            		<?php break;
+				case 'textarea': ?>
+                	<textarea class="multi-text" name="esoption[<?php prt($esRs['idstr']); ?>]"></textarea>
+            		<?php break; } ?>
+            	</div>
             </li>
-            <?php break;
-					case 'input': ?>
-        	<li class="clearfix" dataid="<?php prt($esRs['esid']); ?>">
-            	<div class="tit clearfix">
-                	<div class="hh"><?php prt($i); ?>.</div>
-                    <div class="tt"><?php prt($esRs['estitle']); ?></div>
-                </div>
-                <div class="opts clearfix">
-                	<input class="single-text" type="text" name="esoption[<?php prt($esRs['esid']); ?>]" />
-                </div>
-            </li>
-            <?php break;
-					case 'textarea': ?>
-            <li class="clearfix" dataid="<?php prt($esRs['esid']); ?>">
-            	<div class="tit clearfix">
-                	<div class="hh"><?php prt($i); ?>.</div>
-                    <div class="tt"><?php prt($esRs['estitle']); ?></div>
-                </div>
-                <div class="opts clearfix">
-                	<textarea class="multi-text" name="esoption[<?php prt($esRs['esid']); ?>]"></textarea>
-                </div>
-            </li>
-            <?php break; } ?>
-            <?php } ?>
+            <?php } } } ?>
             
         </ul>
     </div>
@@ -146,7 +129,7 @@ __examListBox.find("li").click(function(e){
 });
 
 var __examForm = document.getElementById("examForm");
-var __examTime = parseInt("<?php prt($jobData['examtime']); ?>");
+var __examTime = parseInt("21<?php prt($jobData['examtime']); ?>");
 var __examTimerFlag;
 var __examTimerNow = __examTime;
 var __examBox = $("#answers-area");
@@ -196,13 +179,10 @@ function rzExamDo(_this, _isauto){
 				if(d.status != 1){
 					examChk(__examTimerNow);
 					
-					d.isCloseBtn = false;
-					d.clickBgClose = true;
-					d.title = "错误：";
-					window.top._GESHAI.dialog(d);
-					
 					/* 未填写的题目 */
 					if(d.emptyData){
+						window.top._GESHAI.dialog.close();
+						
 						var __isFalg = false;
 						for(var i = 0; i < d.emptyData.length; i++){
 							__examListBox.find("li[dataid=\"" + d.emptyData[i] + "\"]").addClass("light");
@@ -210,10 +190,15 @@ function rzExamDo(_this, _isauto){
 						}
 						if(__isFalg){
 							var _st = Math.max(parseInt(__examListBox.find("li[dataid=\"" + d.emptyData[0] + "\"]").offset().top) - 20, 0);
-							$('body,html').stop(true, true).animate({"scrollTop": _st}, 500);
+							$('body').stop(true, true).animate({"scrollTop": _st}, 500);
 						}
+					} else{
+						d.isCloseBtn = false;
+						d.clickBgClose = true;
+						d.title = "错误：";
+						window.top._GESHAI.dialog(d);
 					}
-				}else if(d.status == 1){
+				}else{
 					window.top._GESHAI.dialog.close();
 					_GESHAI.redirect(d);
 				}
@@ -258,5 +243,4 @@ function fqExam(){
 	});
 };
 </script>
-
 <?php include _g('template')->name('@', 'footer', true); ?>
