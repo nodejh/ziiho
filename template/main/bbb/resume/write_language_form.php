@@ -8,7 +8,7 @@
         <li class="bline clearfix">
             <div class="nn">语言类别:</div>
             <div class="ii">
-                <select class="sel" name="ltype">
+                <select class="sel o-input o-fix-select" name="ltype">
                 	<option value="-1">-</option>
 					<?php foreach(_g('cache')->selectitem(112) as $k=>$v): ?>
                     <option value="<?php prt($k); ?>" <?php if($k == my_array_value('ltype', $languageRs)){ ?>selected="selected"<?php } ?> ><?php prt($v['sname']); ?></option>
@@ -16,7 +16,7 @@
                 </select>
                 
                 掌握程度：
-                <select class="sel" name="level">
+                <select class="sel o-input o-fix-select" name="level">
 					<?php foreach(_g('cache')->selectitem(113) as $k=>$v): ?>
                     <option value="<?php prt($k); ?>" <?php if($k == my_array_value('level', $languageRs)){ ?>selected="selected"<?php } ?> ><?php prt($v['sname']); ?></option>
                     <?php endforeach; ?>
@@ -27,14 +27,14 @@
         <li class="bline clearfix">
             <div class="nn">读写能力:</div>
             <div class="ii">
-                <select class="sel" name="rwability">
+                <select class="sel o-input o-fix-select" name="rwability">
 					<?php foreach(_g('cache')->selectitem(113) as $k=>$v): ?>
                     <option value="<?php prt($k); ?>" <?php if($k == my_array_value('rwability', $languageRs)){ ?>selected="selected"<?php } ?> ><?php prt($v['sname']); ?></option>
                     <?php endforeach; ?>
             	</select>
                 
                 听说能力：
-                <select class="sel" name="lsability">
+                <select class="sel o-input o-fix-select" name="lsability">
 					<?php foreach(_g('cache')->selectitem(113) as $k=>$v): ?>
                     <option value="<?php prt($k); ?>" <?php if($k == my_array_value('lsability', $languageRs)){ ?>selected="selected"<?php } ?> ><?php prt($v['sname']); ?></option>
                     <?php endforeach; ?>

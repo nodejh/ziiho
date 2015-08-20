@@ -8,10 +8,14 @@
         <li class="bline clearfix">
             <div class="nn">附件名称:</div>
             <div class="ii">
-                <input type="text" class="ii-inp" name="aname" value="<?php prt(my_array_value('aname', $attachRs)); ?>" />
-                
-                附件链接：
-                <input type="text" class="ii-inp" name="url" value="<?php prt(my_array_value('url', $attachRs)); ?>" />
+                <input type="text" class="o-input" name="aname" value="<?php prt(my_array_value('aname', $attachRs)); ?>" />
+            </div>
+        </li>
+
+        <li class="bline clearfix">
+            <div class="nn">附件链接:</div>
+            <div class="ii">
+                <input type="text" class="o-input" name="url" value="<?php prt(my_array_value('url', $attachRs)); ?>" />
             </div>
         </li>
         
@@ -21,13 +25,13 @@
             	<?php if(strlen(my_array_value('srcname', $attachRs)) >= 1){ ?>
                 <p id="attach_file_<?php prt($attachRs['attachid']); ?>"><?php prt($attachRs['srcname']); ?><a href="#" onclick="return resumeDo_attachFileDel(<?php prt($attachRs['attachid']); ?>);">删除附件</a></p>
                 <?php } ?>
-                <p><input type="file" name="src" /></p>
+                <p><input class="o-input o-input-fix-attach" type="file" name="src" /></p>
             </div>
         </li>
         
         <li class="clearfix">
             <div class="nn">附件描述:</div>
-            <div class="ii"><textarea attach="description" name="description" style="width:540px; height:80px;"><?php prt(my_array_value('description', $attachRs)); ?></textarea></div>
+            <div class="ii"><textarea attach="description" class="o-input" name="description" style="width:540px; height:80px;"><?php prt(my_array_value('description', $attachRs)); ?></textarea></div>
         </li>
         <li class="clearfix">
             <div class="nn">&nbsp;</div>

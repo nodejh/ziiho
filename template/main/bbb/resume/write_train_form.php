@@ -8,24 +8,24 @@
         <li class="bline clearfix">
             <div class="nn">时间:</div>
             <div class="ii">
-            <select class="sel" name="syear">
+            <select class="sel o-input o-fix-select" name="syear">
               <?php for($i = 1960; $i < date('Y'); $i++){ ?>
               <option value="<?php prt($i); ?>" <?php prt($i == my_array_value('syear', $trainRs) ? 'selected="selected"' : null); ?> ><?php prt($i); ?></option>
               <?php } ?>
           </select>
-          <select class="sel" name="smonth">
+          <select class="sel o-input o-fix-select" name="smonth">
               <?php for($i = 1; $i <= 12; $i++){ ?>
               <option value="<?php prt($i); ?>" <?php prt($i == my_array_value('smonth', $trainRs) ? 'selected="selected"' : null); ?> ><?php prt($i); ?></option>
               <?php } ?>
           </select>
           到
-          <select class="sel" name="eyear">
+          <select class="sel o-input o-fix-select" name="eyear">
               <option value="-1"></option>
               <?php for($i = 1960; $i < date('Y'); $i++){ ?>
               <option value="<?php prt($i); ?>" <?php prt($i == my_array_value('eyear', $trainRs) ? 'selected="selected"' : null); ?> ><?php prt($i); ?></option>
               <?php } ?>
           </select>
-          <select class="sel" name="emonth">
+          <select class="sel o-input o-fix-select" name="emonth">
               <option value="-1"></option>
               <?php for($i = 1; $i <= 12; $i++){ ?>
               <option value="<?php prt($i); ?>" <?php prt($i == my_array_value('emonth', $trainRs) ? 'selected="selected"' : null); ?> ><?php prt($i); ?></option>
@@ -38,26 +38,34 @@
         <li class="bline clearfix">
             <div class="nn">培训机构:</div>
             <div class="ii">
-                <input type="text" class="ii-inp" name="organization" value="<?php prt(my_array_value('organization', $trainRs)); ?>" />
-                
-                培训地点：
-                <input type="text" class="ii-inp" name="area" value="<?php prt(my_array_value('area', $trainRs)); ?>" />
+                <input type="text" class="o-input" name="organization" value="<?php prt(my_array_value('organization', $trainRs)); ?>" />
+            </div>
+        </li>
+
+        <li class="bline clearfix">
+            <div class="nn">培训地点:</div>
+            <div class="ii">
+                <input type="text" class="o-input" name="area" value="<?php prt(my_array_value('area', $trainRs)); ?>" />
             </div>
         </li>
         
         <li class="bline clearfix">
             <div class="nn">培训课程:</div>
             <div class="ii">
-                <input type="text" class="ii-inp" name="course" value="<?php prt(my_array_value('course', $trainRs)); ?>" />
-                
-                获得证书：
-                <input type="text" class="ii-inp" name="certificate" value="<?php prt(my_array_value('certificate', $trainRs)); ?>" />
+                <input type="text" class="o-input" name="course" value="<?php prt(my_array_value('course', $trainRs)); ?>" />
+            </div>
+        </li>
+
+        <li class="bline clearfix">
+            <div class="nn">获得证书:</div>
+            <div class="ii">
+                <input type="text" class="o-input" name="certificate" value="<?php prt(my_array_value('certificate', $trainRs)); ?>" />
             </div>
         </li>
         
         <li class="clearfix">
             <div class="nn">详细描述:</div>
-            <div class="ii"><textarea train="description" name="description" style="width:540px; height:80px;"><?php prt(my_array_value('description', $trainRs)); ?></textarea></div>
+            <div class="ii"><textarea train="description" name="description" class="o-input" style="width:540px; height:80px;"><?php prt(my_array_value('description', $trainRs)); ?></textarea></div>
         </li>
         <li class="clearfix">
             <div class="nn">&nbsp;</div>

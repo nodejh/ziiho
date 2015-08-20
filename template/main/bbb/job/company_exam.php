@@ -1,27 +1,60 @@
+<?php //if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
+<?php //include _g('template')->name('@', 'header', true); ?>
+<!--	<link rel="stylesheet" type="text/css" href="--><?php //prt(_g('template')->dir('user')); ?><!--/css/c_center.css" />-->
+<!--	<link rel="stylesheet" type="text/css" href="--><?php //prt(_g('template')->dir('job')); ?><!--/css/exam.css" />-->
+<!---->
+
+
+
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
-<?php include _g('template')->name('@', 'header', true); ?>
-	<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
-	<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/exam.css" />
+
+<!-- include header  -->
+<?php include $a = _g('template')->name('newUI', 'common/header', true); ?>
+<link rel="stylesheet" type="text/css" href="<?php prt(sdir('static')); ?>/dialog/default/default.css" />
+<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
+<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/exam.css" />
+<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/exam_over.css" />
+
+</head>
+
+<!-- include navbar  -->
+<?php include $a = _g('template')->name('newUI', 'common/navbar', true); ?>
+
+
+
+
+<!-- custom html  -->
+<div class="container-fluid zh-mian">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
 
 	<!-- //answers-area -->
 	<div class="answers-area clearfix" id="answers-area">
 		<!-- //txm -->
-		<div class="txm clearfix">
-			<span>共<em class="tss"><?php prt($questionCount); ?></em>题,&nbsp;每题<em class="tss">1</em>分;</span>&nbsp;&nbsp;<span class="at">剩余答题时间<em class="ut" flag="activetime_m">00</em>分<em class="ut" flag="activetime_s">00</em>秒</span>
-		</div>
+<!--		<div class="txm clearfix">-->
+<!--			<span>共<em class="tss">--><?php //prt($questionCount); ?><!--</em>题,&nbsp;每题<em class="tss">1</em>分;</span>&nbsp;&nbsp;<span class="at">剩余答题时间<em class="ut" flag="activetime_m">00</em>分<em class="ut" flag="activetime_s">00</em>秒</span>-->
+<!--		</div>-->
 		<!-- //txm -->
 
 		<!-- //pos-box -->
-		<div class="pos-box clearfix">
-			<em class="f1">当前位置:</em>
-			<a href="<?php prt(_g('uri')->su('job/ac/home')); ?>">首页</a>
-			<em class="f2">&raquo;</em>
-			<a href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $id)); ?>"><?php prt($cUserData['cname']); ?></a>
-			<em class="f2">&raquo;</em>
-			<a href="<?php prt($backUrl); ?>"><?php prt($JMODEL->sortValue($jobData['sortid'], 'sname')); ?></a>
-			<em class="f2">&raquo;</em>
-			<em class="f3"><?php prt($jobData['jname']); ?></em>
-		</div>
+        <ol class="breadcrumb">
+            <li><a href="<?php prt(_g('uri')->su('job/ac/home')); ?>">首页</a></li>
+            <li><a href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $id)); ?>"><?php prt($cUserData['cname']); ?></a></li>
+            <li><a href="<?php prt($backUrl); ?>"><?php prt($JMODEL->sortValue($jobData['sortid'], 'sname')); ?></a></li>
+            <li class="active"><?php prt($jobData['jname']); ?></li>
+            <span class="o-time"><span>共<em class="tss"><?php prt($questionCount); ?></em>题,&nbsp;每题<em class="tss">1</em>分;</span>&nbsp;&nbsp;<span class="at">剩余答题时间<em class="ut o-ut" flag="activetime_m">00</em>分<em class="ut" flag="activetime_s">00</em>秒</span></span>
+        </ol>
+
+<!--		<div class="pos-box clearfix">-->
+<!--			<em class="f1">当前位置:</em>-->
+<!--			<a href="--><?php //prt(_g('uri')->su('job/ac/home')); ?><!--">首页</a>-->
+<!--			<em class="f2">&raquo;</em>-->
+<!--			<a href="--><?php //prt(_g('uri')->su('job/ac/company/op/detail/id/' . $id)); ?><!--">--><?php //prt($cUserData['cname']); ?><!--</a>-->
+<!--			<em class="f2">&raquo;</em>-->
+<!--			<a href="--><?php //prt($backUrl); ?><!--">--><?php //prt($JMODEL->sortValue($jobData['sortid'], 'sname')); ?><!--</a>-->
+<!--			<em class="f2">&raquo;</em>-->
+<!--			<em class="f3">--><?php //prt($jobData['jname']); ?><!--</em>-->
+<!--		</div>-->
 		<!-- pos-box// -->
 
 		<!-- //des-box -->
@@ -45,7 +78,7 @@
 						?>
 
 						<?php if($k != 'my'){ ?>
-							<li style="background:#F2F2F2; color:#03C; text-align:center; padding:0px; font-size:16px; font-weight:bold;"><?php prt($k != 'sys' ? _g('cache')->selectitem('120>'.$k.'>sname') : '职位知识'); ?></li>
+							<li style="background:#F2F2F2;color: #337ab7; text-align:center; padding:0px; font-size:16px; font-weight:bold;"><?php prt($k != 'sys' ? _g('cache')->selectitem('120>'.$k.'>sname') : '职位知识'); ?></li>
 						<?php } ?>
 
 						<?php
@@ -58,7 +91,7 @@
 									<input type="hidden" name="estype[<?php prt($esRs['idstr']); ?>]" value="<?php prt($esRs['estype']); ?>" />
 									<div class="tit clearfix">
 										<div class="hh"><?php prt($i); ?>.</div>
-										<div class="tt"><?php prt($esRs['estitle']); ?><em style="color:#03C; margin-left:10px;">[<?php prt($JMODEL->qsType($esRs['estype'], 'subname')); ?>]</em></div>
+										<div class="tt"><?php prt($esRs['estitle']); ?><em style="color:#7b7b7b; margin-left:10px;font-weight: 100;font-size: .8em;">[<?php prt($JMODEL->qsType($esRs['estype'], 'subname')); ?>]</em></div>
 									</div>
 									<div class="opts clearfix">
 
@@ -66,7 +99,9 @@
 										switch($esRs['estype']){
 										case 'radio': ?>
 											<?php foreach($JMODEL->qsOptionDe($esRs['esoption']) as $optKey => $optVal){ ?>
-											<p class="h" radio="esoption[<?php prt($esRs['idstr']); ?>][]"><input type="radio" name="esoption[<?php prt($esRs['idstr']); ?>][]" value="<?php prt($optKey); ?>" /><?php prt($optVal['flag']); ?>.&nbsp;<?php prt($optVal['name']); ?></p>
+											<p class="h" radio="esoption[<?php prt($esRs['idstr']); ?>][]">
+                                                <input type="radio" name="esoption[<?php prt($esRs['idstr']); ?>][]" value="<?php prt($optKey); ?>" />
+                                                <?php prt($optVal['flag']); ?>.&nbsp;<?php prt($optVal['name']); ?></p>
 										<?php } ?>
 											<script language="javascript">
 												_GESHAI.radio({ radioItem: 'p[radio="esoption[<?php prt($esRs['idstr']); ?>][]"]', name: "esoption[<?php prt($esRs['idstr']); ?>][]" });
@@ -106,9 +141,15 @@
 	<div class="clear"></div>
 	<!-- answers-area// -->
 
+</div>
+    </div>
+</div>
 
-<?php include _g('template')->name('job', 'footer', true); ?>
 
+<?php //include _g('template')->name('job', 'footer', true); ?>
+<script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/geshai.common.min.js"></script>
+<script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.cjslip-v1.0.3.min.js"></script>
 
 	<script type="text/javascript" src="<?php prt(_g('template')->dir('job')); ?>/js/job_job.js"></script>
 	<script language="javascript">
@@ -243,4 +284,14 @@
 			});
 		};
 	</script>
-<?php include _g('template')->name('@', 'footer', true); ?>
+
+<!---->
+<?php //include _g('template')->name('@', 'footer', true); ?>
+
+
+            <!-- include footer  -->
+            <?php include $a = _g('template')->name('newUI', 'common/footer', true); ?>
+
+
+
+            </html>

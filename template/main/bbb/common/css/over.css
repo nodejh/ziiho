@@ -765,3 +765,12 @@ input[type="submit"] { padding:4px 17px; color:#ffffcolor:#585858; ff; text-tran
     display: block;
     height: 50px;
 }
+.cuser_center .cuser_y .company-tab-bd .bd-box ul li .nn {
+    margin-left: 10px;
+}
+.o-inpu-fix-auto {
+    width: auto;
+}
+.o-input-fix-attach {
+    width: 194px;
+}
