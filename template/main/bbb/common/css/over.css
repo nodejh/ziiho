@@ -17,7 +17,8 @@
     border: 1px solid #ccc;;
     border-radius: 4px;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    /*box-shadow:border-color ease-in-out .15s;*/
+    /*-webkit-box-shadow ease-in-out .15s;*/
     -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
@@ -57,7 +58,7 @@
     border-radius: 4px;
 }
 .o-button-default {
-    counter-reset: #333;
+    /*counter-reset: #333;*/
     background-color: #fff;
     border-color: #ccc;
 }
@@ -238,7 +239,6 @@ fieldset[disabled] .o-button-info.active {
     color: #5bc0de;
     background-color: #fff;
 }
-.
 
 .o-button-block {
     width: 100%;
@@ -269,8 +269,7 @@ fieldset[disabled] .o-button-info.active {
 }
 .o-menu-a {
     color: #fff;
-    padding: 13px 10px;
-    /*margin-right: -5px;*/
+    padding: 12px 10px;
     top: 10px;
     position: relative;
 }
@@ -501,8 +500,8 @@ em {
 * home_nav2
 */
 .o-nav2 {
-    /*filter: alpha(opacity=0);*/
-    background-color: rgba(0,0,0,0);
+    filter: alpha(opacity=60);
+    background-color: rgba(0,0,0,0.6);
     z-index: 999;
     position: absolute;
     width: 100%;
@@ -522,6 +521,9 @@ em {
 }
 .o-nav2 .hd3.o-menu .y.uinfo_101 {
     background-color: rgba(0,0,0,0);
+}
+.o-nav2 .hd3.o-menu .y.uinfo_101:hover {
+    background-color: #e7e7e7;
 }
 
 /**
@@ -595,7 +597,7 @@ em {
     width: 215px;
 }
 .o-resume-btn-ok {
-    margin-left: 80px;
+    margin-left: 90px;
 }
 .o-resume-form-width {
     width: 188px;
@@ -626,7 +628,7 @@ em {
     border: 1px solid #ccc;;
     border-radius: 4px;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    /*box-shadow:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;*/
     -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
@@ -655,7 +657,7 @@ em {
 #searchform input[type="text"]:hover, #searchform input[type="text"]:focus { width:200px; }
 #searchform input[type="submit"] { background:url(../../newUI/assets/img/icon-search.png) center 11px no-repeat; cursor:pointer; margin:0px; padding:0px; width:37px; height:38px; line-height:38px; }
 
-input[type="submit"] { padding:4px 17px; color:#ffffcolor:#585858; ff; text-transform:uppercase; border:none; font-size:20px; background:url(../../newUI/assets/imggradient.png) bottom repeat-x; cursor:pointer; margin-top:10px; float:left; overflow:visible; transition: all .3s linear; -moz-transition: all .3s linear; -o-transition: all .3s linear; -webkit-transition: all .3s linear; }
+input[type="submit"] { padding:4px 17px; color:#585858; text-transform:uppercase; border:none; font-size:20px; background:url(../../newUI/assets/img/gradient.png) bottom repeat-x; cursor:pointer; margin-top:10px; float:left; overflow:visible; transition: all .3s linear; -moz-transition: all .3s linear; -o-transition: all .3s linear; -webkit-transition: all .3s linear; }
 
 #searchform input[type="submit"]:hover { background-color:#333232; }
 .style_1 #searchform input[type='submit'] { background-color:#25ade4; }

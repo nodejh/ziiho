@@ -100,8 +100,8 @@
 										case 'radio': ?>
 											<?php foreach($JMODEL->qsOptionDe($esRs['esoption']) as $optKey => $optVal){ ?>
 											<p class="h" radio="esoption[<?php prt($esRs['idstr']); ?>][]">
-                                                <input type="radio" name="esoption[<?php prt($esRs['idstr']); ?>][]" value="<?php prt($optKey); ?>" />
-                                                <?php prt($optVal['flag']); ?>.&nbsp;<?php prt($optVal['name']); ?></p>
+                                                <input type="radio" name="esoption[<?php prt($esRs['idstr']); ?>][]"  id="<?php prt($optKey); ?>" value="<?php prt($optKey); ?>" />
+                                                <label for="<?php prt($optKey); ?>"><?php prt($optVal['flag']); ?>.&nbsp;<?php prt($optVal['name']); ?></label></p>
 										<?php } ?>
 											<script language="javascript">
 												_GESHAI.radio({ radioItem: 'p[radio="esoption[<?php prt($esRs['idstr']); ?>][]"]', name: "esoption[<?php prt($esRs['idstr']); ?>][]" });
@@ -110,7 +110,7 @@
 										<?php break;
 										case 'checkbox': ?>
 										<?php foreach($JMODEL->qsOptionDe($esRs['esoption']) as $optKey => $optVal){ ?>
-											<p class="h" checkbox="esoption[<?php prt($esRs['idstr']); ?>][]"><input type="checkbox" name="esoption[<?php prt($esRs['idstr']); ?>][]" value="<?php prt($optKey); ?>" /><?php prt($optVal['flag']); ?>.&nbsp;<?php prt($optVal['name']); ?></p>
+											<p class="h" checkbox="esoption[<?php prt($esRs['idstr']); ?>][]"><input type="checkbox" name="esoption[<?php prt($esRs['idstr']); ?>][]" id="<?php prt($optKey); ?>" value="<?php prt($optKey); ?>" /><label for="<?php prt($optKey); ?>"><?php prt($optVal['flag']); ?>.&nbsp;<?php prt($optVal['name']); ?></label></p>
 										<?php } ?>
 											<script language="javascript">
 												_GESHAI.checkbox({ checkboxItem: 'p[checkbox="esoption[<?php prt($esRs['idstr']); ?>][]"]', name: "esoption[<?php prt($esRs['idstr']); ?>][]" });

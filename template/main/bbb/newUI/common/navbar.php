@@ -8,13 +8,13 @@
             <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>"><img src="<?php prt(_g('template')->dir('@')); ?>/image/logo.png" class="o-nav-img" /></a>
         </div>
 
-        <div class="style_1">
-        <form method="get" id="searchform" action="/">
-            <fieldset>
-                <input id="s" name="s" type="text" value="输入搜索内容" class="text_input" onblur="if(this.value==''){this.value='输入搜索内容';}" onfocus="if(this.value =='输入搜索内容') {this.value=''; }" />
-                <input name="submit" type="submit" value="" /> </fieldset>
-        </form>
-    </div>
+<!--        <div class="style_1">-->
+<!--        <form method="get" id="searchform" action="/">-->
+<!--            <fieldset>-->
+<!--                <input id="s" name="s" type="text" value="输入搜索内容" class="text_input" onblur="if(this.value==''){this.value='输入搜索内容';}" onfocus="if(this.value =='输入搜索内容') {this.value=''; }" />-->
+<!--                <input name="submit" type="submit" value="" /> </fieldset>-->
+<!--        </form>-->
+<!--    </div>-->
 
         <div class="hd3 clearfix o-menu">
             <?php $UM = _g('module')->trigger('user', 'model');?>
@@ -40,6 +40,5 @@
     </div>
 </div>
 <!-- com-header// -->
-
 
 

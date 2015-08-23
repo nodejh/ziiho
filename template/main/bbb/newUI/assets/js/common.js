@@ -148,8 +148,11 @@ $(document).ready(function() {
         $(this).find('.zh-material-img').css('height', '160px');
     });
 
-
-
+    var dropdownWidth = $('.hd3.clearfix.o-menu').width();
+    console.log(dropdownWidth);
+    if (dropdownWidth > 120) {
+      $('#dropdow-menu').width(dropdownWidth);
+    }
 
     //
     //$.fn.hoverDelay = function(options){

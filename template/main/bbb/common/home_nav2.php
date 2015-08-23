@@ -20,6 +20,7 @@
 
     <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.cjslip-v1.0.3.min.js"></script>
 
+    <script type="text/javascript" src="<?php  prt(_g('template')->dir('newUI')); ?>/assets/js/common.js"></script>
     <script type="text/javascript">
         _GESHAI.setting("path", "<?php prt(sdir()); ?>");
         _GESHAI.setting("fsubmitKey_get", "<?php prt(_g('cfg>fmkey>get')); ?>");
@@ -43,13 +44,13 @@
 <!--            <button class="o-form-button o-button o-button-default o-form-button-home"><i class="fa fa-search"></i></button>-->
 <!--        </form>-->
 
-        <div class="style_1">
-            <form method="get" id="searchform" action="/">
-                <fieldset>
-                    <input id="s" name="s" type="text" value="输入搜索内容" class="text_input" onblur="if(this.value==''){this.value='输入搜索内容';}" onfocus="if(this.value =='输入搜索内容') {this.value=''; }" />
-                    <input name="submit" type="submit" value="" /> </fieldset>
-            </form>
-        </div>
+<!--        <div class="style_1">-->
+<!--            <form method="get" id="searchform" action="/">-->
+<!--                <fieldset>-->
+<!--                    <input id="s" name="s" type="text" value="输入搜索内容" class="text_input" onblur="if(this.value==''){this.value='输入搜索内容';}" onfocus="if(this.value =='输入搜索内容') {this.value=''; }" />-->
+<!--                    <input name="submit" type="submit" value="" /> </fieldset>-->
+<!--            </form>-->
+<!--        </div>-->
 
 
         <?php $UM = _g('module')->trigger('user', 'model');?>
