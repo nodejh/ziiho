@@ -149,7 +149,7 @@ $(document).ready(function() {
     });
 
     var dropdownWidth = $('.hd3.clearfix.o-menu').width();
-    console.log(dropdownWidth);
+    //console.log(dropdownWidth);
     if (dropdownWidth > 120) {
       $('#dropdow-menu').width(dropdownWidth);
     }

@@ -45,7 +45,7 @@
 	<!-- //i-area -->
 	<div class="i-area clearfix">
 
-		<div class="i-box i-box-bline clearfix">
+		<div class="i-box i-box-bline clearfix" style="margin-top: 80px;">
 			<div class="z i-box-hd clearfix">
 				<div class="icons icon-learn clearfix"></div>
 			</div>
@@ -145,14 +145,29 @@
 
 <script language="javascript">
 $(document).ready(function(e) {
-	var _ms = {"w": 1920, "h": 900};
-	var _cs = {"w": _GESHAI.clientsize("clientWidth"), "h": _GESHAI.clientsize("clientHeight")};
-	var _ss = {"w": Math.min(_ms.w, _cs.w), "h": Math.min(_ms.h, _cs.h)};
+//	var _ms = {"w": 1920, "h": 463};
+//	var set_width = _GESHAI.clientsize("clientWidth");
+//	var set_height = _GESHAI.clientsize("clientHeight") * 0.73;
+//	var _cs = {"w": set_width, "h": set_height};
+//	var _ss = {"w": Math.min(_ms.w, _cs.w), "h": Math.min(_ms.h, _cs.h)};
 
+//	var _bannero = $("#banner");
+//	_bannero.width(_ss.w).height(_ss.h);
+//	_bannero.find(".bd .box li img").width(_ss.w).height(_ss.h);
+//	_bannero.find(".cbox").css({"left": (((_cs.w - 1200) / 2) + "px"), "top": ((_ss.h / 2) - 150) + "px"}).show();
+
+
+
+	var set_width = _GESHAI.clientsize("clientWidth");
+	var set_height = _GESHAI.clientsize("clientHeight") * 0.75;
+	var _cs = {"w": set_width, "h": set_height};
+	var _ss = {"w": set_width, "h": set_height};
+	//console.log(set_height);
 	var _bannero = $("#banner");
 		_bannero.width(_ss.w).height(_ss.h);
 		_bannero.find(".bd .box li img").width(_ss.w).height(_ss.h);
 		_bannero.find(".cbox").css({"left": (((_cs.w - 1200) / 2) + "px"), "top": ((_ss.h / 2) - 150) + "px"}).show();
+
 });
 
 var _bannerContItem = $("#banner").find(".cbox").find(".bi");
