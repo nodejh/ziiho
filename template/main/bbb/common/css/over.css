@@ -247,6 +247,10 @@ fieldset[disabled] .o-button-info.active {
 .o-fa-right {
     margin-right: 6px;
 }
+
+.com-w {
+    width: 100%;
+}
 .o-nav {
     background-color: #00C0FF;
     border-bottom: 1px solid #e7e7e7;
@@ -272,6 +276,9 @@ fieldset[disabled] .o-button-info.active {
     padding: 12px 10px;
     top: 10px;
     position: relative;
+}
+div.hd3.clearfix.o-menu {
+    margin-right: 30px;
 }
 .o-menu-a:hover {
     background-color: #e7e7e7;
@@ -509,6 +516,7 @@ em {
 }
 .o-nav2 .o-menu {
     background-color: rgba(0,0,0,0);
+    padding-right: 20px;
 }
 .o-nav2.com-header-wrap {
     border-bottom: none;

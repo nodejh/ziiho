@@ -307,6 +307,9 @@ switch (_get ( 'op' )) {
 		}
 		smsg(lang('100061'), null, 1);
 		break;
+    case 'view':
+        include _g ( 'template' )->name ( 'resume', 'view_resume', true );
+        break;
 	default :
 		_g('uri')->referer(true);
 		$RESUME->delId ();
