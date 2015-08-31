@@ -133,11 +133,11 @@ $(document).ready(function() {
         $(this).css({'-moz-box-shadow':'0px 0px 4px #D3D1D1', '-webkit-box-shadow':'0px 0px 4px #D3D1D1', 'box-shadow':'0px 0px 4px #D3D1D1'});
     });
 
-    //$('.zh-learn-view').hover(function(){
-    //    $(this).css({'-moz-box-shadow':'0px 5px 20px rgb(0, 134, 223)', '-webkit-box-shadow':'0px 5px 20px rgb(0, 134, 223)', 'box-shadow':'0px 5px 20px rgb(0, 134, 223)', 'background-color': 'rgb(0, 134, 223)'});
-    //}, function() {
-    //    $(this).css({'-moz-box-shadow':'0px 0px 10px #A2DDF8', '-webkit-box-shadow':'0px 0px 10px #A2DDF8', 'box-shadow':'0px 0px 10px #A2DDF8', 'background-color':'#71B9D1'});
-    //});
+    $('.zh-learn-view').hover(function(){
+        $(this).css({'-moz-box-shadow':'0px 5px 20px rgb(0, 134, 223)', '-webkit-box-shadow':'0px 5px 20px rgb(0, 134, 223)', 'box-shadow':'0px 5px 20px rgb(0, 134, 223)', 'background-color': 'rgb(0, 134, 223)'});
+    }, function() {
+        $(this).css({'-moz-box-shadow':'0px 0px 10px #A2DDF8', '-webkit-box-shadow':'0px 0px 10px #A2DDF8', 'box-shadow':'0px 0px 10px #A2DDF8', 'background-color':'#71B9D1'});
+    });
 
 
     $('.zh-thumbnail').hover(function(){

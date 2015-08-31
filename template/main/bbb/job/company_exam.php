@@ -286,6 +286,10 @@
 		};
 	</script>
 
+<script>
+    document.body.onselectstart=document.body.oncontextmenu=function(){return false;};
+</script>
+
 <!---->
 <?php //include _g('template')->name('@', 'footer', true); ?>
 
