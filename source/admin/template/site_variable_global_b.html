@@ -1,8 +1,0 @@
-{eval $seo_global=seo_global_get();/}
-<p class="c_mt5px c_ml5px color2">可用变量如下:</p>
-{loop $seo_global $val}
-<p class="c_mt5px c_ml5px color2">
-	<strong class="color7">{field:val.val/}</strong>:{field:val.title/}<font
-		class="color1">{field:val.description/}</font>
-</p>
-{/loop} {eval $seo_global=NULL/}

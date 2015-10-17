@@ -1,0 +1,42 @@
+<table>
+	<tr class="cont_zbg">
+		<td width="6%">ID编号</td>
+		<td width="6%">头像</td>
+		<td width="14%">登录名</td>
+		<td width="14%">邮箱</td>
+		<td width="14%">昵称</td>
+		<td width="46%" colspan="3">操作</td>
+	</tr>
+	{if array_key_val('total_num',$pg)>=1} {dbres $searchResult $val} {eval
+	$url=url('index','mod/member/ac/space/op/index/uid/'.$val['uid'])/}
+	<tr id="clist_{field:val.uid/}" onmouseover="currentbg(this)"
+		onmouseout="currentbg(this,1)">
+		<td width="6%" class="color1">{field:val.uid/}</td>
+		<td width="6%"><img
+			src="{print member_avatar($val['uid'],true)/}" width="50" height="50" /></td>
+		<td width="14%" class="anc"><a href="{field:url/}"
+			target="_blank">{field:val.username/}</a></td>
+		<td width="14%">{field:val.email/}</td>
+		<td width="14%" class="anc"><a href="{field:url}" target="_blank">{field:val.nickname/}</a>
+		</td>
+		<td width="46%" colspan="3" class="anc"><span class="c_l"><a
+				href="javascript:;"
+				onclick="redirectUrl({'url':'{url 'index','mod/member/ac/admin/op/operation/ao/search_systemgroup/uid/'.$val['uid']/}'})">管理组</a></span>
+			<span class="c_l c_ml10px"><a href="javascript:;">用户组</a></span> <span
+			class="c_l c_ml10px"><a href="javascript:;">详细</a></span> <span
+			class="c_l c_ml10px"><a href="javascript:;"
+				onclick="redirectUrl({'url':'{url 'index','mod/member/ac/admin/op/operation/ao/search_stop/uid/'.$val['uid']/}'})">禁止</a></span>
+			<span class="c_l c_ml10px"><a href="javascript:;">删除</a></span>
+			<div class="clr"></div></td>
+	</tr>
+	{/dbres} {else}
+	<tr id="clist_0" onmouseover="currentbg(this)"
+		onmouseout="currentbg(this,1)">
+		<td colspan="9"><font class="color6">暂无显示内容</font></td>
+	</tr>
+	{/if} {if $pg}
+	<tr class="cont_dbg">
+		<td colspan="9">{modtemplate admin/template/page}</td>
+	</tr>
+	{/if}
+</table>

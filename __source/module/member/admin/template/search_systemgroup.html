@@ -1,0 +1,89 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<ul>
+
+		<li><span class="c_ml5px fs14px">{field:member.username/}{if
+				$member['nickname']}({field:member.nickname/}){/if}</span>
+			<div class="clr"></div></li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>{field:group_title/}:</strong>
+			</div>
+			<div class="clr"></div>
+
+			<div class="cont_li_p2">
+				<span class="c_l c_ml5px"> <select name="system_groupid"
+					class="width200px cont_sh">
+						<option value="0">==请选择==</option> {dbres $group_list $val}
+						<option value="{field:val.groupid/}"
+							{if $member['system_groupid']==$val[
+							'groupid']} selected="selected"{/if}>{field:val.title/}</option>
+						{/dbres}
+				</select>
+				</span>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li class="cont_zbg"><p class="cont_tlabel">
+				<strong>后台管理菜单</strong>&nbsp;&nbsp;<span class="c_fab"><input
+					type="checkbox" name="cks"
+					onclick="checkedall(this.name,'menu_id_arr')" /><a
+					href="javascript:;" onclick="checkedall('cks','menu_id_arr')">全选/取消</a></span>
+			</p></li>
+		<div class="clr"></div>
+
+		<li>
+			<!--提示开始-->
+			<div class="c_w100 c_mt5px adm_bb_dashed c_pb10px">
+				<p class="c_mt5px c_ml5px color1">1、选中的菜单，将属于该会员所拥有的管理菜单</p>
+				<p class="c_mt5px c_ml5px color1">2、如果没有选择{field:group_title/}，系统将会清空</p>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div> <!--提示结束--> <!--菜单显示开始-->
+			<div class="c_w100 c_mt5px"
+				style="height: 500px; width: 60%; overflow-y: scroll;">
+				<table>{field:menu_list/}
+				</table>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div> <!--菜单显示结束-->
+		</li>
+
+	</ul>
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="c_ml5px"><input type="button" class="cont_dod"
+			id="dobt" value="提交"
+			onclick="member_adm_search_systemgroup_save('{field:member.uid/}')" /></span>
+		<span class="c_ml10px"><input type="button" class="cont_dod"
+			id="gobt" value="返回"
+			onclick="redirectUrl({'url':'{field:callback_url/}'})" /></span>
+	</div>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','url':'{field:callback_url/}','isajax':1}};
+var button_ids=["#dobt","#gobt"];
+function member_adm_search_systemgroup_save(uid){
+	var system_groupid=selectval('system_groupid');
+	var menu_id_arr=checkedval('menu_id_arr');
+	if(check_nums(system_groupid)<1){
+		menu_id_arr='';
+	}
+	var do_url="{url 'index','mod/member/ac/admin/op/operation/ao/search_systemgroup_save'/}";
+	var datas={'set_uid':uid,'system_groupid':system_groupid,'menu_id':menu_id_arr};
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+</script>
+{modtemplate admin/template/adm_footer}

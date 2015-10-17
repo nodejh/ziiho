@@ -23,7 +23,9 @@
                     <option value="0">==请选择==</option>
                     <?php $siResult = _g('get')->selectitem(120);?>
 					<?php while($rs = _g('db')->result($siResult)){ ?>
+					<?php if(!$JMODEL->is_sys($rs['flag'])){ ?>
                     <option value="<?php prt($rs['siid']); ?>" <?php prt($rs['siid'] == my_array_value('typeid', $syntheticRs, 0) ? 'selected="selected"' : null); ?> ><?php prt($rs['sname']); ?></option>
+                    <?php } ?>
                     <?php } ?>
                 </select>
             </div>
@@ -50,6 +52,25 @@
             <div class="clearfix inp">
                 <input type="text" class="fs-ts-200" name="title" value="<?php prt(my_array_value('title', $syntheticRs)); ?>" />
             </div>
+        </li>
+        <li class="clearfix is">
+            <div class="clearfix inp">
+            	<?php if(strlen(my_array_value('src', $syntheticRs)) >= 1){ ?>
+            	<p style="margin-bottom:5px;" id="srcbox"><img src="<?php prt($JMODEL->src($syntheticRs['src'])); ?>" width="100" /><br/><button type="button" name="disabled-buttons" class="fbtn-ds" onclick="delSrcDo(this);" style="margin-top: 5px;">删除</button></p>
+                <?php } ?>
+                <p><input type="file" class="fs-ts-200" name="src" value="" /></p>
+            </div>
+            <div class="clearfix des">上传一张图片作为问题</div>
+        </li>
+        
+        <li class="clearfix is">
+            <div class="clearfix tit">自选答案形式:</div>
+            <div class="clearfix inp">
+            	<?php foreach(_g('value')->sbs() as $k=>$v){ ?>
+                <span class="ck-mr" radio="anyanswer"><input type="radio" name="anyanswer" value="<?php prt($k); ?>" <?php if($v['v'] == my_array_value('anyanswer', $syntheticRs, -1)){ ?> checked="checked"<?php } ?> /><?php prt($v['name']); ?></span>
+                <?php } ?>
+            </div>
+            <div class="des">若为“是”时，为自选答案形式，则为设定的正确答案选项</div>
         </li>
         
         <li class="clearfix is">
@@ -98,6 +119,7 @@
 var _stypeValue = "<?php prt(my_array_value('stype', $syntheticRs)); ?>";
 
 _GESHAI.radio({ radioItem: 'span[radio="status"]', name: "status"});
+_GESHAI.radio({ radioItem: 'span[radio="anyanswer"]', name: "anyanswer"});
 _GESHAI.radio({ radioItem: 'span[radio="stype"]', name: "stype", 
 	callback: function(i){ 
 		var _nType = $('input[name="stype"]').eq(i).val();
@@ -208,6 +230,27 @@ function fsdo(_this){
 		}
 	});
 };
+/* delete file */
+function delSrcDo(_this){
+	return _GESHAI.fsubmit(_this, "<?php prt(_g('cp')->uri('mod/job/ac/synthetic/op/delsrc')); ?>", {
+		"start": function(){
+			_GESHAI.disbtn("", true);
+			window.top._GESHAI.dialog({isBg: false, isHeader: false, isFooter: false, data: "Loading..."});
+		},
+		"success": function(d){
+			_GESHAI.disbtn("", false);
+			if(d.status != 1){
+				d.isCloseBtn = false;
+				d.clickBgClose = true;
+				d.title = "操作失败";
+				window.top._GESHAI.dialog(d);
+			}else if(d.status == 1){
+				window.top._GESHAI.dialog.close();
+				$("#srcbox").remove();
+			}
+		}
+	});
+}
 /* init */
 _qs_init(_stypeValue);
 </script>

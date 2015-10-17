@@ -233,5 +233,60 @@ class geshai_value {
 		}
 		return my_substr($str, 0, $offser);
 	}
+	function date2age($v){
+		if (strlen($v) < 1) {
+			return 0;
+		}
+		$curYdate = date('Y', _g('cfg>time'));
+		$dateY = date('Y', $v);
+		
+		$value = $curYdate - $dateY;
+		return $value;
+	}
+	
+	function d2month($s, $e = null, $isOnlyValue = false){
+		if (empty($s)) {
+			$s = _g('cfg>time');
+		}
+		if (empty($e)) {
+			if (!$isOnlyValue) {
+				return (date('Y/m', $s) . '&nbsp;-&nbsp;至今');
+			}
+			$e = _g('cfg>time');
+		}
+		
+		$yearS = (24 * 60 * 60 * 30 * 12);
+		$monthS = (24 * 60 * 60 * 30);
+		
+		$v = $e - $s;
+		$m = floor(($v % $yearS) / $monthS);
+		
+		$value = null;
+		if (($v / $yearS) >= 1) {
+			$value .= floor($v / $yearS) . '年';
+		}
+		if ($m >= 1) {
+			$value .= ($m . '个月');
+		}
+		if (empty($value)) {
+			if (!$isOnlyValue) {
+				$value = date('Y年/m月', $s) . '&nbsp;-&nbsp;' . date('Y年/m月', $e);
+			} else {
+				$value = '不满一个月';
+			}
+		}
+		return $value;
+	}
+	
+	function outdoc($filename = null){
+		if (strlen($filename) < 1) {
+			$filename = _g('value')->randchar(10);
+		}
+		header( "Content-type:application/msword");
+		header( "Content-Disposition:attachment; filename={$filename}.doc");
+	}
+	function avatar($value){
+		return _g ( 'module' )->trigger ( 'user', 'avatar' )->src($value);
+	}
 }
 ?>

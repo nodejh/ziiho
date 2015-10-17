@@ -1,0 +1,4 @@
+<?php 
+if (! defined ( 'IN_GESHAI' )) {
+ exit ( 'no direct access allowed' );
+} return array(21=>array('areaid'=> 21,'parentid'=>0,'aname'=>'四川省'),37=>array('areaid'=> 37,'parentid'=>24,'aname'=>'六盘水市'),36=>array('areaid'=> 36,'parentid'=>24,'aname'=>'遵义市'),35=>array('areaid'=> 35,'parentid'=>24,'aname'=>'贵阳市'),34=>array('areaid'=> 34,'parentid'=>23,'aname'=>'深圳市'),33=>array('areaid'=> 33,'parentid'=>23,'aname'=>'广州市'),32=>array('areaid'=> 32,'parentid'=>22,'aname'=>'苏州市'),31=>array('areaid'=> 31,'parentid'=>21,'aname'=>'绵阳市'),30=>array('areaid'=> 30,'parentid'=>21,'aname'=>'成都市'),29=>array('areaid'=> 29,'parentid'=>21,'aname'=>'达州市'),22=>array('areaid'=> 22,'parentid'=>0,'aname'=>'江苏省'),23=>array('areaid'=> 23,'parentid'=>0,'aname'=>'广东省'),24=>array('areaid'=> 24,'parentid'=>0,'aname'=>'贵州省'),39=>array('areaid'=> 39,'parentid'=>0,'aname'=>'重庆市')); ?>

@@ -83,6 +83,10 @@ class class_cuser extends geshai_model {
 		}
 		return sdir('uploadfile') . '/' . $v;
 	}
+	function getLogo($cuid) {
+		$rs = $this->profile_find('cuid', $cuid);
+		return $this->logo ( my_array_value( 'logo', $rs ) );
+	}
 	
 	function getList(){
 		$this->db->join($this->t_cuser, 'a.cuid', $this->t_cuser_profile, 'b.cuid', 'LEFT JOIN');
@@ -121,6 +125,7 @@ class class_cuser extends geshai_model {
 					return null;
 				}
 				$data['cuid'] = $this->db->insert_id();
+				$data['login_type'] = 2;
 				$data['flag'] = 'register';
 				
 				my_session('cuser', my_stripslashes($data));

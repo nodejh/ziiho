@@ -1,0 +1,87 @@
+<div class="c_w100">
+
+	<div class="c_w100 adm_bb_dashed c_pb5px">
+		<span class="c_ml5px"><font class="color1 fs14px fw">当前您将操作的会员为:</font><font
+			class="color6 fs12px">{$member['username']}({$member['nickname']})</font></span>
+	</div>
+	<div class="clr"></div>
+
+	<!--操作项开始-->
+	<div class="c_w100">
+		<ul>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>会员状态:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="cont_li_p2_1">
+						<!--{loop $member_status $val}-->
+						<p class="c_mt5px">
+							<input type="radio" name="member_status" value="{$val['v_val']}"
+								{if $val['v_val']==$member[ 'status']}checked="checked" {/if} />&nbsp;{$val['v_name']}
+						</p>
+						<!--{/loop}-->
+						<div class="clr"></div>
+					</div>
+					<div class="cont_li_p2_2">
+						<p class="cont_c1">请选择当前您操作的会员状态</p>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+			<li>
+				<div class="cont_li_p1">
+					<strong>禁止操作:</strong>
+				</div>
+				<div class="clr"></div>
+				<div class="cont_li_p2">
+					<div class="c_l c_pl5px">
+						<!--{eval $index=0;}-->
+						<!--{loop $stop_term $val}-->
+						<!--{eval $index++;}-->
+						<span class="c_l {if $index!=1}c_ml10px{/if}"><input
+							type="checkbox" name="member_stop_term" value="{$val['v_val']}"
+							{if array_key_val($val['v_val'],$operation,1)!=1}
+							checked="checked" {/if} />&nbsp;{$val['v_name']}</span>
+						<!--{/loop}-->
+						<div class="clr"></div>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</li>
+			<div class="clr"></div>
+
+		</ul>
+		<div class="clr"></div>
+
+	</div>
+	<div class="clr"></div>
+	<!--操作项结束-->
+
+
+	<div class="c_w100 c_mt10px">
+		<span class="c_l c_ml5px"><input type="button" class="cont_dod"
+			id="dobt" value="提交"
+			onclick="member_adm_search_stop('{modelurl 197}','{$uid}')" /></span>
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+
+</div>
+<div class="clr"></div>
+<script language="javascript">
+/*会员搜索_结果_禁止操作保存*/
+function member_adm_search_stop(do_url,uid){
+	var member_status=cboxvals('member_status');
+	var member_stop_term=cboxvals('member_stop_term');
+	member_status=(member_status!='')?member_status[0]:'';
+	var bt=['#search_bt','#dobt'];
+	publishdo(do_url,{'set_uid':uid,'member_status':member_status,'member_stop_term':member_stop_term},"","",bt);
+}
+</script>

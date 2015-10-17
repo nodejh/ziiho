@@ -113,7 +113,7 @@ switch (_get ( 'f' )) {
 				'ctime'=>_g('cfg>time'),
 				'status'=>_g('value')->sb($status),
 				'questionid'=>$questionid,
-				'sortid'=>$sortid,
+				'sortid'=>_g('value')->s2pnsplit( $sortid ),
 		);
 		
 		$JQS->writeSave ( $data, $qsid );
@@ -184,6 +184,26 @@ switch (_get ( 'f' )) {
 			}
 		}
 		break;
+	case 'delsrc':
+		$qsid = _post( 'qsid' );
+		$qRs = $JQS->find ( 'qsid', $qsid );
+		if (!my_is_array( $qRs )) {
+			smsg ( lang ( 'job:600003' ));
+			return null;
+		}
+		/* delete file */
+		if (strlen( $qRs['src'] ) >= 1) {
+			if(!_g('file')->delete(sdir(':uploadfile') . '/' . $qRs['src'])){
+				smsg(lang('job:600015'));
+				return null;
+			}
+			if(!$JQS->updateValue(array('qsid' => $qsid), array('src' => null))){
+				smsg ( lang ( '200013' ) );
+				return null;
+			}
+		}
+		smsg ( lang ( '100061' ), null, 1 );
+		break;
 	default :
 		_g('uri')->referer(true);
 		
@@ -191,7 +211,7 @@ switch (_get ( 'f' )) {
 		$dataResult = null;
 		
 		$JQS->db->from($JQS->t_job_question_subject);
-		$JQS->db->where('sortid', $sortid);
+		$JQS->db->where_regexp('sortid', (',' . $sortid . ','));
 		$JQS->db->where('questionid', $questionid);
 		$pageData = _g('page')->c($JQS->db->count(), 15, 10, _get('page'));
 		$JQS->db->limit($pageData['start'], $pageData['size']);

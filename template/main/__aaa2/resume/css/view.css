@@ -1,0 +1,39 @@
+@charset "utf-8";
+/* CSS Document */
+
+.resume_view {  width:960px; margin:auto; padding-bottom:50px; }
+	.resume_view .plr5 { padding:0px 5px; }
+	.resume_view .plr7 { padding:0px 7px; }
+	.resume_view .plr15 { padding:0px 15px; }
+	.resume_view .pr5 { padding-right:5px; }
+	.resume_view .pr10 { padding-right:10px; }
+	
+	.resume_view .ml20 { margin-left:20px; }
+	.resume_view .ml50 { margin-left:50px; }
+	.resume_view .fw { font-weight:bold; }
+	.resume_view .tc0 { color:#03C; }
+	
+	.resume_view .hh { height:30px; line-height:28px; padding:5px 10px; }
+		.resume_view .hh a { float:right; margin-left:15px; color:#000; }
+		.resume_view .hh a:hover { color:#03C; text-decoration:underline; }
+		.resume_view .hh a.out { padding-left:18px; background:url(../image/out.png) no-repeat left center; }
+		.resume_view .hh a.print { padding-left:18px; background:url(../image/print.png) no-repeat left center; }
+	
+	.resume_view .tbox { padding:15px; border:2px solid #09C; border-radius:6px; }
+	.resume_view .table { border:none; }
+		.resume_view .table td { width:100%; }
+		.resume_view .table .bline { border-bottom:1px solid #ccc; }
+		.resume_view .table .bline2 { border-top:1px dashed #ccc;  }
+		.resume_view .table .tit { font-size:20px; }
+		.resume_view .table .pd { padding:5px 0px; line-height:32px; }
+		.resume_view .table .t1 { padding-bottom:2px; font-size:18px; font-weight:bold; border-bottom:1px dashed #ccc; }
+		
+		.resume_view .table .btl2 { position:relative; border-bottom:4px solid #ccc; }
+		.resume_view .table .tx-light { position:absolute; left:0px; bottom:-4px; width:100px; height:4px; background:url(../image/view-border-bg.png) no-repeat left bottom; display:block; }
+		.resume_view .table .bfb50 { float:left; width:50%; }
+		.resume_view .table .tx0 { float:left; width:80px; }
+		.resume_view .table .tx1 {  }
+		.resume_view .table .tx2 { padding-left:80px; }
+		.resume_view .table .tx3 { width:200px; }
+				
+

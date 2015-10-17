@@ -1,0 +1,58 @@
+<div class="cont_zpage">
+
+	<span class="cont_c1">共<strong class="cont_c2">
+			<!--{$ms_pg['total_num']}-->
+	</strong>条/每页<strong class="cont_c2">
+			<!--{$ms_pg['page_size']}-->
+	</strong>条/共<strong class="cont_c2">
+			<!--{$ms_pg['last_page']}-->
+	</strong>页
+	</span>&nbsp;&nbsp;
+
+	<!--{if $ms_pg['page']==$ms_pg['pre_page']}-->
+	<span class="cont_c1">首页&nbsp;上一页</span>
+	<!--{else}-->
+	<a href="javascript:;"
+		onclick="adm_member_search('{modelurl $ms_pg['url_id']}',1)">首页</a> <a
+		href="javascript:;"
+		onclick="adm_member_search('{modelurl $ms_pg['url_id']}',{$ms_pg['pre_page']})">上一页</a>
+	<!--{/if}-->
+
+	<!--{loop $ms_pg['page_nav'] $pv}-->
+
+	<!--{if $pv==page_omit()}-->
+	<span class="cont_c1 pading3px">...</span>
+	<!--{else}-->
+
+	<!--{if $pv!=$ms_pg['page']}-->
+	<a href="javascript:;"
+		onclick="adm_member_search('{modelurl $ms_pg['url_id']}',{$pv})">
+		<!--{$pv}-->
+	</a>
+	<!--{else}-->
+	<span class="cont_c2 pading3px">
+		<!--{$pv}-->
+	</span>
+	<!--{/if}-->
+
+	<!--{/if}-->
+
+	<!--{/loop}-->
+
+	<!--{if !is_array($ms_pg['page_nav'])}-->
+	<span class="cont_c2 pading3px">
+		<!--{$ms_pg['page']}-->
+	</span>
+	<!--{/if}-->
+
+	<!--{if $ms_pg['page']==$ms_pg['last_page']}-->
+	<span class="cont_c1 pading3px">下一页&nbsp;尾页</span>
+	<!--{else}-->
+	<a href="javascript:;"
+		onclick="adm_member_search('{modelurl $ms_pg['url_id']}',{$ms_pg['next_page']})">下一页</a>
+	<a href="javascript:;"
+		onclick="adm_member_search('{modelurl $ms_pg['url_id']}',{$ms_pg['last_page']})">尾页</a>
+	<!--{/if}-->
+	<div class="clr"></div>
+</div>
+<div class="clr"></div>

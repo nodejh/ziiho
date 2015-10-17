@@ -45,7 +45,7 @@
 			?>
             
             <?php if($k != 'my'){ ?>
-            <li style="background:#F2F2F2; color:#03C; text-align:center; padding:0px; font-size:16px; font-weight:bold;"><?php prt($k != 'sys' ? _g('cache')->selectitem('120>'.$k.'>sname') : '职位知识'); ?></li>
+            <li style="background:#F2F2F2; color:#03C; text-align:center; padding:0px; font-size:16px; font-weight:bold;"><?php prt($JMODEL->smSname($k)); ?></li>
             <?php } ?>
             
             <?php
@@ -58,7 +58,10 @@
             	<input type="hidden" name="estype[<?php prt($esRs['idstr']); ?>]" value="<?php prt($esRs['estype']); ?>" />
             	<div class="tit clearfix">
                 	<div class="hh"><?php prt($i); ?>.</div>
-                    <div class="tt"><?php prt($esRs['estitle']); ?><em style="color:#03C; margin-left:10px;">[<?php prt($JMODEL->qsType($esRs['estype'], 'subname')); ?>]</em></div>
+                    <div class="tt">
+						<p><?php prt($esRs['estitle']); ?><em style="color:#03C; margin-left:10px;">[<?php prt($JMODEL->qsType($esRs['estype'], 'subname')); ?>]</em></p>
+                        <p><?php prt(strlen(my_array_value('essrc', $esRs))<1?null:'<img src="'.uploadfile($esRs['essrc']).'"/>'); ?></p>
+                    </div>
                 </div>
                 <div class="opts clearfix">
                 
@@ -67,6 +70,7 @@
 				case 'radio': ?>
                 	<?php foreach($JMODEL->qsOptionDe($esRs['esoption']) as $optKey => $optVal){ ?>
                 	<p class="h" radio="esoption[<?php prt($esRs['idstr']); ?>][]"><input type="radio" name="esoption[<?php prt($esRs['idstr']); ?>][]" value="<?php prt($optKey); ?>" /><?php prt($optVal['flag']); ?>.&nbsp;<?php prt($optVal['name']); ?></p>
+                    <div class="clear"></div>
                     <?php } ?>
                     <script language="javascript">
                     	_GESHAI.radio({ radioItem: 'p[radio="esoption[<?php prt($esRs['idstr']); ?>][]"]', name: "esoption[<?php prt($esRs['idstr']); ?>][]" });
@@ -76,6 +80,7 @@
 				case 'checkbox': ?>
                 	<?php foreach($JMODEL->qsOptionDe($esRs['esoption']) as $optKey => $optVal){ ?>
                 	<p class="h" checkbox="esoption[<?php prt($esRs['idstr']); ?>][]"><input type="checkbox" name="esoption[<?php prt($esRs['idstr']); ?>][]" value="<?php prt($optKey); ?>" /><?php prt($optVal['flag']); ?>.&nbsp;<?php prt($optVal['name']); ?></p>
+                    <div class="clear"></div>
                     <?php } ?>
                     <script language="javascript">
                     	_GESHAI.checkbox({ checkboxItem: 'p[checkbox="esoption[<?php prt($esRs['idstr']); ?>][]"]', name: "esoption[<?php prt($esRs['idstr']); ?>][]" });
@@ -129,7 +134,7 @@ __examListBox.find("li").click(function(e){
 });
 
 var __examForm = document.getElementById("examForm");
-var __examTime = parseInt("21<?php prt($jobData['examtime']); ?>");
+var __examTime = parseInt("20<?php prt($jobData['examtime']); ?>");
 var __examTimerFlag;
 var __examTimerNow = __examTime;
 var __examBox = $("#answers-area");

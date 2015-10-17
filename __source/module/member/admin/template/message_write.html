@@ -1,0 +1,205 @@
+{modtemplate admin/template/adm_header}
+
+<!--搜索结果开始-->
+<div class="cont_z adm_bb_solid">
+	<div class="cont_li_p1">
+		<span class="c_l">{$result_str}</span> <span class="c_l c_ml5px"><a
+			href="javascript:;" onclick="gourl('{$backurl}')">{lang
+				common:refresh}{lang common:search}</a></span>
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+</div>
+<div class="clr"></div>
+<!--搜索结果结束-->
+
+<!--变量开始-->
+<div class="c_w100 c_mt5px adm_bb_dashed c_pb10px">
+	<!--{modtemplate admin/template/site_variable_global_b}-->
+	<!--{loop $msg_variable_arr $val}-->
+	<p class="c_mt5px c_ml5px color2">
+		<strong class="color7">{$val['val']}</strong>:{$val['title']}<font
+			class="color1">{$val['description']}</font>
+	</p>
+	<!--{/loop}-->
+	<div class="clr"></div>
+</div>
+<div class="clr"></div>
+<!--变量结束-->
+
+<!--内容开始-->
+<div class="cont_z">
+	<ul>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>信息标题:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="msg_title" value="" />
+				</div>
+				<div class="cont_li_p2_2">信息的标题</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>信息内容:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<textarea class="textarea1 cont_zt0" name="msg_content"></textarea>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>发送方式:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<!--{eval $defaul_type=member_config_value_get('message_type','message','field');}-->
+					<!--{eval $defaul_type_str=member_config_value_get('message_type','message','type');}-->
+					<!--{eval $defaul_url=member_adm_config_value_get('message_type_url',$defaul_type,'url');}-->
+					<!--{loop $msg_type $val}-->
+					<p class="cont_li_p2_3">
+						<input type="radio" name="msg_type" value="{$val['field']}"
+							{if $val['field']==$defaul_type}checked=
+							"checked"{/if} onclick="member_adm_msg_send_type('{$val['type']}','{echo member_adm_config_value_get('message_type_url',$val['field'],'url');}')" />
+						{$val['title']}
+					</p>
+					<!--{/loop}-->
+				</div>
+				<div class="cont_li_p2_2">选择信息的发送方式</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li id="tag_msg_content_type" class="c_none">
+			<div class="cont_li_p1">
+				<strong>内容解析方式:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<!--{eval $index=0;}-->
+					<!--{eval $defaul_content_type=member_config_value_get('message_content_type','text','field');}-->
+					<!--{loop $msg_content_type $val}-->
+					<!--{eval $index++;}-->
+					<span class="c_l {if $index>1}c_ml10px{/if}"><input
+						type="radio" name="msg_content_type" value="{$val['field']}"
+						{if $val['field']==$defaul_content_type}checked= "checked"{/if} />&nbsp;{$val['title']}</span>
+					<!--{/loop}-->
+				</div>
+				<div class="cont_li_p2_2">内容解析方式</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li id="tag_msg_send_status" class="c_none">
+			<div class="cont_li_p1">
+				<strong>以系统身份发送:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<!--{eval $index=0;}-->
+					<!--{eval $defaul_send_status=member_config_value_get('message_send_status','yes','field');}-->
+					<!--{loop $msg_send_status $val}-->
+					<!--{eval $index++;}-->
+					<span class="c_l {if $index>1}c_ml10px{/if}"><input
+						type="radio" name="msg_send_status" value="{$val['field']}"
+						{if $val['field']==$defaul_send_status}checked= "checked"{/if} />&nbsp;{$val['title']}</span>
+					<!--{/loop}-->
+				</div>
+				<div class="cont_li_p2_2">选择“是”将已系统身份发送，收件人无法回复</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+	</ul>
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="c_l cont_dobt"> <input type="hidden"
+			name="msg_to_uid" value="{$result['uid']}" /> <input type="button"
+			class="cont_dod" id="dobt" value="{lang common:submit}"
+			onclick="member_adm_msg_send('{modelurl 160}')" />
+		</span> <span class="c_l c_ml10px"><input type="button"
+			class="cont_dod" id="gobt" value="{lang common:goback}"
+			onclick="gourl('{$backurl}')" /></span>
+		<div class="clr"></div>
+	</div>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var back_call_param={'callback_param':{'msg_call':'myalert','msg_call_b':'member_adm_msg_send_msg','msg_href':'{$backurl}'}};
+var actionurl_input_id='actionurl_01';
+/*发送信息*/
+function member_adm_msg_send(){
+	var do_url=inputvals(actionurl_input_id);
+	if(do_url.length<1){
+		return false;
+	}
+	var msg_to_uid=inputvals("msg_to_uid");
+	var msg_title=inputvals("msg_title");
+	var msg_content=textareaval("msg_content");
+	var msg_type=is_check_name("msg_type");
+	var msg_content_type=is_check_name("msg_content_type");
+	var msg_send_status=is_check_name("msg_send_status");	
+	
+	var datas={'msg_to_uid':msg_to_uid,'msg_title':msg_title,'msg_content':msg_content,/*'msg_type':msg_type,*/'msg_content_type':msg_content_type,'msg_send_status':msg_send_status};
+	publishdo(do_url,arr_merge(datas,back_call_param),"","",["#dobt","#gobt"]);
+}
+/*发送消息毁掉信息*/
+function member_adm_msg_send_msg(data,ob){
+	setinputval('msg_title','');
+	settextareaval('msg_content','');
+	myalert(data,ob);
+}
+function member_adm_msg_send_type(typestr,typeurl){
+	if(typeof(typestr)=='undefined' || typestr==null || typestr==""){
+		return false;
+	}
+	/*设置提交url*/
+	set_html_input(actionurl_input_id,typeurl);
+	/*参数*/
+	var typestr="tag_msg_"+typestr;
+	var html_input='msg_send_type_val_01';
+	var id_val=inputvals(html_input);
+	/*记录本次参数*/
+	set_html_input(html_input,typestr);
+	if(id_val==typestr){
+		return false;
+	}
+	if(id_val!=""){
+		$("#"+id_val).css({"display":"none"});
+	}
+	$("#"+typestr).css({"display":"block"});
+}
+$(document).ready(function(){
+member_adm_msg_send_type("{$defaul_type_str}","{$defaul_url}");
+});
+</script>
+
+{modtemplate admin/template/adm_footer}

@@ -1,0 +1,75 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<div class="main_cont">
+
+	<!--导航开始-->
+	<!--{modtemplate admin/template/menu_nav}-->
+	<!--导航结束-->
+
+	<!--内容列表开始-->
+	<div class="cont_z">
+
+		<table>
+			<tr class="cont_zbg">
+				<td width="4%"><input type="checkbox" name="ck_tb_id"
+					onclick="checkedall(this.name,'tb_id_arr')" /></td>
+				<td width="6%">ID编号</td>
+				<td width="11%">排序</td>
+				<td width="15%">名称</td>
+				<td width="14%">奖励</td>
+				<td width="14%">类型</td>
+				<td width="20%">有效时间</td>
+				<td width="6%">可用</td>
+				<td width="10%">操作</td>
+			</tr>
+
+			<!--{if $pg['total_num']>=1}-->
+			<!--{dbres $tb_list $val}-->
+			<tr id="clist_{$val['tb_id']}" onmouseover="currentbg(this)"
+				onmouseout="currentbg(this,1)">
+				<td width="4%"><input type="checkbox" name="tb_id_arr"
+					value="{$val['tb_id']}" /></td>
+				<td width="6%">{$val['tb_id']}</td>
+				<td width="11%">{$val['tb_listorder']}</td>
+				<td width="15%">{$val['tb_name']}</td>
+				<td width="14%">奖励</td>
+				<td width="14%">{$task_base_type[$val['tb_type']]['v_name']}</td>
+				<td width="20%">有效时间</td>
+				<td width="6%"><input type="checkbox"
+					name="tb_disabled_{$val['tb_id']}" value="1"
+					{if $val['tb_disabled']==1}checked= "checked"{/if} /></td>
+				<td width="10%"><span class="c_l"><a
+						href="{modelurl 191,array('tb_id'=>$val['tb_id'])}">编辑</a></span>
+					<div class="clr"></div></td>
+			</tr>
+			<!--{/dbres}-->
+			<!--{else}-->
+			<tr id="clist_0" onmouseover="currentbg(this)"
+				onmouseout="currentbg(this,1)">
+				<td colspan="9"><font class="color6">暂无内容显示</font></td>
+			</tr>
+			<!--{/if}-->
+
+			<tr class="cont_dbg">
+				<td width="50%" colspan="4"><span class="c_l c_mt5px"><input
+						type="checkbox" name="ck_dosign" value="1" />&nbsp;<font
+						class="cont_c2">删?</font></span> <span class="c_l c_ml10px"><input
+						type="button" class="cont_dod" id="dobt" value="提交"
+						onclick="task_base_list('{modelurl 186}','{modelurl 193}')" /></span> <span
+					class="c_l c_ml10px"><input type="button" class="cont_dod"
+						id="dobt" value="添加新任务" onclick="gourl('{modelurl 187}')" /></span>
+					<div class="clr"></div></td>
+				<td width="50%" colspan="5">
+					<!--{modtemplate admin/template/page}-->
+				</td>
+			</tr>
+		</table>
+
+		<div class="clr"></div>
+	</div>
+	<!--内容列表结束-->
+
+	<div class="clr"></div>
+</div>
+
+<!--{modtemplate admin/template/adm_footer}-->

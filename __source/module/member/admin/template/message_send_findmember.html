@@ -1,0 +1,65 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--内容开始-->
+<div class="cont_z">
+	<ul>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>{lang admin:username/}:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="search_username"
+						value="" />
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>{lang admin:uid/}:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_z_txt" name="search_uid" value="" />
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+	</ul>
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="cont_dobt"><input type="button" class="cont_dod"
+			id="dobt" value="提交"
+			onclick="msg_send_member_search('{modelurl 158}')" /></span>
+	</div>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var back_call_param={'callback_param':{'msg_call':'myalert','msg_call_b':'redirecturl'}};
+
+function msg_send_member_search(do_url){
+	var username=inputvals("search_username");
+	var uid=inputvals("search_uid");
+	if(username.length<1 && uid.length<1){
+		return false;
+	}	
+	var datas={'uid':uid,'username':username}
+	publishdo(do_url,arr_merge(datas,back_call_param),"","","#dobt");
+}
+</script>
+
+{modtemplate admin/template/adm_footer}

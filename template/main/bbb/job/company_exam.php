@@ -171,7 +171,7 @@
 		});
 
 		var __examForm = document.getElementById("examForm");
-		var __examTime = parseInt("21<?php prt($jobData['examtime']); ?>");
+		var __examTime = parseInt("<?php prt($jobData['examtime']); ?>");
 		var __examTimerFlag;
 		var __examTimerNow = __examTime;
 		var __examBox = $("#answers-area");

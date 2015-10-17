@@ -1,0 +1,140 @@
+<!--用户基本权限设置开始-->
+<div class="c_w100">
+	<ul>
+		<li>
+			<div class="cont_li_p1">
+				<strong>站点访问:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+						class="c_l {if $index>1}c_ml10px{/if}"><input type="radio"
+						name="{field:moduleInfo.module/}_allowvisit"
+						value="{field:val.val/}" {if
+						array_key_val('allowvisit',$groupSetting,yesno_val('normal'))==$val[
+						'val']} checked="checked" {/if} />&nbsp;{field:val.title3/}</span>
+					{/loop}
+				</div>
+				<div class="cont_li_p2_2 alc">关闭后，该组的用户将不能访问站点的任何页面</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>隐身登录:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+						class="c_l {if $index>1}c_ml10px{/if}"><input type="radio"
+						name="{field:moduleInfo.module/}_allowinvisible"
+						value="{field:val.val/}" {if
+						array_key_val('allowinvisible',$groupSetting,yesno_val('normal'))==$val[
+						'val']} checked="checked" {/if} />&nbsp;{field:val.title3/}</span>
+					{/loop}
+				</div>
+				<div class="cont_li_p2_2 alc">开启后，该组的用户将可以隐身登录站点</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>头像上传:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+						class="c_l {if $index>1}c_ml10px{/if}"><input type="radio"
+						name="{field:moduleInfo.module/}_allowavatar"
+						value="{field:val.val/}" {if
+						array_key_val('allowavatar',$groupSetting,yesno_val('normal'))==$val[
+						'val']} checked="checked" {/if} />&nbsp;{field:val.title3/}</span>
+					{/loop}
+				</div>
+				<div class="cont_li_p2_2 alc">此功能需要开启头像上传功能才有效</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>昵称:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_zt7"
+						name="{field:moduleInfo.module/}_nickname_min"
+						value="{print array_key_val('nickname_min',$groupSetting,member_config_get('nickname_min'))/}" />&nbsp;到&nbsp;<input
+						type="text" class="cont_zt7"
+						name="{field:moduleInfo.module/}_nickname_max"
+						value="{print array_key_val('nickname_max',$groupSetting,member_config_get('nickname_max'))/}" />
+				</div>
+				<div class="cont_li_p2_2">限制昵称的字符串长度，最小长度不能小于{print
+					member_config_get('nickname_min')/}，最大长度不能超过{print
+					member_config_get('nickname_max')/}</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+	</ul>
+	<div class="clr"></div>
+</div>
+<div class="clr"></div>
+<!--用户基本权限设置结束-->
+
+<!--button start-->
+<div class="cont_doc">
+	<span class="c_l c_ml5px"><input type="button" class="cont_dod"
+		id="{field:moduleInfo.module/}_dobt" value="提交"
+		onclick="member_adm_member_groupsetting()" /></span> <span
+		class="c_l c_ml10px"><input type="button" class="cont_dod"
+		id="{field:moduleInfo.module/}_gobt" value="返回"
+		onclick="redirectUrl({'url':'{field:callback_url/}'})" /></span>
+	<div class="clr"></div>
+</div>
+<div class="clr"></div>
+<!--button end-->
+
+<script language="javascript">
+function member_adm_member_groupsetting(){
+	var m="{field:moduleInfo.module/}";
+	var buttons=["#"+m+"_dobt","#"+m+"_gobt"];
+	/*获取当前组值*/
+	var title=inputval("title");
+	/*获取值*/
+	var allowvisit=getboxfirst(m+"_allowvisit");
+	var allowinvisible=getboxfirst(m+"_allowinvisible");
+	var allowavatar=getboxfirst(m+"_allowavatar");
+	
+	var nickname_min=inputval(m+"_nickname_min");
+	var nickname_max=inputval(m+"_nickname_max");
+	
+	var datas={
+		'groupid':currentGroup.groupid,
+		'title':title,
+		'module':m,
+		'settingdo':currentGroup.settingdo,
+		
+		'allowvisit':allowvisit,
+		'allowinvisible':allowinvisible,
+		'allowavatar':allowavatar,
+		'nickname_min':nickname_min,
+		'nickname_max':nickname_max
+	};
+	ajaxAction({'actionUrl':currentGroup.submitUrl,'actionData':arr_merge(datas,currentGroup.callback_param),'offButton':buttons,'urlTarget':_CJG.MF});
+}
+</script>

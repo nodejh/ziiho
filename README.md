@@ -14,11 +14,6 @@
     - *41* $_G ['dir'] ['root'] = 'http://lziiho.com';
     - *70* $_G ['cfg'] ['url'] = 'http://lziiho.com';
 
-+ 后台账户
-
-    admin
-    abc123
-
 ##New UI
 
 ###文件目录

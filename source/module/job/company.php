@@ -12,6 +12,8 @@ $JEXAMS = _g('module')->trigger('job', 'examsubject');
 $JEXAMSA = _g('module')->trigger('job', 'examsubject_answer');
 $JZPLX = _g('module')->trigger('job', 'zplx');
 
+$db = _g ( 'db' );
+
 switch (_get ( 'op' )) {
 	case 'detail' :
 		$getCuid = _get('id');
@@ -126,26 +128,48 @@ switch (_get ( 'op' )) {
 		/* get question */
 		$questionDatas = array ();
 		$questionCount = 0;
+		
 		/* 题库获取 */
-		$db = $JEXAMSA->db;
 		$db->from ( 'job_question' );
-		$db->where ( 'sortid',  $jobData['sortid']);
+		$db->where_regexp('sortid', (',' . $jobData['sortid'] . ','));
+		$__qtCount = $db->count ();
 		$db->select ();
 		$__result = $db->get_list ();
+		
+		/* 计算平均取多少题 */
+		$rIndex = 0;
+		$rLimit = 0;
+		
+		$countYu = 0;
+		$limitNum = 0;
+		if ($__qtCount >= 1) {
+			$countYu = $JMODEL->smCnum ( $JMODEL->sysField ) % $__qtCount;
+			if ($countYu < 1) {
+				$limitNum = $JMODEL->smCnum ( $JMODEL->sysField ) / $__qtCount;
+			} else {
+				$limitNum = ($JMODEL->smCnum ( $JMODEL->sysField ) - $countYu) / $__qtCount;
+			}
+		}
 		while ($rs = $db->fetch_array ($__result)) {
+			$rIndex += 1;
+			if ($rIndex == $__qtCount && $countYu >= 1) {
+				$rLimit = $limitNum + $countYu;
+			} else {
+				$rLimit = $limitNum;
+			}
 			$db->from ( 'job_question_subject' );
 			$db->where ( 'questionid',  $rs['questionid'] );
 			$db->where ( 'status',  1 );
 			$__total = $db->count ();
-			$db->rand_limit ( 10 );
+			$db->rand_limit ( $rLimit );
 			$db->select ();
 			$__result2 = $db->get_list ();
-			$questionDatas['sys'][] = array( 'total'=>$__total, 'result'=>$__result2 );
+			$questionDatas[$JMODEL->sysField][] = array( 'total'=>$__total, 'result'=>$__result2 );
 			
-			if ($__total < 10) {
+			if ($__total < $rLimit) {
 				$questionCount = $questionCount + $__total;
 			} else {
-				$questionCount = $questionCount + 10;
+				$questionCount = $questionCount + $rLimit;
 			}
 		}
 		/* 自定义测试题 */
@@ -157,12 +181,12 @@ switch (_get ( 'op' )) {
 		$JEXAMS->db->select();
 		$__result = $JEXAMS->db->get_list();
 		if ($__total >= 1) {
-			$questionDatas ['my'][] = array ('total'=>$__total, 'result'=>$__result);
+			$questionDatas [$JMODEL->myField][] = array ('total'=>$__total, 'result'=>$__result);
 			
 			$questionCount = $questionCount + $__total;
 		}
 		/* 综合测试 */
-		foreach(_g('cache')->selectitem(120) as $k=>$v) {
+		foreach($JMODEL->smRemoveSys() as $k=>$v) {
 			$db->from ( 'job_synthetic' );
 			$db->where ( 'typeid', $k );
 			$db->where ( 'status',  1 );
@@ -170,7 +194,7 @@ switch (_get ( 'op' )) {
 			$db->rand_limit ( 10 );
 			$db->select ();
 			$__result = $db->get_list ();
-			$questionDatas[$k][] = array ('name'=>$v['sname'], 'total'=>$__total, 'result'=>$__result);
+			$questionDatas[$k][] = array ('total'=>$__total, 'result'=>$__result);
 			
 			if ($__total < 10) {
 				$questionCount = $questionCount + $__total;
@@ -182,6 +206,7 @@ switch (_get ( 'op' )) {
 			smsg('job:600012', $backUrl);
 			return null;
 		}
+		
 		include _g ( 'template' )->name ( 'job', 'company_exam', true );
 		break;
 	case 'exam_do':
@@ -252,7 +277,6 @@ switch (_get ( 'op' )) {
 			return null;
 		}
 		
-		$db = $JEXAMSA->db;
 		/* 如果已答卷 */
 		$answerResult = $JEXAMSA->find(array('cuid'=>$id, 'jobid'=>$jobid, 'uid'=>$uid));
 		if(!$JEXAMSA->db->is_success ( $answerResult )){
@@ -268,11 +292,13 @@ switch (_get ( 'op' )) {
 		
 		/* 统计题数 */
 		$__examCount = 0;
-		$examCountData = array( 'sys' => 0, 'my' => 0 );
+		$examCountData = array ();
+		$examCountData[$JMODEL->sysField] = 0;
+		$examCountData[$JMODEL->myField] = 0;
 		
 		/* 系统题数 */
 		$db->from ( 'job_question' );
-		$db->where ( 'sortid',  $jobData['sortid']);
+		$db->where_regexp ( 'sortid',  ',' . $jobData['sortid'] . ',');
 		$db->select ();
 		if(!$db->is_success ()){
 			smsg ( lang ( '200013' ) );
@@ -290,12 +316,12 @@ switch (_get ( 'op' )) {
 				return null;
 			}
 			if ($__total < 10) {
-				$examCountData['sys'] = $examCountData['sys'] + $__total;
+				$examCountData[$JMODEL->sysField] = $examCountData[$JMODEL->sysField] + $__total;
 			} else {
-				$examCountData['sys'] = $examCountData['sys'] + 10;
+				$examCountData[$JMODEL->sysField] = $examCountData[$JMODEL->sysField] + 10;
 			}
 		}
-		$__examCount = $examCountData['sys'];
+		$__examCount = $examCountData[$JMODEL->sysField];
 		
 		/* 自定义题数 */
 		$esCount = $JEXAMS->count(array('cuid'=>$id, 'jobid'=>$jobid));
@@ -303,11 +329,11 @@ switch (_get ( 'op' )) {
 			smsg ( lang ( '200013' ) );
 			return null;
 		}
-		$examCountData['my'] = $esCount[0];
+		$examCountData[$JMODEL->myField] = $esCount[0];
 		$__examCount = $__examCount + $esCount[0];
 		
 		/* 综合测题数 */
-		foreach(_g('cache')->selectitem(120) as $k=>$v) {
+		foreach($JMODEL->smRemoveSys() as $k=>$v) {
 			$db->from ( 'job_synthetic' );
 			$db->where ( 'typeid', $k );
 			$db->where ( 'status',  1 );
@@ -347,15 +373,15 @@ switch (_get ( 'op' )) {
 				}
 				$idModelData = $JMODEL->examIdDe ( $esid );
 				$esQrs = null;
-				if ($idModelData[0] == 'my') {
+				if ($idModelData[0] == $JMODEL->myField) {
 					$esQrs = $JEXAMS->find ('esid', $idModelData[1]);
 					if(!$JEXAMS->db->is_success ( $esQrs )){
 						smsg ( lang ( '200013' ) );
 						return null;
 					}
 				} else {
-					$db->from ( $idModelData[0] == 'sys' ? 'job_question_subject' : 'job_synthetic' );
-					$db->where ( $idModelData[0] == 'sys' ? 'qsid' : 'syntheticid', $idModelData[1] );
+					$db->from ( $idModelData[0] == $JMODEL->sysField ? 'job_question_subject' : 'job_synthetic' );
+					$db->where ( $idModelData[0] == $JMODEL->sysField ? 'qsid' : 'syntheticid', $idModelData[1] );
 					$db->select ();
 					if(!$db->is_success ()){
 						smsg ( lang ( '200013' ) );
@@ -427,9 +453,11 @@ switch (_get ( 'op' )) {
 		break;
 	case 'exam_s':
 		$id = _get('id');
+		$jobid = _get('jobid');
 		$isEmpty = (_get('empty') == 'yes');
 		
 		$companyData = null;
+		$jobData = null;
 		$backUrl = null;
 		
 		if(_g('validate')->pnum($id)){
@@ -438,6 +466,61 @@ switch (_get ( 'op' )) {
 				$backUrl = _g('uri')->su('job/ac/company/op/detail/id/' . $id);
 			}
 		}
+		
+		if(_g('validate')->pnum($jobid)){
+			$jobData = $CJOB->find('jobid', $jobid);
+			if(!my_is_array($jobData)){
+				smsg(lang('job:job>100000'), $backUrl);
+				return null;
+			}
+		}
+		
+		$uid = $CUMODEL->suser('uid');
+		/* 获取模块类型 */
+		$examModels = $JMODEL->sm ();
+		$examSysDatas = array ();
+		
+		/* 获取专业知识详细题库 */
+		$db->from ( 'job_examsubject_answer' );
+		$db->where ( 'jobid', $jobid );
+		$db->where ( 'uid', $uid );
+		$db->order_by ('answerid', 'desc');
+		$db->select ();
+		$answerData = $db->get_one ();
+		if (my_is_array( $answerData )) {
+			$answerData['records'] = str2array ( $answerData['records'] );
+			$answerData['fields'] = str2array ( $answerData['fields'] );
+			
+			/* 所答题的id */
+			$answerItems = my_keys( $answerData['records']['sys'] );
+			
+			/* 答题模块类型 */
+			$db->from ( 'job_question' );
+			$db->where_regexp ( 'sortid',  ',' . $jobData['sortid'] . ',');
+			$db->select ();
+			$qtResult = $db->get_list ();
+			while ($rs = $db->result ( $qtResult )) {
+				/* 答题详情 */
+				$db->from ( 'job_question_subject' );
+				$db->where_in ( 'qsid', $answerItems );
+				$db->where ( 'questionid', $rs['questionid'] );
+				$db->where_regexp ( 'sortid',  ',' . $jobData['sortid'] . ',');
+				$__count = $db->count ();
+				$db->select();
+				$__cResult = $db->get_list ();
+				/* 答题正确统计 */
+				$__num = 0;
+				while ($__aRs = $db->result ( $__cResult )) {
+					if (array2str(my_explode(',', $answerData['records']['sys'][$__aRs['qsid']][$__aRs['stype']])) == $__aRs['answer']) {
+						$__num += 1;
+					}
+				}
+				
+				/* 队列 */
+				$examSysDatas[] = array ( 'name'=>$rs['qname'], 'count' => $__count, 'num' => $__num );
+			}
+		}
+		
 		include _g ( 'template' )->name ( 'job', 'company_exam_status', true );
 		break;
 	default :

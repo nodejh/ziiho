@@ -1,0 +1,117 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<ul>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>允许登录:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+						class="c_l {if $index>1}c_ml10px{/if}"><input type="radio"
+						name="allowlogin" value="{field:val.val/}" {if
+						config_val('allowlogin',$sets)==$val[ 'val']}checked="checked" {/if} />&nbsp;{field:val.title3/}</span>
+					{/loop}
+				</div>
+				<div class="cont_li_p2_2">关闭后，注册会员将不可登录站点</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>登录验证码:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					{eval $index=0;/} {loop yesno_val() $val} {eval $index++;/} <span
+						class="c_l {if $index>1}c_ml10px{/if}"><input type="radio"
+						name="logincheckcode" value="{field:val.val/}" {if
+						config_val('logincheckcode',$sets)==$val[ 'val']}checked="checked" {/if} />&nbsp;{field:val.title3/}</span>
+					{/loop}
+				</div>
+				<div class="cont_li_p2_2">开启后，会员登录时将会显示输入验证码</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>用户名:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_zt7" name="username_min"
+						value="{print config_val('username_min',$sets)/}" />&nbsp;到&nbsp;<input
+						type="text" class="cont_zt7" name="username_max"
+						value="{print config_val('username_max',$sets)/}" />
+				</div>
+				<div class="cont_li_p2_2">限制用户名的字符串长度，最小长度不能小于1</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+		<li>
+			<div class="cont_li_p1">
+				<strong>用户密码:</strong>
+			</div>
+			<div class="clr"></div>
+			<div class="cont_li_p2">
+				<div class="cont_li_p2_1">
+					<input type="text" class="cont_zt7" name="password_min"
+						value="{print config_val('password_min',$sets)/}" />&nbsp;到&nbsp;<input
+						type="text" class="cont_zt7" name="password_max"
+						value="{print config_val('password_max',$sets)/}" />
+				</div>
+				<div class="cont_li_p2_2">限制用户密码的字符串长度，最小长度不能小于1</div>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</li>
+		<div class="clr"></div>
+
+	</ul>
+
+	<div class="clr"></div>
+
+	<div class="cont_doc">
+		<span class="cont_dobt"><input type="button" class="cont_dod"
+			id="dobt" value="提交" onclick="member_adm_baseset()" /></span>
+	</div>
+
+	<div class="clr"></div>
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','isajax':1}};
+var button_ids="#dobt";
+function member_adm_baseset(){
+	var allowlogin=getboxfirst("allowlogin");
+	var logincheckcode=getboxfirst("logincheckcode");
+	
+	var username_min=inputval("username_min");
+	var username_max=inputval("username_max");
+	var password_min=inputval("password_min");
+	var password_max=inputval("password_max");
+	
+	var datas={'allowlogin':allowlogin,'logincheckcode':logincheckcode,'username_min':username_min,'username_max':username_max,'password_min':password_min,'password_max':password_max};
+	var do_url="{url 'index','mod/member/ac/admin/op/set/ao/baseset_setdo'/}";
+	ajaxAction({'actionUrl':do_url,'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'urlTarget':_CJG.MF});
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->

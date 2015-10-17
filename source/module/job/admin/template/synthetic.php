@@ -14,9 +14,11 @@
                 	<em class="padding100">类型:</em>
                     <select name="q_typeid" class="fs-ts-200">
                     	<option value="0">==请选择==</option>
-                        <?php $siResult = _g('get')->selectitem(120);?>
+                        <?php $siResult = _g('get')->selectitem(120); ?>
                     	<?php while($rs = _g('db')->result($siResult)){ ?>
+                    	<?php if(!$JMODEL->is_sys($rs['flag'])){ ?>
                         <option value="<?php prt($rs['siid']); ?>" <?php prt($rs['siid'] == $typeid ? 'selected="selected"' : null); ?> ><?php prt($rs['sname']); ?></option>
+                        <?php } ?>
                         <?php } ?>
                     </select>
                 </p>

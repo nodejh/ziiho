@@ -1,19 +1,21 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
-<?php include _g('template')->name('@', 'header_center', true); ?>
+<?php include _g('template')->name('@', 'header', true); ?>
     <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
     <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
 
     <!-- //cuser_center -->
-    <div class="cuser_center clearfix o-main" id="cuser_center">
+    <div class="cuser_center clearfix" id="cuser_center">
         <!-- //cuser_z -->
-        <div class="cuser_z clearfix o-left">
+        <div class="cuser_z clearfix">
             <?php include _g('template')->name('user', 'center_nav', true); ?>
         </div>
         <!-- cuser_z// -->
 
         <!-- //cuser_y -->
-        <div class="cuser_y clearfix o-right">
-            <h1 class="o-title">个人资料</h1>
+        <div class="cuser_y clearfix">
+            <div class="company-tab-hd clearfix">
+                <a href="javascript:;">基本资料</a>
+            </div>
 
             <div class="company-tab-bd clearfix">
                 <!-- //基本信息 -->
@@ -53,11 +55,12 @@
                                 <div class="nn">感情状况:</div>
                                 <div class="ii">
                                     <select class="sel" name="emotion">
-                                        <option value="-1">==请选择==</option>
-                                        <?php foreach(_g('value')->ra(_g('module')->dv('user', 100001)) as $v): ?>
-                                            <option value="<?php prt($v['v']); ?>" <?php if($v['v'] == my_array_value('emotion', $userData)){ ?>selected="selected"<?php } ?> ><?php prt($v['name']); ?></option>
-                                        <?php endforeach; ?>
-                                    </select></div>
+                                        <option value="0">==请选择==</option>
+                                        <?php foreach(_g('cache')->selectitem(123) as $k=>$v){ ?>
+                                            <option value="<?php prt($k); ?>" <?php if(my_array_value('emotion', $userData)==$k){ ?>selected="selected"<?php } ?>><?php prt($v['sname']); ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
                             </li>
 
                             <li class="bline clearfix">
@@ -77,7 +80,7 @@
 
                             <li class="clearfix">
                                 <div class="nn">&nbsp;</div>
-                                <button type="button" class="btn-ok" name="disabled-buttons" onclick="cUserProfileUpdate(this, '<?php prt(_g('uri')->su('user/ac/profile/op/do')); ?>');">保存</button>
+                                <button type="button" class="btn-ok" name="disabled-buttons" onclick="profileUpdate(this, '<?php prt(_g('uri')->su('user/ac/profile/op/do')); ?>');">保存</button>
                             </li>
                         </ul>
                     </form>
@@ -93,12 +96,12 @@
     <!-- cuser_center// -->
 
 
-<?php include _g('template')->name('user', 'footer', true); ?>
+<?php include _g('template')->name('job', 'footer', true); ?>
 
 
     <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/calendar/WdatePicker.js"></script>
     <script type="text/javascript" src="<?php prt(sdir('data')); ?>/cache/user/area.js"></script>
-    <script type="text/javascript" src="<?php prt(_g('template')->dir('user')); ?>/js/cuser.js"></script>
+    <script type="text/javascript" src="<?php prt(_g('template')->dir('user')); ?>/js/user.js"></script>
     <script type="text/javascript" src="<?php prt(_g('template')->dir('job')); ?>/js/job_job.js"></script>
     <script language="javascript">
         $("#cuser_center").cjslip({

@@ -38,7 +38,7 @@ class class_job_question extends geshai_model {
 	
 	function moveResult($sortid, $questionid){
 		$this->db->from ( $this->t_job_question );
-		$this->db->where ( 'sortid', $sortid );
+		$this->db->where_regexp ( 'sortid', (',' . $sortid . ',') );
 		$this->db->where ('questionid', $questionid, '!=');
 		$this->db->order_by('listorder');
 		$this->db->limit(0, 100);
@@ -48,7 +48,7 @@ class class_job_question extends geshai_model {
 	
 	function relate($value, $id = null, $limit = 10){
 		$this->db->from ( $this->t_job_question );
-		$this->db->where ( 'sortid', $value );
+		$this->db->where_regexp ( 'sortid', (',' . $value . ',') );
 		if(_g('validate')->pnum($id)){
 			$this->db->where ('questionid', $id, '!=');
 		}

@@ -1,9 +1,0 @@
-<tr id="menu_list_{field:arr.menu_id/}" onmouseover="currentbg(this)"
-	onmouseout="currentbg(this,1)">
-	<td width="4%"><input type="checkbox" name="menu_id_arr"
-		value="{field:arr.menu_id/}" {if $arr['isexist']==1}checked= "checked"{/if} /></td>
-	<td width="96%">{if $arr['indent']>=1}{for
-		$x=0;$x<$arr['indent'];$x++}&nbsp;&nbsp;&nbsp;&nbsp;{/for}<span
-		class="cont_c1">┝&nbsp;</span>{/if}<font{if $arr['indent']<1}class="fw"{/if}>{field:arr.title/}</font>
-	</td>
-</tr>

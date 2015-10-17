@@ -7,7 +7,7 @@ if (! defined ( 'IN_GESHAI' )) {
  * 版本信息
  */
 return array (
-	'name' => 'GeShai',
+	'name' => 'cjThis',
 	/* 版本号 */
 	'version' => '1.0',
 	/* 版本发布日期 */
@@ -17,17 +17,17 @@ return array (
 	/* 版权 */
 	'copyright' => 'Copyright ©2010 - 2015',
 	/* powered by */
-	'powered' => 'Powered by GeShai',
+	'powered' => 'Powered by cjThis',
 	/* powered by html */
-	'powered_html' => 'Powered by <span class="pn"><a href="http://www.geshai.com" target="_blank">GeShai</a></span>',
+	'powered_html' => 'Powered by <span class="pn"><a href="http://www.cjThis.com" target="_blank">cjThis</a></span>',
 	/* 官方网站 */
-	'author_url' => 'http://www.geshai.com',
+	'author_url' => 'http://www.cjthis.com',
 	/* 产品下载 */
-	'download' => 'http://www.geshai.com',
+	'download' => 'http://www.cjthis.com',
 	/* 产品购买 */
-	'buy' => 'http://www.geshai.com',
+	'buy' => 'http://www.cjthis.com',
 	/* 授权信息 */
-	'authorize' => 'http://www.geshai.com',
+	'authorize' => 'http://www.cjthis.com',
 	/* 获取官方动态 */
 	'product_active' => 'http://localhost/index.php?mod=article&ac=content&op=activeinfo',
 	/* 产品详细介绍 */
@@ -46,22 +46,22 @@ return array (
 				),
 				'site' => array (
 						'name' => '官方网站',
-						'value' => '<a href="http://www.geshai.com" target="_blank">www.GeShai.com</a>' 
+						'value' => '<a href="http://www.cjthis.com" target="_blank">www.cjThis.com</a>' 
 				),
 				'bbs' => array (
 						'name' => '官方论坛',
-						'value' => '<a href="http://bbs.geshai.com" target="_blank">bbs.GeShai.com</a>' 
+						'value' => '<a href="http://bbs.cjthis.com" target="_blank">bbs.cjThis.com</a>' 
 				) 
 		),
 	/* 产品相关网站 */
 	'product_relate' => array (
 				array (
 						'name' => '公司网站',
-						'value' => 'http://www.geshai.com' 
+						'value' => 'http://www.cjthis.com' 
 				),
 				array (
 						'name' => '文档',
-						'value' => 'http://www.geshai.com' 
+						'value' => 'http://www.cjthis.com' 
 				) 
 		) 
 );

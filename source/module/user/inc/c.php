@@ -16,8 +16,11 @@ if(strtolower(_get('ac')) == 'logout'){
 	return null;
 }
 
+$sess_type = $UModel->suser('login_type');
+$sess_type = (my_in_array( $sess_type , array(1, 2)) ? $sess_type : null);
+
 if(!my_is_array($UModel->suser())){
-	$acts = array('login', 'register', 'forget');
+	$acts = array('login', 'register', 'forget', 'g');
 	if(in_array(_get('ac'), $acts)){
 		include _g ( 'module' )->filename ( 'user', _get('ac') );
 		return null;
@@ -33,7 +36,7 @@ switch ($UModel->suser('login_type')) {
 		include _g ( 'module' )->inc ( 'cuser', 'common' );
 		break;
 	default :
-		$acts = array( 'login', 'register', 'forget', 'profile', 'password', 'setting', 'avatar', 'examrec', 'jobrec', 'resume' );
+		$acts = array( 'login', 'register', 'forget', 'profile', 'password', 'setting', 'avatar', 'examrec', 'jobrec', 'resume', 'g' );
 		_get('ac', (in_array(_get('ac'), $acts) ? _get('ac') : 'center'));
 		
 		include _g ( 'module' )->filename ( 'user', _get('ac') );

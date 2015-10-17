@@ -4,6 +4,9 @@ if (! defined ( 'IN_GESHAI' )) {
 }
 class class_job_model extends geshai_model {
 	
+	public $sysField = 'sys';
+	public $myField = 'my';
+	
 	function __construct() {
 		parent::__construct ();
 	}
@@ -112,19 +115,18 @@ class class_job_model extends geshai_model {
 		}
 		return $data;
 	}
-	function areaValue($sortid, $k = null){
+	function areaValue($areaid, $k = null){
 		$data = array();
 		$arr = null;
 		$cacheFile = sdir(':data') . '/cache/job/area.php';
 		if(is_file($cacheFile)){
 			$arr = include $cacheFile;
-			$arr = my_array_value($sortid, $arr);
-				
-			if(func_num_args() > 1){
-				$data = my_array_value($k, $arr);
-			}else{
-				$data = (is_array($arr) ? $arr : array());
-			}
+			$arr = my_array_value($areaid, $arr);
+		}
+		if(func_num_args() > 1){
+			$data = my_array_value($k, $arr);
+		}else{
+			$data = (is_array($arr) ? $arr : array());
 		}
 		return $data;
 	}
@@ -142,7 +144,33 @@ class class_job_model extends geshai_model {
 		}
 		return ($data . $detail);
 	}
-	
+	function areaGet($d, $isArray = false){
+		$rdValue = ($isArray === true ? array() : null);
+		$data = array();
+		if (!is_array($d)) {
+			if (preg_match_all("/(\d+)/", $d, $data)){
+				$data = $data[0];
+			}
+		} else {
+			$data = $d;
+		}
+		if (!my_is_array($data)) {
+			return $rdValue;
+		}
+		$isflag = false;
+		foreach ($data as $__id) {
+			if ($isArray === true) {
+				$rdValue[] = $this->areaValue($__id);
+			} else {
+				if ($isflag){
+					$rdValue .= '&nbsp;';
+				}
+				$rdValue .= $this->areaValue($__id, 'aname');
+			}
+			$isflag = true;
+		}
+		return $rdValue;
+	}
 	function qsType($key = null, $key2 = null){
 		$arr = _g ( 'value' )->ra ( _g ( 'module' )->dv ( 'job', 100000 ) );
 		switch (func_num_args()){
@@ -232,6 +260,7 @@ class class_job_model extends geshai_model {
 			$rd['esid'] = $data['qsid'];
 			$rd['idstr'] = $modeltype . '_' . $data['qsid'];
 			$rd['estitle'] = $data['title'];
+			$rd['essrc'] = $data['src'];
 			$rd['estype'] = $data['stype'];
 			$rd['esoption'] = $data['option'];
 			$rd['esanswer'] = $data['answer'];
@@ -239,6 +268,7 @@ class class_job_model extends geshai_model {
 			$rd['esid'] = $data['syntheticid'];
 			$rd['idstr'] = $modeltype . '_' . $data['syntheticid'];
 			$rd['estitle'] = $data['title'];
+			$rd['essrc'] = $data['src'];
 			$rd['estype'] = $data['stype'];
 			$rd['esoption'] = $data['option'];
 			$rd['esanswer'] = $data['answer'];
@@ -420,6 +450,75 @@ class class_job_model extends geshai_model {
 			$value .= $tp;
 		}
 		return $value;
+	}
+	
+	/* 计算进度条 */
+	function bar($n, $count){
+		$value = 0;
+		$n = intval ( $n );
+		$count = intval ( $count );
+		if ($count >= 1) {
+			$value = ($n / $count) * 100;
+		}
+		return $value;
+	}
+	function sm() {
+		return _g('cache')->selectitem(120);
+	}
+	function smRemoveSys() {
+		$data = array ();
+		foreach ($this->sm () as $k => $v) {
+			if ($this->sysField == $v['flag']){
+				continue;
+			}
+			$data[$k] = $v;
+		}
+		return $data;
+	}
+	function smSname($k = null){
+		if (preg_match("/[a-z]+/i", $k)) {
+			foreach ($this->sm () as $k => $v) {
+				if ($this->sysField == $v['flag']){
+					return $v['sname'];
+				}
+			}
+		} else {
+			if (preg_match("/\d+/", $k)) {
+				return _g('cache')->selectitem('120>' . $k . '>sname');
+			}
+		}
+		return null;
+	}
+	function is_sys($v) {
+		return ($v == $this->sysField);
+	}
+	function is_ljfx($v) {
+		return ($v == 'syn1');
+	}
+	function is_qywh($v) {
+		return ($v == 'syn2');
+	}
+	function is_xg($v) {
+		return ($v == 'syn3');
+	}
+	function smCcount($v){
+		return (intval($v) * 2);
+	}
+	function smCnum($k) {
+		$arr = array (
+				'sys'=> 30,
+				'syn1' => 10,
+				'syn2' => 10
+		);
+		return my_array_value($k, $arr);
+	}
+	function smCscore($k) {
+		$arr = array (
+				'sys'=> 60,
+				'syn1' => 20,
+				'syn2' => 20
+		);
+		return my_array_value($k, $arr);
 	}
 }
 ?>

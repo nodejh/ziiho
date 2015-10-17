@@ -1,8 +1,7 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
 <?php include _g('template')->name('@', 'header', true); ?>
-<link rel="stylesheet" type="text/css"
-	href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
-<?php include _g('template')->name('job', 'nav', true); ?>
+<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
+<script language="javascript">$("#com-header-wrap").removeClass("com-header-wrap-def").addClass("com-header-wrap-shadow").css({position: "absolute", "z-index": 2, top: "0px"});</script>
 
 <!-- //banner -->
 <div class="banner clearfix" id="banner">
@@ -41,7 +40,6 @@
 
 </div>
 <!-- banner// -->
-
 
 <!-- //main -->
 <div class="main clearfix">

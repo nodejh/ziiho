@@ -1,0 +1,54 @@
+{eval $groupTypeField=$val['field']/} {eval
+$groupResult=$MGObj->group_list($groupTypeField);/} {eval
+$groupResult=array_key_val(1,$groupResult)/} {eval $coreGroupids=''/}
+
+<textarea name="item-html-{field:groupTypeField/}" class="c_none">
+<table>
+  <tr class="cont_zbg">
+    <td width="4%"><input type="checkbox" name="ck_groupid"
+				onclick="checkedall(this.name,'groupid_arr')" /></td>
+    <td width="6%">ID编号</td>
+    <td width="38%">组名称</td>
+    <td width="30%">分值</td>
+    <td width="22%">操作</td>
+  </tr>
+  
+  {dbres $groupResult $val}
+  <tr id="clist_{field:val.groupid/}" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+    <td width="4%"><input type="checkbox" name="groupid_arr"
+				value="{field:val.groupid/}" /></td>
+    <td width="6%" class="color1">{field:val.groupid/}</td>
+    <td width="38%"><input type="text" class="cont_zt6"
+				name="title_{field:val.groupid/}" value="{field:val.title/}" /></td>
+    <td width="30%"><input type="text" class="cont_zt6"
+				name="credit_{field:val.groupid/}" value="{field:val.credit/}" /></td>
+    <td width="22%"><a href="javascript:;"
+				onclick="redirectUrl({'url':'{url 'index','mod/member/ac/admin/op/membergroup/ao/level_editset/groupid/'.$val['groupid'].'/grouptype/'.$groupTypeField/}'});">编辑</a></td>
+  </tr>
+  {/dbres}
+  
+  <tr id="clist_0" onmouseover="currentbg(this)"
+			onmouseout="currentbg(this,1)">
+    <td width="10%" colspan="2" style="text-align: right;"><span
+				class="cont_c2">添加:</span></td>
+    <td width="38%"><input type="text" class="cont_zt6"
+				name="_title" value="" /></td>
+    <td width="30%"><input type="text" class="cont_zt6"
+				name="_credit" value="" /></td>
+    <td width="22%"><input type="button" class="cont_dod"
+				id="addbt" value="添加"
+				onclick="member_adm_member_group_add('{field:groupTypeField/}')" /></td>
+  </tr>
+  
+  <tr class="cont_dbg">
+    <td colspan="5">
+    	<input type="checkbox" name="ck_dosign" value="1" />&nbsp;<span
+				class="cont_c2">删?</span>&nbsp;&nbsp;<input type="button"
+				class="cont_dod" id="dobt" value="提交"
+				onclick="member_adm_member_group_listdo('{field:groupTypeField/}','{field:coreGroupids/}')" />
+    </td>
+    </tr>
+</table>
+<div class="clr"></div>
+</textarea>

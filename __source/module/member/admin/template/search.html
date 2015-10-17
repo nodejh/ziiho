@@ -1,0 +1,103 @@
+<!--{modtemplate admin/template/adm_header}-->
+
+<!--内容开始-->
+<div class="cont_z">
+
+	<!--提示信息开始-->
+	<div class="c_w100 c_mt5px adm_bb_dashed c_pb10px">
+		<p class="c_mt5px c_ml5px color2 fw">提示:</p>
+		<p class="c_mt5px c_ml5px color1">1、通过条件搜索用户，您可以进行会员管理及相关操作</p>
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+	<!--提示信息结束-->
+
+
+	<!--条件筛选开始-->
+	<div class="cont_z">
+		<table>
+			<tr>
+				<td width="8%">状态:</td>
+				<td width="92%"><span class="c_l"> <select
+						name="q_status" class="width160px cont_sh cont_zt0">
+							<option value="null">==请选择==</option> {loop
+							member_value_get('status') $val}
+							<option value="{field:val.field/}" {if $status_field==$val[
+								'field']} selected="selected"{/if}>{field:val.title/}</option>
+							{/loop}
+					</select>
+				</span> <span class="c_l c_mt2px c_ml20px">UID:</span> <span
+					class="c_l c_ml5px"><input type="text" class="cont_zt6"
+						name="q_uid" value="{field:q_uid/}" /></span> <span
+					class="c_l c_mt2px c_ml20px">用户名:</span> <span class="c_l c_ml5px"><input
+						type="text" class="cont_zt6" name="q_username"
+						value="{field:q_username/}" /></span></td>
+			</tr>
+
+			<tr>
+				<td width="8%">按时间段:</td>
+				<td width="92%"><select name="q_day"
+					class="width160px cont_sh cont_zt0">
+						<option value="0">不限</option> {loop dc_value('where_day') $k $val}
+						<option value="{field:k/}" {if $k==$q_day}selected="selected"{/if}>{field:val.title/}</option>
+						{/loop}
+				</select></td>
+			</tr>
+
+			<tr>
+				<td width="8%">排序方式:</td>
+				<td width="92%"><span class="c_l"> <select
+						name="q_order" class="width100px cont_sh cont_zt0"> {loop
+							dc_value('orderby') $k $val}
+							<option value="{field:k/}" {if $k==$q_order}selected="selected"{/if}>{field:val.title/}</option>
+							{/loop}
+					</select>
+				</span> <span class="c_l c_ml10px"> <select name="q_num"
+						class="width100px cont_sh cont_zt0"> {loop
+							dc_value('data_num') $k $val}
+							<option value="{field:k/}" {if $k==$q_num}selected="selected"{/if}>{field:val.title/}</option>
+							{/loop}
+					</select>
+				</span> <span class="c_l c_ml10px">
+						<button type="button" class="cont_dod" id="query_bt"
+							onclick="member_adm_query();">提交查询</button>
+				</span></td>
+			</tr>
+
+		</table>
+	</div>
+	<div class="clr"></div>
+	<!--条件筛选结束-->
+
+	<!--会员列表开始-->
+	<div class="c_w100" id="search_result">{modtemplate
+		member/admin/template/search_list}</div>
+	<div class="c_w100 c_mt5px c_ml5px color1 c_none" id="search_loading">
+		<img src="" width="16" />&nbsp;正在努力为您加载中...
+	</div>
+	<div class="clr"></div>
+	<!--会员列表结束-->
+
+</div>
+<!--内容结束-->
+
+<script language="javascript">
+var callback_param={'callback_param':{'callFunc':'ajaxActionDialog','callFunc_b':'ajaxActionDialog','isajax':1}};
+var button_ids='#query_bt';
+/*会员搜索_结果查询*/
+function member_adm_query(){
+	var q_status=selectval('q_status');
+	var q_uid=inputval('q_uid');
+	var q_username=inputval('q_username');
+	var q_day=selectval('q_day');
+	var q_order=selectval('q_order');
+	var q_num=selectval('q_num');
+	setHtmlData("#search_result",'');
+	setHtmlDisplay("#search_loading");
+	$("#search_loading img").attr("src",_CJG.sourcepath+"module/admin/template/image/loading.gif");
+	var datas={'q_status':q_status,'q_uid':q_uid,'q_username':q_username,'q_day':q_day,'q_order':q_order,'q_num':q_num};
+	ajaxAction({'actionUrl':"{url 'index','mod/member/ac/admin/op/operation/ao/search_qrs'/}",'actionData':arr_merge(datas,callback_param),'offButton':button_ids,'showStatusId':"#search_loading",'urlTarget':_CJG.MF});
+}
+</script>
+
+<!--{modtemplate admin/template/adm_footer}-->
