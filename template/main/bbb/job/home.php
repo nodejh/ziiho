@@ -24,7 +24,7 @@
     <div class="cbox clearfix">
 
         <div class="z bi clearfix">
-            <a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>" class="color-white"><div class="aa clearfix color-background">学习中心</div></a>
+            <a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>" class="color-white"><div class="aa clearfix color-background">测评中心</div></a>
             <div class="bb clearfix">LEARNING CENTER</div>
             <div class="cc clearfix">针对于职位的职业能力训练</div>
         </div>
@@ -44,24 +44,41 @@
     <!-- //i-area -->
     <div class="i-area clearfix">
 
+        <!--<div class="i-box i-box-bline clearfix">-->
+        <!--    <div class="z i-box-hd clearfix">-->
+        <!--        <div class="icons icon-learn clearfix"></div>-->
+        <!--    </div>-->
+
+        <!--    <div class="z i-box-bd clearfix">-->
+        <!--        <div class="i-box-bd-a clearfix">学习中心</div>-->
+        <!--        <div class="i-box-bd-b clearfix">(LEARNING CENTER)</div>-->
+        <!--        <div class="i-box-bd-c clearfix">-->
+        <!--            <p>本课程是严格按照企业的职位要求制定的学习方案，通过品台的测试可以获得认证。</p>-->
+        <!--            <p>严格按照企业的职位要求制定的学习方案，通过品台的测试可以获得认证。严格按照企业的职位要求制定的学习方案，通过品台的测试</p>-->
+        <!--            <p>通过品台的测试可以获得认证。</p>-->
+        <!--        </div>-->
+        <!--        <div class="i-box-bd-d clearfix">-->
+        <!--            <div class="rz-view clearfix">-->
+        <!--                <a href="javascript:;">我要认证</a>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</div>-->
+        <!--<div class="clear"></div>-->
+
         <div class="i-box i-box-bline clearfix">
             <div class="z i-box-hd clearfix">
-                <div class="icons icon-learn clearfix"></div>
+                <div class="icons icon-rz clearfix"></div>
             </div>
 
             <div class="z i-box-bd clearfix">
-                <div class="i-box-bd-a clearfix">学习中心</div>
-                <div class="i-box-bd-b clearfix">(LEARNING CENTER)</div>
+                <div class="i-box-bd-a clearfix">测评中心</div>
+                <div class="i-box-bd-b clearfix">(CERTIFICATION CENTER)</div>
                 <div class="i-box-bd-c clearfix">
-                    <p>本课程是严格按照企业的职位要求制定的学习方案，通过品台的测试可以获得认证。</p>
-                    <p>严格按照企业的职位要求制定的学习方案，通过品台的测试可以获得认证。严格按照企业的职位要求制定的学习方案，通过品台的测试</p>
-                    <p>通过品台的测试可以获得认证。</p>
+                    <p>专业的职业能力认证，科获得证书。</p>
+                    <p>严格按照企业的职位要求制定的学习方案，通过品台的测试可以获得认证。</p>
                 </div>
-                <div class="i-box-bd-d clearfix">
-                    <div class="rz-view clearfix">
-                        <a href="javascript:;">我要认证</a>
-                    </div>
-                </div>
+                <div class="i-box-bd-d clearfix"></div>
             </div>
         </div>
         <div class="clear"></div>
@@ -79,24 +96,6 @@
                     <p>精选疙瘩职业的职位信息与实习信息。</p>
                     <p>严格按照企业的职位要求制定的学习方案，通过品台的测试可以获得认证。严格按照企业的职位要求制定的学习方案，通过品台的测试</p>
                     <p>通过品台的测试可以获得认证。</p>
-                </div>
-                <div class="i-box-bd-d clearfix"></div>
-            </div>
-        </div>
-        <div class="clear"></div>
-
-
-        <div class="i-box i-box-bline clearfix">
-            <div class="z i-box-hd clearfix">
-                <div class="icons icon-rz clearfix"></div>
-            </div>
-
-            <div class="z i-box-bd clearfix">
-                <div class="i-box-bd-a clearfix">认证中心</div>
-                <div class="i-box-bd-b clearfix">(CERTIFICATION CENTER)</div>
-                <div class="i-box-bd-c clearfix">
-                    <p>专业的职业能力认证，科获得证书。</p>
-                    <p>严格按照企业的职位要求制定的学习方案，通过品台的测试可以获得认证。</p>
                 </div>
                 <div class="i-box-bd-d clearfix"></div>
             </div>

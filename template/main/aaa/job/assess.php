@@ -46,6 +46,7 @@
                 	<span><?php prt(_g('cache')->selectitem('121>'.$v.'>sname')); ?></span>
                     <?php } ?>
                 </div>
+
                 <div class="clearfix btn"><a class="rz" href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $val['cuid'] . '/jobid/' . $val['jobid'])); ?>">认证</a></div>
             </div>
             <?php $index = $index + 1; ?>
