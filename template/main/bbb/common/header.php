@@ -51,7 +51,7 @@
             </div>
             <div class="clearfix o-menu">
                 <a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>" class="ml o-menu-a">学习中心</a>
-                <a href="<?php prt(_g('uri')->su('job/ac/company')); ?>" class="mr o-menu-a">求职中心</a>
+                <a href="<?php prt(_g('uri')->su('job/ac/work')); ?>" class="mr o-menu-a">求职中心</a>
             </div>
         </div>
     </div>
