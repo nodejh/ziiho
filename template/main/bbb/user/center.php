@@ -18,12 +18,12 @@
     <div class="o-content">
         <div class="o-panel o-panel-blue">
             <div class="o-panel-top o-color-white">
-                <i class="fa fa-comments fa-5x"></i>
+                <i class="fa fa-user fa-5x"></i>
                 <div class="o-panel-tips">
-                    <span>5</span><br>认证书
+                    <span></span><br>个人资料
                 </div>
             </div>
-            <a href="<?php prt(_g('uri')->su('user/ac/myauth')); ?>">
+            <a href="<?php prt(_g('uri')->su('user/ac/profile')); ?>">
                 <div class="o-panel-bottom">
                     <span class="o-panel-bottomn-tips o-color-blue">查看详情</span>
                     <span class="o-panel-bottomn-icon o-color-blue"><i class="fa fa-arrow-circle-right"></i></span>
@@ -34,10 +34,10 @@
             <div class="o-panel-top o-color-white">
                 <i class="fa fa-file-text fa-5x"></i>
                 <div class="o-panel-tips">
-                    <span>2</span><br>简历
+                    <span></span><br>我的简历
                 </div>
             </div>
-            <a href="#">
+            <a href="<?php prt(_g('uri')->su('resume/ac/manager')); ?>">
                 <div class="o-panel-bottom">
                     <span class="o-panel-bottomn-tips o-color-green">查看详情</span>
                     <span class="o-panel-bottomn-icon o-color-green"><i class="fa fa-arrow-circle-right"></i></span>
@@ -46,12 +46,12 @@
         </div>
         <div class="o-panel o-panel-yellow">
             <div class="o-panel-top o-color-white">
-                <i class="fa fa-newspaper-o fa-5x"></i>
+                <i class="fa fa-certificate fa-5x"></i>
                 <div class="o-panel-tips">
-                    <span>15</span><br>答卷
+                    <span></span><br>职位测评录
                 </div>
             </div>
-            <a href="<?php prt(_g('uri')->su('user/ac/answer')); ?>">
+            <a href="<?php prt(_g('uri')->su('user/ac/examrec')); ?>">
                 <div class="o-panel-bottom">
                     <span class="o-panel-bottomn-tips o-color-yellow">查看详情</span>
                     <span class="o-panel-bottomn-icon o-color-yellow"><i class="fa fa-arrow-circle-right"></i></span>
@@ -60,12 +60,12 @@
         </div>
         <div class="o-panel o-panel-pink">
             <div class="o-panel-top o-color-white">
-                <i class="fa fa-book fa-5x"></i>
+                <i class="fa fa-file fa-5x"></i>
                 <div class="o-panel-tips">
-                    <span>8</span><br>我的课程
+                    <span></span><br>工作申请录
                 </div>
             </div>
-            <a href="#">
+            <a href="<?php prt(_g('uri')->su('user/ac/jobrec')); ?>">
                 <div class="o-panel-bottom">
                     <span class="o-panel-bottomn-tips o-color-pink">查看详情</span>
                     <span class="o-panel-bottomn-icon o-color-pink"><i class="fa fa-arrow-circle-right"></i></span>

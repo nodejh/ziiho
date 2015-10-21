@@ -1,5 +1,5 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
-<?php include _g('template')->name('@', 'header', true); ?>
+<?php include _g('template')->name('@', 'header_center', true); ?>
     <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
     <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
 
@@ -8,16 +8,51 @@
         .mt101 a:hover { text-decoration:underline; }
     </style>
 
+    <!---->
+    <!--<style type="text/css">-->
+    <!--    .mt101 a { color:#069; }-->
+    <!--    .mt101 a:hover { text-decoration:underline; }-->
+    <!--</style>-->
+
     <!-- //cuser_center -->
-    <div class="cuser_center clearfix" id="cuser_center">
+    <!--<div class="cuser_center clearfix" id="cuser_center">-->
+    <!--    <!-- //cuser_z -->-->
+    <!--    <div class="cuser_z clearfix">-->
+    <!--        --><?php //include _g('template')->name('user', 'center_nav', true); ?>
+    <!--    </div>-->
+    <!--    <!-- cuser_z// -->-->
+    <!---->
+    <!--    <!-- //cuser_y -->-->
+    <!--    <div class="cuser_y clearfix">-->
+    <!---->
+    <!--        -->
+    <!--    </div>-->
+    <!--    <!-- cuser_y// -->-->
+    <!---->
+    <!--</div>-->
+    <!--<div class="clear"></div>-->
+
+
+
+
+
+
+
+
+
+    <!-- //cuser_center -->
+    <div class="cuser_center clearfix o-main" id="cuser_center">
         <!-- //cuser_z -->
-        <div class="cuser_z clearfix">
+        <div class="cuser_z clearfix o-left">
             <?php include _g('template')->name('user', 'center_nav', true); ?>
         </div>
         <!-- cuser_z// -->
 
         <!-- //cuser_y -->
-        <div class="cuser_y clearfix">
+        <div class="cuser_y clearfix o-right">
+
+            <h1 class="o-title">工作申请记录</h1>
+
 
             <div class="light">
                 <p class="t1">提示：</p>
@@ -60,11 +95,17 @@
                 </table>
             </div>
             <div class="page-tab"><?php prt($JModel->page($pageData)); ?></div>
-        </div>
         <!-- cuser_y// -->
 
     </div>
     <div class="clear"></div>
+
+
+
+
+
+
+
     <!-- cuser_center// -->
 
 
