@@ -10,6 +10,12 @@
 
 <!-- include header  -->
 <?php include $a = _g('template')->name('newUI', 'common/header', true); ?>
+
+
+<?php include $a = _g('template')->name('newUI', 'common/fix-header', true); ?>
+
+
+
 <link rel="stylesheet" type="text/css" href="<?php prt(sdir('static')); ?>/dialog/default/default.css" />
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/exam.css" />

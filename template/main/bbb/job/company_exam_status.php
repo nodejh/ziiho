@@ -1,7 +1,18 @@
 <?php if(!defined('IN_GESHAI')){exit('no direct access allowed');} ?>
-<?php include _g('template')->name('@', 'header', true); ?>
+
+<!-- include header  -->
+<?php include $a = _g('template')->name('newUI', 'common/header', true); ?>
+<?php include $a = _g('template')->name('newUI', 'common/fix-header', true); ?>
+
+
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('user')); ?>/css/c_center.css" />
 <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/exam.css" />
+
+
+</head>
+
+<!-- include navbar  -->
+<?php include $a = _g('template')->name('newUI', 'common/navbar', true); ?>
 
 <!-- //answers-area -->
 <div class="answers-success clearfix" id="answers-success">

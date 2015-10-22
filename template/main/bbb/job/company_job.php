@@ -4,6 +4,9 @@
 <?php include $a = _g('template')->name('newUI', 'common/header', true); ?>
 
 
+<?php include $a = _g('template')->name('newUI', 'common/fix-header', true); ?>
+
+
 </head>
 
 <!-- include navbar  -->
@@ -98,12 +101,18 @@
                 <!--<a class="btn btn-info" href="--><?php //prt(_g('uri')->su('job/ac/company/op/jobstep/id/' . _get('id') . '/jobid/' . $jobid)); ?><!--" role="button">学习方案</a>-->
                 <!--<a class="btn btn-info" href="--><?php //prt(_g('uri')->su('job/ac/material')); ?><!--" role="button">学习资料</a>-->
                 <a class="btn btn-info" href="<?php prt(_g('uri')->su('job/ac/company/op/exam/id/' . _get('id') . '/jobid/' . $jobid)); ?>">我要测评</a>
-                <a class="btn btn-info" href="<?php prt(_g('uri')->su('job/ac/company/op/exam/id/' . _get('id') . '/jobid/' . $jobid)); ?>" role="button">提递简历</a>
+                <a class="btn btn-info" href="#" onclick="return _requestJobReady(this);" role="button">提递简历</a>
+
             </div>
 
         </div>
     </div>
 </div>
+
+
+
+<form method="post" onsubmit="return false;" id="form_request" _ready="<?php prt(_g('uri')->su('job/ac/request/op/ready')); ?>" _do="<?php prt(_g('uri')->su('job/ac/request/op/do')); ?>"><input type="hidden" name="jobid" value="<?php prt($jobid)?>" /><input type="hidden" name="resumeid" /><input type="hidden" name="recordid" /></form>
+
 
     
 
@@ -112,6 +121,11 @@
 
 
 <!-- custom javascript  -->
+<!-- job-company-job// -->
+<script type="text/javascript" src="<?php prt(_g('template')->dir('job')); ?>/js/request.js"></script>
+<script language="javascript">
+    $("#job-company-job").cjslip({ speed: 0, eventType: 'click', mainEl: '.bd', mainState: '.hd em' });
+</script>
 
 
 </html>

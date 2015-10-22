@@ -28,3 +28,5 @@
     <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('@')); ?>/css/over.css" />
 <!--    <link rel="stylesheet" type="text/css" href="--><?php //prt(sdir('static')); ?><!--/dialog/default/default.css" />-->
 <!--    <link rel="stylesheet" type="text/css" href="--><?php //prt(_g('template')->dir('job')); ?><!--/css/home.css" />-->
+
+
