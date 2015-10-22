@@ -45,7 +45,7 @@
                 <td width="15%"><?php prt(person_time($rRs['ctime'])); ?></td>
                 <td width="15%"><?php prt($rRs['ctime'] == $rRs['mtime'] ? '-' : person_time($rRs['mtime'])); ?></td>
                 <td width="15%">&nbsp;</td>
-                <td width="5%"><a href="<?php prt(_g('uri')->su('resume/ac/manager/op/view')); ?>">预览</a></td>
+                <td width="5%"><a href="<?php prt(_g('uri')->su('resume/ac/view/rid/' . $rRs['resumeid'])); ?>">预览</a></td>
                 <td width="30%" class="ops"><a href="<?php prt($writeUrl . '&rid=' . $rRs['resumeid']); ?>">修改</a><a href="#" onclick="return resumeDo_delete(<?php prt($rRs['resumeid'])?>);">删除</a></td>
             </tr>
             <?php endwhile; ?>
