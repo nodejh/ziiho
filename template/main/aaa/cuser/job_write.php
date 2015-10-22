@@ -44,7 +44,7 @@
                 	<select class="sel" name="workyear">
                         <option value="-1">-</option>
                         <?php foreach(_g('cache')->selectitem(101) as $k=>$v): ?>
-                        <option value="<?php prt($k); ?>" <?php if($k == my_array_value('workyear', $jobSub)){ ?>selected="selected"<?php } ?> ><?php prt($v['sname']); ?></option>
+                        <option value="<?php prt($k); ?>" <?php if($v['flag'] == my_array_value('workyear', $jobSub)){ ?>selected="selected"<?php } ?> ><?php prt($v['sname']); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

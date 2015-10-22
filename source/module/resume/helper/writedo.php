@@ -60,7 +60,7 @@ switch (_post ( 'f' )) {
 				'phonearea' => $phonearea,
 				'mobilephone' => $mobilephone,
 				'email' => $email,
-				'workyear' => $workyear,
+				'workyear' => $JMODEL->workyearFlag ( $workyear ),
 				'home' => $home,
 				
 				'country' => $country,

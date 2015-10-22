@@ -6,7 +6,7 @@
 		'avatar'=> array('uri'=>'user/ac/avatar', 'name'=>'上传头像'),
 		'password'=> array('uri'=>'user/ac/password', 'name'=>'密码修改'),
 		'manager'=> array('uri'=>'resume/ac/manager', 'name'=>'我的简历'),
-		'examrec'=> array('uri'=>'user/ac/examrec', 'name'=>'职位认证录'),
+		'examrec'=> array('uri'=>'user/ac/examrec', 'name'=>'职位测评录'),
 		'jobrec'=> array('uri'=>'user/ac/jobrec', 'name'=>'工作申请录')
 		
 	);

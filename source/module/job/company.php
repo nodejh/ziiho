@@ -405,6 +405,7 @@ switch (_get ( 'op' )) {
 					$__authAnswerData[$idModelData[0]][$idModelData[1]][$v] = my_stripslashes($esoption[$esid]);
 				}
 			}
+			
 			/* 答题记录 */
 			if (my_is_array( $__authAnswerData )) {
 				$data = array(
@@ -417,11 +418,22 @@ switch (_get ( 'op' )) {
 						'sortid' => $jobData['sortid'],
 						'jobid' => $jobid,
 						'uid' => $uid,
-						'fields' => my_addslashes( array2str( $examCountData ) )
+						'fields' => my_addslashes( array2str( $examCountData ) ),
+						'score' => 0
 				);
+				
 				/* add field */
 				foreach ($examCountData as $key => $val) {
-					$data[$key] = intval(my_array_key_exist($key, $myScoreData) ? $myScoreData[$key] : 0);
+					if ($JMODEL->is_sys ( $key )) {
+						$data['score'] += $JMODEL->smCcount ( $myScoreData[$key] );
+						$data[$key] = $myScoreData[$key];
+					} else {
+						$__skey = $JMODEL->smFlag2Id ( $key );
+						if (my_array_key_exist ($__skey, $myScoreData)) {
+							$data['score'] += $JMODEL->smCcount ( $myScoreData[$__skey] );
+							$data[$key] = $myScoreData[$__skey];
+						}
+					}
 				}
 				
 				/* record */
@@ -429,18 +441,6 @@ switch (_get ( 'op' )) {
 				$db->set ( $data );
 				$db->insert ();
 				if(!$db->is_success ()){
-					smsg ( lang ( '200013' ) );
-					return null;
-				}
-				
-				/* 企业看到的答题记录 */
-				$s = false;
-				if (my_is_array( $answerResult )) {
-					$s = $JEXAMSA->updateValue ( array('answerid'=>$answerResult['answerid']), $data );
-				} else {
-					$s = $JEXAMSA->insertValue( $data );
-				}
-				if(!$s){
 					smsg ( lang ( '200013' ) );
 					return null;
 				}
@@ -476,15 +476,22 @@ switch (_get ( 'op' )) {
 		}
 		
 		$uid = $CUMODEL->suser('uid');
+		if (_g('validate')->hasget('uid')) {
+			$uid = _get('uid');
+			if(!_g('validate')->pnum ( $uid )){
+				smsg(lang('200010'));
+				return null;
+			}
+		}
 		/* 获取模块类型 */
 		$examModels = $JMODEL->sm ();
 		$examSysDatas = array ();
 		
 		/* 获取专业知识详细题库 */
-		$db->from ( 'job_examsubject_answer' );
+		$db->from ( 'job_examsubject_record' );
 		$db->where ( 'jobid', $jobid );
 		$db->where ( 'uid', $uid );
-		$db->order_by ('answerid', 'desc');
+		$db->order_by ('recordid', 'desc');
 		$db->select ();
 		$answerData = $db->get_one ();
 		if (my_is_array( $answerData )) {

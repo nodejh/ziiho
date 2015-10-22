@@ -2,7 +2,7 @@
 if (! defined ( 'GESHAI_DIR' )) {
 	exit ( 'no direct access allowed' );
 }
-date_default_timezone_set('PRC');
+
 define ( 'IN_GESHAI', true );
 require GESHAI_DIR . '/source/init.php';
 

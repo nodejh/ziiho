@@ -8,37 +8,6 @@
         .mt101 a:hover { text-decoration:underline; }
     </style>
 
-    <!---->
-    <!--<style type="text/css">-->
-    <!--    .mt101 a { color:#069; }-->
-    <!--    .mt101 a:hover { text-decoration:underline; }-->
-    <!--</style>-->
-
-    <!-- //cuser_center -->
-    <!--<div class="cuser_center clearfix" id="cuser_center">-->
-    <!--    <!-- //cuser_z -->-->
-    <!--    <div class="cuser_z clearfix">-->
-    <!--        --><?php //include _g('template')->name('user', 'center_nav', true); ?>
-    <!--    </div>-->
-    <!--    <!-- cuser_z// -->-->
-    <!---->
-    <!--    <!-- //cuser_y -->-->
-    <!--    <div class="cuser_y clearfix">-->
-    <!---->
-    <!--        -->
-    <!--    </div>-->
-    <!--    <!-- cuser_y// -->-->
-    <!---->
-    <!--</div>-->
-    <!--<div class="clear"></div>-->
-
-
-
-
-
-
-
-
 
     <!-- //cuser_center -->
     <div class="cuser_center clearfix o-main" id="cuser_center">

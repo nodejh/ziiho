@@ -24,9 +24,9 @@ if(!my_is_array($UModel->suser())){
 $uid = $UModel->suser('uid');
 
 switch ($UModel->suser('login_type')) {
-	case 2:
+	/*case 2:
 		smsg('error!');
-		break;
+		break;*/
 	default :
 		$acts = array( 'resume', 'view' );
 		_get('ac', (in_array(_get('ac'), $acts) ? _get('ac') : 'manager'));

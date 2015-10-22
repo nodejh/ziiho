@@ -3,7 +3,7 @@ if (! defined ( 'IN_GESHAI' )) {
 	exit ( 'no direct access allowed' );
 }
 
-$acts = array ('password', 'job', 'company', 'jskill', 'zplx', 'find', 'examrecord', 'jobrec', 'g');
+$acts = array ('password', 'job', 'company', 'jskill', 'zplx', 'interested', 'examrecord', 'jobrec', 'g');
 $ac = strtolower ( _get ( 'ac' ) );
 $_GET ['ac'] = (in_array ( $ac, $acts ) ? $ac : 'center');
 

@@ -71,14 +71,14 @@ a { -webkit-transition:all 0.4s ease; transition:all 0.4s ease; text-decoration:
 
 
 /* assess-wrap */
-.assess-wrap { width:100%; background:url(../image/assess-bg.png) repeat; }
+.assess-wrap { width:100%; }
 	.assess-wrap .assess-area { width:1200px; min-height:500px; margin:auto; padding-bottom:20px; }
 		.assess-wrap .assess-area .label { height:30px; line-height:30px; padding-bottom:10px; margin-top:20px; border-bottom:1px solid #FAEABE; }
 			.assess-wrap .assess-area .label span.t { line-height:30px; padding-left:28px; background:url(../image/assess.png) no-repeat left center; font-size:18px; display:block; }
 		.assess-wrap .assess-area .not { font-size:16px; text-align:center; color:#666; }
 		.assess-wrap .assess-area .box { width:1155px; margin:auto; }
 			.assess-wrap .assess-area .box .item-mr { margin-left:25px; }
-			.assess-wrap .assess-area .box .item { float:left; width:240px; height:260px; padding:15px; margin-top:25px; background:#fff; overflow:hidden; }
+			.assess-wrap .assess-area .box .item { float:left; width:240px; height:260px; padding:15px; margin-top:25px; background:url(../image/assess-block-bg.png) repeat; overflow:hidden; }
 				.assess-wrap .assess-area .box .item a.img { display:block; width:160px; height:80px; margin:auto; margin-top:10px; overflow:hidden; }
 					.assess-wrap .assess-area .box .item a.img img { width:100%; height:100%; }
 				.assess-wrap .assess-area .box .item .tit { width:100%; line-height:24px; padding-bottom:5px; margin-top:20px; text-align:center; }
@@ -88,8 +88,8 @@ a { -webkit-transition:all 0.4s ease; transition:all 0.4s ease; text-decoration:
 				.assess-wrap .assess-area .box .item .tags { height:26px; line-height:26px; margin-top:5px; overflow:hidden; }
 					.assess-wrap .assess-area .box .item .tags span { float:left; line-height:26px; padding:0px 8px; margin-right:10px; border-radius:3px; background:#eee; font-size:12px; display:block; }
 				.assess-wrap .assess-area .box .item .btn { width:100%; height:24px; margin-top:10px; }
-					.assess-wrap .assess-area .box .item .btn a.rz { float:right; line-height:24px; padding:0px 15px; border-radius:3px; border-bottom:3px solid #ccc; background:#eee; color:#666; outline:none; display:block; filter: alpha(opacity = 60); -moz-opacity: 0.6; -khtml-opacity: 0.6; opacity: 0.6; }
-					.assess-wrap .assess-area .box .item .btn a.rz:hover { border-bottom:3px solid #F60; background:#F90; color:#fff; }
+					.assess-wrap .assess-area .box .item .btn a.rz { float:right; line-height:24px; margin-right:20px; padding:0px 15px; border-radius:3px; border:1px solid #BCACA5; background:#eee; color:#039; outline:none; display:block; filter: alpha(opacity = 60); -moz-opacity: 0.6; -khtml-opacity: 0.6; opacity: 0.6; }
+					.assess-wrap .assess-area .box .item .btn a.rz:hover { border:1px solid #F60; border-bottom:2px solid #F60; background:#F90; color:#fff; }
 
 /* exam-appear */
 .exam-appear { width: 1000px; margin:auto; }

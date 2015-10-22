@@ -38,27 +38,7 @@ switch (_get ( 'op' )) {
 	default :
 		_g('uri')->referer(true);
 		
-		$__where = array ();
-		if (_g('validate')->hasget('sortid')) {
-			$__sortid = _get( 'sortid' );
-			if (_g('validate')->pnum ($__sortid)) {
-				$__where['sortid'] = $__sortid;
-			}
-		}
-		
-		$db->from('job_apply_record');
-		$db->where('cuid', $cuid);
-		if (array_key_exists('sortid', $__where)) {
-			$db->where('sortid', $__where['sortid']);
-		}
-		$db->where ( 'status', 1 );
-		$db->order_by ( 'ctime', 'desc' );
-		$jobRecordData = _g('page')->c($db->count(), 15, 10, _get('page'));
-		$db->limit($jobRecordData['start'], $jobRecordData['size']);
-		$db->select();
-		$jobRecordData['result'] = $db->get_list();
-		$jobRecordData['uri'] = 'user/ac/jobrec/page/';
-		
+		include _g ( 'module' )->inc ( 'cuser', 'jobrec-search' );
 		include _g ( 'template' )->name ( 'cuser', 'jobrec', true );
 		break;
 }

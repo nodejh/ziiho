@@ -3,6 +3,7 @@ if (! defined ( 'IN_GESHAI' )) {
 	exit ( 'no direct access allowed' );
 }
 
+$JMODEL = _g('module')->trigger('job', 'model');
 $JJOB = _g('module')->trigger('job', 'job');
 $JSKILL = _g('module')->trigger('job', 'skill');
 $JEXAMS = _g('module')->trigger('job', 'examsubject');
@@ -17,6 +18,18 @@ $cuid = $UModel->suser('cuid');
 $goBack = _g('uri')->su('user/ac/job');
 
 switch (_get ( 'op' )) {
+	case 'hide':
+		$recordid = _post ( 'recordid' );
+		if (!_g('validate')->pnum ( $recordid )) {
+			smsg(lang('200010'));
+			return null;
+		}
+		if (!$JEXAMSA->updateValue ( array('recordid' => $recordid), array('chide' => -1) )) {
+			smsg ( lang ( '200013' ) );
+			return null;
+		}
+		smsg ( lang ( '100061' ), null, 1 );
+		break;
 	default :
 		_g('uri')->referer(true);
 		$db = $JJOB->db;
@@ -46,7 +59,8 @@ switch (_get ( 'op' )) {
 		}
 		
 		/* query */
-		$db->from( 'job_examsubject_answer' );
+		$db->from( 'job_examsubject_record' );
+		$db->where ( 'chide', 1 );
 		if (array_key_exists( 'sortid' , $__qw)) {
 			$db->where ( 'sortid', $__qw['sortid'] );
 		}

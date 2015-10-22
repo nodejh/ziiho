@@ -30,12 +30,24 @@ switch (_get ( 'op' )) {
 		}
 		smsg(lang('100061'), null, 1);
 		break;
+	case 'hide':
+		$recordid = _post ( 'recordid' );
+		if (!_g('validate')->pnum ( $recordid )) {
+			smsg(lang('200010'));
+			return null;
+		}
+		if (!$JEXAMSA->updateValue ( array('recordid' => $recordid), array('uhide' => -1) )) {
+			smsg ( lang ( '200013' ) );
+			return null;
+		}
+		smsg ( lang ( '100061' ), null, 1 );
+		break;
 	default :
 		_g('uri')->referer(true);
 		
-		
 		/* query */
 		$db->from( 'job_examsubject_record' );
+		$db->where ('uhide', 1);
 		$db->where('uid', $uid);
 		$pageData = _g('page')->c($db->count(), 10, 10, _get('page'));
 		$db->order_by( 'ctime', 'desc' );

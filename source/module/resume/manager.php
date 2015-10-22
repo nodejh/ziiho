@@ -3,6 +3,7 @@ if (! defined ( 'IN_GESHAI' )) {
 	exit ( 'no direct access allowed' );
 }
 
+$JMODEL = _g('module')->trigger('job', 'model');
 $RESUME = _g('module')->trigger('resume');
 
 switch (_get ( 'op' )) {

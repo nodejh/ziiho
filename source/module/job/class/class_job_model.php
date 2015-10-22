@@ -376,6 +376,7 @@ class class_job_model extends geshai_model {
 		$db->from ( 'job_apply_record' );
 		$db->where ( 'uid', $uid );
 		$db->where ( 'jobid', $jobid );
+		$db->order_by ( 'ctime', 'desc' );
 		$db->select ();
 		if (!$db->is_success ()) {
 			return lang ( '200013' );
@@ -392,6 +393,34 @@ class class_job_model extends geshai_model {
 	function wagetypeName($k){
 		$arr = array('122'=>'年', '116'=>'月', 'day'=>'天', 'hour'=>'小时');
 		return my_array_value($k, $arr);
+	}
+	function workyear($k1 = null, $k2 = null) {
+		$data = _g('cache')->selectitem(101);
+		$args = func_num_args();
+		if ($args < 1) {
+			return $data;
+		} else if ($args == 1) {
+			return my_array_value ($k1, $data);
+		} else {
+			return my_array_value ($k1 . '>' . $k2, $data);
+		}
+	}
+	function workyearFlag($k) {
+		$v = $this->workyear($k, 'flag');
+		if (!preg_match("/^(-)?\d+$/", $v)) {
+			return -1;
+		}
+		return $v;
+	}
+	function workyearFlag2Value($flag, $kn = 'sname') {
+		$d = null;
+		foreach ($this->workyear() as $k=>$v) {
+			if ($v['flag'] == $flag) {
+				$d = $v;
+				$d['id'] = $k;
+			}
+		}
+		return my_array_value($kn, $d);
 	}
 	/* 座机联系方式 */
 	function mplxfs($data, $name = null){
@@ -451,7 +480,18 @@ class class_job_model extends geshai_model {
 		}
 		return $value;
 	}
-	
+	function cbar($data, $count){
+		$sysNum = intval(my_array_value('sys', $data));
+		$syn1Num = intval(my_array_value('syn1', $data));
+		$syn2Num = intval(my_array_value('syn2', $data));
+		
+		$value = 0;
+		$n = $sysNum + $syn1Num + $syn2Num;
+		if ($count >= 1) {
+			$value = ($n / $count) * 100;
+		}
+		return array ($this->smCcount ( $n ), $value);
+	}
 	/* 计算进度条 */
 	function bar($n, $count){
 		$value = 0;
@@ -462,8 +502,16 @@ class class_job_model extends geshai_model {
 		}
 		return $value;
 	}
-	function sm() {
-		return _g('cache')->selectitem(120);
+	function sm($k1 = null, $k2 = null) {
+		$data = _g('cache')->selectitem(120);
+		$len = func_num_args ();
+		if ($len < 1) {
+			return $data;
+		} else if ($len == 1) {
+			return my_array_value ( $k1, $data );
+		} else {
+			return my_array_value ( $k1 . '>' . $k2, $data );
+		}
 	}
 	function smRemoveSys() {
 		$data = array ();
@@ -489,6 +537,16 @@ class class_job_model extends geshai_model {
 		}
 		return null;
 	}
+	function smFlag2Id($str = null){
+		if (!preg_match("/\w+/", $str)) {
+			return 0;
+		}
+		foreach ($this->sm () as $k => $v) {
+			if ($str == $v['flag']){
+				return $k;
+			}
+		}
+	}
 	function is_sys($v) {
 		return ($v == $this->sysField);
 	}
@@ -503,6 +561,10 @@ class class_job_model extends geshai_model {
 	}
 	function smCcount($v){
 		return (intval($v) * 2);
+	}
+	function smScoreField() {
+		$arr = array ( 'sys', 'syn1', 'syn2' );
+		return $arr;
 	}
 	function smCnum($k) {
 		$arr = array (
@@ -519,6 +581,21 @@ class class_job_model extends geshai_model {
 				'syn2' => 20
 		);
 		return my_array_value($k, $arr);
+	}
+	function scoreBL() {
+		$arr = array (
+				'0_10'=>'0 ~ 10分',
+				'11_20'=>'11 ~ 20分',
+				'21_30'=>'21 ~ 30分',
+				'31_40'=>'31 ~ 40分',
+				'41_50'=>'41 ~ 50分',
+				'51_60'=>'51 ~ 60分',
+				'61_70'=>'61 ~ 70分',
+				'71_80'=>'71 ~ 80分',
+				'81_90'=>'81 ~ 90分',
+				'91_100'=>'91 ~ 100分'
+		);
+		return $arr;
 	}
 }
 ?>

@@ -3,6 +3,7 @@ if (! defined ( 'IN_GESHAI' )) {
 	exit ( 'no direct access allowed' );
 }
 
+$JMODEL = _g('module')->trigger('job', 'model');
 $JJOB = _g('module')->trigger('job', 'job');
 $JSKILL = _g('module')->trigger('job', 'skill');
 $JEXAMS = _g('module')->trigger('job', 'examsubject');
@@ -133,7 +134,7 @@ switch (_get ( 'op' )) {
 			'examtime'=>$examtime,
 			'areaid'=>_g( 'value' )->s2pnsplit ( $areaid ),
 			'area_detail'=>$area_detail,
-			'workyear'=>$workyear,
+			'workyear'=>$JMODEL->workyearFlag($workyear),
 			'degree'=>$degree,
 			'wagetype'=>$wagetype,
 			'wage'=>$wage,
@@ -474,7 +475,7 @@ switch (_get ( 'op' )) {
 		}
 		
 		/* 获取答卷人 */
-		$JEXAMSA->db->from($JEXAMSA->t_job_examsubject_answer);
+		$JEXAMSA->db->from($JEXAMSA->t_job_examsubject_record);
 		$JEXAMSA->db->where('cuid', $cuid);
 		$JEXAMSA->db->where('jobid', $jobid);
 		$pageData = _g('page')->c($JEXAMSA->db->count(), 10, 10, _get('page'));

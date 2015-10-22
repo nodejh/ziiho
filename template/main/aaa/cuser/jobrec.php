@@ -28,6 +28,20 @@
             	职位分类：<select name="sortid" def="<?php prt(my_array_value('sortid',$__where)); ?>"><option value="">-</option></select>
             	<button type="submit">提交查询</button>
             <p>
+            <p>工作年龄：<select name="workyear">
+            	<option value="">-</option>
+                <?php foreach($JMODEL->workyear() as $k => $v){ ?>
+                	<option value="<?php prt($k); ?>" <?php prt(my_array_value('workyear', $__where) == $k ? 'selected="selected"' : null); ?>><?php prt($v['sname']); ?></option>
+                <?php } ?>
+            </select>
+            </p>
+            <p>测试评分：<select name="score">
+            	<option value="">-</option>
+                <?php foreach($JMODEL->scoreBL() as $k => $v){ ?>
+                	<option value="<?php prt($k); ?>" <?php prt(my_array_value('workyear', $__where) == $k ? 'selected="selected"' : null); ?>><?php prt($v); ?></option>
+                <?php } ?>
+            </select>
+            </p>
         </form>
     </div>
     
@@ -63,7 +77,7 @@
                 <td width="12%"><?php prt(person_time($jRecordRs['ctime'])); ?></td>
                 <td width="10%">成功</td>
                 <td width="10%"><?php prt($RMODEL->profile($jRecordRs['uid'], 'chname')); ?></td>
-                <td width="10%"><a href="#" onclick="return false;">查看</a></td>
+                <td width="10%"><a href="<?php prt(_g('uri')->su('resume/ac/view/rid/'.$jRecordRs['resumeid'])); ?>" target="_blank">查看</a></td>
                 <td width="10%"><a href="#" onclick="return cUserJobRecordDel(this);" _id="<?php prt($jRecordRs['jobrecid']); ?>">删除</a></td>
             </tr>
             <?php endwhile; ?>

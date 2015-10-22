@@ -40,7 +40,7 @@
                     </tr>
                     <tr>
                     	<td class="ftb w80">工作年限</td>
-                        <td class="w160"><?php prt(_g('cache')->selectitem('101>'.$jobData['workyear'].'>sname')); ?></td>
+                        <td class="w160"><?php prt($JMODEL->workyearFlag2Value($jobData['workyear'])); ?></td>
                         <td class="ftb w80">语言要求</td>
                         <td class="w240">
                         	<?php foreach(_g('value')->s2pnsplit2($jobData['language']) as $v){ ?>

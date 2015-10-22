@@ -87,6 +87,6 @@ class class_user_avatar extends geshai_model {
 		}else{
 			return (sdir('uploadfile') . '/' . $data['src']);
 		}
-	} 
+	}
 }
 ?>

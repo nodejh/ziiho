@@ -73,7 +73,7 @@ switch (_get ( 'op' )) {
 	case 'do':
 		$jobid = _post ( 'jobid' );
 		$resumeid = _post ( 'resumeid' );
-		$recordid = _post ( 'recordid' );
+		$recordid = my_explode(',', _post ( 'recordid' ));
 		
 		if (!_g ( 'validate' )->pnum ( $jobid )) {
 			smsg ( lang ( 200010 ) );
@@ -100,6 +100,8 @@ switch (_get ( 'op' )) {
 			return null;
 		}
 		
+		smsg(array2str($recordid));
+		exit;
 		/* execute */
 		$data = array (
 				'ctime' => _g ( 'cfg>time' ),

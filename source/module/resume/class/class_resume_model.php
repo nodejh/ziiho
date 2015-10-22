@@ -30,6 +30,24 @@ class class_resume_model extends geshai_model {
 		return $d;
 	}
 	
+	function avatar($v){
+		$defs = array(
+				'2' => 'gender_2.png',
+				'1' => 'gender_1.png',
+				'0' => 'gender_0.png'
+		);
+		$gender = my_array_value('gender', $v);
+		$gender = (_g('validate')->num($gender) ? $gender : 0);
+		$avatar = my_array_value('avatar', $v);
+	
+		if(strlen($avatar) < 1){
+			$uri = (_g('template')->dir('user') . '/image/');
+			return ($uri . $defs[$gender]);
+		}else{
+			return (sdir('uploadfile') . '/' . $avatar);
+		}
+	}
+	
 	function rdateDe($v) {
 		if (!empty($v)) {
 			return date('Y/m', $v);
