@@ -84,9 +84,7 @@
                 _flagValue = $(this).attr("flag");
                 document.getElementById("form-register").flag.value = _flagValue;
                 if (_flagValue == 2) {
-                    //企业注册
-                    $('#r-button').remove();
-                    $('#register-button').append("<button type=\"button\" class=\"reg\" id=\"r-button\" name=\"disabled-buttons\" onclick=\"register_email(this, '<?php prt(_g('uri')->su('user/ac/register/op/company2_do')); ?>');\">同意服务条款并注册</button>");
+                    window.location.href='<?php prt(_g('uri')->su('user/ac/register/op/company')); ?>';
                 } else {
                     //个人注册
                     $('#r-button').remove();

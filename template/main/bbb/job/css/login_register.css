@@ -2,7 +2,7 @@
 /* Copyright 2010-2014, Jolly,Cloud,Bonejay */
 
 /* c-area */
-.c-area { width:1200px; height:420px; margin:auto; margin-top:150px; position:relative; }
+.c-area { width:1200px; height:420px; margin:auto; margin-top:70px; position:relative; }
 	.c-area .shadow { z-index:-2; position:absolute; left:0px; top:0px; width:1200px; height:420px; background:#fff; filter: alpha(opacity = 20); -moz-opacity: 0.2; -khtml-opacity: 0.2; opacity: 0.2; }
 	.c-area .bl { z-index:-1; position:absolute; left:0px; top:0px; width:1198px; height:418px; border:1px solid #b3d1d9; background:none; filter: alpha(opacity = 60); -moz-opacity: 0.6; -khtml-opacity: 0.6; opacity: 0.6; }
 

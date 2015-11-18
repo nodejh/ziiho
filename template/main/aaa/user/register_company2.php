@@ -4,6 +4,7 @@
 	href="<?php prt(_g('template')->dir('job')); ?>/css/register.css" />
 <?php include _g('template')->name('job', 'nav', true); ?>
 
+
 <!-- //wrap-bg -->
 <div class="wrap-bg clearfix">
 	<div class="box clearfix">
@@ -33,15 +34,15 @@
         <div class="ibs clearfix">
             <div class="nt clearfix">行业类别</div>
             <div class="sel-area clearfix" id="sort-data-box"></div>
-            
+
             <div class="sel-btn ml5 clearfix">
             	<p class="sb-aa sb-mt">>></p>
             </div>
-            
+
             <div class="sel-area ml5 clearfix" id="sort-data-selected"></div>
         </div>
         <div class="clear"></div>
-        
+
         <div class="ibs clearfix">
             <div class="nt clearfix">公司性质</div>
             <select class="sel2" name="cnatureid" id="nature-data">

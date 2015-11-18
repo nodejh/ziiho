@@ -784,3 +784,12 @@ input[type="submit"] { padding:4px 17px; color:#585858; text-transform:uppercase
 .o-input-fix-attach {
     width: 194px;
 }
+
+/** register */
+.c-area .m .f2 .t2.o-register-ipt-1 {
+    width: 25%;
+    float: left;
+}
+.c-area .m .f2 .t2.o-register-ipt-1 input {
+    width: 100%;
+}

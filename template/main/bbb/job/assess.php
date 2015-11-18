@@ -51,12 +51,6 @@
                 </div>
             </div>
 
-            <!--<div class="well zh-list-well">-->
-            <!--    <span class="zh-list-icon"><a href="--><?php //prt(_g('uri')->su('job/ac/learn/op/assess')); ?><!--" class="zh-active"><i class="fa fa-clock-o"></i> 最新</a></span>-->
-            <!--    <span class="zh-list-icon"><a href="--><?php //prt(_g('uri')->su('job/ac/learn/op/assess')); ?><!--"><i class="fa  fa-fire"></i> 人气</a></span>-->
-            <!--    <span class="zh-list-icon"><a href="--><?php //prt(_g('uri')->su('job/ac/learn/op/assess')); ?><!--" ><i class="fa fa-link"></i> 相关</a></span>-->
-            <!--</div>-->
-
             <br>
             <!-- 职位详情 -->
             <div class="row">
@@ -74,17 +68,17 @@
                                     <div class="media-body">
                                         <h4 class="media-heading">
                                             <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $val['cuid'] . '/jobid/' . $val['jobid'])); ?>" target="_blank"><?php prt($val['jname']); ?></a>
+                                            <p class="zh-learn-tips"><?php prt($JMODEL->sortValue($val['sortid'], 'sname')); ?></p>
                                             </h4>
                                     </div>
                                 </div>
                                 <div class="zh-learn-desription zh-assess-description">
-                                    <p class="zh-learn-tips"><?php prt($JMODEL->sortValue($val['sortid'], 'sname')); ?></p>
                                     工作地点:
                                     <?php foreach(_g('value')->s2pnsplit2($val['areaid']) as $v){ ?><?php prt($JMODEL->areaValue($v, 'aname')); ?>&nbsp;<?php } ?>
                                     <br>
 
                                     <?php foreach(_g('value')->s2pnsplit2($val['benefit']) as $v){ ?>
-                                        <span class="label label-default"><?php prt(_g('cache')->selectitem('121>'.$v.'>sname')); ?></span>
+                                        <span class="label label-success"><?php prt(_g('cache')->selectitem('121>'.$v.'>sname')); ?></span>
                                     <?php } ?>
                                 </div>
 
