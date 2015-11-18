@@ -34,8 +34,8 @@
         <div class="clearfix o-menu">
             <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>" class="ml o-menu-a">首页</a>
             <!--<a href="--><?php //prt(_g('uri')->su('job/ac/learn')); ?><!--" class="ml o-menu-a">学习中心</a>-->
-            <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="mr o-menu-a">测评中心</a>
-            <a href="<?php prt(_g('uri')->su('job/ac/work')); ?>" class="mr o-menu-a">求职中心</a>
+            <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="mr o-menu-a">职业测评</a>
+            <a href="<?php prt(_g('uri')->su('job/ac/work')); ?>" class="mr o-menu-a">推荐求职</a>
         </div>
     </div>
 </div>

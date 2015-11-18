@@ -7,7 +7,7 @@
         <div class="z uch-z clearfix">
             <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>">首页</a>
             <a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>">认证中心</a>
-            <a href="<?php prt(_g('uri')->su('job/ac/work')); ?>">求职中心</a>
+            <a href="<?php prt(_g('uri')->su('job/ac/work')); ?>">推荐求职</a>
         </div>
         <!-- uch-z// -->
         

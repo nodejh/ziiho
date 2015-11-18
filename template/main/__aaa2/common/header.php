@@ -35,7 +35,7 @@ _GESHAI.setting("fsubmitKey_onlybody", "<?php prt(_g('cfg>fmkey>onlybody')); ?>"
         </div>
         <div class="hd2 clearfix">
             <a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>" class="ml">学习中心</a>
-            <a href="<?php prt(_g('uri')->su('job/ac/company')); ?>" class="mr">求职中心</a>
+            <a href="<?php prt(_g('uri')->su('job/ac/company')); ?>" class="mr">推荐求职</a>
         </div>
         <div class="hd3 clearfix">
             <?php $UM = _g('module')->trigger('user', 'model');?>

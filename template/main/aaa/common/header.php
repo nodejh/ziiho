@@ -10,8 +10,8 @@
             <div class="clearfix navs">
             	<div class="y clearfix">
                     <a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>">学习中心</a>
-                    <a href="<?php prt(_g('uri')->su('job/ac/company')); ?>">求职中心</a>
-                    <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>">测评中心</a>
+                    <a href="<?php prt(_g('uri')->su('job/ac/company')); ?>">推荐求职</a>
+                    <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>">职业测评</a>
                 </div>
             </div>
             

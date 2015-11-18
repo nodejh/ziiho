@@ -28,7 +28,19 @@ class class_job_model extends geshai_model {
 		
 		include _g ( 'template' )->name ( 'job', 'job-nav', true );
 	}
-	
+	function character($k, $k2 = null){
+		$data = array();
+		$cacheFile = sdir(':data') . '/cache/common/character.php';
+		if(is_file($cacheFile)){
+			$arr = include $cacheFile;
+			$data = my_array_value($k, $arr);
+		}
+		if (func_num_args() < 2) {
+			return $data;
+		} else {
+			return my_array_value($k2, $data, 'undefined');
+		}
+	}
 	function readSort($parentid = 0){
 		$data = array();
 		$cacheFile = sdir(':data') . '/cache/job/sort.php';
@@ -318,13 +330,13 @@ class class_job_model extends geshai_model {
 		return my_array_value( $r, $value );
 	}
 	/* check for request job */
-	function chkRequestJob($jobid){
+	function chkRequestJob($jobid, $recordid = null, &$recordData = array ()){
 		if (!_g ( 'validate' )->pnum ( $jobid )) {
 			return lang ( 200010 );
 		}
 		$um = _g('module')->trigger('user', 'model');
 		$logintype = $um->suser('login_type');
-		if ($logintype == 2 || $logintype != 1) {
+		if ($logintype != 1) {
 			return lang ( 'job:600004' );
 		}
 		$uid = $um->suser ( 'uid' );
@@ -348,14 +360,17 @@ class class_job_model extends geshai_model {
 		}
 		if ($jobRs['isauth'] == 1) {
 			$db->from ( 'job_examsubject_record' );
+			if (func_num_args() > 1) {
+				$db->where ( 'recordid', $recordid );
+			}
 			$db->where ( 'uid', $uid );
 			$db->where ( 'jobid', $jobid );
 			$db->select ();
 			if (!$db->is_success ()) {
 				return lang ( '200013' );
 			}
-			$examRecordRs = $db->get_one ();
-			if ( !my_is_array( $examRecordRs ) ) {
+			$recordData = $db->get_one ();
+			if ( !my_is_array( $recordData ) ) {
 				return lang ( 'job:900002' );
 			}
 		}
@@ -390,9 +405,25 @@ class class_job_model extends geshai_model {
 		}
 		return $jobRs;
 	}
-	function wagetypeName($k){
+	function wagetype($k = null) {
 		$arr = array('122'=>'年', '116'=>'月', 'day'=>'天', 'hour'=>'小时');
+		if (func_num_args() < 1) {
+			return $arr;
+		}
 		return my_array_value($k, $arr);
+	}
+	function wagetypeIs($k) {
+		return my_array_key_exist($k, $this->wagetype());
+	}
+	function wagetypeFK($k) {
+		$arr = array('122'=>'y', '116'=>'m', 'day'=>'d', 'hour'=>'h');
+		return my_array_value($k, $arr);
+	}
+	function wagetypeIsInput($k){
+		return ($k == 'day' || $k == 'hour');
+	}
+	function wagetypeName($k){
+		return $this->wagetype ( $k );
 	}
 	function workyear($k1 = null, $k2 = null) {
 		$data = _g('cache')->selectitem(101);
@@ -404,23 +435,6 @@ class class_job_model extends geshai_model {
 		} else {
 			return my_array_value ($k1 . '>' . $k2, $data);
 		}
-	}
-	function workyearFlag($k) {
-		$v = $this->workyear($k, 'flag');
-		if (!preg_match("/^(-)?\d+$/", $v)) {
-			return -1;
-		}
-		return $v;
-	}
-	function workyearFlag2Value($flag, $kn = 'sname') {
-		$d = null;
-		foreach ($this->workyear() as $k=>$v) {
-			if ($v['flag'] == $flag) {
-				$d = $v;
-				$d['id'] = $k;
-			}
-		}
-		return my_array_value($kn, $d);
 	}
 	/* 座机联系方式 */
 	function mplxfs($data, $name = null){
@@ -596,6 +610,40 @@ class class_job_model extends geshai_model {
 				'91_100'=>'91 ~ 100分'
 		);
 		return $arr;
+	}
+	function xgParse($data = array ()) {
+		$JS = _g('module')->trigger('job', 'synthetic');
+		
+		$character = array ();
+		$values = array ();
+		foreach ($data as $id => $val) {
+			$jsRs = $JS->find ( 'syntheticid', $id );
+			if (!$this->db->is_success ($jsRs)) {
+				return lang ( 200013 );
+			}
+			if (!my_is_array ( $jsRs )) {
+				continue;
+			}
+			$__arr = my_explode( ',' , $val[$jsRs['stype']]);
+			foreach ($__arr as $__v) {
+				$__options = str2array($jsRs['option']);
+				$__flag = strtoupper(my_array_value($__v . '>flag', $__options));
+				if (strlen($__flag) < 1) {
+					continue;
+				}
+				if (array_key_exists($__flag, $values)) {
+					$values[$__flag] += 1;
+				} else {
+					$values[$__flag] = 1;
+				}
+			}
+		}
+		arsort($values);
+		foreach ($values as $k=>$v) {
+			$character = array ( $k );
+			break;
+		}
+		return $character;
 	}
 }
 ?>

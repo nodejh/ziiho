@@ -24,15 +24,15 @@
     <div class="cbox clearfix">
 
         <div class="z bi clearfix">
-            <a href="<?php prt(_g('uri')->su('job/ac/learn')); ?>" class="color-white"><div class="aa clearfix color-background">测评中心</div></a>
-            <div class="bb clearfix">LEARNING CENTER</div>
-            <div class="cc clearfix">针对于职位的职业能力训练</div>
+            <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="color-white"><div class="aa clearfix color-background">职业测评</div></a>
+            <div class="bb clearfix">Assessment Center</div>
+            <div class="cc clearfix">职位技能、素养在线测试和评估</div>
         </div>
 
         <div class="y bi clearfix">
-            <a href="<?php prt(_g('uri')->su('job/ac/job')); ?>" class="color-white"><div class="aa clearfix color-background">求职中心</div></a>
+            <a href="<?php prt(_g('uri')->su('job/ac/work')); ?>" class="color-white"><div class="aa clearfix color-background">推荐求职</div></a>
             <div class="bb clearfix">JOB CENTER</div>
-            <div class="cc clearfix">针对于职业的职位寻找</div>
+            <div class="cc clearfix">大数据智能推荐求职系统</div>
         </div>
     </div>
 
@@ -72,11 +72,10 @@
             </div>
 
             <div class="z i-box-bd clearfix">
-                <div class="i-box-bd-a clearfix">测评中心</div>
-                <div class="i-box-bd-b clearfix">(CERTIFICATION CENTER)</div>
+                <div class="i-box-bd-a clearfix">职业职业测评</div>
+                <div class="i-box-bd-b clearfix">(Assessment Center)</div>
                 <div class="i-box-bd-c clearfix">
-                    <p>专业的职业能力认证，科获得证书。</p>
-                    <p>严格按照企业的职位要求制定的学习方案，通过品台的测试可以获得认证。</p>
+                    <p>专业的职业技能、罗辑思维、职业素养和职业性格测评系统。不仅能根据测评结果智能推荐求职，还能帮助您更好地帮助您了解自己的职业优劣势。</p>
                 </div>
                 <div class="i-box-bd-d clearfix"></div>
             </div>
@@ -90,12 +89,10 @@
             </div>
 
             <div class="z i-box-bd clearfix">
-                <div class="i-box-bd-a clearfix">求职中心</div>
+                <div class="i-box-bd-a clearfix">推荐推荐求职</div>
                 <div class="i-box-bd-b clearfix">(JOB CENTER)</div>
                 <div class="i-box-bd-c clearfix">
-                    <p>精选疙瘩职业的职位信息与实习信息。</p>
-                    <p>严格按照企业的职位要求制定的学习方案，通过品台的测试可以获得认证。严格按照企业的职位要求制定的学习方案，通过品台的测试</p>
-                    <p>通过品台的测试可以获得认证。</p>
+                    <p>大数据推荐系统，根据测评结果和简历内容，智能化的将求职责推荐给招聘企业。</p>
                 </div>
                 <div class="i-box-bd-d clearfix"></div>
             </div>
@@ -112,8 +109,8 @@
                 <div class="i-box-bd-a clearfix">关于我们</div>
                 <div class="i-box-bd-b clearfix">(ABOUT US)</div>
                 <div class="i-box-bd-c clearfix">
-                    <p>关于本公司的简短介绍。</p>
-                    <p>严格按照企业的职位要求制定的学习方案，通过品台的测试可以获得认证。严格按照企业的职位要求制定的学习方案。</p>
+                    <p>“职乎”是成都罗比雷尔科技有限公司为求职者和招聘企业量身打造的智能化推荐求职平台。</p>
+                    <p>“职乎”为求职者做出职业能力的评估，根据评估结果和简历内容，智能地向招聘企业推荐求职者。减少筛选简历、笔试的复杂程序。</p>
                 </div>
                 <div class="i-box-bd-d clearfix">
                     <div class="us-info clearfix">
@@ -124,6 +121,33 @@
                         </p>
                         <p>
                             <em class="ns-c1">Address:</em><em class="ns-c2"> 四川 - 成都</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+
+        <div class="i-box i-box-bline clearfix">
+            <div class="z i-box-hd clearfix">
+                <div class="icons icon-us clearfix"></div>
+            </div>
+
+            <div class="z i-box-bd clearfix">
+                <div class="i-box-bd-a clearfix">联系我们</div>
+                <div class="i-box-bd-b clearfix">(CONTACT US)</div>
+                <div class="i-box-bd-c clearfix">
+                    <p>欢迎希望合作的企事业单位、愿意加入公司团队的求职者联系我们。</p>
+                </div>
+                <div class="i-box-bd-d clearfix">
+                    <div class="us-info clearfix">
+                        <p>
+                            <em class="ns-c1">邮箱:</em><em class="ns-c2"> rbb@rubyrare.com</em>
+                            <em class="ns-c1 ns-ml1">电话:</em><em class="ns-c2"> 028-65273344</em>
+                        </p>
+                        <p>
+                            <em class="ns-c1">地址:</em><em class="ns-c2"> 四川 - 成都</em>
                         </p>
                     </div>
                 </div>
@@ -147,7 +171,8 @@
     $(document).ready(function(e) {
         var _ms = {"w": 1920, "h": 900};
         var _cs = {"w": _GESHAI.clientsize("clientWidth"), "h": _GESHAI.clientsize("clientHeight")};
-        var _ss = {"w": Math.min(_ms.w, _cs.w), "h": Math.min(_ms.h, _cs.h)};
+        //var _ss = {"w": Math.min(_ms.w, _cs.w), "h": Math.min(_ms.h, _cs.h)};
+        var _ss = {"w": Math.min(_ms.w, _cs.w), "h": Math.min(_ms.h, _cs.h) * 0.7};
 
         var _bannero = $("#banner");
         _bannero.width(_ss.w).height(_ss.h);

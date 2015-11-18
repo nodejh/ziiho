@@ -19,7 +19,7 @@
 					</p>
 					<p class="y qz tbg2">
 						<a href="<?php prt(_g('uri')->su('job/ac/company')); ?>"
-							class="fs">求职中心</a>
+							class="fs">推荐求职</a>
 					</p>
 				</li>
 				<li class="z ss ss-w cc clearfix">

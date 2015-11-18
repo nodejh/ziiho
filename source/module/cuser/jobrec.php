@@ -38,7 +38,7 @@ switch (_get ( 'op' )) {
 	default :
 		_g('uri')->referer(true);
 		
-		include _g ( 'module' )->inc ( 'cuser', 'jobrec-search' );
+		include _g ( 'module' )->helper ( 'cuser', 'jobrec-search' );
 		include _g ( 'template' )->name ( 'cuser', 'jobrec', true );
 		break;
 }

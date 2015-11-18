@@ -14,6 +14,12 @@ class geshai_validate {
 		return preg_match ( $partten, $v );
 	}
 	
+	function n($v) {
+		if (is_array ( $v )) {
+			return false;
+		}
+		return $this->match ( "/^\d+$/", $v );
+	}
 	
 	function num($v = null) {
 		if (is_array ( $v )) {

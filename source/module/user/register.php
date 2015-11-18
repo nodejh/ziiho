@@ -150,7 +150,7 @@ switch (_get ( 'op' )) {
 		include _g ( 'template' )->name ( 'user', 'register_company', true );
 		break;
 	case 'company_do' :
-		$username = _post('username');
+		/*$username = _post('username');*/
 		$email = _post('email');
 		$password = _post('password');
 		$password2 = _post('password2');
@@ -160,13 +160,12 @@ switch (_get ( 'op' )) {
 		$contacts = _post('contacts');
 		$telephone = _post('telephone');
 		$mobilephone = _post('mobilephone');
-		$cemail = _post('cemail');
 		
 		/* 用户名 */
-		if(!_g('validate')->en_e($username, 3, 30) || !_g('validate')->vm(strlen($username), 3, 30)){
+		/*if(!_g('validate')->en_e($username, 3, 30) || !_g('validate')->vm(strlen($username), 3, 30)){
 			smsg ( lang ( 'cuser:100000', array(3, 30)) );
 			return null;
-		}
+		}*/
 		/* 邮箱 */
 		if(!_g('validate')->email($email, 1)){
 			smsg ( lang ( 'cuser:100001') );
@@ -187,8 +186,8 @@ switch (_get ( 'op' )) {
 		}
 		
 		/* 公司名称 */
-		if(!_g('validate')->vm(strlen($cname), 1, 30)){
-			smsg ( lang ( 'cuser:100005', array(1, 30)) );
+		if(!_g('validate')->vm(strlen($cname), 1, 300)){
+			smsg ( lang ( 'cuser:100005', array(1, 100)) );
 			return null;
 		}
 		
@@ -199,31 +198,44 @@ switch (_get ( 'op' )) {
 		}
 		
 		/* 联系人 */
-		if(!_g('validate')->vm(strlen($contacts), 1, 20)){
+		if(!_g('validate')->vm(strlen($contacts), 1, 60)){
 			smsg ( lang ( 'cuser:100007', array(1, 20)) );
 			return null;
 		}
-		/* 手机号 */
-		if(!_g('validate')->pnum($mobilephone) || !_g('validate')->vm(strlen($mobilephone), 8, 11)){
-			smsg ( lang ( 'cuser:100008') );
-			return null;
-		}
-		/* 公司邮箱 */
-		if(!_g('validate')->email($cemail, 1)){
-			smsg ( lang ( 'cuser:100009') );
-			return null;
-		}
 		
+		/* 联系方式验证(手机or座机) */
 		/* 座机 */
-		$telephone[0] = substr(my_array_value(0, $telephone), 0, 6);
-		$telephone[1] = substr(my_array_value(1, $telephone), 0, 10);
-		$telephone[2] = substr(my_array_value(2, $telephone), 0, 6);
-		$telephone = array2str($telephone);
+		if (!preg_match("/^\d{1,4}$/", my_array_value(0, $telephone))) {
+			$telephone[0] = null;
+		}
+		if (!preg_match("/^\d{1,11}$/", my_array_value(1, $telephone))) {
+			$telephone[1] = null;
+		}
+		if (!preg_match("/^\d{1,8}$/", my_array_value(2, $telephone))) {
+			$telephone[2] = null;
+		}
+		$phoneFlag = ((strlen($telephone[0]) >= 1 && strlen($telephone[1]) >= 1) ? true : false);
 		
+		/* 手机 */
+		if (strlen($mobilephone) >= 1) {
+			if(!_g('validate')->pnum($mobilephone) || !_g('validate')->vm(strlen($mobilephone), 8, 11)){
+				smsg ( lang ( 'cuser:100008') );
+				return null;
+			}
+			$phoneFlag = true;
+		}
+		/* 如果座机or手机填写无效 */
+		if (!$phoneFlag) {
+			smsg ( lang ( 'cuser:100020') );
+			return null;
+		}
+		
+		/* 默认参数 */
+		$telephone = my_addslashes(array2str($telephone));
 		$ctime = _g('cfg>time');
 		$cip = getip();
 		$datas = array(
-				'username'=>$username,
+				/*'username'=>$username,*/
 				'password'=>my_md5($password, 2),
 				'email'=>$email,
 				'regtime'=>$ctime,
@@ -237,9 +249,8 @@ switch (_get ( 'op' )) {
 				'area'=>$area,
 				'area_detail'=>$area_detail,
 				'contacts'=>$contacts,
-				'telephone'=>my_addslashes($telephone),
-				'mobilephone'=>$mobilephone,
-				'cemail'=>$cemail
+				'telephone'=>$telephone,
+				'mobilephone'=>$mobilephone
 		);
 		$CUser->register($datas, 1);
 		break;

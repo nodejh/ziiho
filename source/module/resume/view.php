@@ -24,7 +24,7 @@ switch (_get ( 'op' )) {
 		}
 		
 		/* profile */
-		$profileData = $RESUME->find ($RESUME->t_resume_profile, 'uid', $uid);
+		$profileData = $RESUME->find ($RESUME->t_resume_profile, 'uid', $resumeSub['uid']);
 		
 		/* wish */
 		$wishData = $RESUME->find ($RESUME->t_resume_wish, 'resumeid', $resumeid);
@@ -62,7 +62,7 @@ switch (_get ( 'op' )) {
 		$workexpData = $RESUME->finds ( $RESUME->t_resume_workexp, 'resumeid', $resumeid);
 		
 		/* attach */
-		$attachData = $RESUME->finds ( $RESUME->t_resume_attach, 'resumeid', $resumeid);
+		$attachData = $RESUME->finds ( $RESUME->t_resume_attach, array('resumeid' => $resumeid, 'ispublish'=>1));
 		
 		/* relate */
 		$relateData = $RESUME->find ( $RESUME->t_resume_relate, array('resumeid'=>$resumeid, 'explainis'=>1));

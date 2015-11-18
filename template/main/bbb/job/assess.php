@@ -74,10 +74,11 @@
                                     <div class="media-body">
                                         <h4 class="media-heading">
                                             <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $val['cuid'] . '/jobid/' . $val['jobid'])); ?>" target="_blank"><?php prt($val['jname']); ?></a>
-                                            <span class="zh-learn-tips"><?php prt($JMODEL->sortValue($val['sortid'], 'sname')); ?></span></h4>
+                                            </h4>
                                     </div>
                                 </div>
                                 <div class="zh-learn-desription zh-assess-description">
+                                    <p class="zh-learn-tips"><?php prt($JMODEL->sortValue($val['sortid'], 'sname')); ?></p>
                                     工作地点:
                                     <?php foreach(_g('value')->s2pnsplit2($val['areaid']) as $v){ ?><?php prt($JMODEL->areaValue($v, 'aname')); ?>&nbsp;<?php } ?>
                                     <br>

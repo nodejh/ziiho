@@ -1,0 +1,65 @@
+.zh-exam-container {
+    margin-top: 80px;
+}
+.zh-exam-title-div {
+    margin: 20px;
+}
+.zh-exam-title {
+    font-size: 2em;
+}
+.zh-exam-title-number {
+    margin: 10px;
+    font-size: 3em;
+    font-weight: 900;
+}
+.zh-exam-title-tips {
+    font-size: .8em;
+}
+.zh-exam-text-align-center {
+    text-align: center;
+}
+.zh-exam-subtitle-div {
+    margin: 20px;
+}
+.zh-exam-subtitle {
+    font-size: 1.3em;
+    font-weight: 400;
+}
+.zh-exam-subtitle-number {
+    font-size: 2em;
+}
+.zh-exam-subtitle-tips {
+    font-size: .8em;
+}
+.zh-exam-bottom-div {
+    margin: 20px;
+}
+.zh-exam-bottom-title {
+    font-size: 2em;
+}
+.zh-exam-bottom-title-tips {
+    font-size: 3em;
+    margin: 10px;
+}
+.zh-exam-bottom-content {
+    font-size: .8em;
+    margin: 20px 60px;
+}
+
+.zh-exam-canvas-bar {
+    display: inline-block;
+    width: 55%;
+    height: auto;
+    vertical-align: middle;
+    text-align: center;
+    margin-top: 30%;
+}
+.zh-exam-title-type {
+    float: right;
+}
+.zh-exam-title-type-mine .fa-square {
+    color: rgba(97,144,225,0.5);
+}
+.zh-exam-title-type-average .fa-square{
+    color: rgba(220,220,220,0.5);
+}

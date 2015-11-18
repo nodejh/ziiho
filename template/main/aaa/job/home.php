@@ -32,7 +32,7 @@
 		</div>
 
 		<div class="y bi clearfix">
-            <a href="<?php prt(_g('uri')->su('job/ac/job')); ?>" class="color-white"><div class="aa clearfix color-background">求职中心</div></a>
+            <a href="<?php prt(_g('uri')->su('job/ac/job')); ?>" class="color-white"><div class="aa clearfix color-background">推荐求职</div></a>
 			<div class="bb clearfix">JOB CENTER</div>
 			<div class="cc clearfix">针对于职业的职位寻找</div>
 		</div>
@@ -75,7 +75,7 @@
 			</div>
 
 			<div class="z i-box-bd clearfix">
-				<div class="i-box-bd-a clearfix">求职中心</div>
+				<div class="i-box-bd-a clearfix">推荐求职</div>
 				<div class="i-box-bd-b clearfix">(JOB CENTER)</div>
 				<div class="i-box-bd-c clearfix">
 					<p>精选疙瘩职业的职位信息与实习信息。</p>

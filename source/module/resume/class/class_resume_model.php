@@ -70,5 +70,45 @@ class class_resume_model extends geshai_model {
 			}
 		}
 	}
+	
+	function degreeHigh($uid, $resumeid, $k = null) {
+		$R = _g('module')->trigger('resume');
+		$data = $R->find ( $R->t_resume_educate, 'resumeid', $resumeid, array('ctime', 'desc'));
+		if (func_num_args() > 2) {
+			return my_array_value ( $k, $data );
+		}
+		return $data;
+	}
+	
+	function wish($resumeid) {
+		$JM = _g('module')->trigger('job', 'model');
+		$R = _g('module')->trigger('resume');
+		$wishData = $R->find ($R->t_resume_wish, 'resumeid', $resumeid);
+		if (my_is_array($wishData)) {
+			$wishData['hangye'] = $JM->sortShow($wishData['sortid']);
+			$wishData['zhiwei'] = $JM->sortShow($wishData['sortid2']);
+		}
+		return $wishData;
+	}
+	function isValid($uid, $resumeid) {
+		$where = array ();
+		$where['uid'] = $uid;
+		$where['resumeid'] = $resumeid;
+		
+		$R = _g ( 'module' )->trigger ( 'resume' );
+		$rData = $R->find ( 'resume', $where );
+		if (!my_is_array ( $rData )) {
+			return false;
+		}
+		$pData = $this->profile ( $uid );
+		if (!my_is_array ( $pData )) {
+			return false;
+		}
+		$wData = $R->find ( $R->t_resume_wish, $where );
+		if (!my_is_array ( $wData )) {
+			return false;
+		}
+		return true;
+	}
 }
 ?>

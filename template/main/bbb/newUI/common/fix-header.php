@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" href="<?php prt(sfullurl(_g('template')->dir('@'))); ?>/css/ooo.css" />
-<link rel="stylesheet" type="text/css" href="<?php prt(sfullurl(_g('template')->dir('@'))); ?>/css/style.css" />
+<!--<link rel="stylesheet" type="text/css" href="--><?php //prt(sfullurl(_g('template')->dir('@'))); ?><!--/css/ooo.css" />-->
+<!--<link rel="stylesheet" type="text/css" href="--><?php //prt(sfullurl(_g('template')->dir('@'))); ?><!--/css/style.css" />-->
 <link rel="stylesheet" type="text/css" href="<?php prt(sfullurl(sdir('static'))); ?>/dialog/default/default.css" />
 
 <script type="text/javascript" src="<?php prt(sfullurl(sdir('static'))); ?>/js/jquery.min.js"></script>

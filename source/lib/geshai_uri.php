@@ -59,5 +59,15 @@ class geshai_uri {
 		$s = 'http://' . $_SERVER ['HTTP_HOST'];
 		return $s;
 	}
+	
+	function value($v) {
+		if (strlen($v) < 1) {
+			return $v;
+		}
+		if (!preg_match("/^(http|https|ftp):\/\//i", $v)) {
+			return ('http://' . $v);
+		}
+		return $v;
+	}
 }
 ?>

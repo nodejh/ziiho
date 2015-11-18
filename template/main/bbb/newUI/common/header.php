@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>职乎</title>
-    <link href='http://fonts.useso.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
     <!-- Bootstrap -->
     <link href="<?php  prt(_g('template')->dir('newUI')); ?>/utils/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- fontawsome -->

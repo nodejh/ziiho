@@ -4,6 +4,7 @@ if (! defined ( 'IN_GESHAI' )) {
 }
 class class_job_job extends geshai_model {
 	public $t_job_job = 'job_job';
+	public $t_apply_record = 'job_apply_record';
 	public $apply_field = 'a.jobrecid,a.ctime,a.status,a.state,a.jobid,a.cuid,a.sortid,a.resumeid,a.recordid,a.uid';
 	
 	function __construct() {

@@ -342,9 +342,14 @@ function uploadfile($v = null, $isdefault = false){
 }
 
 function str2array($data) {
-	if (! preg_match ( "/array\((.+?)\)(;)?$/i", $data )) {
+	if (is_array ( $data )) {
+		return $data;
+	}
+	$data = trim ( $data );
+	if (! preg_match ( "/^array(\s+)?\((.*?)\)(;)?/is", $data )) {
 		return array ();
 	}
+	
 	eval ( '$arr=' . $data . ';' );
 	$arr = (! is_array ( $arr ) ? array () : $arr);
 	return $arr;
@@ -409,7 +414,7 @@ function array2json($array) {
 	return $result;
 }
 
-function person_time($beforeTime, $dt_format = 'Y-m-d') {
+function person_time($beforeTime, $dt_format = 'Y-m-d', $cur_format = 'm-d') {
 	$nowTime = time();
 	$times = $nowTime - $beforeTime;
 	
@@ -446,7 +451,11 @@ function person_time($beforeTime, $dt_format = 'Y-m-d') {
 				if($day < 15){
 					return ($day . '天前');
 				}else{
-					return date($dt_format, $beforeTime);
+					if (date('Y', _g('cfg>time')) == date('Y', $beforeTime)) {
+						return date($cur_format, $beforeTime);
+					} else {
+						return date($dt_format, $beforeTime);
+					}
 				}
 				break;
 		}

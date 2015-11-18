@@ -62,6 +62,14 @@ class class_cuser extends geshai_model {
 		return $data;
 	}
 	
+	function isUsername($v) {
+		if (strlen ( $v ) < 1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	function telephone($value, $k){
 		$value = str2array($value);
 		return my_array_value($k, $value);
@@ -106,13 +114,13 @@ class class_cuser extends geshai_model {
 		switch ($step){
 			case 1:
 				/* 是否已被注册 */
-				$qrs = $this->find('username', $data['username']);
+				$qrs = $this->find('email', $data['email']);
 				if(!$this->db->is_success($qrs)){
 					smsg(lang('200013'));
 					return null;
 				}
 				if(is_array($qrs)){
-					smsg(lang('cuser:100010', $data['username']));
+					smsg(lang('cuser:100010', $data['email']));
 					return null;
 				}
 				
@@ -244,6 +252,24 @@ class class_cuser extends geshai_model {
 		
 		/* cuser table */
 		if(my_array_key_exist('cuser', $data)){
+			/* check username */
+			if(my_array_key_exist('username', $data['cuser'])){
+				$this->db->from ( $this->t_cuser );
+				$this->db->where ( 'cuid', $cuid, '!=' );
+				$this->db->where ( 'username', $data['cuser']['username'] );
+				$this->db->select ();
+				$usernameRs = $this->db->get_one ();
+				if(!$this->db->is_success($usernameRs)){
+					smsg(lang('200013'));
+					return null;
+				}
+				if (my_is_array( $usernameRs )) {
+					smsg(lang('cuser:100023'));
+					return null;
+				}
+			}
+			
+			/* execute */
 			$this->db->from($this->t_cuser);
 			$this->db->where('cuid', $cuid);
 			$this->db->set($data['cuser']);
@@ -281,14 +307,19 @@ class class_cuser extends geshai_model {
 		return true;
 	}
 	/* login */
-	function login($username, $password){
-		$uRs = $this->find_jion(array('a.username'=>$username, 'a.status'=>_g('value')->sb(true)));
+	function login($loginData, $password){
+		$findData = array ();
+		$findData['a.' . $loginData[0]] = $loginData[1];
+		$findData['a.status'] = _g('value')->sb(true);
+		
+		/* execute find */
+		$uRs = $this->find_jion ( $findData );
 		if(!$this->db->is_success($uRs)){
 			smsg(lang('200013'));
 			return null;
 		}
 		if(!my_is_array($uRs)){
-			smsg(lang('cuser:100013'));
+			smsg(lang('cuser:' . my_array_value($loginData[0], array('username'=>100013, 'email'=>100022))));
 			return null;
 		}
 		if(!_g('validate')->v2eq($uRs['password'], my_md5($password, 2), true)){

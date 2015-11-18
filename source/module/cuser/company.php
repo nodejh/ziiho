@@ -21,6 +21,7 @@ switch (_get ( 'op' )) {
 		$data = array();
 		
 		if($tabtype == 'base'){
+			$username = _post('username');
 			$cname = _post('cname');
 			$csortid = _post('csortid');
 			$cnatureid = _post('cnatureid');
@@ -31,6 +32,13 @@ switch (_get ( 'op' )) {
 			$telephone = _post('telephone');
 			$mobilephone = _post('mobilephone');
 			
+			/* username */
+			if ($CUSER->isUsername ( $username )) {
+				if (!_g ( 'validate' )->en_len ( $username, 1, 20 )) {
+					smsg ( lang ( 'cuser:100000', array(1, 20)) );
+					return null;
+				}
+			}
 			/* 公司名称 */
 			if(!_g('validate')->vm(strlen($cname), 1, 90)){
 				smsg ( lang ( 'cuser:100005', array(1, 30)) );
@@ -64,14 +72,18 @@ switch (_get ( 'op' )) {
 			$telephone[2] = substr(my_array_value(2, $telephone), 0, 6);
 			$telephone = array2str($telephone);
 			
-			$data['cuser'] = array(
-					'cname'=>$cname,
-					'area'=>$area,
-					'area_detail'=>$area_detail,
-					'contacts'=>$contacts,
-					'telephone'=>my_addslashes($telephone),
-					'mobilephone'=>$mobilephone
-				);
+			/* -- */
+			$data['cuser'] = array ();
+			if ($CUSER->isUsername ( $username )) {
+				$data['cuser']['username'] = $username;
+			}
+			$data['cuser']['cname'] = $cname;
+			$data['cuser']['area'] = $area;
+			$data['cuser']['area_detail'] = $area_detail;
+			$data['cuser']['contacts'] = $contacts;
+			$data['cuser']['telephone'] = my_addslashes($telephone);
+			$data['cuser']['mobilephone'] = $mobilephone;
+			
 			/* 资料 */
 			$data['profile'] = array(
 					'csortid'=>_g('value')->s2pnsplit( $csortid ),

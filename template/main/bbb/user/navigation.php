@@ -37,7 +37,7 @@
                     <li class="divider"></li>
                     <li>
                         <a href="<?php prt(_g('uri')->su('job/ac/company')); ?>">
-                            求职中心
+                            推荐求职
                         </a>
                     </li>
                     <li class="divider"></li>

@@ -64,9 +64,9 @@
                 <div class="clearfix inp">
                     <select name="cnatureid" class="fs-ts">
                         <option value="-1">==请选择==</option>
-                        <?php $CNatureResult = $CNature->finds('status', _g('value')->sb( true )); ?>
-                        <?php while($CNatureRs = $CSort->db->fetch_array($CNatureResult)){ ?>
-                        <option value="<?php prt($CNatureRs['natureid']); ?>" <?php if(_g('validate')->v2eq(my_array_value('cnatureid', $CUserRs), $CNatureRs['natureid'])){ ?> selected="selected"<?php } ?> ><?php prt($CNatureRs['nname']); ?></option>
+                        <?php $gsxzResult = _g('get')->selectitem(119); ?>
+                        <?php while($val = _g('db')->result($gsxzResult)){ ?>
+                        <option value="<?php prt($val['siid']); ?>" <?php if(_g('validate')->v2eq(my_array_value('cnatureid', $CUserRs), $val['natureid'])){ ?> selected="selected"<?php } ?> ><?php prt($val['sname']); ?></option>
                         <?php } ?>
                     </select>
                 </div>

@@ -35,7 +35,10 @@ if (array_key_exists('sortid', $__where)) {
 	$db->where ('a.sortid', $__where['sortid']);
 }
 if (array_key_exists('workyear', $__where)) {
-	$db->where ('rb.workyear', $JMODEL->workyearFlag($__workyear));
+	$db->where ('rb.workyear', $__workyear);
+}
+if (array_key_exists('score', $__where)) {
+	$db->where_between ('a.score', $__where['score']);
 }
 $db->where ( 'a.status', 1 );
 $db->order_by ( 'a.ctime', 'desc' );

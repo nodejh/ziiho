@@ -189,6 +189,25 @@ class geshai_database extends geshai_mysql {
 		}
 	}
 	
+	function where_between($_key, $_value = null, $link = 'AND') {
+		$link = strtoupper ( $link );
+		if (my_is_array ( $_key )) {
+			foreach ( $_key as $k => $v ) {
+				$this->where_between ( $k, $v, $link );
+			}
+		} else {
+			if (! empty ( $_key )) {
+				$field = $this->standard_field ( $_key );
+				$where = ("({$field} BETWEEN '" . $_value[0] . "' AND '" . $_value[1] . "')");
+				if (! empty ( $this->_where )) {
+					$this->_where .= (" {$link} " . $where);
+				} else {
+					$this->_where = $where;
+				}
+			}
+		}
+	}
+	
 	function where_in($_key, $_value = null, $link = 'AND') {
 		$link = strtoupper ( $link );
 		$valStr = null;

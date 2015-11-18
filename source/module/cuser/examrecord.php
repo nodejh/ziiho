@@ -11,11 +11,10 @@ $JEXAMSA = _g('module')->trigger('job', 'examsubject_answer');
 $JEXAMSAAUTH = _g('module')->trigger('job', 'examsubject_auth');
 
 $RMODEL = _g('module')->trigger('resume', 'model');
-
 $_USER = _g('module')->trigger('user');
 
 $cuid = $UModel->suser('cuid');
-$goBack = _g('uri')->su('user/ac/job');
+$goBack = _g('uri')->su('user/ac/examrecord');
 
 switch (_get ( 'op' )) {
 	case 'hide':

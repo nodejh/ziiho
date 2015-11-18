@@ -51,7 +51,7 @@
         
         <div class="company-tab-bd clearfix">
         	<!-- //rbox1 -->
-        	<div class="rbox1 clearfix" style="border-bottom:3px solid #069; background:#E1ECFF;">
+        	<div class="rbox1 clearfix" style="background:#E1ECFF;">
                 <div class="bd-box clearfix">
                 <form method="post" onsubmit="return false;" id="rform">
                 <input type="hidden" name="f" value="resume" />

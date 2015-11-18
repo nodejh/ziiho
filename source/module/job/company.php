@@ -219,6 +219,7 @@ switch (_get ( 'op' )) {
 		$estype = _post('estype');
 		$esoption = _post('esoption');
 		
+		$character = null;
 		$emptyData = array();
 		/* 提交值检查 */
 		if(!my_is_array($estype)){
@@ -419,6 +420,7 @@ switch (_get ( 'op' )) {
 						'jobid' => $jobid,
 						'uid' => $uid,
 						'fields' => my_addslashes( array2str( $examCountData ) ),
+						'character' => null,
 						'score' => 0
 				);
 				
@@ -426,16 +428,26 @@ switch (_get ( 'op' )) {
 				foreach ($examCountData as $key => $val) {
 					if ($JMODEL->is_sys ( $key )) {
 						$data['score'] += $JMODEL->smCcount ( $myScoreData[$key] );
-						$data[$key] = $myScoreData[$key];
+						if (my_array_key_exist($key, $myScoreData)) {
+							$data[$key] = intval($myScoreData[$key]);
+						}
 					} else {
 						$__skey = $JMODEL->smFlag2Id ( $key );
-						if (my_array_key_exist ($__skey, $myScoreData)) {
-							$data['score'] += $JMODEL->smCcount ( $myScoreData[$__skey] );
-							$data[$key] = $myScoreData[$__skey];
+						if ($JMODEL->is_xg ( $key )) {
+							/* 分析性格 */
+							$character = $JMODEL->xgParse ( $__authAnswerData[$__skey] );
+						} else {
+							if (my_array_key_exist ($__skey, $myScoreData)) {
+								$data['score'] += $JMODEL->smCcount ( $myScoreData[$__skey] );
+								if (my_array_key_exist($__skey, $myScoreData)) {
+									$data[$key] = intval($myScoreData[$__skey]);
+								}
+							}
 						}
 					}
 				}
 				
+				$data['character'] = my_end ( $character );
 				/* record */
 				$db->from ( 'job_examsubject_record' );
 				$db->set ( $data );
@@ -511,10 +523,11 @@ switch (_get ( 'op' )) {
 				$db->from ( 'job_question_subject' );
 				$db->where_in ( 'qsid', $answerItems );
 				$db->where ( 'questionid', $rs['questionid'] );
-				$db->where_regexp ( 'sortid',  ',' . $jobData['sortid'] . ',');
+				/*$db->where_regexp ( 'sortid',  ',' . $jobData['sortid'] . ',');*/
 				$__count = $db->count ();
 				$db->select();
 				$__cResult = $db->get_list ();
+				
 				/* 答题正确统计 */
 				$__num = 0;
 				while ($__aRs = $db->result ( $__cResult )) {
@@ -522,7 +535,6 @@ switch (_get ( 'op' )) {
 						$__num += 1;
 					}
 				}
-				
 				/* 队列 */
 				$examSysDatas[] = array ( 'name'=>$rs['qname'], 'count' => $__count, 'num' => $__num );
 			}
@@ -531,11 +543,14 @@ switch (_get ( 'op' )) {
 		include _g ( 'template' )->name ( 'job', 'company_exam_status', true );
 		break;
 	default :
+		/* 
 		$cUserArr = $CUSER->getList();
 		$cUserPage = $cUserArr[0];
 		$cUserResult = $cUserArr[1];
 		
 		include _g ( 'template' )->name ( 'job', 'company', true );
+		*/
+		header ( 'location:' . _g('uri')->su('job/ac/work') );
 		break;
 }
 ?>

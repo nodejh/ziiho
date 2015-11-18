@@ -42,6 +42,40 @@ switch (_post ( 'f' )) {
 			smsg(lang('resume:100000'));
 			return null;
 		}
+		if(!_g('validate')->vm(strlen($chname), 1, 90)){
+			smsg(lang('resume:100001', 30));
+			return null;
+		}
+		/* gender */
+		if (!my_array_key_exist($gender, _g('module')->dv('resume', 100000))) {
+			smsg(lang('resume:100044'));
+			return null;
+		}
+		/* birthday */
+		if (strlen($birthday) < 1) {
+			smsg(lang('resume:100045'));
+			return null;
+		}
+		/* mobilephone */
+		if(!_g('validate')->n($mobilephone) || !_g('validate')->vm(strlen($mobilephone), 8, 11)){
+			smsg(lang('resume:100046'));
+			return null;
+		}
+		/* email */
+		if(!_g('validate')->email($email, 1)){
+			smsg ( lang ( 'resume:100047') );
+			return null;
+		}
+		/* workyear */
+		if (!_g('validate')->pnum($workyear)) {
+			smsg ( lang ( 'resume:100048') );
+			return null;
+		}
+		/* home */
+		if (my_count(my_explode(',', $home)) < 2) {
+			smsg ( lang ( 'resume:100049') );
+			return null;
+		}
 		
 		/* is exist */
 		$profileRs = $RESUME->find ($RESUME->t_resume_profile, 'uid', $uid);
@@ -60,7 +94,7 @@ switch (_post ( 'f' )) {
 				'phonearea' => $phonearea,
 				'mobilephone' => $mobilephone,
 				'email' => $email,
-				'workyear' => $JMODEL->workyearFlag ( $workyear ),
+				'workyear' => $workyear,
 				'home' => $home,
 				
 				'country' => $country,
@@ -106,16 +140,61 @@ switch (_post ( 'f' )) {
 		$workstatus = _post ( 'workstatus' );
 		$selfintroduce = _post ( 'selfintroduce' );
 		
-		if (strlen( $sortid ) < 1 ) {
+		/* area */
+		if (my_count(my_explode(',', $area)) < 2) {
+			smsg ( lang ( 'resume:100051') );
+			return null;
+		}
+		
+		/* sortid */
+		if (!_g('validate')->pnum( $sortid )) {
 			smsg( lang ('resume:100004') );
 			return null;
 		}
 		
-		if (strlen( $sortid2 ) < 1 ) {
+		/* sortid2 */
+		if (!_g('validate')->pnum( $sortid2 )) {
 			smsg( lang ('resume:100005') );
 			return null;
 		}
-		
+		/* worktype */
+		if (!_g('validate')->pnum( $worktype )) {
+			smsg( lang ('resume:100052') );
+			return null;
+		}
+		/* wage */
+		$__wagetype = _g('cache')->selectitem('108>' . $wagetype . '>flag');
+		if (!$JMODEL->wagetypeIs( $__wagetype )) {
+			smsg( lang ('resume:100054') );
+			return null;
+		}
+		if (!$JMODEL->wagetypeIsInput ( $__wagetype )) {
+			$__tmpWage = null;
+			if ($JMODEL->wagetypeFK ( $__wagetype ) == 'y') {
+				$__tmpWage = $wage_year;
+			} else if ($JMODEL->wagetypeFK ( $__wagetype ) == 'm') {
+				$__tmpWage = $wage_month;
+			}
+			if (!_g('validate')->pnum( $__tmpWage )) {
+				smsg( lang ('resume:100055') );
+				return null;
+			}
+		} else {
+			if (strlen ( $wage_input ) < 1) {
+				$wage_input = '面议';
+			} else {
+				$wage_input = my_substr ( $wage_input, 0, 10 );
+			}
+		}
+		/* workstatus */
+		if (!_g('validate')->pnum( $workstatus )) {
+			smsg( lang ('resume:100053') );
+			return null;
+		}
+		/* selfintroduce */
+		if (strlen($selfintroduce) < 1) {
+			smsg( lang ('resume:100050') );
+		}
 		if(!_g('validate')->vm(strlen ( $selfintroduce ), 0, 3000)){
 			smsg( lang ('resume:100003', 1000) );
 			return null;

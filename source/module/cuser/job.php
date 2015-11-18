@@ -134,7 +134,7 @@ switch (_get ( 'op' )) {
 			'examtime'=>$examtime,
 			'areaid'=>_g( 'value' )->s2pnsplit ( $areaid ),
 			'area_detail'=>$area_detail,
-			'workyear'=>$JMODEL->workyearFlag($workyear),
+			'workyear'=>intval ( $workyear ),
 			'degree'=>$degree,
 			'wagetype'=>$wagetype,
 			'wage'=>$wage,
@@ -487,13 +487,13 @@ switch (_get ( 'op' )) {
 		include _g ( 'template' )->name ( 'cuser', 'job_esanswer', true );
 		break;
 	case 'esanswer_read':
-		$answerid = _get('answerid');
-		if(!_g('validate')->pnum($answerid)){
+		$recordid = _get('recordid');
+		if(!_g('validate')->pnum($recordid)){
 			smsg(lang('200010'), _g('uri')->referer());
 			return null;
 		}
 		
-		$answerRs = $JEXAMSA->find ( 'answerid', $answerid );
+		$answerRs = $JEXAMSA->find ( 'recordid', $recordid );
 		if (!my_is_array( $answerRs )) {
 			smsg(lang('job:600013'), _g('uri')->referer());
 			return null;

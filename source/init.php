@@ -51,6 +51,7 @@ define ( 'MAGIC_QUOTES_GPC', get_magic_quotes_gpc () );
 
 
 require (GESHAI_ROOT . '/source/function/function.php');
+require (GESHAI_ROOT . '/source/function/function2.php');
 
 if (MAGIC_QUOTES_GPC) {
 	$_POST = my_stripslashes ( $_POST );

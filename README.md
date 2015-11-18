@@ -110,7 +110,7 @@
     <!DOCTYPE html>
     <html lang="zh-CN">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <link href='http://fonts.useso.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
 
 
 

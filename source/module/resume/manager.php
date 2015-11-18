@@ -323,6 +323,7 @@ switch (_get ( 'op' )) {
 		
 		$writeUrl = _g('uri')->su('resume/ac/manager/op/write');
 		$delUrl = _g('uri')->su('resume/ac/manager/op/delete');
+		
 		include _g ( 'template' )->name ( 'resume', 'manager', true );
 		break;
 }

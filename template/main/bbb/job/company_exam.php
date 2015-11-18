@@ -294,6 +294,10 @@
 
 <script>
     document.body.onselectstart=document.body.oncontextmenu=function(){return false;};
+
+    $('body').mouseleave (function () {
+       alert('答题过程中不能离开此页面，否则试卷作废!');
+    });
 </script>
 
 <!---->

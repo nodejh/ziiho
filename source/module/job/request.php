@@ -7,7 +7,8 @@ $CUSER = _g('module')->trigger('cuser');
 $UMODEL = _g('module')->trigger('user', 'model');
 $JMODEL = _g('module')->trigger('job', 'model');
 $CJOB = _g('module')->trigger('job', 'job');
-$RESUME = _g('module')->trigger('resume');
+$RMODEL = _g('module')->trigger('resume', 'model');
+$EXAMANSWER = _g('module')->trigger('job', 'examsubject_answer');
 
 /* check user */
 $logintype = $UMODEL->suser('login_type');
@@ -73,35 +74,35 @@ switch (_get ( 'op' )) {
 	case 'do':
 		$jobid = _post ( 'jobid' );
 		$resumeid = _post ( 'resumeid' );
-		$recordid = my_explode(',', _post ( 'recordid' ));
+		$recordid = _post ( 'recordid' );
 		
 		if (!_g ( 'validate' )->pnum ( $jobid )) {
 			smsg ( lang ( 200010 ) );
 			return null;
 		}
 		if (!_g ( 'validate' )->pnum ( $resumeid )) {
-			smsg ( lang ( 200010 ) );
+			smsg(lang('resume:100043'));
 			return null;
 		}
-		/* check resume */
-		$resumeData = $RESUME->find ( 'resume', array ( 'resumeid'=> $resumeid ) );
-		if (!$db->is_success ( $resumeData )) {
-			smsg(lang('200013'));
-			return null;
-		}
-		if (!my_is_array ( $resumeData )) {
-			smsg(lang('resume:100041'));
+		if (!_g ( 'validate' )->pnum ( $recordid )) {
+			smsg(lang('job:900004'));
 			return null;
 		}
 		
-		$rdata = $JMODEL->chkRequestJob ( $jobid );
+		/* check resume valid */
+		if (!$RMODEL->isValid ( $uid, $resumeid )) {
+			smsg(lang('resume:100056'));
+			return null;
+		}
+		
+		/* 检查 */
+		$examRecRs = array ();
+		$rdata = $JMODEL->chkRequestJob ( $jobid, $recordid, $examRecRs );
 		if (!my_is_array( $rdata )) {
 			smsg ( $rdata );
 			return null;
 		}
 		
-		smsg(array2str($recordid));
-		exit;
 		/* execute */
 		$data = array (
 				'ctime' => _g ( 'cfg>time' ),
@@ -112,7 +113,8 @@ switch (_get ( 'op' )) {
 				'sortid' => $rdata['sortid'],
 				'recordid' => $recordid,
 				'resumeid' => $resumeid,
-				'uid' => $uid
+				'uid' => $uid,
+				'score' => intval(my_array_value( 'score', $examRecRs ))
 		);
 		$db->from ( 'job_apply_record' );
 		$db->set ( $data );

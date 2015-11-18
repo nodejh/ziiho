@@ -4,8 +4,8 @@
 
 <div class="clearfix resume_view">
     <div class="hh">
-    	<a href="#" class="out" title="导出简历,word文件格式" target="_blank" onclick="this.href=(window.location.href)+'&out=yes';">导出</a>        
-        <a href="#" class="print" title="打印简历" onclick="window.print(); return false;">打印</a>
+    	<a href="#" class="out" title="导出简历,word文件格式" target="_blank" onclick="this.href=(window.location.href)+'&out=yes';">导出为 Word</a>
+        <a href="#" class="print" title="打印简历" onclick="window.print(); return false;">打印为 PDF</a>
     </div>
     
     <!-- //tbox -->
