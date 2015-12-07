@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/home.css" />
     <!--<link href='http://fonts.useso.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
     <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.min.js"></script>
+    <!--<script src="--><?php // prt(_g('template')->dir('newUI')); ?><!--/utils/jquery-1.11.3/jquery-1.11.3.min.js"></script>-->
     <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/geshai.common.min.js"></script>
     <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.cjslip-v1.0.3.min.js"></script>
 

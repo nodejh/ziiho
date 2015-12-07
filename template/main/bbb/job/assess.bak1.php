@@ -62,8 +62,7 @@
                                 <div class="media">
                                     <div class="media-left media-middle zh-learn-imgbox">
                                         <a href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $val['cuid'])); ?>" target="_blank">
-                                            <span class="zh-assess-company-name">公司名称</span>
-                                            <!--<img class="zh-learn-img" src="--><?php //prt($CUSER->getLogo($val['cuid'])); ?><!--" alt="--><?php //prt($rs['jname']); ?><!--" style="width: 100px;">-->
+                                            <img class="zh-learn-img" src="<?php prt($CUSER->getLogo($val['cuid'])); ?>" alt="<?php prt($rs['jname']); ?>" style="width: 100px;">
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -77,10 +76,10 @@
                                     工作地点:
                                     <?php foreach(_g('value')->s2pnsplit2($val['areaid']) as $v){ ?><?php prt($JMODEL->areaValue($v, 'aname')); ?>&nbsp;<?php } ?>
                                     <br>
-                                    薪资:20万<br>
-                                    招聘人数:10<br>
-                                    工作年限:2年以上<br>
-                                    学历要求:本科及以上<br>
+
+                                    <?php foreach(_g('value')->s2pnsplit2($val['benefit']) as $v){ ?>
+                                        <span class="label label-success"><?php prt(_g('cache')->selectitem('121>'.$v.'>sname')); ?></span>
+                                    <?php } ?>
                                 </div>
 
                                 <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $val['cuid'] . '/jobid/' . $val['jobid'])); ?>" target="_blank" class="zh-learn-view-a">
@@ -88,7 +87,6 @@
                                         <span>我要测评</span><i class="fa fa-arrow-circle-o-right fa-lg"></i>
                                     </div>
                                 </a>
-                                <div class="zh-assess-cover"></div>
                             </div>
                         </div>
 

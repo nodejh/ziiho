@@ -402,3 +402,33 @@ padding:5px;/* border:1px solid #edeef0;*/ }
 div.zh-learn-desription.zh-assess-description {
     height: 97px;
 }
+.zh-assess-company-name{
+	width: 80px;
+	height: 50px;
+	display: block;
+}
+
+
+/*home*/
+.zh-home-img {
+	-webkit-transform: scale(1);
+	-webkit-transition: 1s;
+}
+.zh-home-img:hover {
+	-webkit-transform: scale(.2);
+}
+.zh-i-box-c {
+	width: 350px;
+}
+.zh-home-search {
+	margin: 100px;
+}
+.zh-home-search-input {
+	width: 250px;
+	float: right;
+	right: 210px;
+}
+.zh-home-search-dropdown {
+	width: 100px;
+	left: 200px;
+}

@@ -97,7 +97,7 @@
                </div>
             </div>
 
-            <div class="zh-company-job-btn">
+            <div class="zh-company-job-btn text-center">
                 <!--<a class="btn btn-info" href="--><?php //prt(_g('uri')->su('job/ac/company/op/jobstep/id/' . _get('id') . '/jobid/' . $jobid)); ?><!--" role="button">学习方案</a>-->
                 <!--<a class="btn btn-info" href="--><?php //prt(_g('uri')->su('job/ac/material')); ?><!--" role="button">学习资料</a>-->
                 <a class="btn btn-info" href="<?php prt(_g('uri')->su('job/ac/company/op/exam/id/' . _get('id') . '/jobid/' . $jobid)); ?>">我要测评</a>

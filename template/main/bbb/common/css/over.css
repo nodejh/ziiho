@@ -793,3 +793,15 @@ input[type="submit"] { padding:4px 17px; color:#585858; text-transform:uppercase
 .c-area .m .f2 .t2.o-register-ipt-1 input {
     width: 100%;
 }
+
+
+/* home */
+.main .i-area .i-box .i-box-bd.o-home-div {
+     width: 600px;
+ }
+.main .i-area .i-box .i-box-hd.o-home-div {
+    width: 600px;
+}
+
+
+/* assess */
