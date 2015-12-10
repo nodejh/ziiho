@@ -1,0 +1,189 @@
+
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,a,em,img,strong,sub,sup,dl,dt,dd,ol,ul,li,form,label,embed,select,input,textarea,pre,button,i,u{
+    margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;text-indent:0;font-weight:normal;font-style:normal;}
+body{font:12px/2em Arial,Helvetica,SimSun,sans-serif;color:#666;background:#fff;word-break:break-all;}
+:focus{outline:0;}
+ol,ul{list-style:none;}
+table{empty-cells:show;border-collapse:collapse;border-spacing:0;}
+td{padding: 0}
+.cf:before,.cf:after{content:" ";display:table;}
+.cf:after{clear:both;}
+.cf{*zoom:1;}
+a{color:#666;text-decoration:none;}
+a:hover{color:#f80;text-decoration:underline;}
+/*本例子样式如下*/
+.fl{float:left;_display:inline;}.fr{float:right;_display:inline;}
+
+h1.hide_title{display: none;}
+#nav{
+    position:relative;
+    width:960px;
+    height:124px;
+    /*margin:0 auto;*/
+    z-index:20;
+}
+#nav h2,#nav img{
+    position:absolute;
+    top:40px;
+    left:0;
+    width:190px;
+    height:47px;
+}
+#nav img{
+    top:0;
+}
+#i_search{
+    position:absolute;
+    top:54px;
+    right:0;
+    height:36px;
+    padding:3px;
+    background:#3cacd5;
+    z-index:11;
+}
+#i_search ul{
+    float:left;
+    position:relative;
+    z-index:29;
+}
+#i_search li{
+    float:left;
+    height:36px;
+    line-height:36px;
+    border-right:3px #3cacd5 solid;
+    background:#fff;
+}
+#i_search li s{
+    display:inline-block;
+    float:left;
+    position:relative;
+    width:56px;
+    overflow:hidden;
+    text-align:center;
+    height:28px;
+    line-height:28px;
+    _zoom:1;
+    padding:4px 20px 4px 5px;
+    text-decoration:none;
+    background:#fff;
+    color:#999;
+    cursor:pointer;
+}
+#i_search s i,#i_search s u{
+    display:block;
+    position:absolute;
+    right:6px;
+    top:18px;
+    width:0;
+    height:0;
+    margin:-2px 0 0 0;
+    overflow:hidden;
+    border:6px #fff solid;
+    border-bottom:0;
+    border-top:6px #3cacd5 solid;
+    -webkit-transition:all .4s ease-out;
+    -moz-transition:all .4s ease-out;
+    -o-transition:all .4s ease-out;
+    transition:all .4s ease-out;
+}
+#i_search s u{
+    margin:-4px 0 0 0;
+    border:6px transparent dashed;
+    border-top:6px #fff solid;
+}
+#i_search input{
+    float:left;
+    width:264px;
+    height:34px;
+    line-height:34px;
+    vertical-align:middle;
+}
+#i_search input:focus,#i_search input:hover{
+    border: 1px #3cacd5 solid
+}
+#i_search button{
+    display:inline-block;
+    float:left;
+    width: 80px;
+    height:36px;
+    background: url(../../newUI/assets/img/s1.gif) no-repeat 0 -1px;
+    padding: 0 0 0 30px;
+    cursor:pointer;
+    overflow:hidden;
+    text-indent:0;
+    font-size: 16px;
+    letter-spacing: 6px;
+    color: #cff7ff;
+    font-family:"Microsoft Yahei",SimHei,SimSun,sans-serif;
+    transition:all .3s;
+}
+#i_search button:hover{
+    background-color:#fff;
+    color: #fff;
+}
+#i_search li div{
+    display:none;
+    position:absolute;
+    left:-3px;
+    top:39px;
+    /*width:261px;*/
+    line-height:20px;
+    padding:6px;
+    border:3px #3cacd5 solid;
+    border-top:0;
+    background:#fff;
+}
+#i_search li div a{
+    display:inline-block;
+    color:#999;
+    padding:0 2px;
+}
+#i_search span{
+    display:inline-block;
+    min-width:62px;
+    _width:62px;
+    white-space:nowrap;
+}
+#i_search .m_sp span{
+    min-width:72px;
+    _width:72px;
+}
+#i_search .l_sp span{
+    min-width:99px;
+    _width:99px;
+}
+#i_search .on s{
+    top:4px;
+    padding:0 20px 8px 5px;
+}
+#i_search .on s i,#i_search .on s u{
+    top:14px;
+    -webkit-transform:rotate(-180deg);
+    -moz-transform:rotate(-180deg);
+    -o-transform:rotate(-180deg);
+    transform:rotate(-180deg);
+}
+#i_stab a{
+    display:inline-block;
+    position:relative;
+    padding:0 9px;
+    margin:0 9px 0 0;
+    _zoom:1;
+}
+#i_stab a u{
+    display:none;
+    position:absolute;
+    top:20px;
+    left:50%;
+    width:0;
+    height:0;
+    border:6px #fff solid;
+    border-bottom:0;
+    border-top:6px #3cacd5 solid;
+    margin:0 0 0 -6px;
+    overflow:hidden;
+}
+#i_stab a.on,#i_stab a:hover,#i_search li div a:hover,#i_search li a.on{
+    color:#3cacd5;
+    text-decoration:none;
+}
