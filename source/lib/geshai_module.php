@@ -12,7 +12,6 @@ class geshai_module {
 		$this->__construct ();
 	}
 	
-	
 	function cname($m = null) {
 		if (func_num_args () < 1) {
 			return $this->current_name;
@@ -20,7 +19,6 @@ class geshai_module {
 			$this->current_name = strtolower ( $this->flag ( $m ) );
 		}
 	}
-	
 	
 	function flag($v) {
 		switch ($v) {
@@ -36,7 +34,6 @@ class geshai_module {
 		}
 		return $m;
 	}
-	
 	
 	function isadmin($module = '') {
 		$v = ($module == 'admin');
@@ -88,7 +85,6 @@ class geshai_module {
 		return ($root . $path);
 	}
 	
-	
 	function classname($module, $cla = null) {
 		if ($cla !== null) {
 			$c = $module . '_' . $cla;
@@ -97,7 +93,6 @@ class geshai_module {
 		}
 		return $c;
 	}
-	
 	
 	function c($module, $name = null, $param = null, $is_instance = false) {
 		if (empty ( $module )) {
@@ -127,19 +122,15 @@ class geshai_module {
 		}
 	}
 	
-	
 	function trigger($module, $claName = null, $claParams = null, $method = null) {
 		$module = $this->flag ( $module );
 		if (_g ( 'validate' )->em ( $module )) {
 			return null;
 		}
 		
-		
 		$mName = $this->classname ( $module, $claName );
 		
-		
 		$is_instance = _g ( 'validate' )->en_e ( $method );
-		
 		
 		if (! my_array_key_exist ( $module . '>' . $mName, $this->_triggers )) {
 			$cla = $this->c ( $module, $claName, $claParams, true );
@@ -157,7 +148,6 @@ class geshai_module {
 			return $cla;
 		}
 	}
-	
 	
 	function lang($name, $rep = null) {
 		if (_g ( 'validate' )->em ( $name )) {
@@ -207,7 +197,6 @@ class geshai_module {
 			$l_key = $keyname;
 		}
 		
-		
 		$dir = sdir ( ':source' );
 		$filepath = ($dir . $c_dir . '/lang/' . $l_name . '.php');
 		if (! is_file ( $filepath )) {
@@ -222,7 +211,6 @@ class geshai_module {
 		) : $rep) );
 		return $rnt;
 	}
-	
 	
 	function dv($module, $k = null, $def = null) {
 		$argLen = func_num_args ();
@@ -261,6 +249,39 @@ class geshai_module {
 		}
 		$filename = $this->filename ( $module, 'inc/' . $name );
 		return $filename;
+	}
+	
+	function get($k = null) {
+		$data = array (
+				'job' => array ( 'name' => '求职', 'subname' => '求职版块', 'isseo'=> true ),
+				'user' => array ( 'name' => '用户', 'subname' => '用户', 'isseo'=> true ),
+				'cuser' => array ( 'name' => '企业用户', 'subname' => '企业用户', 'isseo'=> true )
+		);
+		if (func_num_args() < 1) {
+			return $data;
+		} else {
+			return my_array_value($k, $data);
+		}
+	}
+	function seo() {
+		$value = array();
+		foreach ($this->get() as $k=>$v) {
+			if ($v['isseo'] === true) {
+				$value[$k] = $v;
+			}
+		}
+		return $value;
+	}
+	function seoVar($module) {
+		$data = array ();
+		$filename = $this->inc($module, 'seo_variable');
+		if (!is_file($filename)) {
+			return $data;
+		}
+		return _g('value')->ra(include $filename);
+	}
+	function seoVarTag($name) {
+		return ('{' . $name . '}');
 	}
 }
 ?>

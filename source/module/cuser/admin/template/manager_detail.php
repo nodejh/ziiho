@@ -47,10 +47,10 @@
             <li class="clearfix is">
                 <div class="clearfix tit">行业类别:</div>
                 <div class="clearfix inp">
-                    <select multiple="multiple" name="csortid[]" class="fs-ts-h180" style="width:260px;">
-                        <?php $CSortResult_a = $CSort->finds(array('parentid'=>0, 'status'=> _g('value')->sb( true ))); ?>
-                        <?php while($CSortRs_v1 = $CSort->db->fetch_array($CSortResult_a)){ ?>
-                            <option value="<?php prt($CSortRs_v1['sortid']); ?>" <?php if(my_in_array($CSortRs_v1['sortid'], my_explode(',', my_array_value('csortid', $CUserRs)))){ ?> selected="selected"<?php } ?> ><?php prt($CSortRs_v1['sname']); ?></option>
+                    <select multiple="multiple" name="professionid[]" class="fs-ts-h180" style="width:260px;">
+                        <?php $proResult = $CPRO->finds('status', _g('value')->sb( true )); ?>
+                        <?php while($proVal = $CPRO->db->fetch_array($proResult)){ ?>
+                            <option value="<?php prt($proVal['professionid']); ?>" <?php if(my_in_array($proVal['professionid'], _g('value')->s2pnsplit2(my_array_value('professionid', $CUserRs)))){ ?> selected="selected"<?php } ?> ><?php prt($proVal['pname']); ?></option>
                         <?php } ?>
                     </select>
                 </div>

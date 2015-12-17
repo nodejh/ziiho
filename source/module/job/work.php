@@ -73,6 +73,7 @@ switch (_get ( 'op' )) {
 		$JJOB->db->join($JJOB->t_job_job, 'a.cuid', $CUSER->t_cuser, 'b.cuid', 'LEFT JOIN');
 		$JJOB->db->where_in('a.sortid', $__scidArr);
 		$pageData = _g('page')->c($JJOB->db->count(), 15, 10, _get('page'));
+		$JJOB->db->order_by('a.ctime', 'DESC');
 		$JJOB->db->order_by('a.mtime', 'DESC');
 		$JJOB->db->limit($pageData['start'], $pageData['size']);
 		$JJOB->db->select('a.jobid,a.jname,a.pnum,a.ctime,a.sortid,a.cuid,b.cname,b.area,b.area_detail');

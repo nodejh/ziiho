@@ -6,7 +6,7 @@ class class_cuser extends geshai_model {
 	public $t_cuser = 'cuser';
 	public $t_cuser_profile = 'cuser_profile';
 	
-	public $t_field = 'a.cuid,a.username,a.password,a.email,a.regtime,a.regip,a.lasttime,a.lastip,a.curtime,a.curip,a.status,a.online,a.cname,a.area,a.area_detail,a.contacts,a.telephone,a.mobilephone,a.cemail,b.csortid,b.cnatureid,b.csize,b.cdescription,b.authlicence,b.licence,b.logo';
+	public $t_field = 'a.cuid,a.username,a.password,a.email,a.regtime,a.regip,a.lasttime,a.lastip,a.curtime,a.curip,a.status,a.online,a.cname,a.area,a.area_detail,a.contacts,a.telephone,a.mobilephone,a.cemail,b.professionid,b.cnatureid,b.csize,b.cdescription,b.authlicence,b.licence,b.logo';
 	
 	function __construct() {
 		parent::__construct ();

@@ -23,7 +23,7 @@ switch (_get ( 'op' )) {
 		if($tabtype == 'base'){
 			$username = _post('username');
 			$cname = _post('cname');
-			$csortid = _post('csortid');
+			$professionid = _post('professionid');
 			$cnatureid = _post('cnatureid');
 			$csize = _post('csize');
 			$area = _post('area');
@@ -45,7 +45,7 @@ switch (_get ( 'op' )) {
 				return null;
 			}
 			/* 行业类别 */
-			if(!my_is_array($csortid)){
+			if(!my_is_array($professionid)){
 				smsg ( lang ( 'cuser:100011') );
 				return null;
 			}
@@ -86,7 +86,7 @@ switch (_get ( 'op' )) {
 			
 			/* 资料 */
 			$data['profile'] = array(
-					'csortid'=>_g('value')->s2pnsplit( $csortid ),
+					'professionid'=>_g('value')->s2pnsplit( $professionid ),
 					'cnatureid'=>$cnatureid,
 					'csize'=>$csize
 				);

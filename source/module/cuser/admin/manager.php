@@ -10,6 +10,7 @@ $CZPLX = _g ( 'module' )->trigger ( 'job', 'zplx' );
 
 $CUser = _g ( 'module' )->trigger ( 'cuser' );
 $CR = _g ( 'module' )->trigger ( 'cuser', 'recommend' );
+$CPRO = _g ( 'module' )->trigger ( 'cuser', 'profession' );
 
 $CUri = _g('cp')->uri('mod/cuser/ac/manager');
 
@@ -65,7 +66,7 @@ switch (_get ( 'op' )) {
 			$mobilephone = _post('mobilephone');
 			$cemail = _post('cemail');
 			
-			$csortid = _post('csortid');
+			$professionid = _post('professionid');
 			$cnatureid = _post('cnatureid');
 			$csize = _post('csize');
 			
@@ -79,14 +80,9 @@ switch (_get ( 'op' )) {
 					'cemail'=>$cemail
 			);
 			/* profile */
-			$__csortid = null;
-			foreach ($csortid as $__v){
-				$__csortid .= ',' . $__v . ',';
-			}
-			
 			$data2 = array(
 					'cuid'=>$cuid,
-					'csortid'=>$__csortid,
+					'professionid'=>_g('value')->s2pnsplit( $professionid ),
 					'cnatureid'=>$cnatureid,
 					'csize'=>$csize
 			);
@@ -461,7 +457,7 @@ switch (_get ( 'op' )) {
 	default :
 		_g('uri')->referer(true);
 		
-		$q_csortid = _get('q_csortid');
+		$q_professionid = _get('q_professionid');
 		$q_cuid = urldecode(_get('q_cuid'));
 		$q_username = urldecode(_get('q_username'));
 		$q_cname= urldecode(_get('q_cname'));
@@ -470,9 +466,9 @@ switch (_get ( 'op' )) {
 		$q_recommend = _get('q_recommend');
 		
 		$qWhere = array();
-		if(_g('validate')->hasget('q_csortid')){
-			if(_g('validate')->pnum($q_csortid)){
-				$qWhere['csortid'] = $q_csortid;
+		if(_g('validate')->hasget('q_professionid')){
+			if(_g('validate')->pnum($q_professionid)){
+				$qWhere['professionid'] = $q_professionid;
 			}
 		}
 		
@@ -526,8 +522,8 @@ switch (_get ( 'op' )) {
 		if(array_key_exists('cname', $qWhere)){
 			$CUser->db->where_regexp('a.cname', ($qWhere['cname']));
 		}
-		if(array_key_exists('csortid', $qWhere)){
-			$CUser->db->where_regexp('b.csortid', (',' . $qWhere['csortid'] . ','));
+		if(array_key_exists('professionid', $qWhere)){
+			$CUser->db->where_regexp('b.professionid', (',' . $qWhere['professionid'] . ','));
 		}
 		if(array_key_exists('authlicence', $qWhere)){
 			$CUser->db->where('b.authlicence', $qWhere['authlicence']);

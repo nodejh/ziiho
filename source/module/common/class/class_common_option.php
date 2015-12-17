@@ -31,7 +31,6 @@ class class_common_option extends geshai_model {
 		while ( $rs = $this->db->fetch_array ( $result ) ) {
 			if(v2bool($rs['array'])){
 				$rs['sval'] = str2array( $rs['sval'] );
-				$rs['sval'] = (is_array($rs['sval']) ? $rs['sval'] : array());
 			}
 			$arr[$rs['skey']] = $rs ['sval'];
 		}

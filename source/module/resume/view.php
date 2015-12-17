@@ -29,7 +29,7 @@ switch (_get ( 'op' )) {
 		/* wish */
 		$wishData = $RESUME->find ($RESUME->t_resume_wish, 'resumeid', $resumeid);
 		if (my_is_array($wishData)) {
-			$wishData['hangye'] = $JOBMODEL->sortShow($wishData['sortid']);
+			$wishData['hangye'] = _g('value')->s2pnsplit2($wishData['professionid']);
 			$wishData['zhiwei'] = $JOBMODEL->sortShow($wishData['sortid2']);
 		}
 		
@@ -53,7 +53,7 @@ switch (_get ( 'op' )) {
 		/* last work */
 		$lastWorkData = $RESUME->find ( $RESUME->t_resume_workexp, 'resumeid', $resumeid, array('ctime', 'desc'));
 		if (my_is_array( $lastWorkData )) {
-			$lastWorkData['hangye'] = $JOBMODEL->sortShow($lastWorkData['sortid']);
+			$lastWorkData['hangye'] = _g('value')->s2pnsplit2($lastWorkData['professionid']);
 			if (strlen(my_array_value('sortid2_input', $lastWorkData)) >= 1) {
 				$lastWorkData['sortid2_input'] = '(' . $lastWorkData['sortid2_input'] . ')';
 			}

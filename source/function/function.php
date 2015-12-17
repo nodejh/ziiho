@@ -349,7 +349,6 @@ function str2array($data) {
 	if (! preg_match ( "/^array(\s+)?\((.*?)\)(;)?/is", $data )) {
 		return array ();
 	}
-	
 	eval ( '$arr=' . $data . ';' );
 	$arr = (! is_array ( $arr ) ? array () : $arr);
 	return $arr;

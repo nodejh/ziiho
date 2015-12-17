@@ -16,11 +16,11 @@
             <div class="clearfix z">
             	<p class="clearfix">
                 	<em class="padding100">行业分类:</em>
-                    <select name="q_csortid" class="fs-ts-200" style="width:260px;">
+                    <select name="q_professionid" class="fs-ts-200" style="width:260px;">
                     	<option value="0" >==请选择==</option>
-                        <?php $CSortResult = $CSort->finds(array('parentid'=>0, 'status'=> _g('value')->sb( true ))); ?>
-                        <?php while($v = $CSort->db->fetch_array($CSortResult)){ ?>
-                            <option value="<?php prt($v['sortid']); ?>" <?php prt($q_csortid == $v['sortid'] ? 'selected="selected"' : ''); ?> ><?php prt($v['sname']); ?></option>
+                        <?php $proResult = $CPRO->finds('status', _g('value')->sb( true )); ?>
+                        <?php while($v = $CPRO->db->fetch_array($proResult)){ ?>
+                            <option value="<?php prt($v['professionid']); ?>" <?php prt($q_professionid == $v['professionid'] ? 'selected="selected"' : ''); ?> ><?php prt($v['pname']); ?></option>
                         <?php } ?>
                     </select>
                 </p>

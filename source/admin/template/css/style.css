@@ -136,13 +136,14 @@ a:hover { color: #F00; text-decoration: none; }
 .fs-ts-180 { width: 178px; height: 22px; line-height: 22px; }
 .fs-ts-200 { width: 198px; height: 22px; line-height: 22px; }
 .fs-ts-240 { width: 238px; height: 22px; line-height: 22px; }
+.fs-ts-480 { width: 478px; height: 22px; line-height: 22px; }
 
 .fs-ts-h180 { height:180px; line-height:22px; }
 
 .fs-tt { width:480px; height:120px; line-height:22px; }
 .fs-tt2 { width:320px; height:120px; line-height:22px; }
 
-.fs-tb, .fs-ts, .fs-ts-50, .fs-ts-100, .fs-ts-140, .fs-ts-180, .fs-ts-200 , .fs-ts-240, .fs-ts-h180, .fs-tt, .fs-tt2 { border-width: 1px; border-style: solid; border-color: #808080 #CCC #EEE #CCC; outline: none; text-indent: 2px; }
+.fs-tb, .fs-ts, .fs-ts-50, .fs-ts-100, .fs-ts-140, .fs-ts-180, .fs-ts-200 , .fs-ts-240, .fs-ts-480, .fs-ts-h180, .fs-tt, .fs-tt2 { border-width: 1px; border-style: solid; border-color: #808080 #CCC #EEE #CCC; outline: none; text-indent: 2px; }
 
 /* url 样式 */
 .fa-h { height: 28px; line-height: 24px; }
@@ -299,5 +300,14 @@ a:hover { color: #F00; text-decoration: none; }
 			.ugmsetting_menu .ugms_is .ugms_tit .ugms_tit_m:hover { background:#ccc; }
 
 
+/* seo vars */
+.seovar { padding: 8px; background:#fefefe; font-size: 12px; }
+.seovar_bl { border-bottom: 1px solid #ccc; }
+	.seovar span.glo { float:left; line-height:24px; margin-right: 10px; }
+		.seovar span.glo em { font-weight: bold; color: #F30; }
+		.seovar span.glo font { padding-left: 3px; color: #000; }
+	.seovar span.local { float:left; line-height:24px; margin-right: 10px; border-bottom: 1px dotted #F60; }
+		.seovar span.local em { font-weight: bold; color: #F30; }
+		.seovar span.local font { padding-left: 3px; color: #666; }
 
 	

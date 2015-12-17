@@ -130,7 +130,7 @@ switch (_post ( 'f' )) {
 	/* wish */
 	case 'wish':
 		$area = _post ( 'area' );
-		$sortid = _post ( 'sortid' );
+		$professionid = _post ( 'professionid' );
 		$sortid2 = _post ( 'sortid2' );
 		$worktype = _post ( 'worktype' );
 		$wagetype = _post ( 'wagetype' );
@@ -147,7 +147,7 @@ switch (_post ( 'f' )) {
 		}
 		
 		/* sortid */
-		if (!_g('validate')->pnum( $sortid )) {
+		if (!_g('validate')->pnum( $professionid )) {
 			smsg( lang ('resume:100004') );
 			return null;
 		}
@@ -227,7 +227,7 @@ switch (_post ( 'f' )) {
 				'resumeid' => $resumeid,
 				'uid' => $uid,
 				'area' => $area,
-				'sortid' => _g( 'value' )->s2pnsplit( $sortid ),
+				'professionid' => _g( 'value' )->s2pnsplit( $professionid ),
 				'sortid2' => _g( 'value' )->s2pnsplit( $sortid2 ),
 				'wagetype' => $wagetype,
 				'wage' => $wage,
@@ -777,7 +777,7 @@ switch (_post ( 'f' )) {
 		$emonth = _post ( 'emonth' );
 		
 		$company = _post ( 'company' );
-		$sortid = _post ( 'sortid' );
+		$professionid = _post ( 'professionid' );
 		$csize = _post ( 'csize' );
 		$nature = _post( 'nature' );
 		$department = _post ( 'department' );
@@ -807,7 +807,7 @@ switch (_post ( 'f' )) {
 			smsg( lang ('resume:100024', array ( 1, 50 )) );
 			return null;
 		}
-		if (strlen($sortid) < 1) {
+		if (strlen($professionid) < 1) {
 			smsg( lang ('resume:100025') );
 			return null;
 		}
@@ -862,7 +862,7 @@ switch (_post ( 'f' )) {
 				'stime' => $stime,
 				'etime' => $etime,
 				'company' => $company,
-				'sortid' => _g( 'value' )->s2pnsplit( $sortid ),
+				'professionid' => _g( 'value' )->s2pnsplit( $professionid ),
 				'csize' => $csize,
 				'nature' => $nature,
 				'department' => $department,
