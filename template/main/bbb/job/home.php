@@ -227,7 +227,7 @@
                     <div class="shade"></div>
                     <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="zh-home-zz-a">
                         <div class="cont">
-                            我要评测
+                            WEB前端开发工程师
                         </div>
                     </a>
                 </div>
@@ -246,7 +246,7 @@
                     <div class="shade"></div>
                     <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="zh-home-zz-a">
                         <div class="cont">
-                            我要评测
+                            PHP网页开发工程师
                         </div>
                     </a>
                 </div>
@@ -265,7 +265,7 @@
                     <div class="shade"></div>
                     <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="zh-home-zz-a">
                         <div class="cont">
-                            我要评测
+                            JAVA网页开发工程师
                         </div>
                     </a>
                 </div>
@@ -284,7 +284,7 @@
                     <div class="shade"></div>
                     <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="zh-home-zz-a">
                         <div class="cont">
-                            我要评测
+                            Python网页开发工程师
                         </div>
                     </a>
                 </div>
@@ -305,7 +305,7 @@
                     <div class="shade"></div>
                     <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="zh-home-zz-a">
                         <div class="cont">
-                            我要评测
+                            iOS开发工程师
                         </div>
                     </a>
                 </div>
@@ -324,7 +324,7 @@
                     <div class="shade"></div>
                     <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="zh-home-zz-a">
                         <div class="cont">
-                            我要评测
+                            Android开发工程师
                         </div>
                     </a>
                 </div>

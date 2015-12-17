@@ -4,7 +4,7 @@
 .pbBox .likeIcon{width: 42px;height: 42px;position: absolute;left: 50%;top: 50%;overflow:hidden;margin: -20px 0 0 -20px;z-index:4;background-image: url(../../newUI/assets/img/zoom1.png); display:none}
 
 .pbBox .imgArea{position:relative;width:280px;overflow:hidden;}
-.pbBox .imgArea img{width:280px;z-index:1;}
+.pbBox .imgArea img{width:280px;z-index:1;height: 157px;}
 .pbBox .imgArea a{display:block;}
 .pbBox .txtArea{}
 .pbBox .title{font-family:"微软雅黑"; font-weight: bold;font-size:15px;height:30px; line-height:30px; padding:10px 20px 0 20px;}
