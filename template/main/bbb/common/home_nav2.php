@@ -65,14 +65,14 @@
                     </div>
                 </div>
             </div>
-            <div class="clearfix o-menu">
+            <div class="clearfix o-menu o-menu-home">
                 <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>" class="ml o-menu-a">首页</a>
                 <!--<a href="--><?php //prt(_g('uri')->su('job/ac/learn')); ?><!--" class="ml o-menu-a">学习中心</a>-->
                 <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="mr o-menu-a">职业测评</a>
                 <a href="<?php prt(_g('uri')->su('job/ac/work')); ?>" class="mr o-menu-a">推荐求职</a>
             </div>
         <?php }else{ ?>
-            <div class="clearfix o-menu">
+            <div class="clearfix o-menu o-menu-home">
                 <a href="<?php prt(_g('uri')->su('job/ac/home')); ?>" class="ml o-menu-a">首页</a>
                 <!--<a href="--><?php //prt(_g('uri')->su('job/ac/learn')); ?><!--" class="ml o-menu-a">学习中心</a>-->
                 <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="mr o-menu-a">职业测评</a>

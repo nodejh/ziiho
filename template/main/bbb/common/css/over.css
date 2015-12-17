@@ -523,6 +523,7 @@ em {
 }
 .o-nav2 .o-menu-a {
     color: #fff;
+    text-decoration: none;
 }
 .o-nav2 .o-menu-a:hover {
     color: #000;
@@ -796,11 +797,8 @@ input[type="submit"] { padding:4px 17px; color:#585858; text-transform:uppercase
 
 
 /* home */
-.main .i-area .i-box .i-box-bd.o-home-div {
-     width: 600px;
- }
-.main .i-area .i-box .i-box-hd.o-home-div {
-    width: 600px;
+.o-menu-home {
+    margin-right: 12px;
 }
 
 

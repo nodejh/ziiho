@@ -1,5 +1,7 @@
 body {
 	background-color: #fff;
+    font: 14px/26px "microsoft yahei", "SimHei", "SimSun";
+    -webkit-text-size-adjust: 100%;
 }
 
 /*
@@ -431,4 +433,34 @@ div.zh-learn-desription.zh-assess-description {
 .zh-home-search-dropdown {
 	width: 100px;
 	left: 200px;
+}
+.main .i-area .i-box-bline.zh-home-box {
+	height: 170px;
+	/*margin-top: 50px;*/
+	/*padding-bottom: 50px;*/
+	margin: 50px 0;
+	/*padding: 0 50px;*/
+}
+.main .i-area .i-box .i-box-bd.zh-home-div {
+	width: 500px;
+}
+.main .i-area .i-box .i-box-hd.zh-home-div {
+	width: 500px;
+}
+
+.zh-home-div-one-text {
+    margin-left: 100px;
+}
+.zh-home-div-two-picture {
+    margin-left: 100px;
+}
+.zh-pbBox-one {
+    margin: 20px 150px;
+    width: 1000px;
+}
+.zh-pbBox-two {
+    margin: 20px 100px;
+}
+.pbBox.zh-pbBox {
+    margin: 0 10px 50px 10px;;
 }

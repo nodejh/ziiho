@@ -3,8 +3,6 @@
 <!-- include header  -->
 <?php include $a = _g('template')->name('newUI', 'common/header', true); ?>
 
-<link rel="stylesheet" type="text/css" href="<?php prt(_g('template')->dir('job')); ?>/css/assess_zhezhao.css" />
-
 
 </head>
 
@@ -16,6 +14,8 @@
 <div class="container-fluid zh-mian">
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+
+
 
             <!-- //com-bar -->
             <ul class="nav nav-tabs">
@@ -53,42 +53,43 @@
 
             <br>
             <!-- 职位详情 -->
-            <div class="row" id="assess">
+            <div class="row">
                 <?php //if($pageData['total'] >= 1){ ?>
                 <?php $index = 0; ?>
                     <?php while($val = _g('db')->result($JJOBResult)){ ?>
                         <div class="col-sm-6 col-md-3">
-                            <div class="pbBox">
-                                <div class="imgArea">
-                                    <a href="#" ><span class="blackBg">公司名称</span><span class="likeIcon"></span></a>
-
-                                        <h3 class="title"><a href=""<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $val['cuid'])); ?>">公司名称</a></h3>
-
-                                    <h4 class="txtArea">
-                                        <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $val['cuid'] . '/jobid/' . $val['jobid'])); ?>" target="_blank"><?php prt($val['jname']); ?></a>
-                                        <p class="zh-learn-tips"><?php prt($JMODEL->sortValue($val['sortid'], 'sname')); ?></p>
-                                    </h4>
-                                    <div class="zh-learn-desription zh-assess-description">
-                                        工作地点:<?php foreach(_g('value')->s2pnsplit2($val['areaid']) as $v){ ?><?php prt($JMODEL->areaValue($v, 'aname')); ?>&nbsp;<?php } ?><br>
-                                        薪资:20万<br>
-                                        招聘人数:10<br>
-                                        工作年限:2年以上<br>
-                                        学历要求:本科及以上<br>
+                            <div class="zh-learn-div">
+                                <div class="media">
+                                    <div class="media-left media-middle zh-learn-imgbox">
+                                        <a href="<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $val['cuid'])); ?>" target="_blank">
+                                            <span class="zh-assess-company-name">公司名称</span>
+                                            <!--<img class="zh-learn-img" src="--><?php //prt($CUSER->getLogo($val['cuid'])); ?><!--" alt="--><?php //prt($rs['jname']); ?><!--" style="width: 100px;">-->
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $val['cuid'] . '/jobid/' . $val['jobid'])); ?>" target="_blank"><?php prt($val['jname']); ?></a>
+                                            <p class="zh-learn-tips"><?php prt($JMODEL->sortValue($val['sortid'], 'sname')); ?></p>
+                                            </h4>
                                     </div>
                                 </div>
-
-                                <!--遮罩层开始-->
-                                <div class="shadeArea">
-                                    <div class="shade"></div>
-                                    <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $val['cuid'] . '/jobid/' . $val['jobid'])); ?>" class="zh-home-zz-a">
-                                        <div class="cont">
-                                            我要评测
-                                        </div>
-                                    </a>
+                                <div class="zh-learn-desription zh-assess-description">
+                                    工作地点:
+                                    <?php foreach(_g('value')->s2pnsplit2($val['areaid']) as $v){ ?><?php prt($JMODEL->areaValue($v, 'aname')); ?>&nbsp;<?php } ?>
+                                    <br>
+                                    薪资:20万<br>
+                                    招聘人数:10<br>
+                                    工作年限:2年以上<br>
+                                    学历要求:本科及以上<br>
                                 </div>
-                                <!--遮罩层结束-->
-                            </div>
 
+                                <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $val['cuid'] . '/jobid/' . $val['jobid'])); ?>" target="_blank" class="zh-learn-view-a">
+                                    <div class="zh-learn-view">
+                                        <span>我要测评</span><i class="fa fa-arrow-circle-o-right fa-lg"></i>
+                                    </div>
+                                </a>
+                                <div class="zh-assess-cover"></div>
+                            </div>
                         </div>
 
 
@@ -123,39 +124,5 @@
 
 
 <!-- custom javascript  -->
-
-<script>
-
-    // 遮罩
-    var tt=null;
-    $('#assess').cjslip({
-        type: 'menu',
-        speed: 100,
-        mainState: '.pbBox',
-        mainEl: ".shadeArea",
-        defaultShow: false,
-        startFunc: function(i,t,p,pc,o){
-            if(o.eq(i).css("position") == "relative" || o.eq(i).css("position") == "absolute"){
-            }else{
-                o.eq(i).css("position", "relative");
-            }
-            /*设置遮罩包裹层*/
-            o.eq(i).find('.shadeArea').css({
-                position: "absolute",
-                top: "0px",
-                left: "0px",
-                width: (o.eq(i).find('.imgArea').outerWidth()) + "px",
-                height: (o.eq(i).find('.imgArea').outerHeight()) + "px"
-            }).children().css({position: "absolute"});
-            o.eq(i).find('.shadeArea').find(".shade").css({
-                top: "0px",
-                left: "0px",
-                width: "100%",
-                height: "100%",
-                opacity: 0.3
-            });
-        }
-    });
-</script>
 
 </html>

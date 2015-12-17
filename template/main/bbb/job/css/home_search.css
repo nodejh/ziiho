@@ -1,7 +1,12 @@
 
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,a,em,img,strong,sub,sup,dl,dt,dd,ol,ul,li,form,label,embed,select,input,textarea,pre,button,i,u{
     margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;text-indent:0;font-weight:normal;font-style:normal;}
-body{font:12px/2em Arial,Helvetica,SimSun,sans-serif;color:#666;background:#fff;word-break:break-all;}
+body{
+    font: 14px/26px "microsoft yahei", "SimHei", "SimSun";
+    -webkit-text-size-adjust: 100%;
+    color:#666;
+    background:#fff;
+    word-break:break-all;}
 :focus{outline:0;}
 ol,ul{list-style:none;}
 table{empty-cells:show;border-collapse:collapse;border-spacing:0;}
@@ -34,11 +39,12 @@ h1.hide_title{display: none;}
 }
 #i_search{
     position:absolute;
-    top:54px;
+    top:300px;
     right:0;
     height:36px;
     padding:3px;
     background:#3cacd5;
+    background:#00c0ff;
     z-index:11;
 }
 #i_search ul{
@@ -51,6 +57,7 @@ h1.hide_title{display: none;}
     height:36px;
     line-height:36px;
     border-right:3px #3cacd5 solid;
+    border-right:3px #00c0ff solid;
     background:#fff;
 }
 #i_search li s{
@@ -81,6 +88,7 @@ h1.hide_title{display: none;}
     border:6px #fff solid;
     border-bottom:0;
     border-top:6px #3cacd5 solid;
+    border-top:6px #00c0ff solid;
     -webkit-transition:all .4s ease-out;
     -moz-transition:all .4s ease-out;
     -o-transition:all .4s ease-out;
@@ -99,7 +107,8 @@ h1.hide_title{display: none;}
     vertical-align:middle;
 }
 #i_search input:focus,#i_search input:hover{
-    border: 1px #3cacd5 solid
+    border: 1px #3cacd5 solid;
+    border: 1px #00c0ff solid;
 }
 #i_search button{
     display:inline-block;
@@ -130,6 +139,7 @@ h1.hide_title{display: none;}
     line-height:20px;
     padding:6px;
     border:3px #3cacd5 solid;
+    border:3px #00c0ff solid;
     border-top:0;
     background:#fff;
 }
@@ -180,10 +190,12 @@ h1.hide_title{display: none;}
     border:6px #fff solid;
     border-bottom:0;
     border-top:6px #3cacd5 solid;
+    border-top:6px #00c0ff solid;
     margin:0 0 0 -6px;
     overflow:hidden;
 }
 #i_stab a.on,#i_stab a:hover,#i_search li div a:hover,#i_search li a.on{
     color:#3cacd5;
+    color:#00c0ff;
     text-decoration:none;
 }

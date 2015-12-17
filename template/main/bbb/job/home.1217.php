@@ -36,11 +36,11 @@
                         <div>
                             <input type="hidden" name="room"/>
                             <span><a data-val="" href="javascript:void(0)">全部</a></span>
-                            <span><a data-val="1" href="javascript:" >计算机</a></span>
-                            <span><a data-val="2" href="javascript:" >互联网</a></span>
-                            <span><a data-val="3" href="javascript:" >互联网</a></span>
-                            <span><a data-val="4" href="javascript:" >互联网</a></span>
-                            <span><a data-val="5" href="javascript:" >互联网</a></span>
+                            <span><a data-val="1" href="javascript:" >一室</a></span>
+                            <span><a data-val="2" href="javascript:" >二室</a></span>
+                            <span><a data-val="3" href="javascript:" >三室</a></span>
+                            <span><a data-val="4" href="javascript:" >四室</a></span>
+                            <span><a data-val="5" href="javascript:" >其它</a></span>
                         </div>
                     </li>
                     <li id="wy">
@@ -214,122 +214,112 @@
 
 
     <div id="pbMain">
-        <div class="zh-pbBox-one">
-            <div class="pbBox zh-pbBox">
-                <div class="imgArea">
-                    <a href="" >
-                        <img src="<?php  prt(_g('template')->dir('newUI')); ?>/assets/img/home/1.jpg" />
-                        <span class="blackBg"></span><span class="likeIcon"></span>
-                    </a>
+        <div class="pbBox">
+            <div class="imgArea">
+                <a href="#" ><span class="blackBg"></span><span class="likeIcon"></span></a>
+                <div class="txtArea">
+                    <h3 class="title"><a href="#">公司名称</a></h3>
                 </div>
-                <!--遮罩层开始-->
-                <div class="shadeArea">
-                    <div class="shade"></div>
-                    <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="zh-home-zz-a">
-                        <div class="cont">
-                            我要评测
-                        </div>
-                    </a>
+                <div class="zh-learn-desription zh-assess-description">
+                    工作地点:成都<br>
+                    薪资:20万<br>
+                    招聘人数:10<br>
+                    工作年限:2年以上<br>
+                    学历要求:本科及以上<br>
                 </div>
-                <!--遮罩层结束-->
             </div>
 
-            <div class="pbBox zh-pbBox">
-                <div class="imgArea">
-                    <a href="" >
-                        <img src="<?php  prt(_g('template')->dir('newUI')); ?>/assets/img/home/2.jpg" />
-                        <span class="blackBg"></span><span class="likeIcon"></span>
-                    </a>
-                </div>
-                <!--遮罩层开始-->
-                <div class="shadeArea">
-                    <div class="shade"></div>
-                    <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="zh-home-zz-a">
-                        <div class="cont">
-                            我要评测
-                        </div>
-                    </a>
-                </div>
-                <!--遮罩层结束-->
+            <!--遮罩层开始-->
+            <div class="shadeArea">
+                <div class="shade"></div>
+                <a href="#" class="zh-home-zz-a">
+                    <div class="cont">
+                        我要评测
+                    </div>
+                </a>
             </div>
-
-            <div class="pbBox zh-pbBox">
-                <div class="imgArea">
-                    <a href="" >
-                        <img src="<?php  prt(_g('template')->dir('newUI')); ?>/assets/img/home/3.jpg" />
-                        <span class="blackBg"></span><span class="likeIcon"></span>
-                    </a>
-                </div>
-                <!--遮罩层开始-->
-                <div class="shadeArea">
-                    <div class="shade"></div>
-                    <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="zh-home-zz-a">
-                        <div class="cont">
-                            我要评测
-                        </div>
-                    </a>
-                </div>
-                <!--遮罩层结束-->
-            </div>
-
-            <div class="pbBox zh-pbBox">
-                <div class="imgArea">
-                    <a href="" >
-                        <img src="<?php  prt(_g('template')->dir('newUI')); ?>/assets/img/home/4.jpg" />
-                        <span class="blackBg"></span><span class="likeIcon"></span>
-                    </a>
-                </div>
-                <!--遮罩层开始-->
-                <div class="shadeArea">
-                    <div class="shade"></div>
-                    <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="zh-home-zz-a">
-                        <div class="cont">
-                            我要评测
-                        </div>
-                    </a>
-                </div>
-                <!--遮罩层结束-->
-            </div>
+            <!--遮罩层结束-->
         </div>
 
-        <div class="zh-pbBox-two">
-            <div class="pbBox zh-pbBox">
-                <div class="imgArea">
-                    <a href="" >
-                        <img src="<?php  prt(_g('template')->dir('newUI')); ?>/assets/img/home/5.jpg" />
-                        <span class="blackBg"></span><span class="likeIcon"></span>
-                    </a>
+        <div class="pbBox">
+            <div class="imgArea">
+                <a href="#" ><span class="blackBg"></span><span class="likeIcon"></span></a>
+                <div class="txtArea">
+                    <h3 class="title"><a href="#">公司名称</a></h3>
                 </div>
-                <!--遮罩层开始-->
-                <div class="shadeArea">
-                    <div class="shade"></div>
-                    <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="zh-home-zz-a">
-                        <div class="cont">
-                            我要评测
-                        </div>
-                    </a>
+                <div class="zh-learn-desription zh-assess-description">
+                    工作地点:成都<br>
+                    薪资:20万<br>
+                    招聘人数:10<br>
+                    工作年限:2年以上<br>
+                    学历要求:本科及以上<br>
                 </div>
-                <!--遮罩层结束-->
             </div>
 
-            <div class="pbBox zh-pbBox">
-                <div class="imgArea">
-                    <a href="" >
-                        <img src="<?php  prt(_g('template')->dir('newUI')); ?>/assets/img/home/6.jpg" />
-                        <span class="blackBg"></span><span class="likeIcon"></span>
-                    </a>
-                </div>
-                <!--遮罩层开始-->
-                <div class="shadeArea">
-                    <div class="shade"></div>
-                    <a href="<?php prt(_g('uri')->su('job/ac/assess')); ?>" class="zh-home-zz-a">
-                        <div class="cont">
-                            我要评测
-                        </div>
-                    </a>
-                </div>
-                <!--遮罩层结束-->
+            <!--遮罩层开始-->
+            <div class="shadeArea">
+                <div class="shade"></div>
+                <a href="#" class="zh-home-zz-a">
+                    <div class="cont">
+                        我要评测
+                    </div>
+                </a>
             </div>
+            <!--遮罩层结束-->
+        </div>
+
+        <div class="pbBox">
+            <div class="imgArea">
+                <a href="#" ><span class="blackBg"></span><span class="likeIcon"></span></a>
+                <div class="txtArea">
+                    <h3 class="title"><a href="#">公司名称</a></h3>
+                </div>
+                <div class="zh-learn-desription zh-assess-description">
+                    工作地点:成都<br>
+                    薪资:20万<br>
+                    招聘人数:10<br>
+                    工作年限:2年以上<br>
+                    学历要求:本科及以上<br>
+                </div>
+            </div>
+
+            <!--遮罩层开始-->
+            <div class="shadeArea">
+                <div class="shade"></div>
+                <a href="#" class="zh-home-zz-a">
+                    <div class="cont">
+                        我要评测
+                    </div>
+                </a>
+            </div>
+            <!--遮罩层结束-->
+        </div>
+
+        <div class="pbBox">
+            <div class="imgArea">
+                <a href="#" ><span class="blackBg"></span><span class="likeIcon"></span></a>
+                <div class="txtArea">
+                    <h3 class="title"><a href="#">公司名称</a></h3>
+                </div>
+                <div class="zh-learn-desription zh-assess-description">
+                    工作地点:成都<br>
+                    薪资:20万<br>
+                    招聘人数:10<br>
+                    工作年限:2年以上<br>
+                    学历要求:本科及以上<br>
+                </div>
+            </div>
+
+            <!--遮罩层开始-->
+            <div class="shadeArea">
+                <div class="shade"></div>
+                <a href="#" class="zh-home-zz-a">
+                    <div class="cont">
+                        我要评测
+                    </div>
+                </a>
+            </div>
+            <!--遮罩层结束-->
         </div>
 
 
