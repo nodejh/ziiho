@@ -53,9 +53,9 @@
             <br>
             <!-- 职位详情 -->
             <?php
-            $a = ms_JobList(null, 1);
-            var_dump($a);
-            ?>
+            //$a = ms_JobList(null, 1);
+            //var_dump($a);
+            //?>
             <div class="row" id="assess">
                 <?php $list = ms_JobList(); ?>
                 <?php if (count($list) > 0) { ?>
@@ -64,36 +64,40 @@
 
                         <div class="col-sm-6 col-md-3">
                             <div class="pbBox">
-                                <div class="imgArea">
-                                    <a href="#" ><span class="blackBg">公司名称</span><span class="likeIcon"></span></a>
+                                <div class="imgArea zh-assess-div">
+                                    <a href="#" ><span class="blackBg"></span><span class="likeIcon"></span></a>
 
-                                    <h3 class="title">
-                                        <a href="<?php prt($v['detailUrl']); ?>">
+                                    <div class="zh-assess-div-head">
+                                        <a class="zh-assess-div-job" href="<?php prt($v['detailUrl']); ?>" target="_blank">
+                                            <?php prt($v['jname']); ?>
+                                        </a>
+                                        <a class="zh-assess-div-company" href="<?php prt($v['detailUrl']); ?>" target="_blank">
                                             <?php prt($v['cuser']['cname']); ?>
                                         </a>
-                                    </h3>
-
-                                    <h4 class="txtArea">
-                                        <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $val['cuid'] . '/jobid/' . $val['jobid'])); ?>" target="_blank"><?php prt($val['jname']); ?></a>
-                                        <p class="zh-learn-tips"><?php prt($JMODEL->sortValue($val['sortid'], 'sname')); ?></p>
-                                    </h4>
-                                    <div class="zh-learn-desription zh-assess-description">
-                                        工作地点:<?php foreach(_g('value')->s2pnsplit2($val['areaid']) as $v){ ?><?php prt($JMODEL->areaValue($v, 'aname')); ?>&nbsp;<?php } ?><br>
-                                        薪资:20万<br>
-                                        招聘人数:10<br>
-                                        工作年限:2年以上<br>
-                                        学历要求:本科及以上<br>
+                                    </div>
+                                    <div class="zh-assess-div-body">
+                                        薪资:<?php prt($v['wages']); ?><br>
+                                        招聘人数:<?php prt($v['pnum']); ?><br>
+                                        <?php prt($v['workyear']); ?>工作经验
+                                        &bull;
+                                        <?php prt($v['degree']); ?>学历
+                                        <br>
+                                        <span class="zh-assess-div-body-location">
+                                            <?php prt($v['area']); ?>
+                                        </span>
                                     </div>
                                 </div>
 
                                 <!--遮罩层开始-->
                                 <div class="shadeArea">
-                                    <div class="shade"></div>
-                                    <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $val['cuid'] . '/jobid/' . $val['jobid'])); ?>" class="zh-home-zz-a">
-                                        <div class="cont">
-                                            我要评测
-                                        </div>
+                                    <div class="shade zh-assess-shade"></div>
+                                    <a href="<?php prt($v['cuser']['detailUrl']); ?>" class="btn btn-info btn zh-assess-btn-left" role="button" target="_blank">
+                                        查看详情
                                     </a>
+                                    <a href="<?php prt($v['detailUrl']); ?>" class="btn btn-info btn zh-assess-btn-right" role="button" target="_blank">
+                                        我要测评
+                                    </a>
+
                                 </div>
                                 <!--遮罩层结束-->
                             </div>
@@ -109,70 +113,6 @@
                         <div class="alert alert-warning" role="alert">>_< 拼了命也没有找到相关信息！</div>
                     </div>
                 <?php } ?>
-            </div>
-
-
-            <div class="row" id="assess">
-                <?php //if($pageData['total'] >= 1){ ?>
-                <?php $index = 0; ?>
-                    <?php while($val = _g('db')->result($JJOBResult)){ ?>
-
-                        <?php
-                        var_dump($val);
-                        ?>
-
-                        <div class="col-sm-6 col-md-3">
-                            <div class="pbBox">
-                                <div class="imgArea">
-                                    <a href="#" ><span class="blackBg">公司名称</span><span class="likeIcon"></span></a>
-
-                                        <h3 class="title"><a href=""<?php prt(_g('uri')->su('job/ac/company/op/detail/id/' . $val['cuid'])); ?>">公司名称</a></h3>
-
-                                    <h4 class="txtArea">
-                                        <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $val['cuid'] . '/jobid/' . $val['jobid'])); ?>" target="_blank"><?php prt($val['jname']); ?></a>
-                                        <p class="zh-learn-tips"><?php prt($JMODEL->sortValue($val['sortid'], 'sname')); ?></p>
-                                    </h4>
-                                    <div class="zh-learn-desription zh-assess-description">
-                                        工作地点:<?php foreach(_g('value')->s2pnsplit2($val['areaid']) as $v){ ?><?php prt($JMODEL->areaValue($v, 'aname')); ?>&nbsp;<?php } ?><br>
-                                        薪资:20万<br>
-                                        招聘人数:10<br>
-                                        工作年限:2年以上<br>
-                                        学历要求:本科及以上<br>
-                                    </div>
-                                </div>
-
-                                <!--遮罩层开始-->
-                                <div class="shadeArea">
-                                    <div class="shade"></div>
-                                    <a href="<?php prt(_g('uri')->su('job/ac/company/op/job/id/' . $val['cuid'] . '/jobid/' . $val['jobid'])); ?>" class="zh-home-zz-a">
-                                        <div class="cont">
-                                            我要评测
-                                        </div>
-                                    </a>
-                                </div>
-                                <!--遮罩层结束-->
-                            </div>
-
-                        </div>
-
-
-                        <?php $index = $index + 1; ?>
-                    <?php } ?>
-                <?php //}else{ ?>
-                <!--    <div class="container-fluid">-->
-                <!--        <div class="alert alert-warning" role="alert">对不起，暂无该内容信息！</div>-->
-                <!--    </div>-->
-                <?php //} ?>
-
-
-
-                <?php if($index < 1){ ?>
-                    <br>
-                    <div class="container-fluid">
-                        <div class="alert alert-warning" role="alert">>_< 拼了命也没有找到相关信息！</div>
-                    </div>
-                <?php } ?>
-
             </div>
 
         </div>

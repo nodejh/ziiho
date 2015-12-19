@@ -398,8 +398,9 @@ padding:5px;/* border:1px solid #edeef0;*/ }
 .zh-assess-border-top {
 	border-top: 1px solid #ddd;
 }
-.zh-assess-div {
-    height: 190px;
+.pbBox .imgArea.zh-assess-div {
+    height: 200px;
+    width: auto;
 }
 div.zh-learn-desription.zh-assess-description {
     height: 97px;
@@ -408,6 +409,57 @@ div.zh-learn-desription.zh-assess-description {
 	width: 80px;
 	height: 50px;
 	display: block;
+}
+.zh-assess-btn-left {
+    left: 0;
+    width: 50%;
+    text-align: center;
+    top: 45%;
+    border-radius: 0;
+    background: #00c0ff;
+}
+.zh-assess-btn-right {
+    right: 0;
+    width: 50%;
+    text-align: center;
+    top: 45%;
+    border-radius: 0;
+    background: #00c0ff;
+}
+.zh-assess-div-head {
+    height: 55px;
+}
+.zh-assess-div-job {
+    width: 48%;
+    float: left;
+    background: #00c0ff;
+    font-size: 1.2em;
+    height: 54px;
+    overflow: hidden;
+    color: #fff;
+    padding: 2px 2%;
+}
+.zh-assess-div-job:hover {
+    color: #fff;
+}
+.zh-assess-div-company {
+    width: 48%;
+    float: right;
+    color: #9A9A9A;
+    font-size: .8em;
+    font-style: italic;
+    height: 54px;
+    overflow: hidden;
+    margin: 2px 2%;
+}
+.zh-assess-div-body {
+    height: 150px;
+    margin: 10px;
+    overflow: hidden;
+}
+.zh-assess-div-body-location {
+    font-size: .8em;
+    color: #9A9A9A;
 }
 
 
@@ -433,6 +485,28 @@ div.zh-learn-desription.zh-assess-description {
 .zh-home-search-dropdown {
 	width: 100px;
 	left: 200px;
+}
+.zh-home-title-div {
+    text-align: center;
+    top: 150px;
+    position: absolute;
+    display: block;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.zh-home-title {
+    font-size: 46px;
+    color: #fff;
+    margin: 15px;
+    height: 80px;
+    background: rgba(210, 210, 210, 0.64);
+    padding: 20px 30px;
+    font-weight: 900;
+}
+.zh-home-subtitle {
+    font-size: 20px;
+    color: #fff;
 }
 .main .i-area .i-box-bline.zh-home-box {
 	height: 170px;

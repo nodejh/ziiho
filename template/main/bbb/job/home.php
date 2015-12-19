@@ -27,6 +27,16 @@
         </ul>
     </div>
 
+
+    <div class="zh-home-title-div clearfix">
+        <button class="btn btn-default btn-lg zh-home-title" type="button">
+            欢迎评测
+        </button>
+        <h4 class="zh-home-subtitle">
+            向超过20000位求职者提供专业的评测。
+        </h4>
+    </div>
+
     <div class="cbox clearfix">
         <div id="nav">
             <form id="i_search" action="#" method="post" autocomplete="off">
