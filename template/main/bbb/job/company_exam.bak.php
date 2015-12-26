@@ -75,14 +75,6 @@
 
 		<form method="post" onsubmit="return false;" id="examForm">
 			<input type="hidden" name="isauto" value="false" />
-
-            <br>
-            <div class="progress">
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                    <span class="sr-only">40% Complete (success)</span>
-                </div>
-            </div>
-
 			<!-- //item-box -->
 			<div class="item-box clearfix">
 				<ul class="is">
@@ -92,7 +84,7 @@
 						?>
 
 						<?php if($k != 'my'){ ?>
-							<!--<li style="background:#F2F2F2;color: #337ab7; text-align:center; padding:0px; font-size:16px; font-weight:bold;">--><?php //prt($k != 'sys' ? _g('cache')->selectitem('120>'.$k.'>sname') : '职位知识'); ?><!--</li>-->
+							<li style="background:#F2F2F2;color: #337ab7; text-align:center; padding:0px; font-size:16px; font-weight:bold;"><?php prt($k != 'sys' ? _g('cache')->selectitem('120>'.$k.'>sname') : '职位知识'); ?></li>
 						<?php } ?>
 
 						<?php
@@ -145,10 +137,6 @@
 			</div>
 			<!-- item-box// -->
 
-			<div class="zh-exam-page-number" id="page-number">
-
-			</div>
-
 			<!-- //btn-box -->
 			<div class="btn-box clearfix">
 				<button type="button" name="disabled-buttons" class="ok" onclick="rzExamDo(this, 'false');" id="exam-ok">提交答题</button><button type="button" name="disabled-buttons" class="fq" onclick="fqExam();">放弃答题</button>
@@ -165,120 +153,13 @@
 </div>
 
 
-
-<div class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" data-backdrop="static" id="message">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title zh-exam-modal-title" id="gridSystemModalLabel"><i class="fa fa-exclamation-triangle"></i>警告</h4>
-            </div>
-            <div class="modal-body zh-exam-content-message">
-                <h3>答题过程中不能离开此页面，否则试卷作废!</h3>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-
-
-
-
-
-
 <?php //include _g('template')->name('job', 'footer', true); ?>
 <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/geshai.common.min.js"></script>
 <script type="text/javascript" src="<?php prt(sdir('static')); ?>/js/jquery.cjslip-v1.0.3.min.js"></script>
 
 	<script type="text/javascript" src="<?php prt(_g('template')->dir('job')); ?>/js/job_job.js"></script>
-
-<script src="<?php  prt(_g('template')->dir('newUI')); ?>/utils/store/store.min.js"></script>
-
 	<script language="javascript">
-
-		var $all_subject = $('.is li.clearfix');
-		store.set('all_subject_number', $all_subject.length);
-		var j=0;
-		var page_number_html = '<nav>' +
-			'<ul class="pagination">' +
-			'<li id="prev">' +
-			'<span aria-hidden="true">上一题</span>' +
-			'</li>';
-		for (var i=0;i<$all_subject.length;i++) {
-			j=i+1;
-			page_number_html += '<li id="page-number-'+i+'" class="page" data-id="'+i+'"><a>'+j+'</a></li>';
-		}
-		page_number_html += '<li id="next">' +
-			'	<span aria-hidden="true">下一题</span>' +
-			'</li>' +
-			'</ul>' +
-			'</nav>';
-
-		//hide_all_subject($all_subject);
-		$all_subject.each(function() {
-			$(this).css({'display':'none'});
-		});
-
-
-		$('#page-number').append(page_number_html);
-		$all_subject.eq(0).css({'display':'block'});
-		$('#page-number-0').addClass('active');
-		store.set('old_number', 0);
-
-		$('#page-number li.page').click(function () {
-			var old_page_number = parseFloat(store.get('old_number'));
-            $all_subject.eq(old_page_number).css({'display':'none'});
-			$('#page-number-'+old_page_number).removeClass('active');
-			var number = $(this).attr('data-id');
-			store.set('old_number', number);
-			$all_subject.eq(number).css({'display':'block'});
-			$('#page-number-'+number).addClass('active');
-		});
-
-		$('#next').click(function () {
-            var old_page_number = parseFloat(store.get('old_number'));
-			var all_subject_length = parseFloat(store.get('all_subject_number'));
-            console.log(old_page_number);
-            console.log(all_subject_length);
-			if(old_page_number < all_subject_length-1) {
-                $all_subject.eq(old_page_number).css({'display':'none'});
-                $('#page-number-'+old_page_number).removeClass('active');
-                var number = old_page_number + 1;
-                store.set('old_number', number);
-                $all_subject.eq(number).css({'display':'block'});
-                $('#page-number-'+number).addClass('active');
-			}
-		});
-
-        $('#prev').click(function () {
-            var old_page_number = parseFloat(store.get('old_number'));
-            //console.log(old_page_number);
-            if(old_page_number > 0) {
-                $all_subject.eq(old_page_number).css({'display':'none'});
-                $('#page-number-'+old_page_number).removeClass('active');
-                var number = old_page_number - 1;
-                store.set('old_number', number);
-                $all_subject.eq(number).css({'display':'block'});
-                $('#page-number-'+number).addClass('active');
-            }
-        });
-
-
-
-		//function hide_all_subject($all_subject) {
-		//	$all_subject.each(function() {
-		//		$(this).css({'display':'none'});
-		//	});
-		//}
-
-
-
-
 		var _areaBox = $("#answers-area");
 		var _areaBoxTxm = _areaBox.find(".txm");
 		$(window).scroll(function(e) {
@@ -415,7 +296,7 @@
     document.body.onselectstart=document.body.oncontextmenu=function(){return false;};
 
     $('body').mouseleave (function () {
-        $('#message').modal('show');
+       alert('答题过程中不能离开此页面，否则试卷作废!');
     });
 </script>
 

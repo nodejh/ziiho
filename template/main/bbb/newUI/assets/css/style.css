@@ -538,3 +538,14 @@ div.zh-learn-desription.zh-assess-description {
 .pbBox.zh-pbBox {
     margin: 0 10px 50px 10px;;
 }
+
+/* company exam */
+.zh-exam-page-number li{
+	cursor: pointer;
+}
+.zh-exam-content-message {
+	font-size: 36px;
+}
+.zh-exam-modal-title {
+	font-size: 36px;
+}
